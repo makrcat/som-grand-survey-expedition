@@ -386,6 +386,7 @@ function generateScenes() {
             pixelX: normalizedToPixelX(x),
             pixelY: normalizedToPixelY(y),
             name: `Scene ${i}`, // Default name
+            description: `Description for Scene ${i}`, // Default description
             connections: [] // Will be populated when connections are generated
         });
     }
@@ -471,20 +472,22 @@ function renderScenes() {
         .style('pointer-events', 'none')
         .text(d => d.id);
     
-    // Add hover events
-    sceneGroups
+    // Add hover events to circles
+    sceneGroups.select('circle')
         .on('mouseenter', function(event, d) {
             console.log('Mouse enter on scene:', d.id, d.name);
-            showHoverDisplay(d.name);
+            event.stopPropagation();
+            showHoverDisplay(d.name, d.description);
             // Make scene bigger on hover
-            d3.select(this).select('circle')
+            d3.select(this)
                 .attr('r', 10)
                 .attr('stroke-width', d.id === selectedScene ? 4 : 2.5);
         })
         .on('mouseleave', function(event, d) {
             console.log('Mouse leave on scene:', d.id);
+            event.stopPropagation();
             // Return to normal size
-            d3.select(this).select('circle')
+            d3.select(this)
                 .attr('r', 6)
                 .attr('stroke-width', d.id === selectedScene ? 3 : 1.5);
             
@@ -492,12 +495,14 @@ function renderScenes() {
             if (selectedScene !== null) {
                 const selectedSceneData = scenes.find(s => s.id === selectedScene);
                 if (selectedSceneData) {
-                    showHoverDisplay(selectedSceneData.name);
+                    showHoverDisplay(selectedSceneData.name, selectedSceneData.description);
                 }
             } else {
                 hideHoverDisplay();
             }
         });
+    
+
 }
 
 // Render connections
@@ -592,9 +597,10 @@ function updateConnections() {
 }
 
 // Show hover display
-function showHoverDisplay(name) {
+function showHoverDisplay(name, description) {
     const hoverDisplay = document.getElementById('hover-display');
-    hoverDisplay.textContent = name;
+    const displayText = description ? `${name}: ${description}` : name;
+    hoverDisplay.textContent = displayText;
     hoverDisplay.classList.add('visible');
 }
 
@@ -625,8 +631,9 @@ function selectScene(sceneId) {
     selectedScene = sceneId;
     const scene = scenes.find(s => s.id === sceneId);
     if (scene) {
-        document.getElementById('scene-name-input').value = scene.name;
-        showHoverDisplay(scene.name); // Show the name at the top
+        document.getElementById('node-name-input').value = scene.name;
+        document.getElementById('node-description-input').value = scene.description || '';
+        showHoverDisplay(scene.name, scene.description); // Show the name and description at the top
     }
     renderScenes(); // Re-render to show selection
     attachDragBehavior(); // Re-attach drag behavior after re-rendering
@@ -636,7 +643,8 @@ function selectScene(sceneId) {
 // Deselect current scene
 function deselectScene() {
     selectedScene = null;
-    document.getElementById('scene-name-input').value = '';
+    document.getElementById('node-name-input').value = '';
+    document.getElementById('node-description-input').value = '';
     hideHoverDisplay();
     renderScenes(); // Re-render to show deselection
     attachDragBehavior(); // Re-attach drag behavior after re-rendering
@@ -655,13 +663,23 @@ function attachDragBehavior() {
             selectScene(d.id);
         })
         .on('drag', function(event, d) {
-            // Update scene position
-            d.x = parseFloat(pixelToNormalizedX(event.x).toFixed(3));
-            d.y = parseFloat(pixelToNormalizedY(event.y).toFixed(3));
-            d.pixelX = event.x;
-            d.pixelY = event.y;
+            // Get the map container and its bounding rect
+            const mapContainer = document.getElementById('map-container');
+            const containerRect = mapContainer.getBoundingClientRect();
             
-            // Update visual position
+            // Get mouse position relative to the container
+            const mouseX = event.sourceEvent.clientX - containerRect.left;
+            const mouseY = event.sourceEvent.clientY - containerRect.top;
+            
+            // Convert mouse position to normalized coordinates
+            d.x = parseFloat(pixelToNormalizedX(mouseX).toFixed(3));
+            d.y = parseFloat(pixelToNormalizedY(mouseY).toFixed(3));
+            
+            // Convert to pixel coordinates for display
+            d.pixelX = normalizedToPixelX(d.x);
+            d.pixelY = normalizedToPixelY(d.y);
+            
+            // Update visual position of the group
             d3.select(this).attr('transform', `translate(${d.pixelX}, ${d.pixelY})`);
             
             // Update connections if needed
@@ -703,12 +721,24 @@ function setupEventListeners() {
     });
     
     // Scene name input
-    document.getElementById('scene-name-input').addEventListener('input', function() {
+    document.getElementById('node-name-input').addEventListener('input', function() {
         if (selectedScene !== null) {
             const scene = scenes.find(s => s.id === selectedScene);
             if (scene) {
                 scene.name = this.value;
-                showHoverDisplay(scene.name); // Update the hover display
+                showHoverDisplay(scene.name, scene.description); // Update the hover display
+                updateURLWithState();
+            }
+        }
+    });
+    
+    // Scene description input
+    document.getElementById('node-description-input').addEventListener('input', function() {
+        if (selectedScene !== null) {
+            const scene = scenes.find(s => s.id === selectedScene);
+            if (scene) {
+                scene.description = this.value;
+                showHoverDisplay(scene.name, scene.description); // Update the hover display
                 updateURLWithState();
             }
         }
@@ -768,6 +798,7 @@ function getCurrentState() {
             x: scene.x,
             y: scene.y,
             name: scene.name,
+            description: scene.description,
             connections: scene.connections
         }))
     };
@@ -836,7 +867,8 @@ function loadStateFromURL() {
             y: parseFloat(scene.y.toFixed(3)),
             pixelX: normalizedToPixelX(scene.x),
             pixelY: normalizedToPixelY(scene.y),
-            name: scene.name || `Scene ${scene.id}` // Ensure name exists
+            name: scene.name || `Scene ${scene.id}`, // Ensure name exists
+            description: scene.description || `Description for Scene ${scene.id}` // Ensure description exists
         }));
         
         // Reconstruct connections from scene connection arrays
@@ -919,6 +951,7 @@ function convertOldFormatToNew(oldState) {
                 x: parseFloat(x.toFixed(3)),
                 y: parseFloat(y.toFixed(3)),
                 name: dot.name || `Scene ${dot.id}`,
+                description: dot.description || `Description for Scene ${dot.id}`,
                 connections: [] // Will be populated from old connections
             };
         });
