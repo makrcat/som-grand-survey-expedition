@@ -1,16 +1,5 @@
-// Configuration
-const SEED = 42; // Change this to get different random layouts
-const NUM_DOTS = 100;
-const BIDIRECTIONAL_PROBABILITY = 0.4; // Probability of bidirectional connection
-
-// Settings
-let settings = {
-    regenerateConnections: false,
-    showVoronoi: false
-};
-
 // Global variables
-let dots = [];
+let scenes = [];
 let connections = [];
 let imageAspectRatio = 1;
 let imageWidth = 0;
@@ -18,8 +7,19 @@ let imageHeight = 0;
 let svgWidth = 0;
 let svgHeight = 0;
 let isStateLoaded = false; // Track if we loaded state from URL
-let selectedNode = null; // Currently selected node
+let selectedScene = null; // Currently selected scene
 let nodeClickOccurred = false; // Track if a node click just happened
+
+// Settings
+let settings = {
+    regenerateConnections: false,
+    showVoronoi: false
+};
+
+// Constants
+const SEED = 42;
+const NUM_SCENES = 100;
+const BIDIRECTIONAL_PROBABILITY = 0.3;
 
 // Deterministic random number generator using seed
 class SeededRandom {
@@ -44,28 +44,28 @@ class SeededRandom {
 const random = new SeededRandom(SEED);
 
 // Helper functions for proper Voronoi-based connections
-function calculateDistance(dot1, dot2) {
-    const dx = dot1.normalizedX - dot2.normalizedX;
-    const dy = dot1.normalizedY - dot2.normalizedY;
+function calculateDistance(scene1, scene2) {
+    const dx = scene1.x - scene2.x;
+    const dy = scene1.y - scene2.y;
     return Math.sqrt(dx * dx + dy * dy);
 }
 
 function findVoronoiNeighbors() {
-    const neighbors = new Map(); // dot index -> array of neighbor indices
+    const neighbors = new Map(); // scene index -> array of neighbor indices
     
     // Initialize neighbors map
-    for (let i = 0; i < dots.length; i++) {
+    for (let i = 0; i < scenes.length; i++) {
         neighbors.set(i, []);
     }
     
-    // For each pair of dots, check if they share a Voronoi edge
-    for (let i = 0; i < dots.length; i++) {
-        for (let j = i + 1; j < dots.length; j++) {
-            const dot1 = dots[i];
-            const dot2 = dots[j];
+    // For each pair of scenes, check if they share a Voronoi edge
+    for (let i = 0; i < scenes.length; i++) {
+        for (let j = i + 1; j < scenes.length; j++) {
+            const scene1 = scenes[i];
+            const scene2 = scenes[j];
             
-            // Check if these two dots are Voronoi neighbors
-            if (areVoronoiNeighbors(dot1, dot2, i, j)) {
+            // Check if these two scenes are Voronoi neighbors
+            if (areVoronoiNeighbors(scene1, scene2, i, j)) {
                 neighbors.get(i).push(j);
                 neighbors.get(j).push(i);
             }
@@ -75,25 +75,25 @@ function findVoronoiNeighbors() {
     return neighbors;
 }
 
-function areVoronoiNeighbors(dot1, dot2, index1, index2) {
-    // Two dots are Voronoi neighbors if there exists a point equidistant from both
-    // that is closer to these two dots than to any other dot
+function areVoronoiNeighbors(scene1, scene2, index1, index2) {
+    // Two scenes are Voronoi neighbors if there exists a point equidistant from both
+    // that is closer to these two scenes than to any other scene
     
-    // Calculate midpoint between the two dots
-    const midX = (dot1.normalizedX + dot2.normalizedX) / 2;
-    const midY = (dot1.normalizedY + dot2.normalizedY) / 2;
+    // Calculate midpoint between the two scenes
+    const midX = (scene1.x + scene2.x) / 2;
+    const midY = (scene1.y + scene2.y) / 2;
     
-    // Calculate distance from midpoint to both dots
-    const dist1 = calculateDistance({normalizedX: midX, normalizedY: midY}, dot1);
-    const dist2 = calculateDistance({normalizedX: midX, normalizedY: midY}, dot2);
+    // Calculate distance from midpoint to both scenes
+    const dist1 = calculateDistance({x: midX, y: midY}, scene1);
+    const dist2 = calculateDistance({x: midX, y: midY}, scene2);
     
-    // Check if midpoint is closer to these two dots than to any other dot
-    for (let k = 0; k < dots.length; k++) {
+    // Check if midpoint is closer to these two scenes than to any other scene
+    for (let k = 0; k < scenes.length; k++) {
         if (k !== index1 && k !== index2) {
-            const otherDot = dots[k];
-            const distToOther = calculateDistance({normalizedX: midX, normalizedY: midY}, otherDot);
+            const otherScene = scenes[k];
+            const distToOther = calculateDistance({x: midX, y: midY}, otherScene);
             
-            // If any other dot is closer to the midpoint, these are not Voronoi neighbors
+            // If any other scene is closer to the midpoint, these are not Voronoi neighbors
             if (distToOther < Math.max(dist1, dist2)) {
                 return false;
             }
@@ -103,11 +103,11 @@ function areVoronoiNeighbors(dot1, dot2, index1, index2) {
     return true;
 }
 
-// Generate deterministic color from node ID
-function getNodeColor(nodeId) {
+// Generate deterministic color from scene ID
+function getSceneColor(sceneId) {
     // Use a better hash function that distributes across all RGB channels
     let hash = 0;
-    const str = nodeId.toString();
+    const str = sceneId.toString();
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
@@ -138,34 +138,34 @@ function renderVoronoiCells() {
     const stepX = (2 * imageAspectRatio) / gridSize;
     const stepY = 2 / gridSize;
     
-    // Group points by closest dot
+    // Group points by closest scene
     const cellGroups = {};
     
     for (let x = -imageAspectRatio; x <= imageAspectRatio; x += stepX) {
         for (let y = -1; y <= 1; y += stepY) {
-            const point = {normalizedX: x, normalizedY: y};
-            let closestDotIndex = 0;
+            const point = {x: x, y: y};
+            let closestSceneIndex = 0;
             let minDistance = Infinity;
             
-            // Find the closest dot to this point
-            for (let i = 0; i < dots.length; i++) {
-                const distance = calculateDistance(point, dots[i]);
+            // Find the closest scene to this point
+            for (let i = 0; i < scenes.length; i++) {
+                const distance = calculateDistance(point, scenes[i]);
                 if (distance < minDistance) {
                     minDistance = distance;
-                    closestDotIndex = i;
+                    closestSceneIndex = i;
                 }
             }
             
-            // Add this point to the closest dot's cell
-            if (!cellGroups[closestDotIndex]) {
-                cellGroups[closestDotIndex] = [];
+            // Add this point to the closest scene's cell
+            if (!cellGroups[closestSceneIndex]) {
+                cellGroups[closestSceneIndex] = [];
             }
-            cellGroups[closestDotIndex].push([normalizedToPixelX(x), normalizedToPixelY(y)]);
+            cellGroups[closestSceneIndex].push([normalizedToPixelX(x), normalizedToPixelY(y)]);
         }
     }
     
     // Create polygons for each cell
-    for (const [dotIndex, points] of Object.entries(cellGroups)) {
+    for (const [sceneIndex, points] of Object.entries(cellGroups)) {
         if (points.length > 2) {
             // Create a convex hull of the points to get a clean cell boundary
             const hull = createConvexHull(points);
@@ -175,12 +175,12 @@ function renderVoronoiCells() {
                     (index === 0 ? 'M' : 'L') + point[0] + ',' + point[1]
                 ).join('') + 'Z';
                 
-                const nodeColor = getNodeColor(parseInt(dotIndex));
+                const sceneColor = getSceneColor(parseInt(sceneIndex));
                 
                 svg.append('path')
                     .attr('class', 'voronoi-cell')
                     .attr('d', pathData)
-                    .attr('fill', nodeColor)
+                    .attr('fill', sceneColor)
                     .attr('stroke', 'rgba(255, 255, 255, 0.5)')
                     .attr('stroke-width', 1)
                     .style('pointer-events', 'none');
@@ -238,7 +238,7 @@ function generateVoronoiConnections(existingConnectionsArray = []) {
     }
     
     // Create connections for each Voronoi neighbor pair
-    for (let i = 0; i < dots.length; i++) {
+    for (let i = 0; i < scenes.length; i++) {
         const neighborList = neighbors.get(i);
         
         for (const neighborIndex of neighborList) {
@@ -268,47 +268,47 @@ function generateVoronoiConnections(existingConnectionsArray = []) {
         }
     }
     
-    // Ensure graph connectivity by fixing nodes with no in/out edges
+    // Ensure every scene has at least one bidirectional edge
     ensureGraphConnectivity(connections);
     
     console.log(`Generated ${connections.length} connections using Voronoi algorithm (memoized)`);
     return connections;
 }
 
-// Ensure every node has at least one bidirectional edge
+// Ensure every scene has at least one bidirectional edge
 function ensureGraphConnectivity(connections) {
     let maxIterations = 100; // Prevent infinite loops
     let iteration = 0;
     
     while (iteration < maxIterations) {
-        const nodeStats = analyzeNodeConnectivity(connections);
-        const nodesWithoutBidirectional = findNodesWithoutBidirectional(nodeStats);
+        const sceneStats = analyzeSceneConnectivity(connections);
+        const scenesWithoutBidirectional = findScenesWithoutBidirectional(sceneStats);
         
-        if (nodesWithoutBidirectional.length === 0) {
-            console.log(`All nodes have bidirectional edges after ${iteration} iterations`);
+        if (scenesWithoutBidirectional.length === 0) {
+            console.log(`All scenes have bidirectional edges after ${iteration} iterations`);
             break;
         }
         
-        // Fix nodes without bidirectional edges
-        for (const nodeIndex of nodesWithoutBidirectional) {
-            ensureNodeHasBidirectional(nodeIndex, connections, nodeStats);
+        // Fix scenes without bidirectional edges
+        for (const sceneIndex of scenesWithoutBidirectional) {
+            ensureSceneHasBidirectional(sceneIndex, connections, sceneStats);
         }
         
         iteration++;
     }
     
     if (iteration >= maxIterations) {
-        console.warn('Warning: Could not ensure all nodes have bidirectional edges within iteration limit');
+        console.warn('Warning: Could not ensure all scenes have bidirectional edges within iteration limit');
     }
 }
 
-// Analyze connectivity for each node
-function analyzeNodeConnectivity(connections) {
-    const nodeStats = new Map();
+// Analyze connectivity for each scene
+function analyzeSceneConnectivity(connections) {
+    const sceneStats = new Map();
     
-    // Initialize stats for all nodes
-    for (let i = 0; i < dots.length; i++) {
-        nodeStats.set(i, { inEdges: [], outEdges: [], bidirectionalEdges: [] });
+    // Initialize stats for all scenes
+    for (let i = 0; i < scenes.length; i++) {
+        sceneStats.set(i, { inEdges: [], outEdges: [], bidirectionalEdges: [] });
     }
     
     // Analyze each connection
@@ -316,45 +316,45 @@ function analyzeNodeConnectivity(connections) {
         const conn = connections[i];
         
         if (conn.bidirectional) {
-            nodeStats.get(conn.from).bidirectionalEdges.push(i);
-            nodeStats.get(conn.to).bidirectionalEdges.push(i);
+            sceneStats.get(conn.from).bidirectionalEdges.push(i);
+            sceneStats.get(conn.to).bidirectionalEdges.push(i);
         } else {
-            nodeStats.get(conn.from).outEdges.push(i);
-            nodeStats.get(conn.to).inEdges.push(i);
+            sceneStats.get(conn.from).outEdges.push(i);
+            sceneStats.get(conn.to).inEdges.push(i);
         }
     }
     
-    return nodeStats;
+    return sceneStats;
 }
 
-// Find nodes that don't have any bidirectional edges
-function findNodesWithoutBidirectional(nodeStats) {
-    const nodesWithoutBidirectional = [];
+// Find scenes that don't have any bidirectional edges
+function findScenesWithoutBidirectional(sceneStats) {
+    const scenesWithoutBidirectional = [];
     
-    for (const [nodeIndex, stats] of nodeStats.entries()) {
+    for (const [sceneIndex, stats] of sceneStats.entries()) {
         if (stats.bidirectionalEdges.length === 0) {
-            nodesWithoutBidirectional.push(nodeIndex);
+            scenesWithoutBidirectional.push(sceneIndex);
         }
     }
     
-    return nodesWithoutBidirectional;
+    return scenesWithoutBidirectional;
 }
 
-// Ensure a specific node has at least one bidirectional edge
-function ensureNodeHasBidirectional(nodeIndex, connections, nodeStats) {
-    const stats = nodeStats.get(nodeIndex);
+// Ensure a specific scene has at least one bidirectional edge
+function ensureSceneHasBidirectional(sceneIndex, connections, sceneStats) {
+    const stats = sceneStats.get(sceneIndex);
     
-    // If node already has bidirectional edges, nothing to do
+    // If scene already has bidirectional edges, nothing to do
     if (stats.bidirectionalEdges.length > 0) {
         return;
     }
     
-    // Get all edges connected to this node
+    // Get all edges connected to this scene
     const allConnectedEdges = [...stats.inEdges, ...stats.outEdges];
     
     if (allConnectedEdges.length === 0) {
-        // Node has no edges at all - this shouldn't happen with Voronoi neighbors
-        console.warn(`Node ${nodeIndex} has no edges - this shouldn't happen`);
+        // Scene has no edges at all - this shouldn't happen with Voronoi neighbors
+        console.warn(`Scene ${sceneIndex} has no edges - this shouldn't happen`);
         return;
     }
     
@@ -365,83 +365,54 @@ function ensureNodeHasBidirectional(nodeIndex, connections, nodeStats) {
     // Make the edge bidirectional
     conn.bidirectional = true;
     
-    console.log(`Made edge ${edgeIndex} (${conn.from} ↔ ${conn.to}) bidirectional for node ${nodeIndex}`);
+    console.log(`Made edge ${edgeIndex} (${conn.from} ↔ ${conn.to}) bidirectional for scene ${sceneIndex}`);
 }
 
-// Initialize the application
-document.addEventListener('DOMContentLoaded', function() {
-    const mapImage = document.getElementById('map-image');
-    const svg = d3.select('#overlay-svg');
+// Generate scenes with normalized coordinates
+function generateScenes() {
+    scenes = [];
     
-    // Wait for image to load to get dimensions
-    mapImage.onload = function() {
-        initializeApp();
-    };
-    
-    // If image is already loaded
-    if (mapImage.complete) {
-        initializeApp();
-    }
-    
-    function initializeApp() {
-        // Get image dimensions
-        const imgRect = mapImage.getBoundingClientRect();
-        imageWidth = imgRect.width;
-        imageHeight = imgRect.height;
-        imageAspectRatio = imageWidth / imageHeight;
-        
-        // Set SVG dimensions
-        svg.attr('width', imageWidth)
-           .attr('height', imageHeight);
-        
-        svgWidth = imageWidth;
-        svgHeight = imageHeight;
-        
-        // Try to load state from URL first
-        if (!loadStateFromURL()) {
-            // Generate new dots and connections if no state loaded
-            generateDots();
-            generateConnections();
-        }
-        
-        // Render everything (Voronoi cells first, then connections, then dots on top)
-        renderVoronoiCells();
-        renderConnections();
-        renderDots();
-        
-        // Set up event listeners
-        setupEventListeners();
-        
-        // Attach drag behavior to dots
-        attachDragBehavior();
-    }
-});
-
-// Generate dots with normalized coordinates
-function generateDots() {
-    dots = [];
-    
-    for (let i = 0; i < NUM_DOTS; i++) {
+    for (let i = 0; i < NUM_SCENES; i++) {
         // Generate normalized coordinates
         // X: -aspectRatio to +aspectRatio
         // Y: -1 to +1
-        const normalizedX = random.randomBetween(-imageAspectRatio, imageAspectRatio);
-        const normalizedY = random.randomBetween(-1, 1);
+        const x = random.randomBetween(-imageAspectRatio, imageAspectRatio);
+        const y = random.randomBetween(-1, 1);
         
-        dots.push({
+        scenes.push({
             id: i,
-            normalizedX: normalizedX,
-            normalizedY: normalizedY,
-            x: normalizedToPixelX(normalizedX),
-            y: normalizedToPixelY(normalizedY),
-            name: `Node ${i}` // Default name
+            x: parseFloat(x.toFixed(3)),
+            y: parseFloat(y.toFixed(3)),
+            pixelX: normalizedToPixelX(x),
+            pixelY: normalizedToPixelY(y),
+            name: `Scene ${i}`, // Default name
+            connections: [] // Will be populated when connections are generated
         });
     }
 }
 
-// Generate connections between dots using Voronoi diagram
+// Generate connections between scenes using Voronoi diagram
 function generateConnections() {
     connections = generateVoronoiConnections(connections);
+    
+    // Update scenes with their connection arrays
+    updateSceneConnections();
+}
+
+// Update scenes with their connection arrays
+function updateSceneConnections() {
+    // Clear existing connections
+    for (let i = 0; i < scenes.length; i++) {
+        scenes[i].connections = [];
+    }
+    
+    // Build connection arrays for each scene
+    for (const conn of connections) {
+        scenes[conn.from].connections.push(conn.to);
+        if (conn.bidirectional) {
+            scenes[conn.to].connections.push(conn.from);
+        }
+    }
 }
 
 // Convert normalized coordinates to pixel coordinates
@@ -462,35 +433,35 @@ function pixelToNormalizedY(pixelY) {
     return -((pixelY / (imageHeight / 2)) - 1);
 }
 
-// Render dots
-function renderDots() {
+// Render scenes
+function renderScenes() {
     const svg = d3.select('#overlay-svg');
     
-    // Clear existing dots
-    svg.selectAll('.dot').remove();
+    // Clear existing scenes
+    svg.selectAll('.scene').remove();
     
-    console.log('Rendering dots:', dots.length, 'dots with names:', dots.map(d => ({id: d.id, name: d.name})));
+    console.log('Rendering scenes:', scenes.length, 'scenes with names:', scenes.map(s => ({id: s.id, name: s.name})));
     
-    // Create dots
-    const dotGroups = svg.selectAll('.dot')
-        .data(dots)
+    // Create scenes
+    const sceneGroups = svg.selectAll('.scene')
+        .data(scenes)
         .enter()
         .append('g')
-        .attr('class', 'dot')
-        .attr('transform', d => `translate(${d.x}, ${d.y})`)
+        .attr('class', 'scene')
+        .attr('transform', d => `translate(${d.pixelX}, ${d.pixelY})`)
         .style('cursor', 'pointer');
     
-    // Add circle for each dot
-    dotGroups.append('circle')
+    // Add circle for each scene
+    sceneGroups.append('circle')
         .attr('r', 6)
-        .attr('fill', d => d.id === selectedNode ? '#FFD700' : '#FF6B6B')
-        .attr('stroke', d => d.id === selectedNode ? '#FFA500' : '#ffffff')
-        .attr('stroke-width', d => d.id === selectedNode ? 3 : 1.5)
+        .attr('fill', d => d.id === selectedScene ? '#FFD700' : '#FF6B6B')
+        .attr('stroke', d => d.id === selectedScene ? '#FFA500' : '#ffffff')
+        .attr('stroke-width', d => d.id === selectedScene ? 3 : 1.5)
         .attr('data-radius', 6) // Store radius for line calculations
         .style('transition', 'r 0.2s ease, stroke-width 0.2s ease'); // Smooth transitions
     
     // Add text label
-    dotGroups.append('text')
+    sceneGroups.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
         .attr('fill', '#ffffff')
@@ -501,53 +472,32 @@ function renderDots() {
         .text(d => d.id);
     
     // Add hover events
-    dotGroups
+    sceneGroups
         .on('mouseenter', function(event, d) {
-            console.log('Mouse enter on node:', d.id, d.name);
+            console.log('Mouse enter on scene:', d.id, d.name);
             showHoverDisplay(d.name);
-            // Make node bigger on hover
+            // Make scene bigger on hover
             d3.select(this).select('circle')
                 .attr('r', 10)
-                .attr('stroke-width', d.id === selectedNode ? 4 : 2.5);
+                .attr('stroke-width', d.id === selectedScene ? 4 : 2.5);
         })
         .on('mouseleave', function(event, d) {
-            console.log('Mouse leave on node:', d.id);
+            console.log('Mouse leave on scene:', d.id);
             // Return to normal size
             d3.select(this).select('circle')
                 .attr('r', 6)
-                .attr('stroke-width', d.id === selectedNode ? 3 : 1.5);
+                .attr('stroke-width', d.id === selectedScene ? 3 : 1.5);
             
-            // Show selected node's name if there is one, otherwise hide display
-            if (selectedNode !== null) {
-                const selectedNodeData = dots.find(n => n.id === selectedNode);
-                if (selectedNodeData) {
-                    showHoverDisplay(selectedNodeData.name);
+            // Show selected scene's name if there is one, otherwise hide display
+            if (selectedScene !== null) {
+                const selectedSceneData = scenes.find(s => s.id === selectedScene);
+                if (selectedSceneData) {
+                    showHoverDisplay(selectedSceneData.name);
                 }
             } else {
                 hideHoverDisplay();
             }
         });
-}
-
-// Helper function to calculate line endpoints at dot edges
-function calculateLineEndpoints(fromDot, toDot, fromRadius = 6, toRadius = 6) {
-    const dx = toDot.x - fromDot.x;
-    const dy = toDot.y - fromDot.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    
-    if (distance === 0) return { x1: fromDot.x, y1: fromDot.y, x2: toDot.x, y2: toDot.y };
-    
-    // Calculate unit vector
-    const unitX = dx / distance;
-    const unitY = dy / distance;
-    
-    // Calculate endpoints at dot edges
-    const x1 = fromDot.x + unitX * fromRadius;
-    const y1 = fromDot.y + unitY * fromRadius;
-    const x2 = toDot.x - unitX * toRadius;
-    const y2 = toDot.y - unitY * toRadius;
-    
-    return { x1, y1, x2, y2 };
 }
 
 // Render connections
@@ -564,22 +514,22 @@ function renderConnections() {
         .append('g')
         .attr('class', 'connection');
     
-    // Add lines with endpoints at dot edges
+    // Add lines with endpoints at scene edges
     connectionGroups.append('line')
         .attr('x1', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
+            const endpoints = calculateLineEndpoints(scenes[d.from], scenes[d.to]);
             return endpoints.x1;
         })
         .attr('y1', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
+            const endpoints = calculateLineEndpoints(scenes[d.from], scenes[d.to]);
             return endpoints.y1;
         })
         .attr('x2', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
+            const endpoints = calculateLineEndpoints(scenes[d.from], scenes[d.to]);
             return endpoints.x2;
         })
         .attr('y2', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
+            const endpoints = calculateLineEndpoints(scenes[d.from], scenes[d.to]);
             return endpoints.y2;
         })
         .attr('stroke', d => d.bidirectional ? '#4ECDC4' : '#FFE66D')
@@ -614,6 +564,128 @@ function renderConnections() {
         .attr('marker-end', 'url(#arrowhead)');
 }
 
+// Calculate line endpoints to terminate at scene edges
+function calculateLineEndpoints(scene1, scene2) {
+    const radius = 6; // Scene radius
+    const dx = scene2.pixelX - scene1.pixelX;
+    const dy = scene2.pixelY - scene1.pixelY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    if (distance === 0) {
+        return { x1: scene1.pixelX, y1: scene1.pixelY, x2: scene2.pixelX, y2: scene2.pixelY };
+    }
+    
+    const unitX = dx / distance;
+    const unitY = dy / distance;
+    
+    const startX = scene1.pixelX + unitX * radius;
+    const startY = scene1.pixelY + unitY * radius;
+    const endX = scene2.pixelX - unitX * radius;
+    const endY = scene2.pixelY - unitY * radius;
+    
+    return { x1: startX, y1: startY, x2: endX, y2: endY };
+}
+
+// Update connections when scenes are moved
+function updateConnections() {
+    renderConnections();
+}
+
+// Show hover display
+function showHoverDisplay(name) {
+    const hoverDisplay = document.getElementById('hover-display');
+    hoverDisplay.textContent = name;
+    hoverDisplay.classList.add('visible');
+}
+
+// Update hover display for selected scene
+function updateHoverDisplayForSelected() {
+    if (selectedScene !== null) {
+        const scene = scenes.find(s => s.id === selectedScene);
+        if (scene) {
+            showHoverDisplay(scene.name);
+        }
+    }
+}
+
+// Hide hover display
+function hideHoverDisplay() {
+    const hoverDisplay = document.getElementById('hover-display');
+    hoverDisplay.classList.remove('visible');
+}
+
+// Select a scene
+function selectScene(sceneId) {
+    // If clicking the same scene, deselect it
+    if (selectedScene === sceneId) {
+        deselectScene();
+        return;
+    }
+    
+    selectedScene = sceneId;
+    const scene = scenes.find(s => s.id === sceneId);
+    if (scene) {
+        document.getElementById('scene-name-input').value = scene.name;
+        showHoverDisplay(scene.name); // Show the name at the top
+    }
+    renderScenes(); // Re-render to show selection
+    attachDragBehavior(); // Re-attach drag behavior after re-rendering
+    console.log(`Selected scene ${sceneId}: ${scene.name}`);
+}
+
+// Deselect current scene
+function deselectScene() {
+    selectedScene = null;
+    document.getElementById('scene-name-input').value = '';
+    hideHoverDisplay();
+    renderScenes(); // Re-render to show deselection
+    attachDragBehavior(); // Re-attach drag behavior after re-rendering
+    console.log('Deselected scene');
+}
+
+// Attach drag behavior to scenes
+function attachDragBehavior() {
+    console.log('Attaching drag behavior to', d3.selectAll('.scene').size(), 'scenes');
+    
+    const drag = d3.drag()
+        .on('start', function(event, d) {
+            console.log('Drag started on scene:', d.id);
+            d3.select(this).raise().classed('active', true);
+            // Select the scene when drag starts (works for both clicks and drags)
+            selectScene(d.id);
+        })
+        .on('drag', function(event, d) {
+            // Update scene position
+            d.x = parseFloat(pixelToNormalizedX(event.x).toFixed(3));
+            d.y = parseFloat(pixelToNormalizedY(event.y).toFixed(3));
+            d.pixelX = event.x;
+            d.pixelY = event.y;
+            
+            // Update visual position
+            d3.select(this).attr('transform', `translate(${d.pixelX}, ${d.pixelY})`);
+            
+            // Update connections if needed
+            updateConnections();
+        })
+        .on('end', function(event, d) {
+            d3.select(this).classed('active', false);
+            
+            // Update URL with new state
+            updateURLWithState();
+            
+            // Regenerate connections if setting is enabled
+            if (settings.regenerateConnections) {
+                generateConnections();
+                renderVoronoiCells();
+                renderConnections();
+                renderScenes();
+                attachDragBehavior();
+            }
+        });
+    
+    d3.selectAll('.scene').call(drag);
+}
+
 // Set up event listeners
 function setupEventListeners() {
     // Save button
@@ -630,13 +702,13 @@ function setupEventListeners() {
         renderVoronoiCells();
     });
     
-    // Node name input
-    document.getElementById('node-name-input').addEventListener('input', function() {
-        if (selectedNode !== null) {
-            const node = dots.find(d => d.id === selectedNode);
-            if (node) {
-                node.name = this.value;
-                showHoverDisplay(node.name); // Update the hover display
+    // Scene name input
+    document.getElementById('scene-name-input').addEventListener('input', function() {
+        if (selectedScene !== null) {
+            const scene = scenes.find(s => s.id === selectedScene);
+            if (scene) {
+                scene.name = this.value;
+                showHoverDisplay(scene.name); // Update the hover display
                 updateURLWithState();
             }
         }
@@ -644,10 +716,10 @@ function setupEventListeners() {
     
     // Background click to deselect
     document.getElementById('map-container').addEventListener('click', function(event) {
-        // Only deselect if clicking on the background, not on nodes or their children
+        // Only deselect if clicking on the background, not on scenes or their children
         if (event.target.id === 'map-container' || event.target.id === 'map-image') {
             console.log('Background click detected, deselecting');
-            deselectNode();
+            deselectScene();
         }
     });
     
@@ -660,177 +732,23 @@ function setupEventListeners() {
     });
 }
 
-// Show hover display
-function showHoverDisplay(name) {
-    const hoverDisplay = document.getElementById('hover-display');
-    hoverDisplay.textContent = name;
-    hoverDisplay.classList.add('visible');
-}
-
-// Update hover display for selected node
-function updateHoverDisplayForSelected() {
-    if (selectedNode !== null) {
-        const node = dots.find(d => d.id === selectedNode);
-        if (node) {
-            showHoverDisplay(node.name);
-        }
-    }
-}
-
-// Hide hover display
-function hideHoverDisplay() {
-    const hoverDisplay = document.getElementById('hover-display');
-    hoverDisplay.classList.remove('visible');
-}
-
-// Select a node
-function selectNode(nodeId) {
-    // If clicking the same node, deselect it
-    if (selectedNode === nodeId) {
-        deselectNode();
-        return;
-    }
-    
-    selectedNode = nodeId;
-    const node = dots.find(d => d.id === nodeId);
-    if (node) {
-        document.getElementById('node-name-input').value = node.name;
-        showHoverDisplay(node.name); // Show the name at the top
-    }
-    renderDots(); // Re-render to show selection
-    attachDragBehavior(); // Re-attach drag behavior after re-rendering
-    console.log(`Selected node ${nodeId}: ${node.name}`);
-}
-
-// Deselect current node
-function deselectNode() {
-    selectedNode = null;
-    document.getElementById('node-name-input').value = '';
-    hideHoverDisplay();
-    renderDots(); // Re-render to show deselection
-    attachDragBehavior(); // Re-attach drag behavior after re-rendering
-    console.log('Deselected node');
-}
-
-// Attach drag behavior to dots
-function attachDragBehavior() {
-    console.log('Attaching drag behavior to', d3.selectAll('.dot').size(), 'dots');
-    
-    const drag = d3.drag()
-        .on('start', function(event, d) {
-            console.log('Drag started on node:', d.id);
-            d3.select(this).raise().classed('active', true);
-            // Select the node when drag starts (works for both clicks and drags)
-            selectNode(d.id);
-        })
-        .on('drag', function(event, d) {
-            // Update dot position
-            d.normalizedX = pixelToNormalizedX(event.x);
-            d.normalizedY = pixelToNormalizedY(event.y);
-            d.x = event.x;
-            d.y = event.y;
-            
-            // Update visual position
-            d3.select(this).attr('transform', `translate(${d.x}, ${d.y})`);
-            
-            // Update connections if needed
-            updateConnections();
-        })
-        .on('end', function(event, d) {
-            d3.select(this).classed('active', false);
-            
-            // Update URL with new state
-            updateURLWithState();
-            
-            // Regenerate connections if setting is enabled
-            if (settings.regenerateConnections) {
-                generateConnections();
-                renderVoronoiCells();
-                renderConnections();
-                renderDots();
-                attachDragBehavior();
-            }
-        });
-    
-    d3.selectAll('.dot').call(drag);
-}
-
-// Drag functions
-function dragStarted(event, d) {
-    d3.select(this).raise().classed('active', true);
-}
-
-function dragged(event, d) {
-    // Update pixel coordinates
-    d.x = event.x;
-    d.y = event.y;
-    
-    // Update normalized coordinates
-    d.normalizedX = pixelToNormalizedX(d.x);
-    d.normalizedY = pixelToNormalizedY(d.y);
-    
-    // Update transform
-    d3.select(this).attr('transform', `translate(${d.x}, ${d.y})`);
-    
-    // Update connections (but not URL yet)
-    updateConnections();
-}
-
-function dragEnded(event, d) {
-    d3.select(this).classed('active', false);
-    
-    // Regenerate connections if setting is enabled
-    if (settings.regenerateConnections) {
-        generateConnections();
-        renderVoronoiCells();
-        renderConnections();
-        renderDots(); // Re-render dots to keep them on top
-        attachDragBehavior(); // Re-attach drag behavior to new dots
-    }
-    
-    // Update URL with new state only when drag is complete
-    updateURLWithState();
-}
-
-// Update connections when dots move
-function updateConnections() {
-    const svg = d3.select('#overlay-svg');
-    
-    svg.selectAll('.connection line')
-        .attr('x1', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
-            return endpoints.x1;
-        })
-        .attr('y1', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
-            return endpoints.y1;
-        })
-        .attr('x2', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
-            return endpoints.x2;
-        })
-        .attr('y2', d => {
-            const endpoints = calculateLineEndpoints(dots[d.from], dots[d.to]);
-            return endpoints.y2;
-        });
-}
-
-// Save data to clipboard
+// Save current state to clipboard
 function saveToClipboard() {
-    const data = getCurrentState();
-    const jsonString = JSON.stringify(data, null, 2);
+    const state = getCurrentState();
+    const jsonString = JSON.stringify(state, null, 2);
     
-    // Copy to clipboard
     navigator.clipboard.writeText(jsonString).then(function() {
-        // Visual feedback
-        const btn = document.getElementById('save-btn');
-        const originalText = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.background = '#28a745';
+        console.log('State copied to clipboard');
         
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = '#007AFF';
+        // Show temporary success message
+        const saveBtn = document.getElementById('save-btn');
+        const originalText = saveBtn.textContent;
+        saveBtn.textContent = 'Copied!';
+        saveBtn.style.backgroundColor = '#4CAF50';
+        
+        setTimeout(function() {
+            saveBtn.textContent = originalText;
+            saveBtn.style.backgroundColor = '';
         }, 2000);
     }).catch(function(err) {
         console.error('Failed to copy to clipboard:', err);
@@ -842,16 +760,16 @@ function saveToClipboard() {
 function getCurrentState() {
     return {
         seed: SEED,
-        numDots: NUM_DOTS,
+        numScenes: NUM_SCENES,
         bidirectionalProbability: BIDIRECTIONAL_PROBABILITY,
         settings: settings,
-        dots: dots.map(dot => ({
-            id: dot.id,
-            normalizedX: dot.normalizedX,
-            normalizedY: dot.normalizedY,
-            name: dot.name
-        })),
-        connections: connections
+        scenes: scenes.map(scene => ({
+            id: scene.id,
+            x: scene.x,
+            y: scene.y,
+            name: scene.name,
+            connections: scene.connections
+        }))
     };
 }
 
@@ -898,26 +816,57 @@ function loadStateFromURL() {
         
         const state = JSON.parse(jsonString);
         
+        // Check if this is old format (has 'dots' instead of 'scenes')
+        let convertedState = state;
+        if (state.dots) {
+            console.log('Detected old data format, converting to new format...');
+            convertedState = convertOldFormatToNew(state);
+        }
+        
         // Validate state structure
-        if (!state.dots || !state.connections) {
+        if (!convertedState.scenes) {
             console.warn('Invalid state structure in URL');
             return false;
         }
         
-        // Load dots
-        dots = state.dots.map(dot => ({
-            ...dot,
-            x: normalizedToPixelX(dot.normalizedX),
-            y: normalizedToPixelY(dot.normalizedY),
-            name: dot.name || `Node ${dot.id}` // Ensure name exists
+        // Load scenes
+        scenes = convertedState.scenes.map(scene => ({
+            ...scene,
+            x: parseFloat(scene.x.toFixed(3)),
+            y: parseFloat(scene.y.toFixed(3)),
+            pixelX: normalizedToPixelX(scene.x),
+            pixelY: normalizedToPixelY(scene.y),
+            name: scene.name || `Scene ${scene.id}` // Ensure name exists
         }));
         
-        // Load connections
-        connections = state.connections;
+        // Reconstruct connections from scene connection arrays
+        connections = [];
+        const connectionSet = new Set();
+        
+        for (let i = 0; i < scenes.length; i++) {
+            const scene = scenes[i];
+            for (const targetId of scene.connections) {
+                const key = i < targetId ? `${i}-${targetId}` : `${targetId}-${i}`;
+                
+                if (!connectionSet.has(key)) {
+                    connectionSet.add(key);
+                    
+                    // Check if the connection is bidirectional
+                    const targetScene = scenes.find(s => s.id === targetId);
+                    const isBidirectional = targetScene && targetScene.connections.includes(i);
+                    
+                    connections.push({
+                        from: i,
+                        to: targetId,
+                        bidirectional: isBidirectional
+                    });
+                }
+            }
+        }
         
         // Load settings
-        if (state.settings) {
-            settings = state.settings;
+        if (convertedState.settings) {
+            settings = convertedState.settings;
             // Update UI to reflect loaded settings
             document.getElementById('regenerate-connections').checked = settings.regenerateConnections;
             document.getElementById('show-voronoi').checked = settings.showVoronoi;
@@ -932,3 +881,132 @@ function loadStateFromURL() {
         return false;
     }
 }
+
+// Convert old data format to new format
+function convertOldFormatToNew(oldState) {
+    console.log('Converting old format to new format...');
+    
+    const newState = {
+        seed: oldState.seed || 42,
+        numScenes: oldState.numDots || 100,
+        bidirectionalProbability: oldState.bidirectionalProbability || 0.3,
+        settings: oldState.settings || {
+            regenerateConnections: false,
+            showVoronoi: false
+        },
+        scenes: []
+    };
+    
+    // Convert dots to scenes
+    if (oldState.dots) {
+        newState.scenes = oldState.dots.map(dot => {
+            // Handle old coordinate format (normalizedX/normalizedY)
+            let x, y;
+            if (dot.normalizedX !== undefined && dot.normalizedY !== undefined) {
+                x = dot.normalizedX;
+                y = dot.normalizedY;
+            } else if (dot.x !== undefined && dot.y !== undefined) {
+                x = dot.x;
+                y = dot.y;
+            } else {
+                // Fallback to random coordinates
+                x = random.randomBetween(-imageAspectRatio, imageAspectRatio);
+                y = random.randomBetween(-1, 1);
+            }
+            
+            return {
+                id: dot.id,
+                x: parseFloat(x.toFixed(3)),
+                y: parseFloat(y.toFixed(3)),
+                name: dot.name || `Scene ${dot.id}`,
+                connections: [] // Will be populated from old connections
+            };
+        });
+    }
+    
+    // Convert old connections format to new scene connection arrays
+    if (oldState.connections) {
+        // First, build a map of connections for each scene
+        const connectionMap = new Map();
+        
+        // Initialize empty arrays for each scene
+        for (let i = 0; i < newState.scenes.length; i++) {
+            connectionMap.set(i, []);
+        }
+        
+        // Process old connections
+        for (const conn of oldState.connections) {
+            const fromId = conn.from;
+            const toId = conn.to;
+            
+            // Add connection to the from scene
+            if (connectionMap.has(fromId)) {
+                connectionMap.get(fromId).push(toId);
+            }
+            
+            // If bidirectional, add reverse connection
+            if (conn.bidirectional && connectionMap.has(toId)) {
+                connectionMap.get(toId).push(fromId);
+            }
+        }
+        
+        // Update scenes with their connection arrays
+        for (let i = 0; i < newState.scenes.length; i++) {
+            newState.scenes[i].connections = connectionMap.get(i) || [];
+        }
+    }
+    
+    console.log('Conversion complete:', newState);
+    return newState;
+}
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    const mapImage = document.getElementById('map-image');
+    const svg = d3.select('#overlay-svg');
+    
+    // Wait for image to load to get dimensions
+    mapImage.onload = function() {
+        initializeApp();
+    };
+    
+    // If image is already loaded
+    if (mapImage.complete) {
+        initializeApp();
+    }
+    
+    function initializeApp() {
+        // Get image dimensions
+        const imgRect = mapImage.getBoundingClientRect();
+        imageWidth = imgRect.width;
+        imageHeight = imgRect.height;
+        imageAspectRatio = imageWidth / imageHeight;
+        
+        // Set SVG dimensions
+        svg.attr('width', imageWidth)
+           .attr('height', imageHeight);
+        
+        svgWidth = imageWidth;
+        svgHeight = imageHeight;
+        
+        // Try to load state from URL first
+        if (!loadStateFromURL()) {
+            // Generate new scenes and connections if no state loaded
+            generateScenes();
+            generateConnections();
+        }
+        
+        // Render everything
+        renderVoronoiCells();
+        renderConnections();
+        renderScenes();
+        
+        // Set up event listeners
+        setupEventListeners();
+        
+        // Attach drag behavior
+        attachDragBehavior();
+        
+        console.log('Application initialized');
+    }
+});
