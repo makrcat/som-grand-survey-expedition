@@ -58,7 +58,8 @@ body {
     align-items: center;
 }
 
-#save-btn {
+#save-btn,
+#save-manifest-btn {
     background: #007AFF;
     color: white;
     border: none;
@@ -70,12 +71,34 @@ body {
     transition: background-color 0.2s;
 }
 
-#save-btn:hover {
+#load-manifest-btn {
+    background: #FF3B30;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+#save-btn:hover,
+#save-manifest-btn:hover {
     background: #0056CC;
 }
 
-#save-btn:active {
+#load-manifest-btn:hover {
+    background: #D70015;
+}
+
+#save-btn:active,
+#save-manifest-btn:active {
     background: #004499;
+}
+
+#load-manifest-btn:active {
+    background: #B30012;
 }
 
 #info {

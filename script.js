@@ -709,6 +709,12 @@ function setupEventListeners() {
     // Save button
     document.getElementById('save-btn').addEventListener('click', saveToClipboard);
     
+    // Save manifest button
+    document.getElementById('save-manifest-btn').addEventListener('click', saveManifest);
+    
+    // Load manifest button
+    document.getElementById('load-manifest-btn').addEventListener('click', loadManifest);
+    
     // Settings checkboxes
     document.getElementById('regenerate-connections').addEventListener('change', function() {
         settings.regenerateConnections = this.checked;
@@ -784,6 +790,135 @@ function saveToClipboard() {
         console.error('Failed to copy to clipboard:', err);
         alert('Failed to copy to clipboard. Please try again.');
     });
+}
+
+// Save scenes to manifest.json
+function saveManifest() {
+    const manifestData = {
+        scenes: scenes.map(scene => ({
+            id: scene.id,
+            x: scene.x,
+            y: scene.y,
+            name: scene.name,
+            description: scene.description,
+            connections: scene.connections
+        }))
+    };
+    
+    fetch('/save-manifest', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(manifestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            console.log('Manifest saved successfully');
+            
+            // Show temporary success message
+            const saveManifestBtn = document.getElementById('save-manifest-btn');
+            const originalText = saveManifestBtn.textContent;
+            saveManifestBtn.textContent = 'Saved!';
+            saveManifestBtn.style.backgroundColor = '#4CAF50';
+            
+            setTimeout(function() {
+                saveManifestBtn.textContent = originalText;
+                saveManifestBtn.style.backgroundColor = '';
+            }, 2000);
+        } else {
+            console.error('Failed to save manifest:', data.error);
+            alert('Failed to save manifest: ' + data.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error saving manifest:', error);
+        alert('Error saving manifest: ' + error.message);
+    });
+}
+
+// Load scenes from manifest.json
+function loadManifest() {
+    fetch('/manifest.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Manifest file not found');
+            }
+            return response.json();
+        })
+        .then(manifestScenes => {
+            console.log('Loading manifest with', manifestScenes.length, 'scenes');
+            
+            // Update the scenes array
+            scenes = manifestScenes.map(scene => ({
+                ...scene,
+                x: parseFloat(scene.x.toFixed(3)),
+                y: parseFloat(scene.y.toFixed(3)),
+                pixelX: normalizedToPixelX(scene.x),
+                pixelY: normalizedToPixelY(scene.y),
+                name: scene.name || `Scene ${scene.id}`,
+                description: scene.description || `Description for Scene ${scene.id}`,
+                connections: scene.connections || []
+            }));
+            
+            // Reconstruct connections from scene connection arrays
+            connections = [];
+            const connectionSet = new Set();
+            
+            for (let i = 0; i < scenes.length; i++) {
+                const scene = scenes[i];
+                for (const targetId of scene.connections) {
+                    const key = i < targetId ? `${i}-${targetId}` : `${targetId}-${i}`;
+                    
+                    if (!connectionSet.has(key)) {
+                        connectionSet.add(key);
+                        
+                        // Check if the connection is bidirectional
+                        const targetScene = scenes.find(s => s.id === targetId);
+                        const isBidirectional = targetScene && targetScene.connections.includes(i);
+                        
+                        connections.push({
+                            from: i,
+                            to: targetId,
+                            bidirectional: isBidirectional
+                        });
+                    }
+                }
+            }
+            
+            // Clear selection
+            selectedScene = null;
+            document.getElementById('node-name-input').value = '';
+            document.getElementById('node-description-input').value = '';
+            hideHoverDisplay();
+            
+            // Re-render everything
+            renderVoronoiCells();
+            renderConnections();
+            renderScenes();
+            attachDragBehavior();
+            
+            // Update URL with new state
+            updateURLWithState();
+            
+            // Show success message
+            const loadManifestBtn = document.getElementById('load-manifest-btn');
+            const originalText = loadManifestBtn.textContent;
+            loadManifestBtn.textContent = 'Loaded!';
+            loadManifestBtn.style.backgroundColor = '#4CAF50';
+            
+            setTimeout(function() {
+                loadManifestBtn.textContent = originalText;
+                loadManifestBtn.style.backgroundColor = '#FF3B30';
+            }, 2000);
+            
+            console.log('Manifest loaded successfully');
+        })
+        .catch(error => {
+            console.error('Error loading manifest:', error);
+            alert('Error loading manifest: ' + error.message);
+        });
 }
 
 // Get current state as JSON object

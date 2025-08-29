@@ -1,0 +1,1207 @@
+[
+  {
+    "id": 0,
+    "x": 0.937,
+    "y": 0.198,
+    "name": "The Blubberhills",
+    "description": "Description for Scene 0",
+    "connections": [
+      19,
+      56,
+      74,
+      79,
+      90,
+      94
+    ]
+  },
+  {
+    "id": 1,
+    "x": -0.928,
+    "y": 0.603,
+    "name": "Node 1",
+    "description": "Description for Scene 1",
+    "connections": [
+      5,
+      22,
+      23,
+      37,
+      50
+    ]
+  },
+  {
+    "id": 2,
+    "x": 0.391,
+    "y": 0.658,
+    "name": "Node 2",
+    "description": "Description for Scene 2",
+    "connections": [
+      3,
+      25,
+      80
+    ]
+  },
+  {
+    "id": 3,
+    "x": 0.409,
+    "y": 0.496,
+    "name": "Node 3",
+    "description": "Description for Scene 3",
+    "connections": [
+      46,
+      72,
+      73,
+      80
+    ]
+  },
+  {
+    "id": 4,
+    "x": 0.168,
+    "y": 0.335,
+    "name": "Node 4",
+    "description": "Description for Scene 4",
+    "connections": [
+      10,
+      36,
+      46,
+      72
+    ]
+  },
+  {
+    "id": 5,
+    "x": -0.995,
+    "y": 0.346,
+    "name": "Node 5",
+    "description": "Description for Scene 5",
+    "connections": [
+      1,
+      9,
+      18,
+      31,
+      50
+    ]
+  },
+  {
+    "id": 6,
+    "x": 0.683,
+    "y": -0.421,
+    "name": "The Lost City of Hurrngh",
+    "description": "Description for Scene 6",
+    "connections": [
+      32,
+      54,
+      58,
+      97
+    ]
+  },
+  {
+    "id": 7,
+    "x": 0.028,
+    "y": -0.362,
+    "name": "Mount Kablooey Summit Visitor Center",
+    "description": "Description for Scene 7",
+    "connections": [
+      11,
+      82,
+      98
+    ]
+  },
+  {
+    "id": 8,
+    "x": -1.305,
+    "y": 0.047,
+    "name": "Node 8",
+    "description": "Description for Scene 8",
+    "connections": [
+      40,
+      43,
+      95,
+      96
+    ]
+  },
+  {
+    "id": 9,
+    "x": -0.827,
+    "y": 0.23,
+    "name": "Node 9",
+    "description": "Description for Scene 9",
+    "connections": [
+      29,
+      52,
+      86
+    ]
+  },
+  {
+    "id": 10,
+    "x": 0.058,
+    "y": 0.165,
+    "name": "Node 10",
+    "description": "Description for Scene 10",
+    "connections": [
+      4,
+      36,
+      57,
+      77,
+      81
+    ]
+  },
+  {
+    "id": 11,
+    "x": 0.115,
+    "y": -0.469,
+    "name": "Mount Kablooey Gift Shop",
+    "description": "Description for Scene 11",
+    "connections": [
+      54,
+      78,
+      97
+    ]
+  },
+  {
+    "id": 12,
+    "x": 1.027,
+    "y": -0.529,
+    "name": "Node 12",
+    "description": "Description for Scene 12",
+    "connections": [
+      14,
+      66,
+      84
+    ]
+  },
+  {
+    "id": 13,
+    "x": -1.212,
+    "y": -0.455,
+    "name": "Anti-Ireland",
+    "description": "Description for Scene 13",
+    "connections": [
+      17,
+      26,
+      61,
+      63
+    ]
+  },
+  {
+    "id": 14,
+    "x": 0.92,
+    "y": -0.285,
+    "name": "Node 14",
+    "description": "Description for Scene 14",
+    "connections": [
+      34,
+      38,
+      41,
+      66,
+      84
+    ]
+  },
+  {
+    "id": 15,
+    "x": 1.246,
+    "y": 0.42,
+    "name": "The Land of Obese Birds",
+    "description": "Description for Scene 15",
+    "connections": [
+      49,
+      71,
+      88
+    ]
+  },
+  {
+    "id": 16,
+    "x": -0.873,
+    "y": -0.528,
+    "name": "Node 16",
+    "description": "Description for Scene 16",
+    "connections": [
+      26,
+      63,
+      83,
+      85
+    ]
+  },
+  {
+    "id": 17,
+    "x": -1.055,
+    "y": -0.311,
+    "name": "Node 17",
+    "description": "Description for Scene 17",
+    "connections": [
+      20,
+      26,
+      61,
+      93,
+      96
+    ]
+  },
+  {
+    "id": 18,
+    "x": -1.031,
+    "y": 0.112,
+    "name": "Node 18",
+    "description": "Description for Scene 18",
+    "connections": [
+      31,
+      43,
+      52,
+      70,
+      95
+    ]
+  },
+  {
+    "id": 19,
+    "x": 1.157,
+    "y": 0.158,
+    "name": "Node 19",
+    "description": "Description for Scene 19",
+    "connections": [
+      0,
+      24,
+      49,
+      56,
+      90
+    ]
+  },
+  {
+    "id": 20,
+    "x": -1.082,
+    "y": -0.135,
+    "name": "Node 20",
+    "description": "Description for Scene 20",
+    "connections": [
+      17,
+      43,
+      70,
+      93,
+      96
+    ]
+  },
+  {
+    "id": 21,
+    "x": 0.831,
+    "y": 0.798,
+    "name": "Node 21",
+    "description": "Description for Scene 21",
+    "connections": [
+      28,
+      30,
+      33
+    ]
+  },
+  {
+    "id": 22,
+    "x": -0.68,
+    "y": 0.561,
+    "name": "Node 22",
+    "description": "Description for Scene 22",
+    "connections": [
+      1,
+      37,
+      65,
+      86,
+      87
+    ]
+  },
+  {
+    "id": 23,
+    "x": -1.059,
+    "y": 0.749,
+    "name": "Node 23",
+    "description": "Description for Scene 23",
+    "connections": [
+      37,
+      50
+    ]
+  },
+  {
+    "id": 24,
+    "x": 1.251,
+    "y": 0.137,
+    "name": "Node 24",
+    "description": "Description for Scene 24",
+    "connections": [
+      19,
+      88,
+      90
+    ]
+  },
+  {
+    "id": 25,
+    "x": 0.678,
+    "y": 0.803,
+    "name": "Node 25",
+    "description": "Description for Scene 25",
+    "connections": [
+      2,
+      28,
+      73
+    ]
+  },
+  {
+    "id": 26,
+    "x": -1.002,
+    "y": -0.432,
+    "name": "Node 26",
+    "description": "Description for Scene 26",
+    "connections": [
+      13,
+      63,
+      83
+    ]
+  },
+  {
+    "id": 27,
+    "x": -0.327,
+    "y": -0.736,
+    "name": "The Forbidden Sector",
+    "description": "Description for Scene 27",
+    "connections": [
+      47,
+      48
+    ]
+  },
+  {
+    "id": 28,
+    "x": 0.758,
+    "y": 0.737,
+    "name": "Node 28",
+    "description": "Description for Scene 28",
+    "connections": [
+      21,
+      69,
+      73
+    ]
+  },
+  {
+    "id": 29,
+    "x": -0.492,
+    "y": 0.195,
+    "name": "Node 29",
+    "description": "Description for Scene 29",
+    "connections": [
+      60,
+      64,
+      86,
+      92,
+      99
+    ]
+  },
+  {
+    "id": 30,
+    "x": 1.049,
+    "y": 0.646,
+    "name": "Node 30",
+    "description": "Description for Scene 30",
+    "connections": [
+      21,
+      33,
+      69,
+      71
+    ]
+  },
+  {
+    "id": 31,
+    "x": -1.155,
+    "y": 0.276,
+    "name": "Node 31",
+    "description": "Description for Scene 31",
+    "connections": [
+      18,
+      50,
+      95
+    ]
+  },
+  {
+    "id": 32,
+    "x": 0.78,
+    "y": -0.348,
+    "name": "Le Dumpstair\u00e8 II",
+    "description": "Description for Scene 32",
+    "connections": [
+      38,
+      66
+    ]
+  },
+  {
+    "id": 33,
+    "x": 1.088,
+    "y": 0.787,
+    "name": "Node 33",
+    "description": "Description for Scene 33",
+    "connections": [
+      30
+    ]
+  },
+  {
+    "id": 34,
+    "x": 1.17,
+    "y": -0.341,
+    "name": "Node 34",
+    "description": "Description for Scene 34",
+    "connections": [
+      14,
+      84,
+      89
+    ]
+  },
+  {
+    "id": 35,
+    "x": -0.304,
+    "y": -0.338,
+    "name": "Node 35",
+    "description": "Description for Scene 35",
+    "connections": [
+      44,
+      47,
+      91
+    ]
+  },
+  {
+    "id": 36,
+    "x": -0.008,
+    "y": 0.346,
+    "name": "Node 36",
+    "description": "Description for Scene 36",
+    "connections": [
+      53,
+      72,
+      77
+    ]
+  },
+  {
+    "id": 37,
+    "x": -0.883,
+    "y": 0.718,
+    "name": "Node 37",
+    "description": "Description for Scene 37",
+    "connections": [
+      22,
+      67
+    ]
+  },
+  {
+    "id": 38,
+    "x": 0.79,
+    "y": -0.118,
+    "name": "Node 38",
+    "description": "Description for Scene 38",
+    "connections": [
+      41,
+      58,
+      94
+    ]
+  },
+  {
+    "id": 39,
+    "x": -0.323,
+    "y": 0.726,
+    "name": "Node 39",
+    "description": "Description for Scene 39",
+    "connections": [
+      51,
+      53,
+      75,
+      87
+    ]
+  },
+  {
+    "id": 40,
+    "x": -1.314,
+    "y": 0.144,
+    "name": "Node 40",
+    "description": "Description for Scene 40",
+    "connections": [
+      95
+    ]
+  },
+  {
+    "id": 41,
+    "x": 0.892,
+    "y": -0.086,
+    "name": "Node 41",
+    "description": "Description for Scene 41",
+    "connections": [
+      90,
+      94
+    ]
+  },
+  {
+    "id": 42,
+    "x": -0.161,
+    "y": -0.102,
+    "name": "Node 42",
+    "description": "Description for Scene 42",
+    "connections": [
+      57,
+      62,
+      64,
+      91,
+      98
+    ]
+  },
+  {
+    "id": 43,
+    "x": -1.159,
+    "y": -0.008,
+    "name": "Node 43",
+    "description": "Description for Scene 43",
+    "connections": [
+      8,
+      95
+    ]
+  },
+  {
+    "id": 44,
+    "x": -0.456,
+    "y": -0.28,
+    "name": "Node 44",
+    "description": "Description for Scene 44",
+    "connections": [
+      47,
+      64,
+      85,
+      99
+    ]
+  },
+  {
+    "id": 45,
+    "x": 0.519,
+    "y": 0.238,
+    "name": "Node 45",
+    "description": "Description for Scene 45",
+    "connections": [
+      46,
+      58,
+      73,
+      79
+    ]
+  },
+  {
+    "id": 46,
+    "x": 0.343,
+    "y": 0.298,
+    "name": "Ravine Tomb Bottom Entrance",
+    "description": "This is where Heidi and Explorpheus made their daring balloon escape",
+    "connections": [
+      3,
+      4,
+      45,
+      81
+    ]
+  },
+  {
+    "id": 47,
+    "x": -0.466,
+    "y": -0.486,
+    "name": "Node 47",
+    "description": "Description for Scene 47",
+    "connections": [
+      27,
+      85
+    ]
+  },
+  {
+    "id": 48,
+    "x": -0.018,
+    "y": -0.837,
+    "name": "Node 48",
+    "description": "Description for Scene 48",
+    "connections": [
+      27,
+      78
+    ]
+  },
+  {
+    "id": 49,
+    "x": 1.181,
+    "y": 0.311,
+    "name": "Stinkfoot Island",
+    "description": "Description for Scene 49",
+    "connections": [
+      15,
+      56,
+      88
+    ]
+  },
+  {
+    "id": 50,
+    "x": -1.154,
+    "y": 0.501,
+    "name": "Node 50",
+    "description": "Description for Scene 50",
+    "connections": [
+      23,
+      31
+    ]
+  },
+  {
+    "id": 51,
+    "x": -0.12,
+    "y": 0.728,
+    "name": "Node 51",
+    "description": "Description for Scene 51",
+    "connections": [
+      39,
+      53,
+      68
+    ]
+  },
+  {
+    "id": 52,
+    "x": -0.855,
+    "y": 0.101,
+    "name": "Node 52",
+    "description": "Description for Scene 52",
+    "connections": [
+      9,
+      18,
+      70,
+      99
+    ]
+  },
+  {
+    "id": 53,
+    "x": -0.148,
+    "y": 0.494,
+    "name": "Node 53",
+    "description": "Description for Scene 53",
+    "connections": [
+      39,
+      51,
+      60,
+      68,
+      75
+    ]
+  },
+  {
+    "id": 54,
+    "x": 0.41,
+    "y": -0.553,
+    "name": "Node 54",
+    "description": "Description for Scene 54",
+    "connections": [
+      78,
+      97
+    ]
+  },
+  {
+    "id": 55,
+    "x": 0.064,
+    "y": -0.1,
+    "name": "Node 55",
+    "description": "Description for Scene 55",
+    "connections": [
+      57,
+      81,
+      82,
+      98
+    ]
+  },
+  {
+    "id": 56,
+    "x": 1.034,
+    "y": 0.334,
+    "name": "Los \u00c1rboles de la Estupidez",
+    "description": "Description for Scene 56",
+    "connections": [
+      49,
+      71,
+      74
+    ]
+  },
+  {
+    "id": 57,
+    "x": -0.076,
+    "y": -0.02,
+    "name": "Node 57",
+    "description": "Description for Scene 57",
+    "connections": [
+      55,
+      62,
+      81
+    ]
+  },
+  {
+    "id": 58,
+    "x": 0.505,
+    "y": -0.047,
+    "name": "Wigglebutt Woods",
+    "description": "Description for Scene 58",
+    "connections": [
+      6,
+      38,
+      76,
+      81,
+      94
+    ]
+  },
+  {
+    "id": 59,
+    "x": 0.142,
+    "y": 0.777,
+    "name": "Node 59",
+    "description": "Description for Scene 59",
+    "connections": [
+      68,
+      80
+    ]
+  },
+  {
+    "id": 60,
+    "x": -0.266,
+    "y": 0.357,
+    "name": "Node 60",
+    "description": "Description for Scene 60",
+    "connections": [
+      75,
+      77,
+      92
+    ]
+  },
+  {
+    "id": 61,
+    "x": -1.265,
+    "y": -0.388,
+    "name": "Node 61",
+    "description": "Description for Scene 61",
+    "connections": [
+      17,
+      96
+    ]
+  },
+  {
+    "id": 62,
+    "x": -0.207,
+    "y": 0.093,
+    "name": "Node 62",
+    "description": "Description for Scene 62",
+    "connections": [
+      77,
+      92
+    ]
+  },
+  {
+    "id": 63,
+    "x": -1.013,
+    "y": -0.56,
+    "name": "Node 63",
+    "description": "Description for Scene 63",
+    "connections": [
+      16
+    ]
+  },
+  {
+    "id": 64,
+    "x": -0.44,
+    "y": -0.061,
+    "name": "Node 64",
+    "description": "Description for Scene 64",
+    "connections": [
+      29,
+      42,
+      44,
+      91,
+      92,
+      99
+    ]
+  },
+  {
+    "id": 65,
+    "x": -0.745,
+    "y": 0.774,
+    "name": "Node 65",
+    "description": "Description for Scene 65",
+    "connections": [
+      67,
+      87
+    ]
+  },
+  {
+    "id": 66,
+    "x": 0.843,
+    "y": -0.361,
+    "name": "Spooky Tomb",
+    "description": "Description for Scene 66",
+    "connections": [
+      32
+    ]
+  },
+  {
+    "id": 67,
+    "x": -0.777,
+    "y": 0.784,
+    "name": "Node 67",
+    "description": "Description for Scene 67",
+    "connections": [
+      37,
+      65
+    ]
+  },
+  {
+    "id": 68,
+    "x": -0.011,
+    "y": 0.688,
+    "name": "Node 68",
+    "description": "Description for Scene 68",
+    "connections": [
+      72,
+      80
+    ]
+  },
+  {
+    "id": 69,
+    "x": 0.832,
+    "y": 0.599,
+    "name": "Node 69",
+    "description": "Description for Scene 69",
+    "connections": [
+      28,
+      74
+    ]
+  },
+  {
+    "id": 70,
+    "x": -0.927,
+    "y": -0.045,
+    "name": "Node 70",
+    "description": "Description for Scene 70",
+    "connections": [
+      93,
+      99
+    ]
+  },
+  {
+    "id": 71,
+    "x": 1.182,
+    "y": 0.47,
+    "name": "B.L.O.R.T.",
+    "description": "Description for Scene 71",
+    "connections": [
+      15,
+      30,
+      56
+    ]
+  },
+  {
+    "id": 72,
+    "x": 0.138,
+    "y": 0.458,
+    "name": "Node 72",
+    "description": "Description for Scene 72",
+    "connections": [
+      3,
+      68,
+      80
+    ]
+  },
+  {
+    "id": 73,
+    "x": 0.54,
+    "y": 0.494,
+    "name": "Node 73",
+    "description": "Description for Scene 73",
+    "connections": [
+      45,
+      74,
+      79
+    ]
+  },
+  {
+    "id": 74,
+    "x": 0.809,
+    "y": 0.475,
+    "name": "Node 74",
+    "description": "Description for Scene 74",
+    "connections": [
+      0,
+      69,
+      79
+    ]
+  },
+  {
+    "id": 75,
+    "x": -0.366,
+    "y": 0.536,
+    "name": "Node 75",
+    "description": "Description for Scene 75",
+    "connections": [
+      39,
+      53,
+      86,
+      87
+    ]
+  },
+  {
+    "id": 76,
+    "x": 0.383,
+    "y": -0.193,
+    "name": "Node 76",
+    "description": "Description for Scene 76",
+    "connections": [
+      58,
+      82,
+      97
+    ]
+  },
+  {
+    "id": 77,
+    "x": -0.079,
+    "y": 0.251,
+    "name": "Node 77",
+    "description": "Description for Scene 77",
+    "connections": [
+      10,
+      36,
+      60,
+      62
+    ]
+  },
+  {
+    "id": 78,
+    "x": 0.149,
+    "y": -0.663,
+    "name": "Node 78",
+    "description": "Description for Scene 78",
+    "connections": [
+      11,
+      48
+    ]
+  },
+  {
+    "id": 79,
+    "x": 0.715,
+    "y": 0.29,
+    "name": "Node 79",
+    "description": "Description for Scene 79",
+    "connections": [
+      0,
+      94
+    ]
+  },
+  {
+    "id": 80,
+    "x": 0.203,
+    "y": 0.637,
+    "name": "Node 80",
+    "description": "Description for Scene 80",
+    "connections": [
+      59,
+      68
+    ]
+  },
+  {
+    "id": 81,
+    "x": 0.162,
+    "y": 0.078,
+    "name": "Node 81",
+    "description": "Description for Scene 81",
+    "connections": [
+      55,
+      82
+    ]
+  },
+  {
+    "id": 82,
+    "x": 0.235,
+    "y": -0.193,
+    "name": "Node 82",
+    "description": "Description for Scene 82",
+    "connections": [
+      7,
+      55
+    ]
+  },
+  {
+    "id": 83,
+    "x": -0.894,
+    "y": -0.407,
+    "name": "Node 83",
+    "description": "Description for Scene 83",
+    "connections": [
+      16,
+      26,
+      85,
+      93
+    ]
+  },
+  {
+    "id": 84,
+    "x": 1.122,
+    "y": -0.443,
+    "name": "Node 84",
+    "description": "Description for Scene 84",
+    "connections": [
+      12
+    ]
+  },
+  {
+    "id": 85,
+    "x": -0.654,
+    "y": -0.402,
+    "name": "Node 85",
+    "description": "Description for Scene 85",
+    "connections": [
+      16,
+      44,
+      47,
+      83,
+      93,
+      99
+    ]
+  },
+  {
+    "id": 86,
+    "x": -0.685,
+    "y": 0.432,
+    "name": "Node 86",
+    "description": "Description for Scene 86",
+    "connections": [
+      22
+    ]
+  },
+  {
+    "id": 87,
+    "x": -0.593,
+    "y": 0.676,
+    "name": "Node 87",
+    "description": "Description for Scene 87",
+    "connections": [
+      65
+    ]
+  },
+  {
+    "id": 88,
+    "x": 1.301,
+    "y": 0.287,
+    "name": "Anti-Anti-Ireland",
+    "description": "Description for Scene 88",
+    "connections": [
+      24
+    ]
+  },
+  {
+    "id": 89,
+    "x": 1.2,
+    "y": -0.23,
+    "name": "Node 89",
+    "description": "Description for Scene 89",
+    "connections": [
+      34,
+      90
+    ]
+  },
+  {
+    "id": 90,
+    "x": 1.125,
+    "y": -0.012,
+    "name": "Node 90",
+    "description": "Description for Scene 90",
+    "connections": [
+      19
+    ]
+  },
+  {
+    "id": 91,
+    "x": -0.231,
+    "y": -0.218,
+    "name": "Shrubs of Mystery",
+    "description": "Description for Scene 91",
+    "connections": [
+      35,
+      42,
+      64,
+      98
+    ]
+  },
+  {
+    "id": 92,
+    "x": -0.329,
+    "y": 0.13,
+    "name": "Node 92",
+    "description": "Description for Scene 92",
+    "connections": [
+      29,
+      60
+    ]
+  },
+  {
+    "id": 93,
+    "x": -0.85,
+    "y": -0.24,
+    "name": "Node 93",
+    "description": "Description for Scene 93",
+    "connections": [
+      70,
+      85,
+      99
+    ]
+  },
+  {
+    "id": 94,
+    "x": 0.805,
+    "y": 0.053,
+    "name": "Cactusland",
+    "description": "Description for Scene 94",
+    "connections": [
+      0,
+      41,
+      79
+    ]
+  },
+  {
+    "id": 95,
+    "x": -1.224,
+    "y": 0.136,
+    "name": "Node 95",
+    "description": "Description for Scene 95",
+    "connections": [
+      18,
+      40,
+      43
+    ]
+  },
+  {
+    "id": 96,
+    "x": -1.262,
+    "y": -0.267,
+    "name": "Sandtopia",
+    "description": "Description for Scene 96",
+    "connections": [
+      17,
+      61
+    ]
+  },
+  {
+    "id": 97,
+    "x": 0.412,
+    "y": -0.385,
+    "name": "Node 97",
+    "description": "Description for Scene 97",
+    "connections": [
+      54,
+      76
+    ]
+  },
+  {
+    "id": 98,
+    "x": -0.059,
+    "y": -0.308,
+    "name": "Node 98",
+    "description": "Description for Scene 98",
+    "connections": [
+      7,
+      91
+    ]
+  },
+  {
+    "id": 99,
+    "x": -0.691,
+    "y": -0.063,
+    "name": "Node 99",
+    "description": "Description for Scene 99",
+    "connections": [
+      29,
+      52
+    ]
+  }
+]
