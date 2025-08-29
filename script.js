@@ -9,6 +9,10 @@ let svgHeight = 0;
 let isStateLoaded = false; // Track if we loaded state from URL
 let selectedScene = null; // Currently selected scene
 let nodeClickOccurred = false; // Track if a node click just happened
+let isCreatingEdge = false; // Track if we're creating a new edge
+let edgeCreationStart = null; // Starting scene for edge creation
+let tempEdgeLine = null; // Temporary line element for edge creation
+let isReadOnly = false; // Track if we're in read-only mode (not localhost)
 
 // Settings
 let settings = {
@@ -459,7 +463,8 @@ function renderScenes() {
         .attr('stroke', d => d.id === selectedScene ? '#FFA500' : '#ffffff')
         .attr('stroke-width', d => d.id === selectedScene ? 3 : 1.5)
         .attr('data-radius', 6) // Store radius for line calculations
-        .style('transition', 'r 0.2s ease, stroke-width 0.2s ease'); // Smooth transitions
+        .style('transition', 'r 0.2s ease, stroke-width 0.2s ease') // Smooth transitions
+        .style('cursor', isReadOnly ? 'default' : 'pointer'); // Disable pointer cursor in read-only mode
     
     // Add text label
     sceneGroups.append('text')
@@ -500,8 +505,24 @@ function renderScenes() {
             } else {
                 hideHoverDisplay();
             }
-        });
+                });
     
+    // Add right-click event to groups for edge creation (only in edit mode)
+    if (!isReadOnly) {
+        sceneGroups
+            .on('contextmenu', function(event, d) {
+                event.preventDefault();
+                event.stopPropagation();
+                
+                // Only allow edge creation when regenerate connections is off
+                if (!settings.regenerateConnections) {
+                    startEdgeCreation(d);
+                }
+            });
+    }
+    
+    // Ensure all scenes are on top of connections
+    svg.selectAll('.scene').raise();
 
 }
 
@@ -540,7 +561,57 @@ function renderConnections() {
         .attr('stroke', d => d.bidirectional ? '#4ECDC4' : '#FFE66D')
         .attr('stroke-width', d => d.bidirectional ? 4 : 3)
         .attr('stroke-dasharray', d => d.bidirectional ? 'none' : '5,5')
-        .style('filter', 'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.8))'); // Add shadow for contrast
+        .style('filter', 'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.8))') // Add shadow for contrast
+        .style('cursor', isReadOnly ? 'default' : 'pointer') // Make lines clickable only in edit mode
+        .on('mouseenter', function(event, d) {
+            // Hover effect - make line thicker and brighter
+            d3.select(this)
+                .attr('stroke-width', d.bidirectional ? 6 : 5)
+                .style('filter', 'drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8))')
+                .style('cursor', isReadOnly ? 'default' : 'pointer');
+            
+            // Show tooltip with connection info
+            const fromScene = scenes[d.from];
+            const toScene = scenes[d.to];
+            const connectionType = d.bidirectional ? 'Bidirectional' : 'One-way';
+            const tooltipText = `${fromScene.name} ${d.bidirectional ? '↔' : '→'} ${toScene.name} (${connectionType})`;
+            
+            if (isReadOnly) {
+                showHoverDisplay(tooltipText, connectionType);
+            } else {
+                showHoverDisplay(tooltipText, `Left-click to cycle type • Right-click to delete`);
+            }
+        })
+        .on('mouseleave', function(event, d) {
+            // Return to normal appearance
+            d3.select(this)
+                .attr('stroke-width', d.bidirectional ? 4 : 3)
+                .style('filter', 'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.8))');
+            
+            // Show selected scene's name if there is one, otherwise hide display
+            if (selectedScene !== null) {
+                const selectedSceneData = scenes.find(s => s.id === selectedScene);
+                if (selectedSceneData) {
+                    showHoverDisplay(selectedSceneData.name, selectedSceneData.description);
+                }
+            } else {
+                hideHoverDisplay();
+            }
+        });
+    
+    // Add click and right-click handlers only in edit mode
+    if (!isReadOnly) {
+        connectionGroups.select('line')
+            .on('click', function(event, d) {
+                event.stopPropagation();
+                cycleConnectionType(d);
+            })
+            .on('contextmenu', function(event, d) {
+                event.preventDefault();
+                event.stopPropagation();
+                deleteConnection(d);
+            });
+    }
     
     // Add arrow markers for directional connections
     if (!svg.select('defs').empty()) {
@@ -567,6 +638,176 @@ function renderConnections() {
     connectionGroups.select('line')
         .filter(d => !d.bidirectional)
         .attr('marker-end', 'url(#arrowhead)');
+}
+
+// Delete a connection
+function deleteConnection(connection) {
+    console.log('Deleting connection:', connection.from, '->', connection.to);
+    
+    // Remove from connections array
+    const index = connections.findIndex(c => 
+        (c.from === connection.from && c.to === connection.to) ||
+        (c.from === connection.to && c.to === connection.from)
+    );
+    
+    if (index !== -1) {
+        connections.splice(index, 1);
+        
+        // Update scene connection arrays
+        updateSceneConnections();
+        
+        // Re-render connections
+        renderConnections();
+        
+        // Update URL state
+        updateURLWithState();
+        
+        console.log('Connection deleted successfully');
+    }
+}
+
+// Cycle through connection types: bidirectional -> one-way -> reverse -> bidirectional
+function cycleConnectionType(connection) {
+    console.log('Cycling connection type:', connection.from, '->', connection.to);
+    
+    // Find the connection in the array
+    const index = connections.findIndex(c => 
+        (c.from === connection.from && c.to === connection.to) ||
+        (c.from === connection.to && c.to === connection.from)
+    );
+    
+    if (index !== -1) {
+        const currentConnection = connections[index];
+        
+        // Initialize state if it doesn't exist
+        if (currentConnection.state === undefined) {
+            currentConnection.state = currentConnection.bidirectional ? 'bidirectional' : 'one-way';
+        }
+        
+        // Cycle through states
+        if (currentConnection.state === 'bidirectional') {
+            // Bidirectional -> One-way (A->B)
+            currentConnection.state = 'one-way';
+            currentConnection.bidirectional = false;
+            console.log('Changed to one-way:', currentConnection.from, '->', currentConnection.to);
+        } else if (currentConnection.state === 'one-way') {
+            // One-way (A->B) -> One-way (B->A)
+            currentConnection.state = 'reverse';
+            const temp = currentConnection.from;
+            currentConnection.from = currentConnection.to;
+            currentConnection.to = temp;
+            console.log('Reversed direction:', currentConnection.from, '->', currentConnection.to);
+        } else if (currentConnection.state === 'reverse') {
+            // One-way (B->A) -> Bidirectional
+            currentConnection.state = 'bidirectional';
+            currentConnection.bidirectional = true;
+            console.log('Changed to bidirectional');
+        }
+        
+        // Update scene connection arrays
+        updateSceneConnections();
+        
+        // Re-render connections
+        renderConnections();
+        
+        // Update URL state
+        updateURLWithState();
+        
+        console.log('Connection type cycled successfully');
+    }
+}
+
+// Start edge creation mode
+function startEdgeCreation(startScene) {
+    console.log('Starting edge creation from scene:', startScene.id);
+    
+    isCreatingEdge = true;
+    edgeCreationStart = startScene;
+    
+    // Create temporary line element
+    const svg = d3.select('#overlay-svg');
+    tempEdgeLine = svg.append('line')
+        .attr('class', 'temp-edge')
+        .attr('stroke', '#FF6B6B')
+        .attr('stroke-width', 3)
+        .attr('stroke-dasharray', '5,5')
+        .style('pointer-events', 'none');
+    
+    // Add mouse move handler to update temp line
+    svg.on('mousemove.temp-edge', function(event) {
+        if (isCreatingEdge && tempEdgeLine) {
+            const startEndpoints = calculateLineEndpoints(edgeCreationStart, {pixelX: edgeCreationStart.pixelX, pixelY: edgeCreationStart.pixelY});
+            tempEdgeLine
+                .attr('x1', startEndpoints.x1)
+                .attr('y1', startEndpoints.y1)
+                .attr('x2', event.offsetX)
+                .attr('y2', event.offsetY);
+        }
+    });
+    
+    // Add background click handler to cancel edge creation
+    d3.select('#map-container').on('click.temp-edge', function(event) {
+        if (isCreatingEdge && event.target === this) {
+            endEdgeCreation();
+        }
+    });
+}
+
+// Create a new edge between two scenes
+function createEdge(scene1, scene2) {
+    console.log('Creating edge between scenes:', scene1.id, 'and', scene2.id);
+    
+    // Check if edge already exists
+    const existingEdge = connections.find(c => 
+        (c.from === scene1.id && c.to === scene2.id) ||
+        (c.from === scene2.id && c.to === scene1.id)
+    );
+    
+    if (existingEdge) {
+        console.log('Edge already exists');
+        return;
+    }
+    
+    // Create new edge (unidirectional by default)
+    const newEdge = {
+        from: scene1.id,
+        to: scene2.id,
+        bidirectional: false
+    };
+    
+    connections.push(newEdge);
+    
+    // Update scene connection arrays
+    updateSceneConnections();
+    
+    // Re-render connections
+    renderConnections();
+    
+    // Update URL state
+    updateURLWithState();
+    
+    console.log('Edge created successfully');
+}
+
+// End edge creation mode
+function endEdgeCreation() {
+    console.log('Ending edge creation');
+    
+    isCreatingEdge = false;
+    edgeCreationStart = null;
+    
+    // Remove temporary line
+    if (tempEdgeLine) {
+        tempEdgeLine.remove();
+        tempEdgeLine = null;
+    }
+    
+    // Remove event handlers
+    const svg = d3.select('#overlay-svg');
+    svg.on('mousemove.temp-edge', null);
+    
+    // Remove background click handler
+    d3.select('#map-container').on('click.temp-edge', null);
 }
 
 // Calculate line endpoints to terminate at scene edges
@@ -653,14 +894,27 @@ function deselectScene() {
 
 // Attach drag behavior to scenes
 function attachDragBehavior() {
+    // Don't attach drag behavior in read-only mode
+    if (isReadOnly) {
+        console.log('Skipping drag behavior attachment in read-only mode');
+        return;
+    }
+    
     console.log('Attaching drag behavior to', d3.selectAll('.scene').size(), 'scenes');
     
     const drag = d3.drag()
         .on('start', function(event, d) {
             console.log('Drag started on scene:', d.id);
             d3.select(this).raise().classed('active', true);
-            // Select the scene when drag starts (works for both clicks and drags)
-            selectScene(d.id);
+            
+            // If we're in edge creation mode, complete the edge
+            if (isCreatingEdge && d.id !== edgeCreationStart.id) {
+                createEdge(edgeCreationStart, d);
+                endEdgeCreation();
+            } else {
+                // Normal selection behavior
+                selectScene(d.id);
+            }
         })
         .on('drag', function(event, d) {
             // Get the map container and its bounding rect
@@ -764,6 +1018,12 @@ function setupEventListeners() {
         if ((e.metaKey || e.ctrlKey) && e.key === 'c') {
             e.preventDefault();
             saveToClipboard();
+        }
+        
+        // Escape key to cancel edge creation
+        if (e.key === 'Escape' && isCreatingEdge) {
+            e.preventDefault();
+            endEdgeCreation();
         }
     });
 }
@@ -1128,10 +1388,85 @@ function convertOldFormatToNew(oldState) {
     return newState;
 }
 
+// Check if we're running on localhost
+function isLocalhost() {
+    return window.location.hostname === 'localhost' || 
+           window.location.hostname === '127.0.0.1' || 
+           window.location.hostname === '';
+}
+
+// Load from manifest.json in read-only mode
+function loadFromManifestReadOnly() {
+    console.log('Loading from manifest.json in read-only mode');
+    
+    fetch('/manifest.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Manifest file not found');
+            }
+            return response.json();
+        })
+        .then(manifestScenes => {
+            console.log('Loading manifest with', manifestScenes.length, 'scenes');
+            
+            scenes = manifestScenes.map(scene => ({
+                ...scene,
+                x: parseFloat(scene.x.toFixed(3)),
+                y: parseFloat(scene.y.toFixed(3)),
+                pixelX: normalizedToPixelX(scene.x),
+                pixelY: normalizedToPixelY(scene.y),
+                name: scene.name || `Scene ${scene.id}`,
+                description: scene.description || `Description for Scene ${scene.id}`,
+                connections: scene.connections || []
+            }));
+            
+            connections = [];
+            const connectionSet = new Set();
+            
+            for (let i = 0; i < scenes.length; i++) {
+                const scene = scenes[i];
+                for (const targetId of scene.connections) {
+                    const key = i < targetId ? `${i}-${targetId}` : `${targetId}-${i}`;
+                    
+                    if (!connectionSet.has(key)) {
+                        connectionSet.add(key);
+                        const targetScene = scenes.find(s => s.id === targetId);
+                        const isBidirectional = targetScene && targetScene.connections.includes(i);
+                        
+                        connections.push({
+                            from: i,
+                            to: targetId,
+                            bidirectional: isBidirectional
+                        });
+                    }
+                }
+            }
+            
+            console.log('Manifest loaded successfully in read-only mode');
+        })
+        .catch(error => {
+            console.error('Error loading manifest in read-only mode:', error);
+            // Fall back to generating new scenes if manifest fails to load
+            generateScenes();
+            generateConnections();
+        });
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     const mapImage = document.getElementById('map-image');
     const svg = d3.select('#overlay-svg');
+    
+    // Check if we're in read-only mode
+    isReadOnly = !isLocalhost();
+    
+    // Hide controls if in read-only mode
+    if (isReadOnly) {
+        const controlsBar = document.querySelector('.controls-bar');
+        if (controlsBar) {
+            controlsBar.style.display = 'none';
+        }
+    }
     
     // Wait for image to load to get dimensions
     mapImage.onload = function() {
@@ -1157,11 +1492,22 @@ document.addEventListener('DOMContentLoaded', function() {
         svgWidth = imageWidth;
         svgHeight = imageHeight;
         
-        // Try to load state from URL first
-        if (!loadStateFromURL()) {
-            // Generate new scenes and connections if no state loaded
-            generateScenes();
-            generateConnections();
+        if (isReadOnly) {
+            // In read-only mode, load from manifest.json
+            loadFromManifestReadOnly();
+        } else {
+            // In edit mode, try to load state from URL first
+            if (!loadStateFromURL()) {
+                // Generate new scenes and connections if no state loaded
+                generateScenes();
+                generateConnections();
+            }
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Attach drag behavior
+            attachDragBehavior();
         }
         
         // Render everything
@@ -1169,12 +1515,6 @@ document.addEventListener('DOMContentLoaded', function() {
         renderConnections();
         renderScenes();
         
-        // Set up event listeners
-        setupEventListeners();
-        
-        // Attach drag behavior
-        attachDragBehavior();
-        
-        console.log('Application initialized');
+        console.log('Application initialized', isReadOnly ? '(read-only mode)' : '(edit mode)');
     }
 });
