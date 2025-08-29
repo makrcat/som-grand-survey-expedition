@@ -446,6 +446,14 @@ function renderScenes() {
     svg.selectAll('.scene').remove();
     
     console.log('Rendering scenes:', scenes.length, 'scenes with names:', scenes.map(s => ({id: s.id, name: s.name})));
+    console.log('SVG element:', svg.node());
+    console.log('SVG dimensions:', svg.attr('width'), 'x', svg.attr('height'));
+    
+    // Don't render if there are no scenes
+    if (scenes.length === 0) {
+        console.log('No scenes to render, skipping');
+        return;
+    }
     
     // Create scenes
     const sceneGroups = svg.selectAll('.scene')
@@ -532,6 +540,12 @@ function renderConnections() {
     
     // Clear existing connections
     svg.selectAll('.connection').remove();
+    
+    // Don't render if there are no connections
+    if (connections.length === 0) {
+        console.log('No connections to render, skipping');
+        return;
+    }
     
     // Create connections
     const connectionGroups = svg.selectAll('.connection')
@@ -1390,17 +1404,21 @@ function convertOldFormatToNew(oldState) {
 
 // Check if we're running on localhost
 function isLocalhost() {
-    return window.location.hostname === 'localhost' || 
-           window.location.hostname === '127.0.0.1' || 
-           window.location.hostname === '';
+    const hostname = window.location.hostname;
+    const isLocal = hostname === 'localhost' || 
+                   hostname === '127.0.0.1' || 
+                   hostname === '';
+    console.log('Hostname:', hostname, 'Is localhost:', isLocal);
+    return isLocal;
 }
 
 // Load from manifest.json in read-only mode
 function loadFromManifestReadOnly() {
     console.log('Loading from manifest.json in read-only mode');
     
-    fetch('/manifest.json')
+    return fetch('/manifest.json')
         .then(response => {
+            console.log('Manifest fetch response:', response.status, response.ok);
             if (!response.ok) {
                 throw new Error('Manifest file not found');
             }
@@ -1408,6 +1426,7 @@ function loadFromManifestReadOnly() {
         })
         .then(manifestScenes => {
             console.log('Loading manifest with', manifestScenes.length, 'scenes');
+            console.log('First scene sample:', manifestScenes[0]);
             
             scenes = manifestScenes.map(scene => ({
                 ...scene,
@@ -1419,6 +1438,9 @@ function loadFromManifestReadOnly() {
                 description: scene.description || `Description for Scene ${scene.id}`,
                 connections: scene.connections || []
             }));
+            
+            console.log('Processed scenes:', scenes.length);
+            console.log('First processed scene:', scenes[0]);
             
             connections = [];
             const connectionSet = new Set();
@@ -1442,13 +1464,17 @@ function loadFromManifestReadOnly() {
                 }
             }
             
+            console.log('Generated connections:', connections.length);
             console.log('Manifest loaded successfully in read-only mode');
         })
         .catch(error => {
             console.error('Error loading manifest in read-only mode:', error);
             // Fall back to generating new scenes if manifest fails to load
+            console.log('Falling back to generated scenes');
             generateScenes();
             generateConnections();
+            // Return a resolved promise to continue the chain
+            return Promise.resolve();
         });
 }
 
@@ -1459,12 +1485,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check if we're in read-only mode
     isReadOnly = !isLocalhost();
+    console.log('Read-only mode:', isReadOnly);
     
     // Hide controls if in read-only mode
     if (isReadOnly) {
-        const controlsBar = document.querySelector('.controls-bar');
+        const controlsBar = document.querySelector('#controls');
+        console.log('Controls bar element:', controlsBar);
         if (controlsBar) {
             controlsBar.style.display = 'none';
+            console.log('Hidden controls bar');
+        } else {
+            console.log('Controls bar not found');
         }
     }
     
@@ -1494,7 +1525,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (isReadOnly) {
             // In read-only mode, load from manifest.json
-            loadFromManifestReadOnly();
+            loadFromManifestReadOnly().then(() => {
+                // Render everything after manifest is loaded
+                console.log('About to render - scenes count:', scenes.length, 'connections count:', connections.length);
+                renderVoronoiCells();
+                renderConnections();
+                renderScenes();
+                console.log('Application initialized (read-only mode)');
+            });
         } else {
             // In edit mode, try to load state from URL first
             if (!loadStateFromURL()) {
@@ -1508,13 +1546,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Attach drag behavior
             attachDragBehavior();
+            
+            // Render everything
+            console.log('About to render - scenes count:', scenes.length, 'connections count:', connections.length);
+            renderVoronoiCells();
+            renderConnections();
+            renderScenes();
+            console.log('Application initialized (edit mode)');
         }
-        
-        // Render everything
-        renderVoronoiCells();
-        renderConnections();
-        renderScenes();
-        
-        console.log('Application initialized', isReadOnly ? '(read-only mode)' : '(edit mode)');
     }
 });
