@@ -21,11 +21,9 @@
     "name": "Node 1",
     "description": "Description for Scene 1",
     "connections": [
-      5,
       22,
       23,
-      37,
-      50
+      37
     ]
   },
   {
@@ -73,23 +71,20 @@
     "name": "Node 5",
     "description": "Description for Scene 5",
     "connections": [
-      1,
       9,
-      18,
       31,
       50
     ]
   },
   {
     "id": 6,
-    "x": 0.683,
-    "y": -0.421,
-    "name": "The Lost City of Hurrngh",
-    "description": "Description for Scene 6",
+    "x": 0.691,
+    "y": -0.416,
+    "name": "The Lost City of Hrrurrrngh",
+    "description": "HRRRUUURRRRRRRRRNGHHHH",
     "connections": [
       32,
       54,
-      58,
       97
     ]
   },
@@ -98,10 +93,9 @@
     "x": 0.028,
     "y": -0.362,
     "name": "Mount Kablooey Summit Visitor Center",
-    "description": "Description for Scene 7",
+    "description": "Every summit needs a visitor center.",
     "connections": [
       11,
-      82,
       98
     ]
   },
@@ -114,8 +108,7 @@
     "connections": [
       40,
       43,
-      95,
-      96
+      95
     ]
   },
   {
@@ -125,9 +118,9 @@
     "name": "Node 9",
     "description": "Description for Scene 9",
     "connections": [
+      5,
       29,
-      52,
-      86
+      52
     ]
   },
   {
@@ -149,7 +142,7 @@
     "x": 0.115,
     "y": -0.469,
     "name": "Mount Kablooey Gift Shop",
-    "description": "Description for Scene 11",
+    "description": "Really? $35 for a mug?",
     "connections": [
       54,
       78,
@@ -173,7 +166,7 @@
     "x": -1.212,
     "y": -0.455,
     "name": "Anti-Ireland",
-    "description": "Description for Scene 13",
+    "description": "Whatever it is, it ain't Ireland.",
     "connections": [
       17,
       26,
@@ -191,7 +184,6 @@
       34,
       38,
       41,
-      66,
       84
     ]
   },
@@ -266,8 +258,8 @@
     "id": 20,
     "x": -1.082,
     "y": -0.135,
-    "name": "Node 20",
-    "description": "Description for Scene 20",
+    "name": "Sconehenge",
+    "description": "It looks ancient, and rather stale.",
     "connections": [
       17,
       43,
@@ -290,14 +282,13 @@
   },
   {
     "id": 22,
-    "x": -0.68,
-    "y": 0.561,
+    "x": -0.67,
+    "y": 0.558,
     "name": "Node 22",
     "description": "Description for Scene 22",
     "connections": [
       1,
       37,
-      65,
       86,
       87
     ]
@@ -306,11 +297,10 @@
     "id": 23,
     "x": -1.059,
     "y": 0.749,
-    "name": "Node 23",
-    "description": "Description for Scene 23",
+    "name": "Western Upside-Down Island",
+    "description": "Reputedly even more upside-down than the eastern half.",
     "connections": [
-      37,
-      50
+      37
     ]
   },
   {
@@ -351,13 +341,14 @@
   },
   {
     "id": 27,
-    "x": -0.327,
-    "y": -0.736,
-    "name": "The Forbidden Sector",
-    "description": "Description for Scene 27",
+    "x": -0.34,
+    "y": -0.738,
+    "name": "The Discouraged Sector",
+    "description": "About 30% less off-limits as the Forbidden Sector.",
     "connections": [
       47,
-      48
+      48,
+      65
     ]
   },
   {
@@ -381,7 +372,6 @@
     "connections": [
       60,
       64,
-      86,
       92,
       99
     ]
@@ -403,8 +393,8 @@
     "id": 31,
     "x": -1.155,
     "y": 0.276,
-    "name": "Node 31",
-    "description": "Description for Scene 31",
+    "name": "Cringe Canyon",
+    "description": "Oh, god, oof\u2026 it's honestly hard just to look at it.",
     "connections": [
       18,
       50,
@@ -416,9 +406,9 @@
     "x": 0.78,
     "y": -0.348,
     "name": "Le Dumpstair\u00e8 II",
-    "description": "Description for Scene 32",
+    "description": "This is where Heidi Croft and Explorpheus Jones began their island journey when their ship got beached",
     "connections": [
-      38,
+      6,
       66
     ]
   },
@@ -460,7 +450,7 @@
     "id": 36,
     "x": -0.008,
     "y": 0.346,
-    "name": "Node 36",
+    "name": "The Shores of ",
     "description": "Description for Scene 36",
     "connections": [
       53,
@@ -472,10 +462,11 @@
     "id": 37,
     "x": -0.883,
     "y": 0.718,
-    "name": "Node 37",
-    "description": "Description for Scene 37",
+    "name": "Eastern Upside-Down Island",
+    "description": "Woah, is that tree *upside-down*?",
     "connections": [
       22,
+      23,
       67
     ]
   },
@@ -506,8 +497,8 @@
   },
   {
     "id": 40,
-    "x": -1.314,
-    "y": 0.144,
+    "x": -1.312,
+    "y": 0.139,
     "name": "Node 40",
     "description": "Description for Scene 40",
     "connections": [
@@ -593,8 +584,8 @@
     "id": 47,
     "x": -0.466,
     "y": -0.486,
-    "name": "Node 47",
-    "description": "Description for Scene 47",
+    "name": "Wetwater Lake",
+    "description": "You won't believe how wet the water here is!",
     "connections": [
       27,
       85
@@ -602,10 +593,10 @@
   },
   {
     "id": 48,
-    "x": -0.018,
-    "y": -0.837,
-    "name": "Node 48",
-    "description": "Description for Scene 48",
+    "x": -0.016,
+    "y": -0.825,
+    "name": "Pumice & Hummus",
+    "description": "Exactly what it sounds like.",
     "connections": [
       27,
       78
@@ -627,10 +618,10 @@
     "id": 50,
     "x": -1.154,
     "y": 0.501,
-    "name": "Node 50",
-    "description": "Description for Scene 50",
+    "name": "Cringe Plateau",
+    "description": "The height of cringe.",
     "connections": [
-      23,
+      5,
       31
     ]
   },
@@ -642,7 +633,6 @@
     "description": "Description for Scene 51",
     "connections": [
       39,
-      53,
       68
     ]
   },
@@ -661,15 +651,13 @@
   },
   {
     "id": 53,
-    "x": -0.148,
-    "y": 0.494,
-    "name": "Node 53",
-    "description": "Description for Scene 53",
+    "x": -0.157,
+    "y": 0.503,
+    "name": "Imaginary Sandcastle",
+    "description": "Despite what it looks like, this enormous sandcastle is a figment of your imagination.",
     "connections": [
       39,
-      51,
       60,
-      68,
       75
     ]
   },
@@ -726,11 +714,9 @@
     "x": 0.505,
     "y": -0.047,
     "name": "Wigglebutt Woods",
-    "description": "Description for Scene 58",
+    "description": "Home of the wigglebutts",
     "connections": [
-      6,
       38,
-      76,
       81,
       94
     ]
@@ -782,8 +768,8 @@
   },
   {
     "id": 63,
-    "x": -1.013,
-    "y": -0.56,
+    "x": -1.016,
+    "y": -0.524,
     "name": "Node 63",
     "description": "Description for Scene 63",
     "connections": [
@@ -807,13 +793,12 @@
   },
   {
     "id": 65,
-    "x": -0.745,
-    "y": 0.774,
-    "name": "Node 65",
-    "description": "Description for Scene 65",
+    "x": -0.154,
+    "y": -0.618,
+    "name": "The Forbidden Sector",
+    "description": "DO NOT GO HERE.",
     "connections": [
-      67,
-      87
+      27
     ]
   },
   {
@@ -821,20 +806,20 @@
     "x": 0.843,
     "y": -0.361,
     "name": "Spooky Tomb",
-    "description": "Description for Scene 66",
+    "description": "This is where Heidi and Explorpheus discovered their first tomb!",
     "connections": [
+      14,
       32
     ]
   },
   {
     "id": 67,
-    "x": -0.777,
-    "y": 0.784,
-    "name": "Node 67",
-    "description": "Description for Scene 67",
+    "x": -0.767,
+    "y": 0.783,
+    "name": "The Sandy Swallow Islands",
+    "description": "PTUAH. Ptuah! Ugh, who would have thought swallowing sand is so unpleasant??",
     "connections": [
-      37,
-      65
+      37
     ]
   },
   {
@@ -844,6 +829,7 @@
     "name": "Node 68",
     "description": "Description for Scene 68",
     "connections": [
+      51,
       72,
       80
     ]
@@ -927,8 +913,7 @@
     "connections": [
       39,
       53,
-      86,
-      87
+      86
     ]
   },
   {
@@ -938,9 +923,9 @@
     "name": "Node 76",
     "description": "Description for Scene 76",
     "connections": [
-      58,
       82,
-      97
+      97,
+      58
     ]
   },
   {
@@ -958,8 +943,8 @@
   },
   {
     "id": 78,
-    "x": 0.149,
-    "y": -0.663,
+    "x": 0.157,
+    "y": -0.66,
     "name": "Node 78",
     "description": "Description for Scene 78",
     "connections": [
@@ -997,6 +982,7 @@
     "description": "Description for Scene 81",
     "connections": [
       55,
+      58,
       82
     ]
   },
@@ -1007,7 +993,6 @@
     "name": "Node 82",
     "description": "Description for Scene 82",
     "connections": [
-      7,
       55
     ]
   },
@@ -1036,8 +1021,8 @@
   },
   {
     "id": 85,
-    "x": -0.654,
-    "y": -0.402,
+    "x": -0.683,
+    "y": -0.361,
     "name": "Node 85",
     "description": "Description for Scene 85",
     "connections": [
@@ -1056,17 +1041,20 @@
     "name": "Node 86",
     "description": "Description for Scene 86",
     "connections": [
-      22
+      22,
+      1
     ]
   },
   {
     "id": 87,
     "x": -0.593,
     "y": 0.676,
-    "name": "Node 87",
-    "description": "Description for Scene 87",
+    "name": "Pointy Dunes",
+    "description": "Pointy sand makes for pointy dunes.",
     "connections": [
-      65
+      22,
+      75,
+      67
     ]
   },
   {
@@ -1074,7 +1062,7 @@
     "x": 1.301,
     "y": 0.287,
     "name": "Anti-Anti-Ireland",
-    "description": "Description for Scene 88",
+    "description": "Whatever it is, it ain't Anti-Ireland.",
     "connections": [
       24
     ]
@@ -1141,7 +1129,7 @@
     "x": 0.805,
     "y": 0.053,
     "name": "Cactusland",
-    "description": "Description for Scene 94",
+    "description": "Guess what this place has a lot of?",
     "connections": [
       0,
       41,
@@ -1165,7 +1153,7 @@
     "x": -1.262,
     "y": -0.267,
     "name": "Sandtopia",
-    "description": "Description for Scene 96",
+    "description": "Wow. What an incredible place to be a sand!!",
     "connections": [
       17,
       61
@@ -1186,8 +1174,8 @@
     "id": 98,
     "x": -0.059,
     "y": -0.308,
-    "name": "Node 98",
-    "description": "Description for Scene 98",
+    "name": "Porple Point",
+    "description": "Porplier than your average point. Great view of Mount Kablooey!!",
     "connections": [
       7,
       91

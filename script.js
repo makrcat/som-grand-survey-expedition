@@ -462,7 +462,10 @@ function renderScenes() {
         .append('g')
         .attr('class', 'scene')
         .attr('transform', d => `translate(${d.pixelX}, ${d.pixelY})`)
-        .style('cursor', 'pointer');
+        .style('cursor', 'pointer')
+        .style('pointer-events', 'all'); // Ensure pointer events are enabled
+    
+    console.log('Created scene groups:', sceneGroups.size());
     
     // Add circle for each scene
     sceneGroups.append('circle')
@@ -526,7 +529,8 @@ function renderScenes() {
                 if (!settings.regenerateConnections) {
                     startEdgeCreation(d);
                 }
-            });
+            })
+
     }
     
     // Ensure all scenes are on top of connections
@@ -915,10 +919,12 @@ function attachDragBehavior() {
     }
     
     console.log('Attaching drag behavior to', d3.selectAll('.scene').size(), 'scenes');
+    console.log('D3 version:', d3.version);
     
     const drag = d3.drag()
         .on('start', function(event, d) {
-            console.log('Drag started on scene:', d.id);
+            console.log('Drag started on scene:', d.id, 'Event type:', event.type);
+            event.sourceEvent.stopPropagation();
             d3.select(this).raise().classed('active', true);
             
             // If we're in edge creation mode, complete the edge
@@ -931,6 +937,8 @@ function attachDragBehavior() {
             }
         })
         .on('drag', function(event, d) {
+            console.log('Drag event fired for scene:', d.id);
+            
             // Get the map container and its bounding rect
             const mapContainer = document.getElementById('map-container');
             const containerRect = mapContainer.getBoundingClientRect();
@@ -938,6 +946,8 @@ function attachDragBehavior() {
             // Get mouse position relative to the container
             const mouseX = event.sourceEvent.clientX - containerRect.left;
             const mouseY = event.sourceEvent.clientY - containerRect.top;
+            
+            console.log('Mouse position:', mouseX, mouseY);
             
             // Convert mouse position to normalized coordinates
             d.x = parseFloat(pixelToNormalizedX(mouseX).toFixed(3));
@@ -947,14 +957,23 @@ function attachDragBehavior() {
             d.pixelX = normalizedToPixelX(d.x);
             d.pixelY = normalizedToPixelY(d.y);
             
+            console.log('Calculated position:', d.pixelX, d.pixelY);
+            
             // Update visual position of the group
-            d3.select(this).attr('transform', `translate(${d.pixelX}, ${d.pixelY})`);
+            const group = d3.select(this);
+            group.attr('transform', `translate(${d.pixelX}, ${d.pixelY})`);
+            console.log('Updated scene position:', d.id, 'to', d.pixelX, d.pixelY);
+            console.log('Group element:', group.node());
             
             // Update connections if needed
             updateConnections();
         })
         .on('end', function(event, d) {
             d3.select(this).classed('active', false);
+            
+            // Ensure final position is set
+            d3.select(this).attr('transform', `translate(${d.pixelX}, ${d.pixelY})`);
+            console.log('Drag ended for scene:', d.id, 'final position:', d.pixelX, d.pixelY);
             
             // Update URL with new state
             updateURLWithState();
@@ -969,7 +988,19 @@ function attachDragBehavior() {
             }
         });
     
-    d3.selectAll('.scene').call(drag);
+    const sceneElements = d3.selectAll('.scene');
+    console.log('Found scene elements for drag:', sceneElements.size());
+    
+    if (sceneElements.size() === 0) {
+        console.error('No scene elements found for drag attachment!');
+        return;
+    }
+    
+    // Attach drag to groups only (not circles to avoid conflicts)
+    sceneElements.call(drag);
+    
+    // Test if drag is working by adding a simple test
+    console.log('Drag behavior attached. Try dragging a scene now.');
 }
 
 // Set up event listeners
@@ -1544,14 +1575,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set up event listeners
             setupEventListeners();
             
-            // Attach drag behavior
-            attachDragBehavior();
-            
-            // Render everything
+            // Render everything first
             console.log('About to render - scenes count:', scenes.length, 'connections count:', connections.length);
             renderVoronoiCells();
             renderConnections();
             renderScenes();
+            
+            // Attach drag behavior after rendering
+            attachDragBehavior();
+            
             console.log('Application initialized (edit mode)');
         }
     }
