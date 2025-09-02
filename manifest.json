@@ -4,7 +4,7 @@
     "x": 0.937,
     "y": 0.198,
     "name": "The Blubberhills",
-    "description": "Description for Scene 0",
+    "description": "Hills with the quality of blubberfulness.",
     "connections": [
       19,
       56,
@@ -53,14 +53,13 @@
   },
   {
     "id": 4,
-    "x": 0.168,
-    "y": 0.335,
-    "name": "Node 4",
-    "description": "Description for Scene 4",
+    "x": 0.238,
+    "y": 0.359,
+    "name": "Embresa Mesa",
+    "description": "Hugs\u2026 hugs everywhere.",
     "connections": [
       10,
       36,
-      46,
       72
     ]
   },
@@ -90,8 +89,8 @@
   },
   {
     "id": 7,
-    "x": 0.028,
-    "y": -0.362,
+    "x": 0.034,
+    "y": -0.351,
     "name": "Mount Kablooey Summit Visitor Center",
     "description": "Every summit needs a visitor center.",
     "connections": [
@@ -153,8 +152,8 @@
     "id": 12,
     "x": 1.027,
     "y": -0.529,
-    "name": "Node 12",
-    "description": "Description for Scene 12",
+    "name": "Anxious Island",
+    "description": "Oooh, this place really really hopes it didn't do anything to cause Mount Unhappiness\u2026",
     "connections": [
       14,
       66,
@@ -170,16 +169,15 @@
     "connections": [
       17,
       26,
-      61,
-      63
+      61
     ]
   },
   {
     "id": 14,
     "x": 0.92,
     "y": -0.285,
-    "name": "Node 14",
-    "description": "Description for Scene 14",
+    "name": "Mildly Angry Mountains",
+    "description": "Sometimes nature just kinda pisses you off, yknow?!",
     "connections": [
       34,
       38,
@@ -201,8 +199,8 @@
   },
   {
     "id": 16,
-    "x": -0.873,
-    "y": -0.528,
+    "x": -0.874,
+    "y": -0.526,
     "name": "Node 16",
     "description": "Description for Scene 16",
     "connections": [
@@ -214,15 +212,13 @@
   },
   {
     "id": 17,
-    "x": -1.055,
-    "y": -0.311,
-    "name": "Node 17",
-    "description": "Description for Scene 17",
+    "x": -1.089,
+    "y": -0.335,
+    "name": "Toetree Forest",
+    "description": "If you taken any photos here, do *not* share them on slack.",
     "connections": [
-      20,
       26,
       61,
-      93,
       96
     ]
   },
@@ -247,11 +243,9 @@
     "name": "Node 19",
     "description": "Description for Scene 19",
     "connections": [
-      0,
       24,
       49,
-      56,
-      90
+      56
     ]
   },
   {
@@ -261,11 +255,9 @@
     "name": "Sconehenge",
     "description": "It looks ancient, and rather stale.",
     "connections": [
-      17,
       43,
       70,
-      93,
-      96
+      93
     ]
   },
   {
@@ -329,10 +321,10 @@
   },
   {
     "id": 26,
-    "x": -1.002,
-    "y": -0.432,
-    "name": "Node 26",
-    "description": "Description for Scene 26",
+    "x": -0.997,
+    "y": -0.448,
+    "name": "Lost Island of the Praksadonskalisks",
+    "description": "What's a praksadonskalisk? Guess you'll have to visit to find out.",
     "connections": [
       13,
       63,
@@ -370,8 +362,6 @@
     "name": "Node 29",
     "description": "Description for Scene 29",
     "connections": [
-      60,
-      64,
       92,
       99
     ]
@@ -403,8 +393,8 @@
   },
   {
     "id": 32,
-    "x": 0.78,
-    "y": -0.348,
+    "x": 0.775,
+    "y": -0.33,
     "name": "Le Dumpstair\u00e8 II",
     "description": "This is where Heidi Croft and Explorpheus Jones began their island journey when their ship got beached",
     "connections": [
@@ -424,10 +414,10 @@
   },
   {
     "id": 34,
-    "x": 1.17,
-    "y": -0.341,
-    "name": "Node 34",
-    "description": "Description for Scene 34",
+    "x": 1.16,
+    "y": -0.346,
+    "name": "Dilapidated Negative Emotion Factory",
+    "description": "The ruins of this ancient facility seem to be leaking into the surrounding environment.",
     "connections": [
       14,
       84,
@@ -436,22 +426,20 @@
   },
   {
     "id": 35,
-    "x": -0.304,
-    "y": -0.338,
+    "x": -0.251,
+    "y": -0.374,
     "name": "Node 35",
     "description": "Description for Scene 35",
     "connections": [
-      44,
-      47,
-      91
+      47
     ]
   },
   {
     "id": 36,
     "x": -0.008,
     "y": 0.346,
-    "name": "The Shores of ",
-    "description": "Description for Scene 36",
+    "name": "The Sea of Glub",
+    "description": "It's like one of those inland seas.",
     "connections": [
       53,
       72,
@@ -474,12 +462,12 @@
     "id": 38,
     "x": 0.79,
     "y": -0.118,
-    "name": "Node 38",
-    "description": "Description for Scene 38",
+    "name": "DDoouubblleettoowwnn",
+    "description": "GGeett ddoouubblleedd!!",
     "connections": [
-      41,
       58,
-      94
+      94,
+      41
     ]
   },
   {
@@ -509,25 +497,23 @@
     "id": 41,
     "x": 0.892,
     "y": -0.086,
-    "name": "Node 41",
-    "description": "Description for Scene 41",
+    "name": "Singletown",
+    "description": "Before there could be DDoouubblleettoowwnn\u2026 there had to be a singletown.",
     "connections": [
-      90,
-      94
+      94,
+      38
     ]
   },
   {
     "id": 42,
     "x": -0.161,
     "y": -0.102,
-    "name": "Node 42",
-    "description": "Description for Scene 42",
+    "name": "The Ugly Isles",
+    "description": "Honestly, they just aren't very attractive.",
     "connections": [
       57,
       62,
-      64,
-      91,
-      98
+      91
     ]
   },
   {
@@ -545,13 +531,13 @@
     "id": 44,
     "x": -0.456,
     "y": -0.28,
-    "name": "Node 44",
-    "description": "Description for Scene 44",
+    "name": "Trollcave",
+    "description": "Beware of rickrolls.",
     "connections": [
-      47,
       64,
       85,
-      99
+      91,
+      35
     ]
   },
   {
@@ -588,6 +574,7 @@
     "description": "You won't believe how wet the water here is!",
     "connections": [
       27,
+      44,
       85
     ]
   },
@@ -665,8 +652,8 @@
     "id": 54,
     "x": 0.41,
     "y": -0.553,
-    "name": "Node 54",
-    "description": "Description for Scene 54",
+    "name": "Hotland",
+    "description": "Legends say it is hot here. The reality is much more mysterious.",
     "connections": [
       78,
       97
@@ -681,8 +668,7 @@
     "connections": [
       57,
       81,
-      82,
-      98
+      82
     ]
   },
   {
@@ -768,23 +754,21 @@
   },
   {
     "id": 63,
-    "x": -1.016,
-    "y": -0.524,
-    "name": "Node 63",
-    "description": "Description for Scene 63",
+    "x": -1.01,
+    "y": -0.529,
+    "name": "The Great Pyramids of Sneeza",
+    "description": "ACHOO!",
     "connections": [
       16
     ]
   },
   {
     "id": 64,
-    "x": -0.44,
-    "y": -0.061,
+    "x": -0.471,
+    "y": -0.099,
     "name": "Node 64",
     "description": "Description for Scene 64",
     "connections": [
-      29,
-      42,
       44,
       91,
       92,
@@ -803,13 +787,14 @@
   },
   {
     "id": 66,
-    "x": 0.843,
-    "y": -0.361,
+    "x": 0.838,
+    "y": -0.359,
     "name": "Spooky Tomb",
     "description": "This is where Heidi and Explorpheus discovered their first tomb!",
     "connections": [
+      32,
       14,
-      32
+      6
     ]
   },
   {
@@ -918,8 +903,8 @@
   },
   {
     "id": 76,
-    "x": 0.383,
-    "y": -0.193,
+    "x": 0.395,
+    "y": -0.246,
     "name": "Node 76",
     "description": "Description for Scene 76",
     "connections": [
@@ -982,8 +967,7 @@
     "description": "Description for Scene 81",
     "connections": [
       55,
-      58,
-      82
+      58
     ]
   },
   {
@@ -1000,8 +984,8 @@
     "id": 83,
     "x": -0.894,
     "y": -0.407,
-    "name": "Node 83",
-    "description": "Description for Scene 83",
+    "name": "Pantsified Peninsula",
+    "description": "Oh god, it's like the whole place has been\u2026 pantsified.",
     "connections": [
       16,
       26,
@@ -1013,8 +997,8 @@
     "id": 84,
     "x": 1.122,
     "y": -0.443,
-    "name": "Node 84",
-    "description": "Description for Scene 84",
+    "name": "Mount Unhappiness",
+    "description": "That frown is gonna have to return to its right-side-up state.",
     "connections": [
       12
     ]
@@ -1030,8 +1014,7 @@
       44,
       47,
       83,
-      93,
-      99
+      93
     ]
   },
   {
@@ -1071,31 +1054,29 @@
     "id": 89,
     "x": 1.2,
     "y": -0.23,
-    "name": "Node 89",
-    "description": "Description for Scene 89",
+    "name": "The Shores of Sorrow",
+    "description": "u won't believe how this place got its name, it jus so saaad \ud83d\ude2d\ud83d\ude2d\ud83d\ude2d",
     "connections": [
-      34,
-      90
+      34
     ]
   },
   {
     "id": 90,
-    "x": 1.125,
-    "y": -0.012,
+    "x": 1.134,
+    "y": -0.005,
     "name": "Node 90",
     "description": "Description for Scene 90",
     "connections": [
-      19
+      24
     ]
   },
   {
     "id": 91,
-    "x": -0.231,
-    "y": -0.218,
+    "x": -0.225,
+    "y": -0.196,
     "name": "Shrubs of Mystery",
-    "description": "Description for Scene 91",
+    "description": "Oh my god, what could they be hiding??",
     "connections": [
-      35,
       42,
       64,
       98
@@ -1114,14 +1095,14 @@
   },
   {
     "id": 93,
-    "x": -0.85,
-    "y": -0.24,
+    "x": -0.853,
+    "y": -0.241,
     "name": "Node 93",
     "description": "Description for Scene 93",
     "connections": [
+      17,
       70,
-      85,
-      99
+      85
     ]
   },
   {
@@ -1163,8 +1144,8 @@
     "id": 97,
     "x": 0.412,
     "y": -0.385,
-    "name": "Node 97",
-    "description": "Description for Scene 97",
+    "name": "Realm of the Triangular Trees",
+    "description": "These trees are triangular at levels never even seen before, it's unbelievable.",
     "connections": [
       54,
       76
@@ -1175,7 +1156,7 @@
     "x": -0.059,
     "y": -0.308,
     "name": "Porple Point",
-    "description": "Porplier than your average point. Great view of Mount Kablooey!!",
+    "description": "Porplier than your average point. What's left of it, anyway.",
     "connections": [
       7,
       91
@@ -1183,10 +1164,10 @@
   },
   {
     "id": 99,
-    "x": -0.691,
-    "y": -0.063,
-    "name": "Node 99",
-    "description": "Description for Scene 99",
+    "x": -0.712,
+    "y": -0.037,
+    "name": "Spanky's",
+    "description": "Welcome to Spanky's. Would you like to roll the dice?",
     "connections": [
       29,
       52
