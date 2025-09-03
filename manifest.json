@@ -755,8 +755,8 @@
     "id": 64,
     "x": -0.471,
     "y": -0.099,
-    "name": "Node 64",
-    "description": "Description for Scene 64",
+    "name": "Menacing Earthworks",
+    "description": "Beautiful! I bet some highly esteemed deed is commemorated here...",
     "connections": [
       44,
       91,
@@ -966,8 +966,8 @@
     "id": 82,
     "x": 0.225,
     "y": -0.204,
-    "name": "Node 82",
-    "description": "Description for Scene 82",
+    "name": "Splorgon 4",
+    "description": "Superseded by Splorgon 5. Best left shunned and uninhabited.",
     "connections": [
       55
     ]
