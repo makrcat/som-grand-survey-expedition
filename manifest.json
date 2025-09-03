@@ -34,7 +34,6 @@
     "description": "Description for Scene 2",
     "connections": [
       3,
-      25,
       80
     ]
   },
@@ -123,8 +122,8 @@
     "id": 10,
     "x": 0.058,
     "y": 0.165,
-    "name": "Node 10",
-    "description": "Description for Scene 10",
+    "name": "Ruined House (Semi-Sentient)",
+    "description": "If only these walls could talk\u2026 and like, they almost can!",
     "connections": [
       36,
       57,
@@ -260,7 +259,6 @@
     "name": "Bigloo Island",
     "description": "Originally called \"Big Igloo Island\", but the name got shortened at some point.",
     "connections": [
-      28,
       30,
       33
     ]
@@ -307,7 +305,6 @@
     "description": "Description for Scene 25",
     "connections": [
       2,
-      28,
       73
     ]
   },
@@ -343,8 +340,8 @@
     "description": "Description for Scene 28",
     "connections": [
       21,
-      69,
-      73
+      25,
+      69
     ]
   },
   {
@@ -365,7 +362,6 @@
     "name": "The Frozen Tomb",
     "description": "This one's real cold!",
     "connections": [
-      21,
       33,
       69,
       71
@@ -645,8 +641,8 @@
   },
   {
     "id": 55,
-    "x": 0.073,
-    "y": -0.094,
+    "x": 0.084,
+    "y": -0.081,
     "name": "The Forest of Many Tree-Like Things That Are Not Actually Trees",
     "description": "They may look like trees at first\u2026 but they aren't.",
     "connections": [
@@ -844,8 +840,8 @@
     "id": 72,
     "x": 0.138,
     "y": 0.458,
-    "name": "Node 72",
-    "description": "Description for Scene 72",
+    "name": "The River Glub",
+    "description": "It makes a curious glubbing sound, which is your first clue to unraveling its enduring mysteries\u2026",
     "connections": [
       3,
       68,
@@ -951,8 +947,8 @@
     "id": 81,
     "x": 0.162,
     "y": 0.078,
-    "name": "Node 81",
-    "description": "Description for Scene 81",
+    "name": "Boom Boom Tomb",
+    "description": "What's that booming noise?",
     "connections": [
       55,
       58
@@ -1140,8 +1136,8 @@
   },
   {
     "id": 98,
-    "x": -0.059,
-    "y": -0.308,
+    "x": -0.065,
+    "y": -0.322,
     "name": "Porple Point",
     "description": "Porplier than your average point. What's left of it, anyway.",
     "connections": [
