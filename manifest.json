@@ -30,8 +30,8 @@
     "id": 2,
     "x": 0.391,
     "y": 0.658,
-    "name": "Node 2",
-    "description": "Description for Scene 2",
+    "name": "The Frozen Upvote Forest",
+    "description": "Wow, I didn't know intangible concepts from the internet could freeze like that!",
     "connections": [
       3,
       80
@@ -39,8 +39,8 @@
   },
   {
     "id": 3,
-    "x": 0.409,
-    "y": 0.496,
+    "x": 0.411,
+    "y": 0.455,
     "name": "Tickle Tomb",
     "description": "Uh-oh, what happens here??",
     "connections": [
@@ -233,8 +233,8 @@
     "id": 19,
     "x": 1.144,
     "y": 0.162,
-    "name": "Island Island",
-    "description": "Just your generic island. You cannot get more classically \"island\" than this.",
+    "name": "http://island",
+    "description": "Once upon a time, this island once hosted the long-destroyed Geo-City",
     "connections": [
       24,
       49,
@@ -299,10 +299,10 @@
   },
   {
     "id": 25,
-    "x": 0.678,
-    "y": 0.803,
-    "name": "Node 25",
-    "description": "Description for Scene 25",
+    "x": 0.675,
+    "y": 0.798,
+    "name": "Cantada",
+    "description": "Why even try, eh?",
     "connections": [
       2,
       73
@@ -312,8 +312,8 @@
     "id": 26,
     "x": -0.997,
     "y": -0.448,
-    "name": "Lost Island of the Praksadonskalisks",
-    "description": "What's a praksadonskalisk? Guess you'll have to visit to find out.",
+    "name": "Island Island",
+    "description": "Just your generic island. You cannot get more classically \"island\" than this.",
     "connections": [
       13,
       63,
@@ -336,8 +336,8 @@
     "id": 28,
     "x": 0.758,
     "y": 0.737,
-    "name": "Node 28",
-    "description": "Description for Scene 28",
+    "name": "Abandoned Polar Bear Breeding Operation",
+    "description": "I'm sorry, they were breeding them to do WHAT??",
     "connections": [
       21,
       25,
@@ -360,7 +360,7 @@
     "x": 1.039,
     "y": 0.647,
     "name": "The Frozen Tomb",
-    "description": "This one's real cold!",
+    "description": "This one's real cold! Which is good, considering what's inside.",
     "connections": [
       33,
       69,
@@ -414,10 +414,10 @@
   },
   {
     "id": 35,
-    "x": -0.251,
-    "y": -0.374,
-    "name": "Node 35",
-    "description": "Description for Scene 35",
+    "x": -0.249,
+    "y": -0.382,
+    "name": "A Hole in the Ground Where Elvis Presley is Definitely Not Hiding",
+    "description": "I mean, he's dead\u2026 right?",
     "connections": [
       47
     ]
@@ -691,8 +691,8 @@
     "id": 59,
     "x": 0.142,
     "y": 0.777,
-    "name": "Node 59",
-    "description": "Description for Scene 59",
+    "name": "Elephant's Butt Glacier",
+    "description": "Wow, that glacier looks remarkably like a\u2026 well, just look for yourself.",
     "connections": [
       68,
       80
@@ -702,8 +702,8 @@
     "id": 60,
     "x": -0.266,
     "y": 0.357,
-    "name": "Node 60",
-    "description": "Description for Scene 60",
+    "name": "The Swole Hole",
+    "description": "GRRRAAAHHHH GET SWOLE",
     "connections": [
       53,
       77,
@@ -725,8 +725,8 @@
     "id": 62,
     "x": -0.207,
     "y": 0.093,
-    "name": "Ghost ",
-    "description": "Description for Scene 62",
+    "name": "The Shellfish Kingdom",
+    "description": "Oh my god\u2026 it's like Ant Fugue, but with mollusks!!!",
     "connections": [
       77,
       92
@@ -850,10 +850,10 @@
   },
   {
     "id": 73,
-    "x": 0.54,
-    "y": 0.494,
-    "name": "Node 73",
-    "description": "Description for Scene 73",
+    "x": 0.539,
+    "y": 0.518,
+    "name": "The Great Frozen Wall",
+    "description": "It's gonna blow your mind when you figure out the clever trick this remarkable structure uses to keep the cold at bay.",
     "connections": [
       45,
       74,
@@ -913,8 +913,8 @@
     "id": 78,
     "x": 0.157,
     "y": -0.66,
-    "name": "Node 78",
-    "description": "Description for Scene 78",
+    "name": "Ominous Blurtzing Sound",
+    "description": "Hey, what is making that ominous blurtzing sound?",
     "connections": [
       11,
       48
@@ -989,10 +989,10 @@
   },
   {
     "id": 85,
-    "x": -0.683,
-    "y": -0.361,
-    "name": "Node 85",
-    "description": "Description for Scene 85",
+    "x": -0.675,
+    "y": -0.359,
+    "name": "Lost Island of the Praksadonskalisks",
+    "description": "What's a praksadonskalisk? Guess you'll have to visit to find out.",
     "connections": [
       16,
       44,
