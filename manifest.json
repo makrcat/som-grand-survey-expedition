@@ -520,7 +520,6 @@
     "description": "Beware of rickrolls.",
     "connections": [
       64,
-      85,
       91,
       35
     ]
@@ -994,9 +993,7 @@
     "name": "Lost Island of the Praksadonskalisks",
     "description": "What's a praksadonskalisk? Guess you'll have to visit to find out.",
     "connections": [
-      16,
       44,
-      47,
       83,
       93
     ]
