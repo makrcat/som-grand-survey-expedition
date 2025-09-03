@@ -58,7 +58,6 @@
     "name": "Embresa Mesa",
     "description": "Hugs\u2026 hugs *everywhere*",
     "connections": [
-      10,
       36,
       72
     ]
@@ -127,7 +126,6 @@
     "name": "Node 10",
     "description": "Description for Scene 10",
     "connections": [
-      4,
       36,
       57,
       77,
@@ -539,9 +537,7 @@
     "description": "Description for Scene 45",
     "connections": [
       46,
-      58,
-      73,
-      79
+      73
     ]
   },
   {
@@ -553,8 +549,7 @@
     "connections": [
       3,
       45,
-      4,
-      81
+      4
     ]
   },
   {
@@ -692,7 +687,7 @@
     "description": "Home of the wigglebutts",
     "connections": [
       38,
-      81,
+      45,
       94
     ]
   },
@@ -801,8 +796,8 @@
     "id": 68,
     "x": -0.024,
     "y": 0.662,
-    "name": "Mount Miniscule Base Camp",
-    "description": "Description for Scene 68",
+    "name": "Mount Miniscule Based Camp",
+    "description": "BASED camp, not base camp. Common mistake.",
     "connections": [
       51,
       72,
@@ -937,6 +932,7 @@
     "description": "Ancient peoples would gather here to trade ancient insults.",
     "connections": [
       0,
+      45,
       94
     ]
   },
