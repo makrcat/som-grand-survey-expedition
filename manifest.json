@@ -65,8 +65,8 @@
   },
   {
     "id": 5,
-    "x": -0.963,
-    "y": 0.343,
+    "x": -0.961,
+    "y": 0.327,
     "name": "The Cringey Borderlands",
     "description": "Debatably cringe.",
     "connections": [
@@ -276,7 +276,6 @@
     "connections": [
       1,
       37,
-      86,
       87
     ]
   },
@@ -295,7 +294,7 @@
     "x": 1.251,
     "y": 0.137,
     "name": "The Big Island",
-    "description": "Everything here is real big!!",
+    "description": "Everything here is real big!! Like, REALLY big. Holy **** that thing is HUGE what even is that?!",
     "connections": [
       19,
       88,
@@ -381,8 +380,8 @@
     "name": "Cringe Canyon",
     "description": "Oh, god, oof\u2026 it's honestly hard just to look at it.",
     "connections": [
-      5,
       18,
+      5,
       50
     ]
   },
@@ -449,7 +448,6 @@
     "description": "Woah, is that tree *upside-down*?",
     "connections": [
       22,
-      23,
       67
     ]
   },
@@ -469,13 +467,11 @@
     "id": 39,
     "x": -0.323,
     "y": 0.726,
-    "name": "Node 39",
-    "description": "Description for Scene 39",
+    "name": "Splorgon 4",
+    "description": "Superseded by Splorgon 5. Best left shunned and uninhabited.",
     "connections": [
       51,
-      53,
-      75,
-      87
+      75
     ]
   },
   {
@@ -495,8 +491,8 @@
     "name": "Singletown",
     "description": "Before there could be DDoouubblleettoowwnn\u2026 there had to be a singletown.",
     "connections": [
-      94,
-      38
+      38,
+      94
     ]
   },
   {
@@ -556,8 +552,8 @@
     "description": "This is where Heidi and Explorpheus made their daring balloon escape",
     "connections": [
       3,
-      4,
       45,
+      4,
       81
     ]
   },
@@ -611,8 +607,8 @@
     "id": 51,
     "x": -0.12,
     "y": 0.728,
-    "name": "Node 51",
-    "description": "Description for Scene 51",
+    "name": "Mount Miniscule Summit",
+    "description": "This absolutely enormous mountain is named for Sir George Miniscule, who\u2014fun fact\u2014never even saw the mountain.",
     "connections": [
       39,
       68
@@ -637,9 +633,8 @@
     "name": "Imaginary Sandcastle",
     "description": "Despite what it looks like, this enormous sandcastle is a figment of your imagination.",
     "connections": [
-      39,
-      60,
-      75
+      75,
+      68
     ]
   },
   {
@@ -719,7 +714,7 @@
     "name": "Node 60",
     "description": "Description for Scene 60",
     "connections": [
-      75,
+      53,
       77,
       92
     ]
@@ -798,19 +793,21 @@
     "name": "The Sandy Swallow Islands",
     "description": "PTUAH. Ptuah! Ugh, who would have thought swallowing sand is so unpleasant??",
     "connections": [
-      37
+      37,
+      87
     ]
   },
   {
     "id": 68,
-    "x": -0.011,
-    "y": 0.688,
-    "name": "Node 68",
+    "x": -0.024,
+    "y": 0.662,
+    "name": "Mount Miniscule Base Camp",
     "description": "Description for Scene 68",
     "connections": [
       51,
       72,
-      80
+      80,
+      75
     ]
   },
   {
@@ -828,8 +825,8 @@
     "id": 70,
     "x": -0.932,
     "y": -0.058,
-    "name": "Node 70",
-    "description": "Description for Scene 70",
+    "name": "Menacing Earthworks",
+    "description": "I bet some highly-esteemed deed is commemorated here!",
     "connections": [
       20,
       93,
@@ -886,13 +883,13 @@
   },
   {
     "id": 75,
-    "x": -0.366,
-    "y": 0.536,
-    "name": "Node 75",
-    "description": "Description for Scene 75",
+    "x": -0.395,
+    "y": 0.495,
+    "name": "Flavortown",
+    "description": "Oh my god, I thought that obnoxious guy on the food network was just making it up!!",
     "connections": [
-      39,
       53,
+      60,
       86
     ]
   },
@@ -1031,8 +1028,8 @@
     "description": "Pointy sand makes for pointy dunes.",
     "connections": [
       22,
-      75,
-      67
+      39,
+      75
     ]
   },
   {
@@ -1095,9 +1092,9 @@
     "name": "Node 93",
     "description": "Description for Scene 93",
     "connections": [
-      17,
       70,
-      85
+      85,
+      17
     ]
   },
   {
