@@ -17,25 +17,46 @@
                 padding: 5px;
             }
         </style>
+        <script>
+            // Returns the current Swatch beat
+            function GetSwatchTime(showDecimals = true) {
+                // get date in UTC/GMT
+                var date = new Date();
+                var hours = date.getUTCHours();
+                var minutes = date.getUTCMinutes();
+                var seconds = date.getUTCSeconds();
+                var milliseconds = date.getUTCMilliseconds();
+                // add hour to get time in Switzerland
+                hours = hours == 23 ? 0 : hours + 1;
+                // time in seconds
+                var timeInMilliseconds = ((hours * 60 + minutes) * 60 + seconds) * 1000 + milliseconds;
+                // there are 86.4 seconds in a beat
+                var millisecondsInABeat = 86400;
+                // calculate beats to two decimal places
+                if (showDecimals) {
+                    return Math.abs(timeInMilliseconds / millisecondsInABeat).toFixed(2);
+                } else {
+                    return Math.floor(Math.abs(timeInMilliseconds / millisecondsInABeat));
+                }
+            }
+
+            window.UpdateSwatchClock = function() {
+                const swatchEl = document.getElementById('swatchClock');
+                swatchEl.innerHTML = '@' + GetSwatchTime();
+            }
+        </script>
     </head>
     <body>
-        <img src="island.gif" usemap="#woah-another-map-thats-so-meta" style="image-rendering: pixelated; z-index: 1; height: 100%;">
-        <marquee style="z-index: 2; position: absolute; top: 120px; left: 0; width: 100%; height: 100%; pointer-events: none;" direction="right">
-            <img src="plane.jpg" height="100px" style="cursor: pointer; pointer-events: auto;" onclick="new Audio('bank_angle.ogg').play();">
+        <h1>Welcome to the http://island information page!</h1>
+
+        <img src="island.jpg" style="image-rendering: pixelated; z-index: 1; height: 80vh;">
+        <marquee style="z-index: 2; position: absolute; top: 130px; left: 0; width: 100%; height: 100%; pointer-events: none; transform: rotate(3deg);" direction="right">
+            <img src="plane.jpg" height="70px" style="cursor: pointer; pointer-events: auto;" onclick="new Audio('bank_angle.ogg').play();">
             <p>terrain! terrain! pull up!!</p>
         </marquee>
 
-        <map name="woah-another-map-thats-so-meta">
-            <area target="_self" alt="TO THE BIG ISLAND" title="TO THE BIG ISLAND" href="/scenes/24/" coords="1153,649,832,588" shape="rect">
-            <area target="_self" alt="hacia los árboles de la estupidez...." title="hacia los árboles de la estupidez...." href="/scenes/56/" coords="1223,577,813,477,914,516" shape="rect">
-            <area target="_self" alt="to stinkfoot island?" title="to stinkfoot island?" href="/scenes/49" coords="1142,783,877,664" shape="rect">
-        </map>
-
-        <h1 style="text-align: right; font-size: 24px; margin-top: 100px; margin-right: 100px; position: absolute; top: 0; right: 0; width: 100%; text-shadow: 2px 2px 0px black; color: white;"> scroll down for more information please!</h1>
-
-        <h1>Welcome to the Island island information page!</h1>
-        <p>This is the information page for the Island island. Here you can find information about the Island Island.</p>
-        <p>The Island island is a small island in the middle of the ocean. It is home to a small population of people who live on the island.</p>
+        <p>This is the information page for the http://island. Here you can find information about the http://island.</p>
+        <p>The http://island is a small island in the middle of the ocean. It is home to a small population of people who live on the island.</p>
         <h2>Statistics:</h2>
         <table>
             <tr>
@@ -48,19 +69,19 @@
             </tr>
             <tr>
                 <td>Currency</td>
-                <td>Island Island Dollar</td>
+                <td>Beenz</td>
             </tr>
             <tr>
                 <td>Language</td>
                 <td>English</td>
             </tr>
             <tr>
-                <td>Government</td>
-                <td>Island Island Government</td>
+                <td>Timezone</td>
+                <td>Internet Time</td>
             </tr>
             <tr>
-                <td>Timezone</td>
-                <td>EDT (UTC-4)</td>
+                <td>Local Time</td>
+                <td><span id="swatchClock">@000</span></td>
             </tr>
             <tr>
                 <td>Climate</td>
@@ -68,19 +89,58 @@
             </tr>
             <tr>
                 <td>Flag</td>
-                <td>None yet, please submit a design at the information desk!</td>
+                <td>N/A</td>
             </tr>
         </table>
         <h2>News:</h2>
         <ul>
-            <li><strong>2024-10-15:</strong> Community fishing cooperative reports successful tuna season, with 50% increase in catch compared to last year</li>
-            <li><strong>2024-10-12:</strong> Island council approves solar panel installation for the community center, expected completion by December</li>
-            <li><strong>2024-10-08:</strong> Annual Island Island Festival attracts visitors from neighboring islands, featuring local crafts and traditional music</li>
-            <li><strong>2024-10-05:</strong> New desalination plant comes online, providing fresh water security for the island's growing population</li>
-            <li><strong>2024-10-01:</strong> Local school announces expansion plans, adding computer lab with funding from mainland education grant</li>
+            <li><strong>1999-12-31:</strong> Island completes comprehensive Y2K readiness assessment, all systems certified compliant</li>
+            <li><strong>1999-11-15:</strong> Telecommunications infrastructure upgraded to support broadband internet connectivity</li>
+            <li><strong>1999-10-28:</strong> Island participates in regional summit on sustainable development and climate adaptation</li>
+            <li><strong>1999-09-22:</strong> New automated weather station installed for improved meteorological data collection</li>
+            <li><strong>1999-08-24:</strong> Island Council appoints Y2K compliance officer to oversee millennium transition preparations</li>
+            <li><strong>1999-07-15:</strong> Citizens approve referendum adopting Internet Time as the island's official timezone</li>
+            <li><strong>1999-02-14:</strong> Power generator maintains stable operation throughout evening hours</li>
+            <li><strong>1999-01-20:</strong> Island adopts wireless communication initiative as part of modernization efforts</li>
+            <li><strong>1998-12-25:</strong> Island receives new Pentium II computer system for administrative use</li>
+            <li><strong>1998-11-30:</strong> Pro-internet political party secures majority in recent elections</li>
+            <li><strong>1998-10-31:</strong> Technical issue reported with shared computer system, investigation underway</li>
+            <li><strong>1998-09-15:</strong> Tourism department develops virtual island tour program using digital imaging</li>
+            <li><strong>1998-08-01:</strong> Island experiences Category 2 hurricane with minimal structural impact</li>
+            <li><strong>1998-07-04:</strong> Independence Day celebrations include traditional fireworks display</li>
+            <li><strong>1998-06-15:</strong> Island school incorporates computer science into educational curriculum</li>
+            <li><strong>1998-04-10:</strong> Island hosts technology conference focused on emerging digital developments</li>
+            <li><strong>1998-03-15:</strong> Island newspaper establishes online presence for improved information dissemination</li>
+            <li><strong>1998-02-13:</strong> Community fishing cooperative reports successful tuna season, with 50% increase in catch compared to last year</li>
+            <li><strong>1998-01-02:</strong> Island council approves solar panel installation for the community center, expected completion by December</li>
+            <li><strong>1997-12-18:</strong> Island establishes formal diplomatic relations with neighboring island nations</li>
+            <li><strong>1997-11-08:</strong> Annual Island Festival attracts visitors from neighboring islands, featuring local crafts and traditional music</li>
+            <li><strong>1997-10-05:</strong> New desalination plant comes online, providing fresh water security for the island's growing population</li>
+            <li><strong>1997-10-01:</strong> Local school announces expansion plans, adding computer lab with funding from mainland education grant</li>
+            <li><strong>1997-08-14:</strong> Island participates in international maritime safety training program</li>
+            <li><strong>1997-07-03:</strong> Renewable energy committee formed to assess alternative power sources</li>
+            <li><strong>1997-06-21:</strong> Island adopts standardized shipping container protocol for international trade</li>
+            <li><strong>1997-05-09:</strong> Medical clinic receives new diagnostic equipment through international aid program</li>
+            <li><strong>1997-04-16:</strong> Island council establishes environmental protection zone around coral reef system</li>
+            <li><strong>1997-02-08:</strong> Island participates in regional economic development forum</li>
+            <li><strong>1997-01-15:</strong> New harbor facilities completed to improve maritime access and safety</li>
+            <li><strong>1996-12-01:</strong> Island establishes permanent weather monitoring station</li>
+            <li><strong>1996-11-19:</strong> Educational exchange program initiated with mainland institutions</li>
+            <li><strong>1996-10-27:</strong> Island council approves long-term infrastructure development plan</li>
+            <li><strong>1996-09-14:</strong> Agricultural cooperative expands operations to include organic farming methods</li>
         </ul>   
+        <h2>Web links:</h2>
+        <ul>
+            <li><a href="/scenes/56/">los árboles de la estupidez</a></li>
+            <li><a href="/scenes/49/">Stinkfoot Island</a></li>
+            <li><a href="/scenes/24/"><big><big><big><big>The Big Island</big></big></big></big></a></li>
+        </ul>
             <hr/>
-        <b>This site is hosted as a courtesy of the Island Island Internet Exchange (I<sup>3</sup>X).  <i>NO HOTLINKING!</i></b> <small>our bandwidth is limited due to tenuous peering agreements.</small>
+        <b>This site is hosted as a courtesy of the HTTP Island Internet Exchange (HI<sup>2</sup>X).  <i>NO HOTLINKING!</i></b> <small>RoadRunner depeered us, so we can't spare the bandwidth.</small>
+        <script>
+            UpdateSwatchClock();
+            setInterval(UpdateSwatchClock, 1000);
+        </script>
     </body>
 </html>
 <!-- haii :3 -->
