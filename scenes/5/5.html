@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spot 5 - The Cringey Borderlands</title>
+    <style>
+        /* idk why but this works lol */
+        body{
+            background: linear-gradient(45deg, #00ff00, #ff1493, #00ffff, #ffff00);
+            height: 100vh;
+            margin:0;
+            overflow: hidden;
+            font-family: "Comic Sans MS", cursive; 
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background-image: url('https://pngimg.com/d/trollface_PNG42.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        img {
+            position: absolute;
+            cursor: pointer;
+        }
+        img:hover{
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .yunoGuy {
+            top: 10%;
+            left: 5%;
+            width: 120px;
+        }
+
+        #fortniteGuy{
+            bottom: 10%;
+            right: 8%;
+            width: 100px;
+            animation: wiggle 1.5s infinite;
+        }
+        @keyframes wiggle{
+            0%,100%{transform: translateX(0);}
+            25%{transform: translateX(-10px) rotate(-10deg);}
+            75%{transform: translateX(10px) rotate(10deg);}
+        }
+
+        .stockPhoto {
+            top: 45%;
+            left: 45%;
+            width: 150px;
+        }
+
+        /* spooky boi */
+        .skeletonDude{
+            top: 60%;
+            left: 12%;
+            width: 110px;
+            animation: spookydance 2s infinite;
+        }
+        @keyframes spookydance{
+            0%,100%{transform: rotate(-5deg);}
+            50%{transform: rotate(5deg);}
+        }
+
+        .fakeAd {
+            position: absolute;
+            top: 15%;
+            right: 15%;
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(45deg, red, yellow);
+            border: 3px solid black;
+            border-radius: 10px;
+            text-align: center;
+            font-family: Impact, sans-serif; 
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            animation: annoying 1s infinite;
+            padding-top: 20px;
+        }
+        @keyframes annoying{
+            0%,50%{opacity: 1;}
+            51%,100%{opacity: 0.7;}
+        }
+
+        .papyrusText {
+            position: absolute;
+            font-family: Papyrus, fantasy;
+            color: #8B4513;
+            font-size: 18px;
+            bottom: 5%;
+            left: 25%;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .impactTitle {
+            position: absolute;
+            font-family: "Comic Sans MS", cursive;
+            color: purple;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px yellow;
+            top: 8%;
+            left: 25%;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 style="text-align: center; font-family: Impact, sans-serif; color: white; text-shadow: 3px 3px 0px black; text-transform: uppercase;">The Cringey Borderlands</h1>
+    
+    <div class="papyrusText">ancient wisdom...</div>
+    <div class="impactTitle">EPIC FAIL</div>
+    
+    <img src="https://i.imgflip.com/1bij.jpg" class="yunoGuy" onclick="alert('Y U NO CLICK OTHER MEMES?!')">
+
+    <img src="https://media.tenor.com/17pFKrJQR4AAAAAM/default-dance-fortnite.gif" id="fortniteGuy" onclick="alert('Default Dance Activated! 💃')">
+
+    <img src="https://images.pexels.com/photos/16262290/pexels-photo-16262290/free-photo-of-smiling-man-in-suit-standing-with-thumbs-up.jpeg" class="stockPhoto" onclick="alert('Stock Photo Success! 👍')">
+
+    <img src="https://i.gifer.com/7VE.gif" class="skeletonDude" onclick="alert('Spooky Scary Skeletons! 💀')">
+
+    <div class="fakeAd" onclick="alert('CONGRATULATIONS! You are NOT the 1,000,000th visitor!')"
+        🎉 CONGRATULATIONS! 🎉<br>
+        <small style="font-family: 'Comic Sans MS', cursive;">You are our 1,000,000th visitor!</small><br>
+        <tiny style="font-family: Papyrus, fantasy;">Click here to claim your FREE iPhone!</tiny>
+    </div>
+
+</body>
+</html>
