@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickle tomb</title>
+    <style>
+        body {
+            background-color: #61545d;
+        }
+        @keyframes fly {
+            0% {transform: translate(0,0);}
+            10% {transform: translate(0, -200px);}
+            90% {transform: translate(0, -200px);}
+            100% {transform: translate(0,0);}
+        }
+        .fly {
+            animation: fly 4s ease-out 0s 1 forwards;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="bats-container" style="position: fixed; width: 100vw; height: 100vh;">
+        <img id="bats" style="z-index: 3; position: relative; top: 50px; height: 10vh;" src="./assets/bats.png"/>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; overflow-y: hidden;">
+            <img style="z-index: 2; width: 100vw; height: auto;" src="./assets/gates.png" />
+        </div>
+    </div>
+    <div id="tomb-container" style="position: relative; display: flex; justify-content: center; align-items: center; top: 60vh;">
+        <div style="position: relative; height: 75vh; width: 50vw; display: flex; justify-content: center; align-items: flex-end;">
+            <img id="tomb" style="z-index: 4; position: absolute; top: 0; height: 75vh;" src="./assets/tomb.png"/>
+            <div id="tomb-tickle-1" style="height: 100%; width: 50%; position: absolute; left: 0; z-index: 5;"></div>
+            <div id="tomb-tickle-2" style="height: 100%; width: 50%; position: absolute; right: 0; z-index: 5;"></div>
+        </div>
+        <div style="overflow: hidden; width: 100vw; height: 75vh; position: absolute;"> 
+            <img style="width: 100vw; height: auto; z-index: 3; position: absolute; bottom: 0;" src="./assets/background.png" />
+        </div>
+    </div>
+    <div style="background-color: black; height: 100vh; width: 100vw; z-index: 6; position: relative; top: 55vh;">
+        <h1 style="color: white; text-align: center; padding-top: 40vh;">You found the tomb!<br/>But it's empty...<br/>Maybe try tickling it?</h1>
+    </div>
+    <script>
+        let bats = document.querySelectorAll("#bats");
+        bats.forEach(element => {
+            element.addEventListener("mouseover", () => {
+                element.classList.add("fly");
+                setTimeout(() => {
+                    element.classList.remove("fly");
+                }, 4000);
+            })
+        });
+    </script>
+</body>
+</html>
