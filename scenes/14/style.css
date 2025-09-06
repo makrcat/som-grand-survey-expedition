@@ -17,10 +17,8 @@ a {
 
 #exits {
     display: grid;
-    width: 200px;
-    max-width: 100vw;
 
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     margin: auto;
 }
 
