@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    <title> Scene 30: The Frozen Tomb</title>
+</head>
+<body>
+    <h1 class = "title">The Frozen Tomb</h1>
+    <p class = "description">This one's real cold! Which is good, considering what's inside.</p>
+    <div class = "tomb-container" id = "tombContainer">
+        <!-- tbf-->
+    </div>
+
+    <div class = "navigation">
+        <a href="../scene69/" class = "nav-link">Scene 69: The Best of All Possible Snowdrifts</a>
+        <a href="../scene71/" class = "nav-link">Scene 71: B.L.O.R.T.</a>
+    </div>
+</body>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.transparenttextures.com/patterns/ice-age.png');
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .title { 
+        text-align: center;
+        padding: 20px;
+        font-size: 2.8rem;
+        color: #1a3252;
+        text-shadow: 0 0 10px rgba(255, 255, 255, .8), 0 0 20px rgba(173, 215, 230, .8);
+    }
+</style>
+</html>
