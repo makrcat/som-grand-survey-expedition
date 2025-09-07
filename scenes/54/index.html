@@ -12,37 +12,52 @@
         src: url("Asimovian.ttf");
       }
 
+       @font-face {
+        font-family: EpundaSlab;
+        src: url("EpundaSlab-VariableFont_wght.ttf");
+      }
+
       @font-face {
         font-family: TulpenOne;
         src: url("TulpenOne.ttf");
       }
+
       .site {
-        background-color: rgb(204, 197, 0);
+        background-color: rgb(250, 141, 7);
         display: block;
         border-radius: 25px;
         outline-width: 3px;
         outline-style: solid;
         box-sizing: border-box;
+        max-width: 23.3rem;
+        overflow: hidden;
       }
 
       h1 {
-        font-family: TulpenOne;
-        font-size: 60px
-        
+        font-family: EpundaSlab;
+        font-size: 60px;
+        text-align: center;
       }
 
-      p, h2,h3,h4,h5,h6 {
+      p,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         font-family: Asimovian;
+        text-align: center;
       }
 
       .grid {
         display: grid;
         gap: 1rem 1rem;
-        size: inherit;
-        align-content: space-evenly;
-        grid-template-areas:
-          "a" "b"
-          "c" "d";
+        justify-content: center;
+        grid-template:
+          "a b"
+          "c d"
+          "e f"
+          "g h";
       }
 
       .text-with-margin {
@@ -50,7 +65,9 @@
       }
 
       img {
+        overflow: hidden;
         border-radius: 25px;
+        width: 100%;
       }
     </style>
   </head>
@@ -62,7 +79,7 @@
       background-size: cover;
     "
   >
-    <h1>!Bonol on Is of Temper</h1>
+    <h1><b>!Bonol on Is of Temper</b></h1>
     <!-- Welcome to Hotland! (Welcome to the Land of Hot!)-->
     <!--Bonol: Welcome, 
         on: To, 
@@ -92,7 +109,7 @@
     </h3>
 
     <div class="grid">
-      <div class="site" style="grid-area: a">
+      <div class="site">
         <img src="sites/20eab515-48f8-4559-8c24-2de4b7dd8262.jpeg" />
         <div class="text-with-margin">
           <h2>The Crying Man (Dasses of Home)</h2>
@@ -108,7 +125,7 @@
           </p>
         </div>
       </div>
-      <div class="site" style="grid-area: b">
+      <div class="site">
         <img src="sites/64c34806-9451-4e6a-b758-e0bd8ccba2d0.jpeg" />
         <div class="text-with-margin">
           <h2>The Tomb of the Warm (Temper of Pasth, Miter of Tomth)</h2>
@@ -127,7 +144,7 @@
           </p>
         </div>
       </div>
-      <div class="site" style="grid-area: c">
+      <div class="site">
         <img src="sites/789aa266-6119-47ba-a0d2-01d0d0ba15d5.jpeg" />
         <div class="text-with-margin">
           <h2>Sandfalls (Fown of, Dunds of Miter)</h2>
@@ -137,12 +154,12 @@
 
               <br />
               <br />
-              This water fall is connected to Cave Dunowrath, a cave once connecting Hotland to 78. The water fall, formed after a
-              fatal land slide, destroying villages, and collapsing caves. Now
-              you can only get in through, by jumping in the deep underground
-              lake. <br />
-              <b>You will not be able to get back up.</b> (<a
-                href="/scenes/78/"
+              This water fall is connected to Cave Dunowrath, a cave once
+              connecting Hotland to 78. The water fall, formed after a fatal
+              land slide, destroying villages, and collapsing caves. Now you can
+              only get in through, by jumping in the deep underground lake.
+              <br />
+              <b>You will not be able to get back up.</b> (<a href="/scenes/78/"
                 ><b>Travel to 78</b></a
               >)
             </i>
