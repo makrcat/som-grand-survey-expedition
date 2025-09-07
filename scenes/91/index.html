@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <style>
+            #exit{
+                background-color:LightYellow;
+                width: fit-content;
+                border-color:black;
+                border-width: 5px;
+                border-style: solid;
+                border-radius: 20px;
+                padding-left:20px;
+                padding-right:20px;
+            }
+            .bush-div{
+                width: 500px;
+                height:515px;
+            }
+            .bush-hiding{
+                transition-duration: 1s;
+                opacity: 0;
+            }
+        </style>
+        <script>
+            function loaded(){
+                let bushes=document.getElementsByClassName("bush")
+                console.log(bushes.length)
+                for(let i=0;i<bushes.length;i++){
+                    bushes[i].addEventListener("transitionend",()=>{console.log("remove bush");bushes[i].remove()})
+                }
+            }
+        </script>
     </head>
-    <body>
+    <body onload="loaded()">
         <h1>Shrubs of Mystery</h1>
 
-        <img src="bush.png">
+        <div class="bush-div">
+            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush">
+        </div>
 
         
         <div id="exit">
