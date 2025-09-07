@@ -3,7 +3,6 @@
 <head>
     <title>Spot 5 - The Cringey Borderlands</title>
     <style>
-        /* idk why but this works lol */
         body{
             background: linear-gradient(45deg, #00ff00, #ff1493, #00ffff, #ffff00);
             height: 100vh;
@@ -60,7 +59,7 @@
             width: 150px;
         }
 
-        /* spooky boi */
+
         .skeletonDude{
             top: 60%;
             left: 12%;
@@ -114,28 +113,674 @@
             top: 8%;
             left: 25%;
         }
+
+        .cringeMeter {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            background: black;
+            border: 2px solid white;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: Impact;
+            color: white;
+            z-index: 999;
+        }
+
+        .meterBar {
+            width: 100%;
+            height: 20px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .meterFill {
+            height: 100%;
+            background: linear-gradient(to right, green, yellow, red);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .dogeImg {
+            position: absolute;
+            top: 35%;
+            right: 25%;
+            width: 80px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .wholesomeBtn {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+        }
+        
+        .wholesomeBtn:hover {
+            transform: translate(-50%, -50%) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .fadeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+            z-index: 9999;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+
+        .finalScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .storyText {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            font-family: Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .navButtons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .navBtn {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s ease;
+            min-width: 200px;
+        }
+
+        .navBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .memeBtn {
+            position: absolute;
+            top: 60%;
+            right: 5%;
+            padding: 12px 24px;
+            background: #ff6b6b;
+            border: 2px solid #000;
+            border-radius: 8px;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 0px black;
+            cursor: pointer;
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .memeBtn:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+        }
+
+        .historyBtn {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            padding: 12px 24px;
+            background: #8e44ad;
+            border: 2px solid #000;
+            border-radius: 8px;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 0px black;
+            cursor: pointer;
+            z-index: 100;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px #8e44ad; }
+            50% { box-shadow: 0 0 20px #8e44ad, 0 0 30px #8e44ad; }
+        }
+
+        .historyBtn:hover {
+            background: #9b59b6;
+            transform: scale(1.05);
+        }
+
+        .historyModal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border: 4px solid #000;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: none;
+            z-index: 10002;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            animation: rainbow-bg 3s infinite;
+        }
+
+        @keyframes rainbow-bg {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .historyContent {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+            text-align: left;
+        }
+
+        .historyTitle {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .closeHistory {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: #e74c3c;
+            border: 3px solid #000;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .closeHistory:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .memeDisplay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px;
+            display: none;
+            z-index: 10001;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .memeDisplay img {
+            max-width: 400px;
+            max-height: 300px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .closeMeme {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: #ff4444;
+            border: 2px solid #000;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .videoIntro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .videoIntro video {
+            max-width: 80%;
+            max-height: 70%;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .skipBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff4444;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-family: "Comic Sans MS", cursive;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+        }
+
+        .skipBtn:hover {
+            background: #ff6666;
+        }
+
+        .videoText {
+            color: white;
+            font-family: "Comic Sans MS", cursive;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .gameContent {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .gameContent.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+
     </style>
 </head>
 <body>
     
+    <div class="videoIntro" id="videoIntro">
+        <div class="videoText">⚠️ WARNING: MAXIMUM CRINGE INCOMING ⚠️</div>
+        <video id="cringeVideo" controls>
+            <source src="cringe_intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="skipBtn" id="skipBtn" onclick="skipIntro()">Skip Cringe Intro</button>
+    </div>
+
+    <div class="gameContent" id="gameContent">
+    <div class="cringeMeter">
+        <div style="font-size: 14px;">CRINGE O METER</div>
+
+        <div class="meterBar">
+            <div class="meterFill" id="cringeFill"></div>
+        </div>
+        <div id="cringeText">0 / 100</div>
+    </div>
+
     <h1 style="text-align: center; font-family: Impact, sans-serif; color: white; text-shadow: 3px 3px 0px black; text-transform: uppercase;">The Cringey Borderlands</h1>
+    <p style="text-align: center;">You are stuck in the cringey Borderlands, explore it to find a way out!</p>
+
     
     <div class="papyrusText">ancient wisdom...</div>
     <div class="impactTitle">EPIC FAIL</div>
     
+
+    <img src="https://pngimg.com/d/trollface_PNG42.png" style="position: absolute; top: 25%; left: 15%; width: 100px; cursor: pointer;" onclick="trollfaceTrap()">
+    
     <img src="https://i.imgflip.com/1bij.jpg" class="yunoGuy" onclick="alert('Y U NO CLICK OTHER MEMES?!')">
 
-    <img src="https://media.tenor.com/17pFKrJQR4AAAAAM/default-dance-fortnite.gif" id="fortniteGuy" onclick="alert('Default Dance Activated! 💃')">
+    <img src="https://media.tenor.com/17pFKrJQR4AAAAAM/default-dance-fortnite.gif" id="fortniteGuy" onclick="fortniteTrap()">
 
     <img src="https://images.pexels.com/photos/16262290/pexels-photo-16262290/free-photo-of-smiling-man-in-suit-standing-with-thumbs-up.jpeg" class="stockPhoto" onclick="alert('Stock Photo Success! 👍')">
 
-    <img src="https://i.gifer.com/7VE.gif" class="skeletonDude" onclick="alert('Spooky Scary Skeletons! 💀')">
+    <img src="https://i.gifer.com/7VE.gif" class="skeletonDude" onclick="skeletonTrap()">
 
-    <div class="fakeAd" onclick="alert('CONGRATULATIONS! You are NOT the 1,000,000th visitor!')"
+    <img src="https://i.kym-cdn.com/entries/icons/facebook/000/013/564/doge.jpg" class="dogeImg" onclick="dogeSave()">
+
+    <div class="fakeAd" onclick="popupTrap()">
+      
+ 
         🎉 CONGRATULATIONS! 🎉<br>
         <small style="font-family: 'Comic Sans MS', cursive;">You are our 1,000,000th visitor!</small><br>
         <tiny style="font-family: Papyrus, fantasy;">Click here to claim your FREE iPhone!</tiny>
     </div>
+
+    <button class="wholesomeBtn" id="wholesomeBtn" onclick="wholesomeExit()">Leave Cringe Behind →</button>
+
+    <button class="memeBtn" onclick="showRandomMeme()">Give me a meme</button>
+
+    <button class="historyBtn" onclick="showHistory()">📜 History & Lore</button>
+
+    <div class="memeDisplay" id="memeDisplay">
+        <div class="closeMeme" onclick="closeMeme()">×</div>
+        <img id="randomMemeImg" src="" alt="Random Meme">
+    </div>
+
+    <div class="historyModal" id="historyModal">
+        <div class="closeHistory" onclick="closeHistory()">×</div>
+        <div class="historyContent">
+            <div class="historyTitle">📜 THE LEGENDARY HISTORY 📜</div>
+            <p>👉 omg soooo like once upon a timE (back in da LEGENDARY year 2010 😱🔥) some rando explorers thought it was a good idea to dump ALL the memes here… 🥴 rage comics, advice animals, LOLcats, & even the forbidden bad Minion jokes.</p>
+            
+            <p>🌵 the land became SOOOO overloaded with epic failz & awkward vibes that it basically turned into a perma-cringe dimension 💀. People say if u dab here, you can still hear the faint echo of "trolololol" in the wind 🎶.</p>
+            
+            <p>🙈 Many brave noobs entered… but all got stuck doing Gangnam Style forever 💃. Since then, this cursed zone is known only as…</p>
+            
+            <p style="text-align: center; font-size: 20px; font-weight: bold; color: #e74c3c; text-shadow: 2px 2px 0px #000;">THE CRINGEY BORDERLANDS!!!!1! 🌈🔥🦖</p>
+        </div>
+    </div>
+
+    <div class="fadeOverlay" id="fadeOverlay"></div>
+    </div>
+    
+    <div class="finalScreen" id="finalScreen">
+        <div class="storyText">
+            <h2 style="margin-top: 0; color: #667eea;">🎉 Victory! 🎉</h2>
+            <pre>
+💀😎 you did it fam!! 
+you SURVIVED the cursed cringe dimension!!! 🎂🎂🎂
+The skeletons dab in defeat 🕺💀.
+Doge says “such win, much wow” 🐶🌟.
+Trollface gets rekt and rage-quits to 2010 😂👎.
+Even the Fortnite dancers just… floss off into TikTok 🤳.
+
+Now you may go forth 👉👉 to the next scene…
+…until the day cringe rises again 😱😱😱
+<!-- You survived the cursed cringe dimension! The skeletons dab in defeat. Doge smiles upon you with wholesome light. The trollface retreats back to the ancient memes of 2010. Fortnite dancers flee to TikTok.</pre> -->
+        </div>
+        
+        <div class="navButtons">
+            <button class="navBtn" onclick="window.location.href='../50/index.html'">
+                ➡ Continue to Cringe Plateau
+            </button>
+            <button class="navBtn" onclick="window.location.href='../9/index.html'">
+                ➡ Continue to EXXTREEME MOUNTENZ
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let cringeLevel = 0;
+        
+        function updateCringeMeter() {
+            const fill = document.getElementById('cringeFill');
+            const text = document.getElementById('cringeText');
+            
+            fill.style.width = cringeLevel + '%';
+            text.textContent = cringeLevel + ' / 100';
+            
+            if (cringeLevel >= 100) {
+                document.body.style.filter = 'invert(1) hue-rotate(180deg)';
+                alert('MAXIMUM CRINGE ACHIEVED! YOU HAVE DROWNED IN CRINGE 💀');
+                localStorage.setItem('cringeIntroSeen', 'true');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        }
+
+        function trollfaceTrap() {
+            cringeLevel += 20;
+            updateCringeMeter();
+            
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
+            oscillator.frequency.setValueAtTime(523, audioCtx.currentTime + 0.2);
+            oscillator.frequency.setValueAtTime(349, audioCtx.currentTime + 0.4);
+            
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 1);
+        }
+
+        function fortniteTrap() {
+            cringeLevel += 15;
+            updateCringeMeter();
+            
+            alert('DEFAULT DANCE ACTIVATED! 💃 *floss sounds*');
+        }
+
+        function skeletonTrap() {
+            cringeLevel += 25;
+            updateCringeMeter();
+            
+            document.body.classList.add('shake');
+            setTimeout(() => {
+                document.body.classList.remove('shake');
+            }, 500);
+        }
+
+        function popupTrap() {
+            cringeLevel += 10;
+            updateCringeMeter();
+            
+            let popup = window.open('', 'popup', 'width=400,height=300,scrollbars=no,resizable=no');
+            if (popup) {
+                popup.document.write('<h1 style="font-family: Comic Sans MS; color: red;">VIRUS DETECTED!!!</h1><p>Just kidding lol</p>');
+                setTimeout(() => popup.close(), 3000);
+            } else {
+                alert('🎉 CONGRATULATIONS! You avoided the popup trap!');
+            }
+        }
+
+        function dogeSave() {
+            cringeLevel = 0;
+            updateCringeMeter();
+            
+            document.getElementById('wholesomeBtn').style.display = 'block';
+            
+            alert('Much wow! Such save! Very wholesome! Doge has reset your cringe meter!');
+        }
+
+        function wholesomeExit() {
+            const fadeOverlay = document.getElementById('fadeOverlay');
+            const finalScreen = document.getElementById('finalScreen');
+            const gameContent = document.getElementById('gameContent');
+            
+            fadeOverlay.style.pointerEvents = 'auto';
+            fadeOverlay.style.opacity = '1';
+            
+            setTimeout(() => {
+                document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                
+                gameContent.style.display = 'none';
+                
+                fadeOverlay.style.opacity = '0';
+                fadeOverlay.style.pointerEvents = 'none';
+                finalScreen.style.display = 'flex';
+            }, 1000);
+        }
+
+        updateCringeMeter();
+
+        const memeList = [
+            'https://imgix.ranker.com/user_node_img/50042/1000833201/original/the-y-u-no-guy-photo-u2?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=355',
+            'https://s-media-cache-ak0.pinimg.com/564x/13/e0/ce/13e0cef23c4323e8d32be0e6322be99a.jpg',
+            'https://techcrunch.com/wp-content/uploads/2010/12/screen-shot-2010-12-31-at-6-54-28-pm.png',
+            'https://imgix.ranker.com/user_node_img/50042/1000833179/original/one-does-not-simply-photo-u2?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=355',
+            'https://i.chzbgr.com/thumb800/36369157/h4718E1E8/a-freezer-full-of-the-funniest-random-memes-that-will-definitely-help-you-break-the-ice',
+        ];
+
+        let memeClickCount = 0;
+
+        function showRandomMeme() {
+            memeClickCount++;
+            cringeLevel += 25;
+            updateCringeMeter();
+            
+            if (memeClickCount === 2) {
+                document.getElementById('memeDisplay').innerHTML = `
+                    <div class="closeMeme" onclick="closeMeme()">×</div>
+                    <img id="randomMemeImg" src="https://media.tenor.com/ZZ69Ch98s_0AAAAM/baby-stray-kids.gif" alt="Special Meme">
+                    <div style="text-align: center; margin-top: 15px; font-family: Comic Sans MS; font-size: 18px; color: #333;">
+                        Why are you clicking it again? So you like seeing cringe memes 😂
+                    </div>
+                `;
+                document.getElementById('memeDisplay').style.display = 'block';
+            } else {
+                const randomIndex = Math.floor(Math.random() * memeList.length);
+                const randomMeme = memeList[randomIndex];
+                
+                document.getElementById('memeDisplay').innerHTML = `
+                    <div class="closeMeme" onclick="closeMeme()">×</div>
+                    <img id="randomMemeImg" src="${randomMeme}" alt="Random Meme">
+                `;
+                document.getElementById('memeDisplay').style.display = 'block';
+            }
+        }
+
+        function closeMeme() {
+            document.getElementById('memeDisplay').style.display = 'none';
+        }
+
+        function showHistory() {
+            document.getElementById('historyModal').style.display = 'block';
+        }
+
+        function closeHistory() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        function skipIntro() {
+            localStorage.setItem('cringeIntroSeen', 'true');
+            document.getElementById('videoIntro').style.display = 'none';
+            document.getElementById('gameContent').classList.add('active');
+        }
+
+        function startGame() {
+            document.getElementById('videoIntro').style.display = 'none';
+            document.getElementById('gameContent').classList.add('active');
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('cringeIntroSeen') === 'true') {
+                startGame();
+                return;
+            }
+            
+            const video = document.getElementById('cringeVideo');
+            const skipBtn = document.getElementById('skipBtn');
+            
+            setTimeout(() => {
+                skipBtn.style.display = 'block';
+            }, 5000);
+            
+            video.addEventListener('ended', function() {
+                localStorage.setItem('cringeIntroSeen', 'true');
+                startGame();
+            });
+            
+            video.addEventListener('error', function() {
+                alert('Video not found! Proceeding to game...');
+                localStorage.setItem('cringeIntroSeen', 'true');
+                startGame();
+            });
+        };
+    </script>
 
 </body>
 </html>
