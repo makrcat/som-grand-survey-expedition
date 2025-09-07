@@ -12,13 +12,34 @@
                 padding-left:20px;
                 padding-right:20px;
             }
+            #small-bush{
+                width:50%;
+                margin-left:auto;
+                margin-right:auto;
+                display:block;
+            }
             .bush-div{
                 width: 500px;
                 height:515px;
+                position:relative;
             }
+            /* .bush{
+                position:relative;
+            } */
             .bush-hiding{
                 transition-duration: 1s;
                 opacity: 0;
+            }
+            .behind-bush{
+                z-index: -1;
+                position:absolute;
+                top:0;
+                margin-top: 60px;
+                margin-left: 40px;
+                align-self: center;
+            }
+            .desciption{
+                text-align: center;
             }
         </style>
         <script>
@@ -35,7 +56,18 @@
         <h1>Shrubs of Mystery</h1>
 
         <div class="bush-div">
-            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush">
+            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
+            <div class="behind-bush">
+                <img src="bush.png" id="small-bush">
+                <p class="desciption">You found a smaller bush behind the first bush<br>You don't think there is anything else behind this bush</p>
+            </div>
+        </div>
+        <div class="bush-div">
+            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
+            <div class="behind-bush">
+                <img src="bush.png" id="small-bush">
+                <p class="desciption">You found a smaller bush behind the first bush</p>
+            </div>
         </div>
 
         
