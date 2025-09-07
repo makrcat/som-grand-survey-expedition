@@ -7,21 +7,42 @@
     <meta charset="utf-8" />
     <title>Welcome to Hotland!</title>
     <style>
+      @font-face {
+        font-family: Asimovian;
+        src: url("Asimovian.ttf");
+      }
+
+      @font-face {
+        font-family: TulpenOne;
+        src: url("TulpenOne.ttf");
+      }
       .site {
         background-color: rgb(204, 197, 0);
         display: block;
         border-radius: 25px;
         outline-width: 3px;
-        outline-color: invert;
         outline-style: solid;
-        box-sizing: inherit;
+        box-sizing: border-box;
+      }
+
+      h1 {
+        font-family: TulpenOne;
+        font-size: 60px
+        
+      }
+
+      p, h2,h3,h4,h5,h6 {
+        font-family: Asimovian;
       }
 
       .grid {
         display: grid;
         gap: 1rem 1rem;
+        size: inherit;
         align-content: space-evenly;
-        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "a" "b"
+          "c" "d";
       }
 
       .text-with-margin {
@@ -35,7 +56,11 @@
   </head>
 
   <body
-    style="background-image: url(images/bg.jpeg); background-position: center"
+    style="
+      background-image: url(images/bg.jpeg);
+      background-position: center;
+      background-size: cover;
+    "
   >
     <h1>!Bonol on Is of Temper</h1>
     <!-- Welcome to Hotland! (Welcome to the Land of Hot!)-->
@@ -45,7 +70,7 @@
         of: (connection of adjectives: hot water would be "Water of Hot") 
         Temper: of a certain tempachure. Usally oppisite of cold. -->
 
-    <h4 class="less-space">Welcome to Hotland!</h4>
+    <h4>Welcome to Hotland!</h4>
     <h3>
       The Lushory of Sown Ocean! <br />
       The Southern Ocean Resort!
@@ -67,7 +92,7 @@
     </h3>
 
     <div class="grid">
-      <div class="site">
+      <div class="site" style="grid-area: a">
         <img src="sites/20eab515-48f8-4559-8c24-2de4b7dd8262.jpeg" />
         <div class="text-with-margin">
           <h2>The Crying Man (Dasses of Home)</h2>
@@ -83,7 +108,7 @@
           </p>
         </div>
       </div>
-      <div class="site">
+      <div class="site" style="grid-area: b">
         <img src="sites/64c34806-9451-4e6a-b758-e0bd8ccba2d0.jpeg" />
         <div class="text-with-margin">
           <h2>The Tomb of the Warm (Temper of Pasth, Miter of Tomth)</h2>
@@ -95,9 +120,31 @@
               <br />
               This tomb contains the heroic soldiers who bravly defended our
               land from the Trianglish, during the War of the South. Many of
-              these soldiers used heat to there advantage, but many of them were
+              these soldiers used heat to there advantage, but lots of them were
               wounded in battle, and they couldn't move, burning to death in the
               sun.
+            </i>
+          </p>
+        </div>
+      </div>
+      <div class="site" style="grid-area: c">
+        <img src="sites/789aa266-6119-47ba-a0d2-01d0d0ba15d5.jpeg" />
+        <div class="text-with-margin">
+          <h2>Sandfalls (Fown of, Dunds of Miter)</h2>
+          <p>
+            <i
+              >Direct Translation: Sand-Water Falls
+
+              <br />
+              <br />
+              This water fall is connected to Cave Dunowrath, a cave once connecting Hotland to 78. The water fall, formed after a
+              fatal land slide, destroying villages, and collapsing caves. Now
+              you can only get in through, by jumping in the deep underground
+              lake. <br />
+              <b>You will not be able to get back up.</b> (<a
+                href="/scenes/78/"
+                ><b>Travel to 78</b></a
+              >)
             </i>
           </p>
         </div>
