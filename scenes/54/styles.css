@@ -1,0 +1,62 @@
+@font-face {
+  font-family: Asimovian;
+  src: url("Asimovian.ttf");
+}
+
+@font-face {
+  font-family: EpundaSlab;
+  src: url("EpundaSlab-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: TulpenOne;
+  src: url("TulpenOne.ttf");
+}
+
+.site {
+  background-color: rgb(250, 141, 7);
+  display: block;
+  border-radius: 25px;
+  outline-width: 3px;
+  outline-style: solid;
+  box-sizing: border-box;
+  max-width: 23.3rem;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: EpundaSlab;
+  font-size: 60px;
+  text-align: center;
+}
+
+p,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Asimovian;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem 1rem;
+  justify-content: center;
+  grid-template:
+    "a b"
+    "c d"
+    "e f"
+    "g h";
+}
+
+.text-with-margin {
+  padding: 10px;
+}
+
+img {
+  overflow: hidden;
+  border-radius: 25px;
+  width: 100%;
+}
