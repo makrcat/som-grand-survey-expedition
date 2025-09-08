@@ -1,0 +1,137 @@
+/* Eastern Upside-Down Island — base stylesheet */
+:root{
+  --bg-blur: 0px;
+  --accent: #c9a2ff;
+  --accent-2:#6fe7ff;
+  --text: #f6f6fb;
+  --text-dim:#d7d7ef;
+  --shadow: rgba(2, 6, 23, .5);
+  --card: rgba(16, 12, 40, .55);
+  --ui: rgba(255,255,255,.12);
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font: 500 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji';
+  color: var(--text);
+  background: #0b0720;
+  overflow-x:hidden;
+}
+
+.bg{
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(111,231,255,.18), transparent 60%),
+    radial-gradient(900px 500px at 20% 110%, rgba(201,162,255,.22), transparent 60%),
+    url('assets/background.png') center / cover no-repeat;
+  filter: blur(var(--bg-blur));
+  transform: translateZ(0);
+  z-index: -1;
+}
+
+/* Glassy cards */
+.title-card{
+  margin: clamp(16px, 4vw, 40px) auto 8px;
+  padding: 16px 20px;
+  max-width: 900px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(4px);
+}
+.title-card h1{
+  margin:0 0 6px 0;
+  font-size: clamp(28px, 4.5vw, 44px);
+  letter-spacing:.2px;
+}
+.subtitle{ margin:0; color: var(--text-dim); }
+
+.lore{
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 14px 20px 24px;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+/* Exits */
+.links{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+  max-width: 980px;
+  margin: 18px auto;
+  padding: 0 12px;
+}
+.exit{
+  --ring: 0 0 0 0 rgba(111,231,255,.0);
+  display: inline-block;
+  text-decoration:none;
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align:center;
+  background: var(--ui);
+  border: 1px solid rgba(255,255,255,.14);
+  color: var(--text);
+  backdrop-filter: blur(4px) saturate(110%);
+  transition: transform .18s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow: var(--ring);
+  position: relative;
+}
+.exit:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.18);
+  box-shadow: 0 0 0 6px rgba(111,231,255,.15);
+}
+.exit.flip:hover{ transform: translateY(-2px) scaleX(-1); }
+.exit::after{
+  content: attr(data-dir);
+  position: absolute;
+  bottom: 8px; right: 12px;
+  font-size: 11px;
+  opacity:.6;
+}
+
+/* UI buttons */
+.interact{
+  display:flex; gap:10px; justify-content:center;
+  margin: 8px auto 18px;
+}
+.ui{
+  background: var(--ui);
+  border:1px solid rgba(255,255,255,.18);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform .18s ease, background .2s ease;
+}
+.ui:hover{ background: rgba(255,255,255,.22); transform: translateY(-1px); }
+.ui:active{ transform: translateY(0); }
+
+.credits{
+  text-align:center;
+  font-size: 14px;
+  color: var(--text-dim);
+  margin: 12px auto 30px;
+  padding: 8px 14px;
+  max-width: 900px;
+}
+
+/* High-contrast mode (toggled) */
+.hc body, body.hc{
+  --card: rgba(0,0,0,.65);
+  --ui: rgba(255,255,255,.28);
+  --bg-blur: 0px;
+}
+
+/* Responsive */
+@media (max-width:720px){
+  .links{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
