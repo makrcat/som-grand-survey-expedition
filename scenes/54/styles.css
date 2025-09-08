@@ -30,6 +30,10 @@ h1 {
   text-align: center;
 }
 
+#text, i {
+  font-family: EpundaSlab;
+}
+
 p,
 h2,
 h3,
