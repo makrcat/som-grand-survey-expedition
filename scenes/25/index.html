@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body{
-            background-image: url('https://imgur.com/Bo0TkYA.png');
+            background-image: url('https://hc-cdn.hel1.your-objectstorage.com/s/v3/45230adbb3c31b2d70cf2dfe2f2ab3c27f47c8ab_image.png');
             font-family: 'Roboto', sans-serif;
         }
         p {
@@ -22,8 +22,9 @@
         .container  {
             height: 95vh;
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5vh;
         }
         .scroll-reveal {
             width: 100%;
@@ -34,13 +35,35 @@
             font-size: 64px;
         }
         .container2  {
-            height: 50vh;
+            height: 75vh;
             width: 160vh;
             align-items: center;
             text-align: left;
             position: relative;
             top: 18vh;
             left: 8vh;
+            padding-top: 20vh;
+        }
+        .container3  {
+            background: linear-gradient(180deg, #627b9507 0%, #3e5c7b02 45%, #8bafc506 100%);
+            align-items: center;
+            text-align: left;
+            padding-top: 8vh;
+            position: relative;
+        }
+        .container3 a {
+            display: inline-block;
+            margin: 0.5rem 4rem;
+            font-size: 18px;
+            text-decoration: underline;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px #858585, 0 0 10px #aaa;
+
+        }
+        .container3 a:visited {
+            color: #ffffff;
+            text-shadow: 2px 2px 8px #858585, 0 0 10px #aaa;
+
         }
         .container2 p {
             font-size: 32px;
@@ -58,8 +81,14 @@
             animation: fall var(--duration, 8s) linear infinite;
             top: -10vh;
             left: var(--left,50%);
+            pointer-events: none;
         }
 
+        #snowflake-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
         @keyframes fall {
             0% { transform: translateY(0); }
             100% { transform: translateY(120vh); }
@@ -82,8 +111,13 @@
     </div>
     <div class="container2">
         <p>Legend has it that there exists a great island called Cantada. There is even a rumour of hiker who travelled great lengths, treking across dozens of islands before discovering the snowy mountain. It is believed at the hill top, the hiker shouted "it can, tada!" when they saw magical lights suddenly emerge from the dark...</p>
-        <br>
         <p>Unfortunately, many have attempted to see the hidden gem, but the snowy conditions have misguided all to a dead end. It is believed only those chosen are lucky enough to see the land, Cantada.</p>
+        <p>Below are sites the hiker also visited!</p>
+    </div>
+    <div class="container3">
+        <a href="../2/index.html">The Frozen Upvote Forest</a>
+        <a href="..7/2/index.html">The Great Frozen Wall</a>
+        <a href="../28/index.html">Abandonded Polar Bear Breeding Operation</a>
     </div>
     <div id="snowflake-container"></div>
 
