@@ -19,19 +19,21 @@
                 display:block;
             }
             .bush-div{
-                width: 500px;
+                width: 640px;
                 height:515px;
                 position:relative;
+                overflow:hidden;
             }
-            /* .bush{
+            .bush{
                 position:relative;
-            } */
+                z-index:10;
+            }
             .bush-hiding{
                 transition-duration: 1s;
-                opacity: 0;
+                transform: translateY(515px);
             }
             .behind-bush{
-                z-index: -1;
+                /* z-index: -1; */
                 position:absolute;
                 top:0;
                 margin-top: 60px;
@@ -47,7 +49,7 @@
                 let bushes=document.getElementsByClassName("bush")
                 console.log(bushes.length)
                 for(let i=0;i<bushes.length;i++){
-                    bushes[i].addEventListener("transitionend",()=>{console.log("remove bush");bushes[i].remove()})
+                    bushes[i].addEventListener("transitionend",()=>{console.log("remove bush");this.remove()})
                 }
             }
         </script>
