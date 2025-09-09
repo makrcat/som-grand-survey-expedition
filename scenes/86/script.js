@@ -9,13 +9,13 @@ function loadVideos() {
     const sidebarVids = [
         {
             name: 'Splorgon 5',
-            author: 'Unassigned',
+            author: 'Utkarsh Kumar',
             projectId: 1,
-            thumbnail: `https://picsum.photos/seed/${getRandomInt(38164912416)}/1280/720`,
+            thumbnail: `/scenes/86/assets/neighbors/01.png`,
         },
         {
             name: 'Just a Real Nice Pond',
-            author: 'Unassigned',
+            author: 'Irtaza',
             projectId: 22,
             thumbnail: `https://picsum.photos/seed/${getRandomInt(212894126948)}/1280/720`,
         },
