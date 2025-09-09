@@ -15,6 +15,7 @@ let isCreatingEdge = false; // Track if we're creating a new edge
 let edgeCreationStart = null; // Starting scene for edge creation
 let tempEdgeLine = null; // Temporary line element for edge creation
 let isReadOnly = false; // Track if we're in read-only mode (not localhost)
+let finishedSceneIds = new Set(); // Set of scene IDs that have corresponding folders
 
 // Settings
 let settings = {
@@ -26,6 +27,33 @@ let settings = {
 const SEED = 42;
 const NUM_SCENES = 100;
 const BIDIRECTIONAL_PROBABILITY = 0.3;
+
+// which scenes have a corresponding folder in /scenes
+function fetchAvailableScenesAndRender() {
+    fetch('/scenes')
+        .then(response => response.text())
+        .then(text => {
+            let folderIds = [];
+            try {
+                // Try to parse as JSON first
+                const data = JSON.parse(text);
+                folderIds = Object.keys(data);
+            } catch (e) {
+                // If not JSON, parse as HTML 
+                // Match <a href="number/">number/</a>
+                const matches = [...text.matchAll(/<a href="(\d+)\/">/g)];
+                folderIds = matches.map(m => m[1]);
+                console.log('Parsed folder IDs from HTML:', folderIds);
+            }
+            finishedSceneIds = new Set(folderIds.map(Number));
+            renderScenes();
+        })
+        .catch(error => {
+            console.error('Error fetching scenes folder:', error);
+            finishedSceneIds = new Set();
+            renderScenes();
+        });
+}
 
 // Deterministic random number generator using seed
 class SeededRandom {
@@ -441,6 +469,7 @@ function pixelToNormalizedY(pixelY) {
 }
 
 // Render scenes
+fetchAvailableScenesAndRender();
 function renderScenes() {
     const svg = d3.select('#overlay-svg');
     
@@ -471,18 +500,14 @@ function renderScenes() {
     
     // Add circle for each scene
     sceneGroups.append('circle')
-        .attr('fill', d => 
-            d.id === selectedScene ? '#306cb1ff' :
-            d.id === finishedScene ? '#2ec15aff' :
-            d.id === claimedScene ? '#d3d684ff' :
-            '#FF6B6B'
-        )
-        .attr('stroke', d =>
-            d.id === selectedScene ? '#2600ffff' :
-            d.id === finishedScene ? '#226e2fff' :
-            d.id === claimedScene ? '#c3ff00ff' :
-            '#FF6B6B'
-        )
+    
+        .attr('fill', d => finishedSceneIds.has(d.id) ? '#2ec15aff' : '#767a01ff')
+        .attr('stroke', d => finishedSceneIds.has(d.id) ? '#226e2fff' : '#ffff00ff')
+
+        //.attr('fill', d => d.id === finishedScene ? '#2ec15aff' : '#d3d684ff')
+        //.attr('stroke', d => d.id === finishedScene ? '#226e2fff' : '#c3ff00ff')
+        //.attr('fill', d => d.id === claimedScene ? '#d3d684ff' : '#FF6B6B')
+        //.attr('stroke', d => d.id === claimedScene ? '#c3ff00ff' : '#FF6B6B')
 
         .attr('stroke-width', d => d.id === selectedScene ? 3 : 1.5)
         .attr('r', 6)
@@ -1156,6 +1181,29 @@ function saveManifest() {
     });
 }
 
+function loadScenesFolder(title) {
+    fetch('/scenes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch scenes folder');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (title in data) {
+                console.log(title);
+                return title;
+            }
+            else {
+                return "";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching scenes folder:', error);
+            return "";
+        });
+    }
+
 // Load scenes from manifest.json
 function loadManifest() {
     fetch('/manifest.json')
@@ -1455,7 +1503,7 @@ function isLocalhost() {
                    hostname === '127.0.0.1' || 
                    hostname === '';
     console.log('Hostname:', hostname, 'Is localhost:', isLocal);
-    return isLocal;
+    return false; // Force read-only mode for testing
 }
 
 // Load from manifest.json in read-only mode

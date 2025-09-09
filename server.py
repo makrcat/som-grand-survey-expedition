@@ -54,7 +54,7 @@ class ManifestHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
 
 if __name__ == "__main__":
-    PORT = 8000
+    PORT = 5000
     
     with socketserver.TCPServer(("", PORT), ManifestHandler) as httpd:
         print(f"Server running at http://localhost:{PORT}")
