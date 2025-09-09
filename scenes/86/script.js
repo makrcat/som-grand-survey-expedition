@@ -1,13 +1,10 @@
 /// <reference path="ref.d.ts"
+
 function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
     return Math.floor(Math.random() * max)
+}
 
 function loadVideos() {
-    /**
-     * @type {{name: string, author: string, projectId: number, thumbnail: string}[]}
-     */
     /** @type {Video[]} */
     const sidebarVids = [
         {
@@ -38,6 +35,58 @@ function loadVideos() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function loadComments() {
+    /** @type {Comment[]} */
+    const comments = [
+        {
+            content: 'What are you drinking?',
+            author: 'carpet_owner21',
+            replies: [
+                {
+                    content: 'Great Question! It is in fact a cup of tea.',
+                    author: 'fancy_plant'
+                },
+                {
+                    tagged: 'fancy_plant',
+                    content: "But you're a plant,, isn't tea made of plants??",
+                    author: 'carpet_owner21'
+                },
+                {
+                    tagged: 'carpet_owner21',
+                    content: "That is true. This, however, is a special kind of tea! It's made of meat.",
+                    author: 'fancy_plant'
+                },
+                {
+                    tagged: 'fancy_plant',
+                    content: "I'm unsubscribing.",
+                    author: 'carpet_owner'
+                }
+            ]
+        },
+        {
+            author: 'explorer.exe',
+            content: 'First',
+            replies: [
+                {
+                    content: 'nuh uh',
+                    author: 'xX_epixgamer_Xx'
+                }
+            ]
+        }
+    ]
+
+    for(const comment of comments) {
+        let element = `<span class="comment"><b>&lt; ${comment.author} &gt;</b> ${comment.content}</span>`
+        for(const reply of comment.replies ?? []) {
+            const replyEl = `<span class="comment reply"><b>&lt; ${reply.author} &gt;</b> ${reply.tagged ? '@' + reply.tagged : ''} ${reply.content}</span>`
+            element += replyEl
+        }
+        const commentsList = document.getElementById('commentsection')
+        commentsList.innerHTML += element
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     loadVideos()
+    loadComments()
 })

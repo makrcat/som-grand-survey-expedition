@@ -23,7 +23,10 @@
             <div id="vidinfo">
                 <span id="title">&lbrack;86&rbrack; Answering Your Inquiries.</span>
             </div>
-            <div id="commentsection"></div>
+            <div id="commentsection">
+                <hr/>
+                <span id="title">Comments:</span>
+            </div>
         </div>
         <div id="recommended">
             <span id="title">Recommended videos:</span>
@@ -73,7 +76,7 @@
         display: flex;
         gap: 1rem;
 
-        #video {
+        & #video {
             width: 66%;
             display: flex;
             flex-direction: column;
@@ -87,9 +90,41 @@
                 box-shadow: 0rem 0rem 5rem 1rem rgb(22, 32, 22);
             }
 
-            #title {
+            #vidinfo > #title {
                 font-weight: 800;
                 font-size: x-large;
+            }
+
+            #commentsection {
+                flex-direction: column;
+                display: flex;
+                gap: 1rem;
+
+                hr {
+                    width: 100%;
+                }
+
+                #title {
+                    font-size: x-large;
+                    font-weight: 700;
+                }
+
+                .comment {
+                    background-color: #0f381d;
+                    padding: 1rem 2rem;
+                    border-radius: 1rem;
+                    b {
+                        margin-right: 0.7rem;
+                    }
+                }
+
+                .reply {
+                    b {
+                        color: #ccc;
+                    }
+                    margin-left: 4rem;
+                    color: #aaa;
+                }
             }
         }
 
