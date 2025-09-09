@@ -8,7 +8,8 @@ class crab {
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.width * 0.8}px`;
         // Crab image
-        this.element.style.backgroundImage = `url(images/crab-walking-no-color.webp)`;
+        this.image = 'images/crab-walking-no-color.webp';
+        this.element.style.backgroundImage = `url(${this.image})`;
         // Random color
         this.hue = (Math.random() * 15) + 310;
         this.element.style.filter = `sepia(50%) saturate(1000%) contrast(180%) hue-rotate(${this.hue}deg)`;
@@ -24,7 +25,6 @@ class crab {
     update(animProperty) {
         switch (animProperty) {
             case 1: // animation 1: Crabs walking sideways.
-                this.element.style.backgroundImage = `url(images/crab-walking-no-color.webp)`;
                 if (this.x < window.innerWidth) {
                     this.x += this.speed;
                 } else {
@@ -38,14 +38,19 @@ class crab {
                 }
                 this.element.style.left = `${this.x}px`;
                 break;
-            default:
-                this.element.style.backgroundImage = `url(images/crab-still.webp)`;
+            case 2: // animation 2: stop moving and reposition crabs out of bounds.
                 if (this.x < 0 || this.x > window.innerWidth - this.width) {
                     this.x = Math.random() * window.innerWidth;
                     this.element.style.left = `${this.x}px`;
                 }
                 break;
+            default: // Don't do anything.
+                break;
         }
+    }
+    updateImage(image) {
+        this.image = image;
+        this.element.style.backgroundImage = `url(${this.image})`;
     }
 }
 
@@ -53,6 +58,8 @@ class crabController {
     constructor( ){
         this.crabs = [];
         this.animProperty = 1;
+        this.updateImg = false;
+        this.image = 'images/crab-walking-no-color.webp';
         this.spawnCrabs(20);
     }
     spawnCrabs(num){
@@ -70,8 +77,12 @@ class crabController {
     }
     handleCrabs() {
         this.crabs.forEach(crab => {
+            if (this.updateImg)
+                crab.updateImage(this.image);
             crab.update(this.animProperty);
         });
+        if (this.updateImg)
+            this.updateImg = false;
     }
     animate = () => {
         this.handleCrabs();
@@ -128,6 +139,10 @@ let t36 = false;
 let t44 = false;
 let t70 = false;
 let t75 = false;
+let t79 = false;
+let t82 = false;
+let t86 = false;
+let t94 = false;
 function checkVideoTime() {
     const currentTime = player.getCurrentTime();
     console.log(currentTime);
@@ -143,17 +158,32 @@ function checkVideoTime() {
         console.log("They are marching?");
         seconds29(false, true);
         seconds36(false);
+        changeImage('images/crab-walking-no-color.webp');
         crabs(1);
         t44 = true;
     } else if (!t70 && currentTime >= 70) {
         console.log("Wait for it...");
         seconds29(false, false);
-        crabs();
+        changeImage('images/crab-still.webp');
+        crabs(2);
         t70 = true;
     } else if (!t75 && currentTime >= 75) {
         console.log("Dun dun dun dududu dun dududu dun dododododo...");
-        crabs(2);
-        t70 = true;
+        changeImage('images/dancing-crab1.webp');
+        crabs();
+        t75 = true;
+    } else if (!t79 && currentTime >= 79) {
+        console.log("...");
+        changeImage('images/crab-dancing-blocky.webp');
+        t79 = true;
+    } else if (!t82 && currentTime >= 83) {
+        console.log("...(x2)");
+        changeImage('images/dancing-crab2.webp');
+        t82 = true;
+    } else if (!t94 && currentTime >= 93.7) {
+        console.log("...(x3)");
+        changeImage('images/dancing-crab3.webp');
+        t94 = true;
     }
 }
 
@@ -172,7 +202,6 @@ function seconds29(bool, resize){
 function seconds36(bool) {
     const twoThree2 = document.getElementById("tt2");
     twoThree2.hidden = !bool;
-
 }
 
 function crabs(animProperty) {
@@ -185,9 +214,9 @@ function crabs(animProperty) {
     controller.animProperty = animProperty;
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const scene = document.getElementById('scene');
-//     const crabs = new crabController();
-//     crabs.appendCrabs(scene);
-//     crabs.animate();
-// });
+function changeImage(img) {
+    if (controller) {
+        controller.image = img;
+        controller.updateImg = true;
+    }
+}
