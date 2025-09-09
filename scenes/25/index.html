@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot 25 - Cantada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            background-image: url('https://hc-cdn.hel1.your-objectstorage.com/s/v3/45230adbb3c31b2d70cf2dfe2f2ab3c27f47c8ab_image.png');
+            font-family: 'Roboto', sans-serif;
+        }
+        p {
+            color: rgba(255, 255, 255, 0.3);
+            transition: color 0.5s ease;
+        }
+        .reveal {
+            color: #fff;
+        }
+        .container  {
+            height: 95vh;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5vh;
+        }
+        .scroll-reveal {
+            width: 100%;
+            max-width: 900px;
+            text-align: left;
+        }
+        .scroll-reveal p {
+            font-size: 64px;
+        }
+        .container2  {
+            height: 75vh;
+            width: 160vh;
+            align-items: center;
+            text-align: left;
+            position: relative;
+            top: 18vh;
+            left: 8vh;
+            padding-top: 20vh;
+        }
+        .container3  {
+            background: linear-gradient(180deg, #627b9507 0%, #3e5c7b02 45%, #8bafc506 100%);
+            align-items: center;
+            text-align: left;
+            padding-top: 8vh;
+            position: relative;
+        }
+        .container3 a {
+            display: inline-block;
+            margin: 0.5rem 4rem;
+            font-size: 18px;
+            text-decoration: underline;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px #858585, 0 0 10px #aaa;
+
+        }
+        .container3 a:visited {
+            color: #ffffff;
+            text-shadow: 2px 2px 8px #858585, 0 0 10px #aaa;
+
+        }
+        .container2 p {
+            font-size: 32px;
+            color: #fff;
+            text-shadow: 2px 2px 8px #858585, 0 0 10px #aaa;
+        }
+
+        .snowflake {
+            --size: var(--radius);
+            width: var(--size);
+            height: var(--size);
+            position: fixed;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: fall var(--duration, 8s) linear infinite;
+            top: -10vh;
+            left: var(--left,50%);
+            pointer-events: none;
+        }
+
+        #snowflake-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(120vh); }
+        }
+        @keyframes sway {
+            0% { transform: translateY(var(--y, 0)) translateX(0); }
+            50% { transform: translateY(calc(var(--y, 0)+50vh)) translateX(var(--sway, 20px)); }
+            100% { transform: translateY(calc(var(--y, 0)+120vh)) translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="scroll-reveal">
+            <p id="reveal-text">Beyond the snow, <br/>
+                Above the mountain, <br/>
+                There's a sight to behold!
+            </p>
+        </section>
+    </div>
+    <div class="container2">
+        <p>Legend has it that there exists a great island called Cantada. There is even a rumour of hiker who travelled great lengths, treking across dozens of islands before discovering the snowy mountain. It is believed at the hill top, the hiker shouted "it can, tada!" when they saw magical lights suddenly emerge from the dark...</p>
+        <p>Unfortunately, many have attempted to see the hidden gem, but the snowy conditions have misguided all to a dead end. It is believed only those chosen are lucky enough to see the land, Cantada.</p>
+        <p>Below are sites the hiker also visited!</p>
+    </div>
+    <div class="container3">
+        <a href="scenes/2/">The Frozen Upvote Forest</a>
+        <a href="scenes/73/">The Great Frozen Wall</a>
+        
+    </div>
+    <div id="snowflake-container"></div>
+
+    <script>
+        let isScrolled = false;
+        function scrollReveal() {
+            if (!isScrolled && window.scrollY > 50) {
+                document.getElementById('reveal-text').classList.add('reveal');
+                isScrolled = true;
+            }
+        }
+        window.addEventListener('scroll', scrollReveal)
+
+        function spawnSnowfall(n = 67) {
+            const container = document.getElementById('snowflake-container')
+            const frag = document.createDocumentFragment();
+            for (let i = 0; i < n; i++) {
+                const s = document.createElement('div')
+                s.className = 'snowflake';
+                const radius = Math.floor(Math.random() * 7 + 3)
+                const size = (Math.random() * 6 + 2).toFixed(2) + 'px';
+                const left = (Math.random() * 100).toFixed(2) + '%';
+                const duration = (Math.random() * 4 + 6).toFixed(2) + 's';
+                const opacity = (Math.random() * 0.4 + 0.4).toFixed(2);
+                const sway = Math.round((Math.random() * 60 - 30)) + 'px';
+                const delay = (Math.random() * -14).toFixed(2) + 's'
+                s.style.setProperty(`--radius`, radius);
+                s.style.setProperty(`--size`, size);
+                s.style.setProperty(`--left`, left);
+                s.style.setProperty(`--duration`, duration);
+                s.style.setProperty(`--opacity`, opacity);
+                s.style.setProperty(`--sway`, sway);
+                s.style.setProperty(`animation-delay`, delay)
+
+                if (Math.random() > 0.67) {
+                    s.style.animation = `sway ${(Math.random()*8 + 6).toFixed(2)}s ease-in-out infinite`;
+                    s.style.setProperty('animation-delay', delay)
+                }
+                frag.appendChild(s);
+            }
+            container.appendChild(frag);
+        }
+        spawnSnowfall(67);
+    </script>
+</body>
+</html>

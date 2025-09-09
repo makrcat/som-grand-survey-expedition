@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scene 8 - Isle of Riddle Me This</title>
+    <style>
+        /* General Styles */
+        body {
+            background-image: url('desert-island.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 20px;
+            font-family: "Comic Sans MS", cursive;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        .header, .lore, .riddle {
+            background-color: rgba(255, 228, 181, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 900px;
+            box-sizing: border-box;
+        }
+
+        .lore {
+            column-count: 2;
+            column-gap: 40px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 60%;
+            max-width: 300px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Top link styling */
+        .top-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .top-link a:hover {
+            background-color: #1976D2;
+        }
+
+        /* Hidden secret link */
+        .hidden-link {
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin-top: 20px;
+        }
+
+        .hidden-link.visible {
+            opacity: 1;
+        }
+
+        /* Secret button styling */
+        .hidden-link a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .hidden-link a:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 700px) {
+            .lore {
+                column-count: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header with top link -->
+    <div class="header">
+        <h1>Welcome to the Isle of Riddle Me This</h1>
+        <p>Prepare to embark on a journey filled with challenges and enigmas.</p>
+        <div class="top-link">
+            <a href="https://summer.hackclub.com/s?scene=43" target="_blank">Visit Example Website</a>
+        </div>
+    </div>
+
+    <!-- Lore section -->
+    <div class="lore">
+        <h2>The Lore of the Desert Isle</h2>
+        <p>
+            When sea withdrew and coasts were slain,<br>
+            The desert rose, a burning chain.<br>
+            The Surveyors of the Sun decreed,<br>
+            That wit, not strength, must first succeed.<br><br>
+
+            The desert lives, it shifts, it schemes,<br>
+            It binds the world in fiery dreams.<br>
+            Its dunes will move, its winds will hide,<br>
+            The truth is found by those who bide.<br><br>
+
+            They set the stones, they carved the law,<br>
+            So wanderers would stand in awe:<br><br>
+
+            “The desert tests the wit, the will,<br>
+            It bends the strong, it breaks them still.<br>
+            The clever mind may find its way,<br>
+            The fool is lost, the winds obey.”<br><br>
+
+            Answer true, and shade shall fall,<br>
+            Cool waters spring, and treasures call.<br>
+            Answer false, the Scorchwind wakes,<br>
+            It burns, it blinds, it steals, it takes.<br><br>
+
+            Thus speaks the isle, thus stands the test,<br>
+            The desert tries both mind and chest.<br>
+            Seek wisely, stranger, read the sign,<br>
+            Or be erased by sands divine.
+        </p>
+    </div>
+
+    <!-- Riddle section -->
+    <div class="riddle">
+        <h2>Riddle Me This:</h2>
+        <p>I am born in the desert though I never breathe</p>
+        <p>I drink in the sun, yet water I seethe.</p>
+        <p>My flesh gives life where none can be found</p>
+        <p>Who am I?</p>
+        <input type="text" id="riddleAnswer" placeholder="Your answer here">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+
+        <!-- Hidden secret link -->
+        <p id="bonusLink" class="hidden-link">
+            <a href="https://summer.hackclub.com/s?scene=40" target="_blank">Proceed to the Secret Website!</a>
+        </p>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            const answer = document.getElementById('riddleAnswer').value.toLowerCase();
+            const feedback = document.getElementById('feedback');
+            const bonusLink = document.getElementById('bonusLink');
+
+            if (answer === 'cactus') {
+                feedback.textContent = "Correct! You may proceed to the next challenge.";
+                feedback.style.color = "green";
+                bonusLink.classList.add('visible'); // reveal the secret button
+            } else {
+                feedback.textContent = "Incorrect. Try again!";
+                feedback.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
