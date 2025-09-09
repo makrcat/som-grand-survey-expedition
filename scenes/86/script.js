@@ -1,11 +1,14 @@
+/// <reference path="ref.d.ts"
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+    return Math.floor(Math.random() * max)
 
 function loadVideos() {
     /**
      * @type {{name: string, author: string, projectId: number, thumbnail: string}[]}
      */
+    /** @type {Video[]} */
     const sidebarVids = [
         {
             name: 'Splorgon 5',
