@@ -1,0 +1,67 @@
+body {
+    overflow: hidden;
+    margin: 0;
+}
+
+#overlay {
+    background: #7f7f7fff;
+    transition: 2s ease;
+    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    left: 0;
+}
+
+#sky {
+    background: linear-gradient(to top, #007fff 50%, #00007f);
+    width: 100vw;
+    height: 100vh;
+}
+#water {
+    background: linear-gradient(to top, #00ffff, #007fcf);
+    width: 100vw;
+    height: 60vh;
+    position: fixed;
+    bottom: 0;
+}
+#land {
+    --width: 101vw;
+    --height: 100px;
+    width: var(--width);
+    height: var(--height);
+    position: fixed;
+    bottom: 0;
+    left: calc((var(--width) - 100vw) * -0.5);
+    border-radius: 33% 33% 0 0 / 50px 50px 0 0;
+    background: linear-gradient(to top, #006600, #009900);
+    display: flex;
+    justify-content: center;
+}
+
+.message {
+    position: fixed;
+    animation: scrolling var(--duration) forwards linear;
+    color: white;
+    font-family: Arial, sans-serif;
+    cursor: default;
+    user-select: none;
+}
+
+#leave {
+    position: fixed;
+    bottom: 10px;
+    display: block;
+    cursor: pointer;
+    color: white;
+}
+
+@keyframes scrolling {
+    from {
+        transform: translateX(var(--start)); 
+    }
+    to {
+        transform: translateX(100vw);
+    }
+}
