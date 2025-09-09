@@ -1,0 +1,19 @@
+/* pixel-operator-bold */
+@font-face {
+	font-family: "Pixel Operator";
+	font-style: normal;
+	font-weight: 700;
+	font-stretch: 100%;
+	src: local("Pixel Operator Bold"), local("PixelOperator-Bold"), url(pixel-operator-bold.woff2) format("woff2"), url(pixel-operator-bold.woff) format("woff");
+	font-display: auto;
+}
+/* pixel-operator */
+@font-face {
+	font-family: "Pixel Operator";
+	font-style: normal;
+	font-weight: 400;
+	font-stretch: 100%;
+	src: local("Pixel Operator"), local("PixelOperator"), url(pixel-operator.woff2) format("woff2"), url(pixel-operator.woff) format("woff");
+	font-display: auto;
+}
+

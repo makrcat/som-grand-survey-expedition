@@ -1,0 +1,116 @@
+
+@import "fonts/8bitoperator-jve/8bitoperator-jve.css";
+@import "fonts/pixel-operator/pixel-operator.css";
+
+html {
+    font-family: "Pixel Operator", "8bitoperator JVE",  "8-bit Operator+", monospace;
+    font-size: 1.4em;
+}
+
+a {
+    color: inherit;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
+#exits {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    margin: auto;
+}
+
+a.link {
+    font-size: 200%;
+}
+
+body {
+    margin: 0;
+
+
+    background: black;
+    color: white;
+
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    /*font-weight: normal;*/
+    margin: 0.1em 0;
+    margin-top: 0.5em;
+}
+
+main {
+    margin: 0 1em;
+
+    line-height: 1;
+}
+
+#legend {
+    font-family: "8bitoperator JVE", "Pixel Operator", "8-bit Operator+", monospace;
+    font-size: 31px;
+
+    text-shadow: #020279 1px 1px;
+
+    background: black;
+    color: white;
+
+    padding: 0.75em 1em;
+
+    :first-child {
+        margin-top: 0;
+    }
+
+    :last-child {
+        margin-bottom: 0;
+    }
+
+    .piss {
+        background: linear-gradient(to bottom, #ffffaa, #ffff00);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        text-shadow: transparent 0 0;
+    }
+
+    table {
+        margin: auto;
+        text-align: left;
+
+        td {
+            width: 128px !important;
+
+            padding: 0 2ch 1ch;
+        }
+    }
+}
+
+.textbox {
+    font-family: "8bitoperator JVE", "Pixel Operator", "8-bit Operator+", monospace;
+    font-size: 31px;
+
+    text-shadow: #020279 1px 1px;
+
+    border: white 4px solid;
+
+    width: fit-content;
+    padding: 0.5em;
+    text-align: left;
+
+    margin: 2em auto;
+}
+
+header {
+    background: linear-gradient(#647C8A, #223949);
+
+    img {
+        margin: auto;
+        display: block;
+
+        max-width: 100vw;
+        width: 852px;
+    }
+}

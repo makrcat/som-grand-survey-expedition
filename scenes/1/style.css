@@ -1,0 +1,232 @@
+/* Reset */
+body, h1, h2, p, ul, li, table, td {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", monospace;
+}
+
+body {
+  background: linear-gradient(to bottom, #1b4d2c, #0a2915);
+  color: #e0ffe0;
+  line-height: 1.5;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tagline {
+  font-style: italic;
+  color: #baffc9;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #baffc9; }
+  to { text-shadow: 0 0 15px #00ff99; }
+}
+
+/* scene stuff */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.background img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* water vapour all around */
+.mist {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('images/mist.png') repeat;
+  opacity: 0.25;
+  animation: floatMist 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes floatMist {
+  from { background-position: 0 0; }
+  to { background-position: 200px 0; }
+}
+
+.interactive img.hotspot {
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.5s ease;
+  min-width: 120px;
+}
+
+.interactive img.hotspot:hover {
+  filter: drop-shadow(0 0 12px gold);
+}
+
+/* for your sake */
+#tooltip {
+  position: fixed;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid #44ff88;
+  border-radius: 6px;
+  font-size: 14px;
+  display: none;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+/* I didn't wanted to, but he thretened me :( */
+#fireball {
+  position: absolute;
+  bottom: 18%;
+  right: 43%;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #ffcc00, #ff6600, transparent 70%);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#fireball.animate {
+  animation: shootFireballAtUser 1.5s ease-in forwards;
+}
+
+@keyframes shootFireballAtUser {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-10vw, -5vh) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-45vw, -40vh) scale(150);
+    opacity: 0;
+  }
+}
+
+#fire-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(255, 255, 200, 0.8) 0%, rgba(255, 150, 0, 0.7) 50%, rgba(255, 50, 0, 0.6) 100%);
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.3s ease-out;
+}
+
+/* content css */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(10, 40, 20, 0.8);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 100, 0.3);
+}
+
+.content h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #aaffaa;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 500px;
+}
+
+td {
+  border: 1px solid #66bb66;
+  padding: 5px 10px;
+}
+
+.news ul, .links ul {
+  list-style: square;
+  padding-left: 40px;
+}
+
+a {
+  color: #66ffcc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #00ffaa;
+}
+
+.counter {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: #afffaf;
+}
+
+.scene-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+  font-size: 2vw;
+  font-weight: bold;
+  color: #fffbcc;
+  text-shadow: 2px 2px 6px #000;
+  pointer-events: none;
+}
+
+.pond {
+  bottom: 11%;
+  left: 11%;
+}
+
+.pond-left {
+  transform: rotate(34deg);
+}
+
+.pond-right {
+  transform: rotate(34deg) translateX(-20px);
+}
+
+/* give the V-shape tilt */
+.v-left {
+  transform: rotate(50deg);
+}
+.v-right {
+  transform: rotate(-45deg) translateY(75px) translateX(150px);
+}
+
+/* placement */
+.left-label {
+  top: 10%;
+  right: 46%;
+}
+
+.right-label {
+  top: 10%;
+  right: 10%;
+}
