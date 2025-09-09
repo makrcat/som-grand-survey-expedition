@@ -8,6 +8,8 @@ let svgWidth = 0;
 let svgHeight = 0;
 let isStateLoaded = false; // Track if we loaded state from URL
 let selectedScene = null; // Currently selected scene
+let finishedScene = null; // scene is by default not marked as finished
+let claimedScene = null; // scene is by default not marked as existing
 let nodeClickOccurred = false; // Track if a node click just happened
 let isCreatingEdge = false; // Track if we're creating a new edge
 let edgeCreationStart = null; // Starting scene for edge creation
@@ -469,10 +471,21 @@ function renderScenes() {
     
     // Add circle for each scene
     sceneGroups.append('circle')
-        .attr('r', 6)
-        .attr('fill', d => d.id === selectedScene ? '#FFD700' : '#FF6B6B')
-        .attr('stroke', d => d.id === selectedScene ? '#FFA500' : '#ffffff')
+        .attr('fill', d => 
+            d.id === selectedScene ? '#306cb1ff' :
+            d.id === finishedScene ? '#2ec15aff' :
+            d.id === claimedScene ? '#d3d684ff' :
+            '#FF6B6B'
+        )
+        .attr('stroke', d =>
+            d.id === selectedScene ? '#2600ffff' :
+            d.id === finishedScene ? '#226e2fff' :
+            d.id === claimedScene ? '#c3ff00ff' :
+            '#FF6B6B'
+        )
+
         .attr('stroke-width', d => d.id === selectedScene ? 3 : 1.5)
+        .attr('r', 6)
         .attr('data-radius', 6) // Store radius for line calculations
         .style('transition', 'r 0.2s ease, stroke-width 0.2s ease') // Smooth transitions
         .style('cursor', isReadOnly ? 'default' : 'pointer'); // Disable pointer cursor in read-only mode
@@ -1194,6 +1207,8 @@ function loadManifest() {
             
             // Clear selection
             selectedScene = null;
+            claimedScene = null;
+            finishedScene = null;
             document.getElementById('node-name-input').value = '';
             document.getElementById('node-description-input').value = '';
             hideHoverDisplay();
