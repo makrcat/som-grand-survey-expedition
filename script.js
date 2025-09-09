@@ -29,31 +29,25 @@ const NUM_SCENES = 100;
 const BIDIRECTIONAL_PROBABILITY = 0.3;
 
 // which scenes have a corresponding folder in /scenes
-function fetchAvailableScenesAndRender() {
-    fetch('/scenes')
-        .then(response => response.text())
-        .then(text => {
-            let folderIds = [];
-            try {
-                // Try to parse as JSON first
-                const data = JSON.parse(text);
-                folderIds = Object.keys(data);
-            } catch (e) {
-                // If not JSON, parse as HTML 
-                // Match <a href="number/">number/</a>
-                const matches = [...text.matchAll(/<a href="(\d+)\/">/g)];
-                folderIds = matches.map(m => m[1]);
-                console.log('Parsed folder IDs from HTML:', folderIds);
-            }
-            finishedSceneIds = new Set(folderIds.map(Number));
-            renderScenes();
-        })
-        .catch(error => {
-            console.error('Error fetching scenes folder:', error);
-            finishedSceneIds = new Set();
-            renderScenes();
-        });
+async function fetchAvailableScenesAndRender() {
+    const url = 'https://api.github.com/repos/hackclub/som-grand-survey-expedition/contents/scenes?ref=5e6b79eb26951f32565729beab4c8154bdcf6951';
+    const resp = await fetch(url);
+    const items = await resp.json();
+    // Just use github API, server side component with NGINX is overkill for this
+    // Filter to directories only, grab their names
+    const folders = items
+        .filter(item => item.type === 'dir')
+        .map(item => item.name);
+
+    console.log(folders); 
+    // list format of all dirs
+    finishedSceneIds = new Set(folders);
+    renderScenes();
+    return finishedSceneIds;
 }
+
+
+
 
 // Deterministic random number generator using seed
 class SeededRandom {
@@ -501,8 +495,8 @@ function renderScenes() {
     // Add circle for each scene
     sceneGroups.append('circle')
     
-        .attr('fill', d => finishedSceneIds.has(d.id) ? '#2ec15aff' : '#767a01ff')
-        .attr('stroke', d => finishedSceneIds.has(d.id) ? '#226e2fff' : '#ffff00ff')
+        .attr('fill', d => finishedSceneIds.has(String(d.id)) ? '#2ec15aff' : '#767a01ff')
+        .attr('stroke', d => finishedSceneIds.has(String(d.id)) ? '#226e2fff' : '#ffff00ff')
 
         //.attr('fill', d => d.id === finishedScene ? '#2ec15aff' : '#d3d684ff')
         //.attr('stroke', d => d.id === finishedScene ? '#226e2fff' : '#c3ff00ff')

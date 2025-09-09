@@ -7,23 +7,7 @@ from urllib.parse import parse_qs, urlparse
 
 #pass the list of files with get as a JSON array, i tried with post as HTML over HTTP but it gets blocked!
 class ManifestHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == "/scenes":
-            try:
-                files = os.listdir("scenes")
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(json.dumps(files).encode())
-            except Exception as e:
-                self.send_response(500)
-                self.end_headers()
-                self.wfile.write(json.dumps({"error": str(e)}).encode())
-        else:
-            super().do_GET()
-
-    
+ 
     def do_OPTIONS(self):
         # Handle CORS preflight requests
         self.send_response(200)
