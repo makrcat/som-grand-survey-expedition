@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Survey Expedition - Map Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="hover-display" class="hover-display"></div>
+        <div id="map-container">
+            <img id="map-image" src="map.png" alt="Map">
+            <svg id="overlay-svg"></svg>
+        </div>
+        <div id="controls">
+            <button id="load-manifest-btn">Load from Manifest</button>
+            <button id="save-btn">Save to Clipboard (Cmd+C)</button>
+            <button id="save-manifest-btn">Save Manifest</button>
+            <div class="settings">
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="regenerate-connections">
+                        Regenerate connections
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="show-voronoi">
+                        Show Voronoi cells
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        Node name:
+                        <input type="text" id="node-name-input" placeholder="Enter node name">
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>
+                        Description:
+                        <input type="text" id="node-description-input" placeholder="Enter description">
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

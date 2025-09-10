@@ -1,4 +1,14 @@
-const crabAnimations = [];
+const crabAnimations = [
+    'crab-dancing-blocky',
+    'crab-excited',
+    'crab-yay',
+    'dancing-crab1',
+    'dancing-crab2',
+    'dancing-crab3',
+    'dancing-crab4',
+    'minecraft-crab',
+    'silly-crab'
+];
 
 class crab {
     constructor() {
@@ -46,15 +56,22 @@ class crab {
                     this.element.style.left = `${this.x}px`;
                 }
                 break;
-            case 3: // get ready for round 2.
-                this.width = Math.random() * 150 + 50;
-                this.element.style.width = `${this.width}px`;
-                this.element.style.height = `${this.width * 0.8}px`;
-
-                this.x = Math.random() * window.innerWidth - this.width;
-                this.y = Math.random() * window.innerHeight - (this.width * 0.8);
+            case 3: // animation 3: Crabs walking sideways (reversed).
+                this.speed = 2;
+                this.element.style.filter = `brightness(0)`;
+                if (this.x < window.innerWidth) {
+                    this.x -= this.speed;
+                } else {
+                    this.speed = Math.random() * 1 + 0.3;
+                    this.width = Math.random() * 150 + 50;
+                    this.element.style.width = `${this.width}px`;
+                    this.element.style.height = `${this.width * 0.8}px`;
+                    this.y = Math.random() * 50;
+                    this.element.style.bottom = `${this.y}px`;
+                    this.x = - this.width;
+                }
                 this.element.style.left = `${this.x}px`;
-                this.element.style.bottom = `${this.y}px`;
+                break;
             default: // Don't do anything.
                 break;
         }
@@ -65,42 +82,64 @@ class crab {
             this.element.style.backgroundImage = `url(${this.image})`;
         }
     }
-    hidden(bool){
+    randomImage(){
+        const index = Math.floor(Math.random() * crabAnimations.length);
+        this.image = `images/${crabAnimations[index]}.webp`;
+        this.element.style.backgroundImage = `url(${this.image})`;
 
+        this.width = Math.random() * 150 + 50;
+        const height = this.width * 0.8;
+        this.element.style.width = `${this.width}px`;
+        this.element.style.height = `${height}px`;
+
+
+        this.x = Math.random() * (window.innerWidth - this.width);
+        this.y = Math.random() * (window.innerHeight - height);
+
+        this.element.style.left = `${this.x}px`;
+        this.element.style.bottom = `${this.y}px`;
     }
 }
 
 class crabController {
     constructor( ){
         this.crabs = [];
+
+        this.crabsElement = document.createElement('div');
+        this.crabsElement.classList.add('crab-container');
+
         this.animProperty = 1;
+
         this.updateImg = false;
         this.hide = false;
         this.show = false;
+        this.changeRandom = false;
+
         this.image = 'images/crab-walking-no-color.webp';
         this.spawnCrabs(20);
     }
     spawnCrabs(num){
         for (let i = 0; i < num; i++) {
-            this.crabs[i] = new crab();
+            const crab1 = new crab();
+            this.crabs.push(crab1);
+            this.crabsElement.appendChild(crab1.element);
         }
     }
     appendCrabs(scene){
-        const crabs = document.createElement('div');
-        crabs.classList.add('crab-container');
-        this.crabs.forEach(crab => {
-            crabs.appendChild(crab.element);
-        });
-        scene.appendChild(crabs);
+        scene.appendChild(this.crabsElement);
     }
     handleCrabs() {
         this.crabs.forEach(crab => {
-            if (this.updateImg)
-                crab.updateImage(this.image);
+            if (this.updateImg) crab.updateImage(this.image);
+            if (this.hide) crab.element.hidden = true;
+            if (this.show) crab.element.hidden = false;
+            if (this.changeRandom) crab.randomImage();
             crab.update(this.animProperty);
         });
-        if (this.updateImg)
-            this.updateImg = false;
+        if (this.updateImg) this.updateImg = false;
+        if (this.hide) this.hide = false;
+        if (this.show) this.show = false;
+        if (this.changeRandom) this.changeRandom = false;
     }
     animate = () => {
         this.handleCrabs();
@@ -164,6 +203,17 @@ let t90 = false;
 let t94 = false;
 let t98 = false;
 let t102 = false;
+let t105 = false;
+let t129 = false;
+let t138 = false;
+let t140 = false;
+let t144 = false;
+let t148 = false;
+let t152 = false;
+let t155 = false;
+let t159 = false;
+let t163 = false;
+let t167 = false;
 function checkVideoTime() {
     const currentTime = player.getCurrentTime();
     console.log(currentTime);
@@ -219,12 +269,57 @@ function checkVideoTime() {
         t98 = true;
     } else if (!t102 && currentTime >= 101.7) {
         console.log("Finally...");
-        changeImage('images/crab-walking-no-color.webp');
+        changeImage('images/minecraft-crab.webp');
         t102 = true;
-    } else if (!t105 && currentTime >= 104.7) {
+    } else if (!t105 && currentTime >= 105.5) {
+        controller.spawnCrabs(30);
         console.log("*sighs in relief*... Wait, wdym there's another round?");
-        changeImage('images/crab-excited.webp');
-        t102 = true;
+        controller.hide = true;
+        crabs();
+        changeImage('images/crab-still.webp');
+        t105 = true;
+    } else if (!t129 && currentTime >= 129) {
+        console.log("Here it comes again...");
+        controller.show = true;
+        t129 = true;
+    } else if (!t138 && currentTime >= 138) {
+        console.log("...");
+        controller.changeRandom = true;
+        t138 = true;
+    } else if (!t140 && currentTime >= 140) {
+        console.log("...(x2)");
+        controller.changeRandom = true;
+        t140 = true;
+    } else if (!t144 && currentTime >= 144) {
+        console.log("...(x3)");
+        controller.changeRandom = true;
+        t144 = true;
+    } else if (!t148 && currentTime >= 148) {
+        console.log("...(x4)");
+        controller.changeRandom = true;
+        t148 = true;
+    } else if (!t152 && currentTime >= 151.7) {
+        console.log("...(x5)");
+        controller.changeRandom = true;
+        t152 = true;
+    } else if (!t155 && currentTime >= 155) {
+        console.log("...(x6)");
+        controller.changeRandom = true;
+        t155 = true;
+    } else if (!t159 && currentTime >= 159) {
+        console.log("...(x7)");
+        controller.changeRandom = true;
+        t159 = true;
+    } else if (!t163 && currentTime >= 163) {
+        console.log("...(x8)");
+        controller.changeRandom = true;
+        t163 = true;
+    } else if (!t167 && currentTime >= 167) {
+        console.log("Bye, bye crabs :)");
+        changeImage('images/crab-walking-no-color.webp');
+        crabs(3);
+        // controller.changeRandom = true;
+        t167 = true;
     }
 }
 
