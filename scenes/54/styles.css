@@ -13,6 +13,13 @@
   src: url("TulpenOne.ttf");
 }
 
+header {
+  background-image: url("images/header-bg.png");
+  height: 80px;
+  width: 100%;
+  overflow: hidden;
+}
+
 .site {
   background-color: rgb(250, 141, 7);
   display: block;
@@ -30,7 +37,8 @@ h1 {
   text-align: center;
 }
 
-#text, i {
+#text,
+i {
   font-family: EpundaSlab;
 }
 
@@ -59,7 +67,7 @@ h6 {
   padding: 10px;
 }
 
-img {
+.site-image {
   overflow: hidden;
   border-radius: 25px;
   width: 100%;
