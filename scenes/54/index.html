@@ -2,6 +2,9 @@
 
 <html>
   <head>
+    <script src="shared.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
     <meta http-equiv="Content-Type" content="text/html" />
     <meta name="author" content="xFN10x" />
     <meta charset="utf-8" />
@@ -18,24 +21,7 @@
       margin: 0px 0px;
     "
   >
-    <header>
-      <div style="margin: 4px 4px; display: flex">
-        <img style="width: 72px; margin-right: 10px" src="images/flag.jpg" />
-        <h2
-          style="
-            color: chocolate;
-            -webkit-text-stroke-color: black;
-            -webkit-text-stroke-width: 1px;
-            font-size: 40px;
-            margin: 10px 0px;
-            text-align: center;
-            vertical-align: middle;
-          "
-        >
-          Hotland
-        </h2>
-      </div>
-    </header>
+    <header w3-include-html="header.html"></header>
 
     <div style="margin: 8px 8px">
       <h1 style="margin-bottom: 1px"><b>!Bienol on Is of Temper</b></h1>
@@ -135,5 +121,8 @@
         </div>
       </div>
     </div>
+    <script>
+      w3.includeHTML();
+    </script>
   </body>
 </html>

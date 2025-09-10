@@ -1,0 +1,20 @@
+//detect the page from where you came from
+const urlSearchParams = new URLSearchParams(window.location.search);
+if (urlSearchParams.has("from")) {
+  switch (urlSearchParams.get("from")) {
+    case "97":
+      localStorage.setItem("from", "north");
+      break;
+    case "11":
+      localStorage.setItem("from", "n-east");
+      break;
+    case "6":
+      localStorage.setItem("from", "west");
+      break;
+    case "self":
+      break;
+  }
+} else {
+  console.warn("URL did not include from varaible");
+  localStorage.setItem("from", "central");
+}
