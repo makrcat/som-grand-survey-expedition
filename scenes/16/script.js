@@ -214,6 +214,7 @@ let t155 = false;
 let t159 = false;
 let t163 = false;
 let t167 = false;
+let t185 = false;
 function checkVideoTime() {
     const currentTime = player.getCurrentTime();
     console.log(currentTime);
@@ -318,8 +319,11 @@ function checkVideoTime() {
         console.log("Bye, bye crabs :)");
         changeImage('scenes/16/images/crab-walking-no-color.webp');
         crabs(3);
-        // controller.changeRandom = true;
         t167 = true;
+    } else if (!t185 && currentTime >= 167) {
+        console.log("Good night :)");
+        controller.crabs = [];
+        t185 = true;
     }
 }
 
