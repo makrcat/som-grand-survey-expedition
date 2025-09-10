@@ -20,7 +20,7 @@ class crab {
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.width * 0.8}px`;
         // Crab image
-        this.image = 'images/crab-walking-no-color.webp';
+        this.image = 'scenes/16/images/crab-walking-no-color.webp';
         this.element.style.backgroundImage = `url(${this.image})`;
         // Random color
         this.hue = (Math.random() * 15) + 310;
@@ -84,7 +84,7 @@ class crab {
     }
     randomImage(){
         const index = Math.floor(Math.random() * crabAnimations.length);
-        this.image = `images/${crabAnimations[index]}.webp`;
+        this.image = `scenes/16/images/${crabAnimations[index]}.webp`;
         this.element.style.backgroundImage = `url(${this.image})`;
 
         this.width = Math.random() * 150 + 50;
@@ -115,7 +115,7 @@ class crabController {
         this.show = false;
         this.changeRandom = false;
 
-        this.image = 'images/crab-walking-no-color.webp';
+        this.image = 'scenes/16/images/crab-walking-no-color.webp';
         this.spawnCrabs(20);
     }
     spawnCrabs(num){
@@ -229,54 +229,54 @@ function checkVideoTime() {
         console.log("They are marching?");
         seconds29(false, true);
         seconds36(false);
-        changeImage('images/crab-walking-no-color.webp');
+        changeImage('scenes/16/images/crab-walking-no-color.webp');
         crabs(1);
         t44 = true;
     } else if (!t70 && currentTime >= 70) {
         console.log("Wait for it...");
         seconds29(false, false);
-        changeImage('images/crab-still.webp');
+        changeImage('scenes/16/images/crab-still.webp');
         crabs(2);
         t70 = true;
     } else if (!t75 && currentTime >= 75) {
         console.log("Dun dun dun dududu dun dududu dun dododododo...");
-        changeImage('images/dancing-crab1.webp');
+        changeImage('scenes/16/images/dancing-crab1.webp');
         crabs();
         t75 = true;
     } else if (!t79 && currentTime >= 79) {
         console.log("...");
-        changeImage('images/crab-dancing-blocky.webp');
+        changeImage('scenes/16/images/crab-dancing-blocky.webp');
         t79 = true;
     } else if (!t82 && currentTime >= 83) {
         console.log("...(x2)");
-        changeImage('images/dancing-crab2.webp');
+        changeImage('scenes/16/images/dancing-crab2.webp');
         t82 = true;
     } else if (!t86 && currentTime >= 86.3) {
         console.log("...(x3)");
-        changeImage('images/dancing-crab4.webp');
+        changeImage('scenes/16/images/dancing-crab4.webp');
         t86 = true;
     } else if (!t90 && currentTime >= 90) {
         console.log("...(x4)");
-        changeImage('images/silly-crab.webp');
+        changeImage('scenes/16/images/silly-crab.webp');
         t90 = true;
     } else if (!t94 && currentTime >= 93.7) {
         console.log("...(x5)");
-        changeImage('images/dancing-crab3.webp');
+        changeImage('scenes/16/images/dancing-crab3.webp');
         t94 = true;
     } else if (!t98 && currentTime >= 97.7) {
         console.log("...(x6)");
-        changeImage('images/crab-yay.webp');
+        changeImage('scenes/16/images/crab-yay.webp');
         t98 = true;
     } else if (!t102 && currentTime >= 101.7) {
         console.log("Finally...");
-        changeImage('images/minecraft-crab.webp');
+        changeImage('scenes/16/images/minecraft-crab.webp');
         t102 = true;
     } else if (!t105 && currentTime >= 105.5) {
         controller.spawnCrabs(30);
         console.log("*sighs in relief*... Wait, wdym there's another round?");
         controller.hide = true;
         crabs();
-        changeImage('images/crab-still.webp');
+        changeImage('scenes/16/images/crab-still.webp');
         t105 = true;
     } else if (!t129 && currentTime >= 129) {
         console.log("Here it comes again...");
@@ -316,7 +316,7 @@ function checkVideoTime() {
         t163 = true;
     } else if (!t167 && currentTime >= 167) {
         console.log("Bye, bye crabs :)");
-        changeImage('images/crab-walking-no-color.webp');
+        changeImage('scenes/16/images/crab-walking-no-color.webp');
         crabs(3);
         // controller.changeRandom = true;
         t167 = true;
