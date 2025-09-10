@@ -128,6 +128,15 @@
                 transform: scale(0);
             }
 
+
+            @media screen and (max-width: 1024px) {
+                
+                .final-img{
+                    transform: scale(0.8);
+                }
+
+            }
+
             @keyframes shake {
                 0%   {rotate: 0;}
                 25%  {rotate: -10deg;}
@@ -170,7 +179,7 @@
 
     <body>
         <div class="final-popup" id="fin">
-            <img alt="the secret of the site" src="assets/white-shirt-with-text.png">
+            <img class="final-img" alt="the secret of the site" src="assets/white-shirt-with-text.png" height="500vh">
             <p class="floor-text">
                 You did it..
                 Now get away!!
@@ -248,7 +257,7 @@
 
 
         <div class="treasure center-content" >
-            <p class="floor-text">
+            <p class="floor-text" id="5">
                 Ha, tricked ya.
                 <br>
                 You will never find the key.
@@ -271,6 +280,7 @@
             var text2 = document.getElementById("2");
             var text3 = document.getElementById("3");
             var text4 = document.getElementById("4");
+            var text5 = document.getElementById("5");
 
             var key_collected = false;
 
@@ -300,9 +310,10 @@
                 // phase 3
                 key_collected = true;
 
-                text2.innerText = "..."
-                text3.innerText = ""
-                text4.innerText = ""
+                text2.innerText = "...";
+                text3.innerText = "";
+                text4.innerText = "";
+                text5.innerText = "";
                 
             }, false);
 
