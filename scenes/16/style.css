@@ -1,3 +1,12 @@
+.kablammo-title-text {
+  font-family: "Kablammo", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -41,13 +50,14 @@ h1 {
     width: 100%;
     height: 100%;
     margin-top: 50px;
+    margin-bottom: 140px;
     z-index: 1;
 }
 
-.text-wrapper {
+#text-wrapper {
     display: block;
     text-align: center;
-    width: 20em;
+    width: 300px;
     margin: 20px;
     /* margin-right: 200px; */
     padding: 30px;
@@ -59,7 +69,7 @@ h1 {
     /* z-index: 2; */
 }
 
-.text-wrapper button {
+#text-wrapper button {
     background-color: #ab876c;
     padding: 10px;
     border: none;
@@ -67,11 +77,11 @@ h1 {
     transition: all 0.1s;
 }
 
-.text-wrapper button:hover {
+#text-wrapper button:hover {
     scale: 1.05;
 }
 
-.arrow {
+#arrow {
     width: 250px;
     height: auto;
     margin-bottom: 12%;
@@ -81,11 +91,16 @@ h1 {
     z-index: -1;
 }
 
-.for-later {
-    display: none;
+svg {
+    width: fit-content;
+    height: fit-content;
 }
 
-.video-wrapper {
+#info {
+    color: rgb(255, 253, 219);
+}
+
+#video-wrapper {
     width: 512px;
     height: 293px;
     overflow: hidden;
@@ -101,10 +116,10 @@ h1 {
     color: #c3ad9ce2;
 }
 
-.video-wrapper iframe {
+#video-wrapper iframe {
     display: block;
-    width: 500px;
-    height: 281px;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
     border: 12px solid #ab876c;
     border-image: linear-gradient(to bottom right, #c3ad9ce2, #baa48e) 1;
 }

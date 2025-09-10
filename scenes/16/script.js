@@ -20,7 +20,7 @@ class crab {
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.width * 0.8}px`;
         // Crab image
-        this.image = 'scenes/16/images/crab-walking-no-color.webp';
+        this.image = 'images/crab-walking-no-color.webp';
         this.element.style.backgroundImage = `url(${this.image})`;
         // Random color
         this.hue = (Math.random() * 15) + 310;
@@ -72,6 +72,9 @@ class crab {
                 }
                 this.element.style.left = `${this.x}px`;
                 break;
+            case 4: // animation 4: hue shift
+                this.hue += 10;
+                this.element.style.filter = `sepia(50%) saturate(1000%) contrast(180%) hue-rotate(${this.hue}deg)`;
             default: // Don't do anything.
                 break;
         }
@@ -84,7 +87,7 @@ class crab {
     }
     randomImage(){
         const index = Math.floor(Math.random() * crabAnimations.length);
-        this.image = `scenes/16/images/${crabAnimations[index]}.webp`;
+        this.image = `images/${crabAnimations[index]}.webp`;
         this.element.style.backgroundImage = `url(${this.image})`;
 
         this.width = Math.random() * 150 + 50;
@@ -113,9 +116,10 @@ class crabController {
         this.updateImg = false;
         this.hide = false;
         this.show = false;
+
         this.changeRandom = false;
 
-        this.image = 'scenes/16/images/crab-walking-no-color.webp';
+        this.image = 'images/crab-walking-no-color.webp';
         this.spawnCrabs(20);
     }
     spawnCrabs(num){
@@ -172,11 +176,18 @@ function onYouTubePlayerAPIReady() {
     });
 }
 
+let interval;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
         if (!hasStartedPlaying) {
             hasStartedPlaying = true;
-            setInterval(checkVideoTime, 500);
+            document.getElementById('info').hidden = true;
+            document.getElementById('text-wrapper').style.display = 'none';
+            document.getElementById('arrow').style.display = 'none';
+            const videoWrapper = document.getElementById('video-wrapper');
+            videoWrapper.style.width = '42.7vw';
+            videoWrapper.style.height = '24vw';
+            interval = setInterval(checkVideoTime, 100);
         }
         state.currentState = 'PLAYING';
     } else if (event.data == YT.PlayerState.PAUSED) {
@@ -184,6 +195,7 @@ function onPlayerStateChange(event) {
     } else if (event.data == YT.PlayerState.ENDED) {
         if (hasStartedPlaying) {
             hasStartedPlaying = false;
+            clearInterval(interval);
         }
         state.currentState = 'ENDED';
     } else if (event.data == YT.PlayerState.BUFFERING) {
@@ -217,7 +229,6 @@ let t167 = false;
 let t185 = false;
 function checkVideoTime() {
     const currentTime = player.getCurrentTime();
-    console.log(currentTime);
     if (!t29 && currentTime >= 29) {
         console.log("The crabs are snapping!");
         seconds29(true, false);
@@ -230,61 +241,62 @@ function checkVideoTime() {
         console.log("They are marching?");
         seconds29(false, true);
         seconds36(false);
-        changeImage('scenes/16/images/crab-walking-no-color.webp');
+        changeImage('images/crab-walking-no-color.webp');
         crabs(1);
         t44 = true;
     } else if (!t70 && currentTime >= 70) {
         console.log("Wait for it...");
         seconds29(false, false);
-        changeImage('scenes/16/images/crab-still.webp');
+        changeImage('images/crab-still.webp');
         crabs(2);
         t70 = true;
     } else if (!t75 && currentTime >= 75) {
         console.log("Dun dun dun dududu dun dududu dun dododododo...");
-        changeImage('scenes/16/images/dancing-crab1.webp');
+        changeImage('images/dancing-crab1.webp');
         crabs();
         t75 = true;
-    } else if (!t79 && currentTime >= 79) {
+    } else if (!t79 && currentTime >= 78.8) {
         console.log("...");
-        changeImage('scenes/16/images/crab-dancing-blocky.webp');
+        changeImage('images/crab-dancing-blocky.webp');
         t79 = true;
     } else if (!t82 && currentTime >= 83) {
         console.log("...(x2)");
-        changeImage('scenes/16/images/dancing-crab2.webp');
+        changeImage('images/dancing-crab2.webp');
         t82 = true;
     } else if (!t86 && currentTime >= 86.3) {
         console.log("...(x3)");
-        changeImage('scenes/16/images/dancing-crab4.webp');
+        changeImage('images/dancing-crab4.webp');
         t86 = true;
     } else if (!t90 && currentTime >= 90) {
         console.log("...(x4)");
-        changeImage('scenes/16/images/silly-crab.webp');
+        changeImage('images/silly-crab.webp');
         t90 = true;
     } else if (!t94 && currentTime >= 93.7) {
         console.log("...(x5)");
-        changeImage('scenes/16/images/dancing-crab3.webp');
+        changeImage('images/dancing-crab3.webp');
         t94 = true;
     } else if (!t98 && currentTime >= 97.7) {
         console.log("...(x6)");
-        changeImage('scenes/16/images/crab-yay.webp');
+        changeImage('images/crab-yay.webp');
         t98 = true;
     } else if (!t102 && currentTime >= 101.7) {
         console.log("Finally...");
-        changeImage('scenes/16/images/minecraft-crab.webp');
+        changeImage('images/minecraft-crab.webp');
         t102 = true;
     } else if (!t105 && currentTime >= 105.5) {
         controller.spawnCrabs(30);
         console.log("*sighs in relief*... Wait, wdym there's another round?");
-        controller.hide = true;
+        controller.crabsElement.hidden = true;
         crabs();
-        changeImage('scenes/16/images/crab-still.webp');
+        changeImage('images/crab-still.webp');
         t105 = true;
     } else if (!t129 && currentTime >= 129) {
         console.log("Here it comes again...");
-        controller.show = true;
+        controller.crabsElement.hidden = false;
         t129 = true;
     } else if (!t138 && currentTime >= 138) {
         console.log("...");
+        crabs(4);
         controller.changeRandom = true;
         t138 = true;
     } else if (!t140 && currentTime >= 140) {
@@ -317,12 +329,14 @@ function checkVideoTime() {
         t163 = true;
     } else if (!t167 && currentTime >= 167) {
         console.log("Bye, bye crabs :)");
-        changeImage('scenes/16/images/crab-walking-no-color.webp');
+        changeImage('images/crab-walking-no-color.webp');
         crabs(3);
         t167 = true;
-    } else if (!t185 && currentTime >= 167) {
-        console.log("Good night :)");
+    } else if (!t185 && currentTime >= 185) {
+        controller.crabsElement.remove();
         controller.crabs = [];
+        controller = null;
+        console.log("Good night :)");
         t185 = true;
     }
 }
@@ -359,4 +373,22 @@ function changeImage(img) {
         controller.image = img;
         controller.updateImg = true;
     }
+}
+
+function play() {
+    player.playVideo();
+}
+
+const title = document.querySelector('.kablammo-title-text');
+let MORF = 0;
+let reverse = false;
+const increment = 0.01;
+titleAnimation();
+function titleAnimation() {
+    MORF = Math.max(0, Math.min(60, MORF + (reverse ? -increment : increment)));
+    if (MORF <= 0 || MORF >= 60) {
+        reverse = !reverse;
+    }
+    title.style.fontVariationSettings = `"MORF" ${MORF}`;
+    requestAnimationFrame(titleAnimation);
 }
