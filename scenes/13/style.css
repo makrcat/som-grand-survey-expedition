@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+  font-family: "Baloo 2", cursive, sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgb(249, 241, 234);
+}
+
+.home,
+.grass-page,
+.rain-page,
+.sheep-page,
+.shamrock-page {
+  min-height: 100vh;
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h1 a {
+  text-decoration: none;
+  color: #333;
+}
+
+p:hover {
+  text-decoration: wavy underline;
+  text-decoration-color: #333;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 90%;
+  margin: 0rem auto;
+  flex-wrap: wrap;
+}
+
+.title-container img {
+  animation: rotateBackAndForth 1s infinite;
+  cursor: pointer;
+}
+
+@keyframes rotateBackAndForth {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
