@@ -80,6 +80,7 @@
                 text-align: center;
                 font-size: x-large;
                 padding: 5px;
+                z-index: 2;
             }
 
             .last-text{
@@ -109,6 +110,24 @@
                 bottom: 0px;
             }            
             
+            .final-popup{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                position: fixed;
+                z-index: 3;
+                top: 0;
+                left: 0;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0, 0.5);
+                overflow-x: hidden;
+                transition: 0.8s;
+                transform: scale(0);
+            }
+
             @keyframes shake {
                 0%   {rotate: 0;}
                 25%  {rotate: -10deg;}
@@ -133,12 +152,42 @@
                 animation-fill-mode: both;
             }
 
+            @keyframes chest-open {
+                0%   {filter: brightness(1) invert(0); opacity: 100%; transform: scale(1);}
+                60% {filter: brightness(0) invert(1);}
+                100% {opacity: 0%; transform: scale(2); filter: brightness(0) invert(1);}
+            }
+            .chest-open-anim{
+                animation-name: chest-open;
+                animation-duration: 3s;
+                animation-fill-mode: both;
+            }
+
 
         </style>
 
     </head>
 
     <body>
+        <div class="final-popup" id="fin">
+            <img alt="the secret of the site" src="assets/white-shirt-with-text.png">
+            <p class="floor-text">
+                You did it..
+                Now get away!!
+                <br>
+                <br>
+                <br>
+                <a href="/scenes/48/">Pumice & Hummus</a> 
+                <br>
+                <a href="/scenes/47/">Wetwater Lake</a>
+                <br>
+                <br>
+                <a href="/scenes/65/">The Forbidden Sector</a>
+
+            </p>
+        </div>
+
+
         <div class="heading center-content">
             <h1>403.3 Discuraged</h1>
         </div>
@@ -146,7 +195,7 @@
         <div class="trans1"></div>
 
         <div class="floor1 center-content">
-            <img alt="bone" src="assets/pebble1.png" style="position: absolute; left: 200px; top: 400vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/pebble1.png" style="position: absolute; left: 10vw; top: 400vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
             
             <p class="floor-text" id="1">
                 Can't you read, ye scallywag? You're not supposed to be here.
@@ -155,29 +204,29 @@
             </p>
             <img alt="The key" class="key" id="key" width="10%" src="assets/key.png" hidden>
             
-            <img alt="bone" src="assets/pebble2.png" style="position: absolute; right: 200px; top: 600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/pebble2.png" style="position: absolute; right: 10vw; top: 600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
 
         </div>
         
         <div class="trans2"></div>
         
         <div class="floor2 center-content">
-            <img alt="bone" src="assets/bone.png" style="rotate: 60deg; position: absolute; left: 200px; top: 1000vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="rock" src="assets/rock1.png" style="rotate: 10deg; position: absolute; right: 100px; top: 1100vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone.png" style="rotate: 60deg; position: absolute; left: 10vw; top: 1000vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="rock" src="assets/rock1.png" style="rotate: 10deg; position: absolute; right: 5vw; top: 1100vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
             <p class="floor-text" id="2"> 
                 What? You think there be somethin' shiny at the bottom of the page?
                 <br>
                 No way, matey. You're seein' things, just go back <a href="#1">up</a> and chose a path.
             </p>
-            <img alt="rock" src="assets/rock2.png" style="rotate: 10deg; position: absolute; left: 150px; top: 1200vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 300px; top: 1300vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="rock" src="assets/rock2.png" style="rotate: 10deg; position: absolute; left: 7vw; top: 1200vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 15vw; top: 1300vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
         </div>
 
         <div class="trans3"></div>
 
         <div class="floor3 center-content">
-            <img alt="bone" src="assets/bone.png" style="rotate: 20deg; position: absolute; left: 400px; top: 1600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 100px; top: 1700vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone.png" style="rotate: 20deg; position: absolute; left: 20vw; top: 1600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 5vw; top: 1700vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
 
             <p class="floor-text last-text" id="3">
             You're still here?
@@ -191,8 +240,8 @@
                 No no no. Go back, go away—it's my treasure, not yers!
             </p>
 
-            <img alt="bone" src="assets/bone.png" style="rotate: 40deg; position: absolute; right: 500px; top: 1780vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="bone" src="assets/bone2.png" style="rotate: -5deg; position: absolute; left: 600px; top: 1900vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone.png" style="rotate: 40deg; position: absolute; right: 25vw; top: 1780vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            <img alt="bone" src="assets/bone2.png" style="rotate: -5deg; position: absolute; left: 30vw; top: 1900vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
         </div>
 
         <div class="trans4"></div>
@@ -223,14 +272,22 @@
             var text3 = document.getElementById("3");
             var text4 = document.getElementById("4");
 
+            var key_collected = false;
+
             chest.addEventListener("click", function(e){
                 e.preventDefault();
+                if(key_collected){
+                    chest.classList.add("chest-open-anim");
+                    // open popup
+                    document.getElementById("fin").style.transform = "scale(1)";
+                }
+                else{
+                    chest.classList.remove("shake-anim");
 
-                chest.classList.remove("shake-anim");
+                    void chest.offsetWidth;
 
-                void chest.offsetWidth;
-
-                chest.classList.add("shake-anim");
+                    chest.classList.add("shake-anim");
+                }
                 
             }, false);
 
@@ -241,6 +298,11 @@
                 key.classList.add("shake-and-fall-anim");
 
                 // phase 3
+                key_collected = true;
+
+                text2.innerText = "..."
+                text3.innerText = ""
+                text4.innerText = ""
                 
             }, false);
 
