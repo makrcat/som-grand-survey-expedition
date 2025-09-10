@@ -13,11 +13,6 @@
                 color: white;
             }
 
-            ::-webkit-scrollbar {
-                width: 0px;
-                background: transparent;
-            }
-
             .heading {
                 height: 100vh;
             }
@@ -61,18 +56,18 @@
 
             .trans4{
                 background-image: linear-gradient(rgb(155, 106, 0), rgb(204, 139, 0));
-                height: 50vh;
+                height: 100vh;
             }
             
 
             .floor1{
                 background-color: rgb(85, 55, 0);
-                height: 700vh;
+                height: 600vh;
             }
 
             .floor2{
                 background-color: rgb(131, 85, 0);
-                height: 700vh;
+                height: 600vh;
             }
 
             .floor3{
@@ -84,6 +79,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 text-align: center;
                 font-size: x-large;
+                padding: 5px;
             }
 
             .last-text{
@@ -103,14 +99,38 @@
                 image-rendering: crisp-edges;
             }
 
+            .key{
+                position: relative;
+                bottom: 0px;
+            }            
+            
+            @keyframes shake {
+                0%   {rotate: 0;}
+                25%  {rotate: -10deg;}
+                50%  {rotate: 10deg;}
+                100% {rotate: 0;}
+            }
+            .shake-anim{
+                animation: shake 0.5s 1;
+            }
 
-
+            @keyframes shake-and-fall {
+                0%   {rotate: 0;}
+                5%  {rotate: -10deg;}
+                10%  {rotate: 10deg;}
+                15% {rotate: 0; bottom: 0px; opacity: 100%;}
+                80% {opacity: 0%;}
+                100% {bottom: -2000px; opacity: 0%;}
+            }
+            .shake-and-fall-anim{
+                animation-name: shake-and-fall;
+                animation-duration: 3s;
+                animation-fill-mode: both;
+            }
 
 
         </style>
-        <script>
 
-        </script>
     </head>
 
     <body>
@@ -122,28 +142,29 @@
 
         <div class="floor1 center-content">
 
-            <p class="floor-text" id="up">
+            <p class="floor-text" id="1">
             Can't you read, ye scallywag? You're not supposed to be here.
             <br>
             Just move on to <a href="/scenes/48/">Pumice & Hummus</a> or <a href="/scenes/47/">Wetwater Lake</a>.
             </p>
+            <img alt="The key" class="key" id="key" width="10%" src="assets/key.png" hidden>
 
         </div>
         
         <div class="trans2"></div>
         
         <div class="floor2 center-content">
-            <p class="floor-text">
+            <p class="floor-text" id="2"> 
             What? You think there be somethin' shiny at the bottom of the page?
             <br>
-            No way, matey. You're seein' things, just go back <a href="#up">up</a> and chose a path.
+            No way, matey. You're seein' things, just go back <a href="#1">up</a> and chose a path.
             </p>
         </div>
 
         <div class="trans3"></div>
 
         <div class="floor3 center-content">
-            <p class="floor-text last-text">
+            <p class="floor-text last-text" id="3">
             You're still here?
             <br>
             Well, I'm not supposed to tell ye, but there be a secret path.
@@ -151,7 +172,7 @@
             You could go to <a href="/scenes/65/">The Forbidden Sector</a>. But you didn't hear it from me, savvy?
             </p>
 
-            <p class="floor-text">
+            <p class="floor-text" id="4">
                 No no no. Go back, go away—it's my treasure, not yers!
             </p>
         </div>
@@ -159,13 +180,79 @@
         <div class="trans4"></div>
 
 
-        <div class="treasure center-content">
-            <img alt="The treasure" src="white-shirt-with-text.png">
+        <div class="treasure center-content" >
+            <p class="floor-text">
+                Ha, tricked ya.
+                <br>
+                You will never find the key.
+            </p>
+            <img alt="The treasure" class="shake-anim" id="chest" width="50%" src="assets/treasure-chest.png">
         </div>
 
 
         <div class="sign-container">
-            <img alt="Handwritten 'Keep out' sign" class="sign" src="keep_out.png"/>
+            <img alt="Handwritten 'Keep out' sign" class="sign" src="assets/keep_out.png"/>
         </div>
+
+
+
+        <script>
+
+            var chest = document.getElementById("chest");
+            var key = document.getElementById("key");
+            var text1 = document.getElementById("1");
+            var text2 = document.getElementById("2");
+            var text3 = document.getElementById("3");
+            var text4 = document.getElementById("4");
+
+            chest.addEventListener("click", function(e){
+                e.preventDefault();
+
+                chest.classList.remove("shake-anim");
+
+                void chest.offsetWidth;
+
+                chest.classList.add("shake-anim");
+                
+            }, false);
+
+
+            key.addEventListener("click", function(e){
+                e.preventDefault();
+
+                key.classList.add("shake-and-fall-anim");
+
+                // phase 3
+                
+            }, false);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                    
+                    // phase 2
+
+                    text1.hidden = true
+                    key.hidden = false
+
+                    text2.innerText = "Why won't you listen to me.."
+
+                    text3.innerHTML = `
+                        You could visit all these wonderfull places:
+                        <br>
+                        <a href="/scenes/48/">Pumice & Hummus</a>, <a href="/scenes/47/">Wetwater Lake</a>
+                        <br>
+                        or even <a href="/scenes/65/">The Forbidden Sector</a>
+                    `
+                    text4.innerText = "Stop searching. Ya won't find it!"
+
+                    observer.unobserve(chest); 
+                    }
+                });
+            });
+
+            observer.observe(chest);
+
+        </script>
     </body> 
 </html>
