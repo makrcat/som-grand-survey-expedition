@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Island Island</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #f0f4f8;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .card-container {
+    width: 895px;
+    height: 585px;
+    perspective: 1000px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+    transform-origin: center center;
+  }
+
+  .card-container.flipped .card {
+    transform: rotateY(180deg);
+  }
+
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 73px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Front side */
+  .card-front {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-front .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  /* Back side */
+  .card-back {
+    background: white;
+    transform: rotateY(180deg);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card-back .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  /* Clickable hotspots */
+  .hotspot {
+    position: absolute;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 10;
+  }
+
+  .hotspot:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .hotspot .icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  .hotspot.postmark {
+    top: 5%;
+    right: 7%;
+    width: 14%;
+    height: 26%;
+  }
+
+  .hotspot.pants {
+    bottom: 0%;
+    left: 0%;
+    width: 30%;
+    height: 45%;
+  }
+
+  .hotspot.sand {
+    top: 19%;
+    left: 26%;
+    width: 7%;
+    height: 5%;
+  }
+
+  .hotspot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(59, 130, 246, 0.1);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .hotspot:hover::before {
+    opacity: 1;
+  }
+
+  .js-tilt-glare {
+    border-radius: 16px;
+  }
+
+  @media (max-width: 500px) {
+    .card-container {
+      width: 320px;
+      height: 240px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .card-container {
+      width: 280px;
+      height: 210px;
+    }
+  }
+
+  .hotspot .icon {
+    background: rgba(255, 255, 255, 0.1);
+  }
+</style>
+</head>
+<body>
+  <div class="card-container" id="cardContainer" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
+    <div class="card">
+      <!-- Front of the card -->
+      <div class="card-face card-front">
+        <img src="assets/front.svg" alt="Island Island Postcard Front" class="card-img">
+      </div>
+      
+      <!-- Back of the card -->
+      <div class="card-face card-back">
+        <!-- Base postcard back image -->
+        <img src="assets/back.svg" alt="Postcard Back" class="card-img">
+        
+        <!-- Dublin postmark - clickable -->
+        <a class="hotspot postmark" href="/scenes/13" target="_self" aria-label="Visit Anti-Ireland">
+          <object type="image/svg+xml" data="assets/dublin-postmark.svg" class="icon">
+            <!-- Fallback content -->
+            <div style="background: #f3f4f6; border-radius: 8px; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666;">Postmark</div>
+          </object>
+        </a>
+        
+        <!-- Pants stamp - clickable -->
+        <a class="hotspot pants" href="/scenes/83" target="_self" aria-label="Visit Pantsified Peninsula">
+          <object type="image/svg+xml" data="assets/pants-stamp.svg" class="icon">
+            <!-- Fallback content -->
+            <div style="background: #f3f4f6; border-radius: 8px; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666;">Pants</div>
+          </object>
+        </a>
+        
+        <!-- Sand text - clickable -->
+        <a class="hotspot sand" href="/scenes/63" target="_self" aria-label="Visit The Great Pyramids of Sneeza">
+          <object type="image/svg+xml" data="assets/sand.svg" class="icon">
+            <!-- Fallback content -->
+            <div style="background: #f3f4f6; border-radius: 8px; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #666;">Sand</div>
+          </object>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla Tilt JS -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  
+  <script>
+    const cardContainer = document.getElementById('cardContainer');
+    
+    // Initialize tilt effect
+    VanillaTilt.init(cardContainer, {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.3,
+      scale: 1.05,
+      perspective: 1000,
+      gyroscope: true,
+      reset: true
+    });
+    
+    // Flip card on click
+    cardContainer.addEventListener('click', function(e) {
+      // Don't flip if clicking on a hotspot link
+      if (e.target.closest('.hotspot')) {
+        return;
+      }
+      e.preventDefault();
+      cardContainer.classList.toggle('flipped');
+    });
+
+    // Optional: Add loading states for SVG objects
+    document.querySelectorAll('.hotspot .icon').forEach(obj => {
+      obj.addEventListener('load', function() {
+        this.style.background = 'transparent';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="linuxdino">
+    <title>Tickle tomb</title>
+    <style>
+        body {
+            background-color: #61545d;
+            background-image: url('./assets/background_scary.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        @keyframes fly {
+            0% {transform: translate(0,0);}
+            20% {transform: translate(0, -50vh);}
+            80% {transform: translate(0, -50vh);}
+            100% {transform: translate(0,0);}
+        }
+        .fly {
+            animation: fly 4s ease-out 0s 1 forwards;
+            background-image: url('./assets/bat_fly.png') !important;
+        }   
+        tr {
+            border: white 1px solid;
+        }
+        table, tr, td {
+            border-collapse: collapse;
+            border: white 1px solid;
+            padding: 10px;
+            text-align: left;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="jumpscare" style="z-index: 100; width: 100vw; height: 100vh; position: fixed; top: 0; display: none; background-image: url('./assets/jumpscare.gif'); background-repeat: no-repeat; background-size: contain; "></div>
+    <div id="bats-container" style="position: fixed; width: 100vw; height: 100vh;">
+        <div id="bats" style="z-index: 10; position: absolute; top: 15vh; left: 20%; height: 15vh; width: 15vh; background-image: url('./assets/bat_sleep.png'); transform: rotate(185deg); background-repeat: no-repeat; background-size: contain; filter: brightness(0.5);"></div>
+        <div id="bats" style="z-index: 10; position: absolute; top: 15vh; left: 40%; height: 15vh; width: 15vh; background-image: url('./assets/bat_sleep.png'); transform: rotate(172deg); background-repeat: no-repeat; background-size: contain; filter: brightness(0.5);"></div>
+        <div id="bats" style="z-index: 10; position: absolute; top: 15vh; left: 60%; height: 15vh; width: 15vh; background-image: url('./assets/bat_sleep.png'); transform: rotate(192deg); background-repeat: no-repeat; background-size: contain; filter: brightness(0.5);"></div>
+        <div id="bats" style="z-index: 10; position: absolute; top: 15vh; left: 80%; height: 15vh; width: 15vh; background-image: url('./assets/bat_sleep.png'); transform: rotate(160deg); background-repeat: no-repeat; background-size: contain; filter: brightness(0.5);"></div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; overflow-y: hidden;">
+            <img style="z-index: 2; width: 100vw; height: auto; filter: brightness(0);" src="./assets/gates.png" />
+        </div>
+    </div>
+    <div id="tomb-container" style="position: relative; display: flex; justify-content: center; align-items: center; top: 60vh;">
+        <div style="position: relative; height: 75vh; width: 50vw; display: flex; justify-content: center; align-items: center;">
+            <img id="tomb" style="z-index: 4; position: absolute; top: 0; height: 75vh; filter: brightness(0.4);" src="./assets/tomb.png"/>
+            <div id="tomb-tickle-1" style="height: 100%; width: 50%; position: absolute; left: 0; z-index: 5;"></div>
+            <div id="tomb-tickle-2" style="height: 100%; width: 50%; position: absolute; right: 0; z-index: 5;"></div>
+        </div>
+        <div style="overflow: hidden; width: 100vw; height: 75vh; position: absolute;"> 
+            <img style="width: 102vw; height: auto; z-index: 3; position: absolute; bottom: 0; right: 0;" src="./assets/background.png" />
+        </div>
+    </div>
+    <div style="background-color: black; height: 160vh; width: 100vw; z-index: 6; position: relative; top: 55vh; margin: none; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div style="position: relative; top: 100px; height: 5vh; width: 50%; overflow: hidden; z-index: 7; border: white solid 2px; display: block;">
+            <div style="position: absolute; left: 25%; height: 100%; width: 1.5px; background-color: white; z-index: 8;"></div>
+            <div style="position: absolute; left: 50%; height: 100%; width: 1.5px; background-color: white; z-index: 8;"></div>
+            <div style="position: absolute; left: 75%; height: 100%; width: 1.5px; background-color: white; z-index: 8;"></div>
+            <div id="tickle-meter" style="position: absolute; width: 100%; left: 0; background-color: #000000; height: 100%; transition: 0.2s;"></div>
+        </div>
+        <h2 style="color: white; text-align: center; padding-top: 20vh; position: relative;">You found the tickle tomb!<br/>But it's empty...<br/>Maybe try tickling it?<br/></h2>
+        <p style="color: white;">Note to travellers: Turn on your volume!</p>
+        <div id="table" style="position: relative; display: block;">
+            <h3 style="color: white;">Statistics: </h3>
+            <table>
+                <tr>
+                    <td>Population</td>
+                    <td>0.6741 (the rest of the body has decomposed)</td>
+                </tr>
+                <tr>
+                    <td>Area</td>
+                    <td>~500 ft<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Currency</td>
+                    <td>Soullars</td>
+                </tr>
+                <tr>
+                    <td>Language</td>
+                    <td>Victorian English</td>
+                </tr>
+                <tr>
+                    <td>Timezone</td>
+                    <td>Internet Time</td>
+                </tr>
+                <tr>
+                    <td>Climate</td>
+                    <td>Cloudy</td>
+                </tr>
+                <tr>
+                    <td>Flag</tds>
+                    <td>N/A</td>
+                </tr>
+            </table>
+        </div>  
+        <p style="color: white;">Many travellers have troden this path, most never look back, keep moving. Don't tickle the tomb too much..</p>
+        <h2 style="color: white;">Ways to escape the tomb:</h2>
+        <ul style="color: white;">
+            <li><a href="/scenes/73/">The Great Frozen Wall</a></li>
+            <li><a href="/scenes/46/">Ravine Tomb Bottom Entrance</a></li>
+            <li><a href="/scenes/24/">The River Glub</a></li>
+            <li><a href="/scenes/80/">The Parting of the Mountain Waters</a></li>
+        </ul>
+        <p style="color: white;">made by LinuxDino</p>
+    </div>
+
+    <script>
+        let tickleMeter = 0;
+        const tickle1 = document.querySelector("#tomb-tickle-1");
+        const tickle2 = document.querySelector("#tomb-tickle-2");
+        const tickleMeterEl = document.querySelector("#tickle-meter");
+        const jumpscareEl = document.querySelector("#jumpscare");
+        const bats = document.querySelectorAll("#bats");
+        bats.forEach(element => {
+            element.addEventListener("mouseover", () => {
+                element.classList.add("fly");
+                setTimeout(() => {
+                    element.classList.remove("fly");
+                }, 4000);
+            })
+        });
+        function handleHover(){
+            tickleMeter++;
+            if (tickleMeter == 25){
+                new Audio("./assets/laugh.mp3").play();
+            }
+            if (tickleMeter == 50){
+                new Audio("./assets/knock.mp3").play();
+            }
+            if (tickleMeter == 75){
+                new Audio("./assets/scary.mp3").play();
+            }
+            if (tickleMeter == 100){
+                new Audio("./assets/jumpscare.mp3").play();
+                jumpscareEl.style.display = "block";
+                tickleMeter = 0;
+                setTimeout(() => {
+                    jumpscareEl.style.display = "none";
+                }, 3000);
+            }
+            console.log(tickleMeter);
+            tickleMeterEl.style.width = tickleMeter + "%";
+            tickleMeterEl.style.backgroundColor = `rgb(${Math.min(255, tickleMeter * 2.55)}, ${Math.max(0, 255 - tickleMeter * 2.55)}, 0)`;
+        }
+        tickle1.addEventListener("mouseover", handleHover);
+        tickle2.addEventListener("mouseover", handleHover);
+    </script>
+</body>
+</html>

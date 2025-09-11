@@ -8,11 +8,14 @@ let svgWidth = 0;
 let svgHeight = 0;
 let isStateLoaded = false; // Track if we loaded state from URL
 let selectedScene = null; // Currently selected scene
+let finishedScene = null; // scene is by default not marked as finished
+let claimedScene = null; // scene is by default not marked as existing
 let nodeClickOccurred = false; // Track if a node click just happened
 let isCreatingEdge = false; // Track if we're creating a new edge
 let edgeCreationStart = null; // Starting scene for edge creation
 let tempEdgeLine = null; // Temporary line element for edge creation
 let isReadOnly = false; // Track if we're in read-only mode (not localhost)
+let finishedSceneIds = new Set(); // Set of scene IDs that have corresponding folders
 
 // Settings
 let settings = {
@@ -24,6 +27,27 @@ let settings = {
 const SEED = 42;
 const NUM_SCENES = 100;
 const BIDIRECTIONAL_PROBABILITY = 0.3;
+
+// which scenes have a corresponding folder in /scenes
+async function fetchAvailableScenesAndRender() {
+    const url = 'https://api.github.com/repos/hackclub/som-grand-survey-expedition/contents/scenes?ref=5e6b79eb26951f32565729beab4c8154bdcf6951';
+    const resp = await fetch(url);
+    const items = await resp.json();
+    // Just use github API, server side component with NGINX is overkill for this
+    // Filter to directories only, grab their names
+    const folders = items
+        .filter(item => item.type === 'dir')
+        .map(item => item.name);
+
+    console.log(folders); 
+    // list format of all dirs
+    finishedSceneIds = new Set(folders);
+    renderScenes();
+    return finishedSceneIds;
+}
+
+
+
 
 // Deterministic random number generator using seed
 class SeededRandom {
@@ -439,6 +463,7 @@ function pixelToNormalizedY(pixelY) {
 }
 
 // Render scenes
+fetchAvailableScenesAndRender();
 function renderScenes() {
     const svg = d3.select('#overlay-svg');
     
@@ -469,10 +494,17 @@ function renderScenes() {
     
     // Add circle for each scene
     sceneGroups.append('circle')
-        .attr('r', 6)
-        .attr('fill', d => d.id === selectedScene ? '#FFD700' : '#FF6B6B')
-        .attr('stroke', d => d.id === selectedScene ? '#FFA500' : '#ffffff')
+    
+        .attr('fill', d => finishedSceneIds.has(String(d.id)) ? '#2ec15aff' : '#767a01ff')
+        .attr('stroke', d => finishedSceneIds.has(String(d.id)) ? '#226e2fff' : '#ffff00ff')
+
+        //.attr('fill', d => d.id === finishedScene ? '#2ec15aff' : '#d3d684ff')
+        //.attr('stroke', d => d.id === finishedScene ? '#226e2fff' : '#c3ff00ff')
+        //.attr('fill', d => d.id === claimedScene ? '#d3d684ff' : '#FF6B6B')
+        //.attr('stroke', d => d.id === claimedScene ? '#c3ff00ff' : '#FF6B6B')
+
         .attr('stroke-width', d => d.id === selectedScene ? 3 : 1.5)
+        .attr('r', 6)
         .attr('data-radius', 6) // Store radius for line calculations
         .style('transition', 'r 0.2s ease, stroke-width 0.2s ease') // Smooth transitions
         .style('cursor', isReadOnly ? 'default' : 'pointer'); // Disable pointer cursor in read-only mode
@@ -1143,6 +1175,29 @@ function saveManifest() {
     });
 }
 
+function loadScenesFolder(title) {
+    fetch('/scenes')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch scenes folder');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (title in data) {
+                console.log(title);
+                return title;
+            }
+            else {
+                return "";
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching scenes folder:', error);
+            return "";
+        });
+    }
+
 // Load scenes from manifest.json
 function loadManifest() {
     fetch('/manifest.json')
@@ -1194,6 +1249,8 @@ function loadManifest() {
             
             // Clear selection
             selectedScene = null;
+            claimedScene = null;
+            finishedScene = null;
             document.getElementById('node-name-input').value = '';
             document.getElementById('node-description-input').value = '';
             hideHoverDisplay();
@@ -1440,7 +1497,7 @@ function isLocalhost() {
                    hostname === '127.0.0.1' || 
                    hostname === '';
     console.log('Hostname:', hostname, 'Is localhost:', isLocal);
-    return isLocal;
+    return false; // Force read-only mode for testing
 }
 
 // Load from manifest.json in read-only mode
