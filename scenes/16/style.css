@@ -200,7 +200,7 @@ svg {
 
 .crab-lore-container p {
     color: #333;
-    font-size: 1.1em;
+    font-size: 14pt;
     line-height: 1.6;
 }
 
@@ -211,13 +211,47 @@ svg {
 
 #crab-description {
     min-width: 100px;
-    padding: 0 20px;
-    margin: 0 20px;
+    padding: 0 15px;
+    margin: 0 15px;
     border-left: solid #c3ad9c 1.5px;
 }
 
 #crabb {
+    /* margin-left: 45px; */
+    border: solid #333 2px;
+    border-radius: 20px;
     width: 150px;
+}
+
+#content h3 {
+    text-align: center;
+    font-size: 60pt;
+    color: white;
+    text-shadow: 3px 5px 5px #c37d48;
+    margin: 100px 0;
+}
+
+#links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#links a {
+    text-align: center;
+    font-size: 13pt;
+    color: rgb(0, 0, 0);
+    text-shadow: 0px 0px 5px #c37d48;
+    padding: 10px 50px;
+    margin: 20px;
+    width: 150px;
+    background-image: radial-gradient(#ffe6a4, #e4c89b);
+    border: 2px solid #c3ad9ce2;
+    border-radius: 10px;
+}
+
+details {
+    background-color: #e4d3a6;
 }
 
 .colors {
@@ -234,16 +268,24 @@ svg {
     #first-container {
         flex-direction: column;
     }
-    .arrow {
+    #arrow {
         transform: rotate(90deg);
     }
-
-    .video-wrapper {
+    #video-wrapper {
         width: 412px;
         height: 231px;
     }
-    .video-wrapper iframe {
+    #video-wrapper iframe {
         width: 400px;
         height: 221px;
+    }
+    .crab-lore-container p {
+        font-size: 13pt;
+    }
+    #crabb {
+        width: 150px;
+    }
+    #content h3 {
+        font-size: 30pt;
     }
 }

@@ -155,8 +155,9 @@ class crabController {
 var player;
 let hasStartedPlaying = false;
 const scene = document.getElementById('scene');
-// const content = document.getElementById('content');
-// content.hidden = true;
+scene.hidden = false;
+const content = document.getElementById('content');
+content.hidden = true;
 let controller;
 
 // Video loader
@@ -200,6 +201,7 @@ function onPlayerStateChange(event) {
             hasStartedPlaying = false;
             clearInterval(interval);
             scene.hidden = true;
+            content.hidden = false;
         }
     }
 }
