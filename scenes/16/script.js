@@ -1,3 +1,4 @@
+// Available Animations
 const crabAnimations = [
     'crab-dancing-blocky',
     'crab-excited',
@@ -153,10 +154,12 @@ class crabController {
 
 var player;
 let hasStartedPlaying = false;
-const state = {currentState: 'UNSTARTED'};
 const scene = document.getElementById('scene');
+// const content = document.getElementById('content');
+// content.hidden = true;
 let controller;
 
+// Video loader
 function onYouTubePlayerAPIReady() {
     player = new YT.Player('player', {
             width: '640',
@@ -165,10 +168,7 @@ function onYouTubePlayerAPIReady() {
             playerVars: {
                 'rel': 0,
                 'modestbranding': 0,
-                // 'controls': 0,
-                // 'autoplay': 1,
-                // 'loop': 1,
-                // 'playlist': 'LDU_Txk06tM'
+                'controls': 0,
             },
             events: {
                 onStateChange: onPlayerStateChange
@@ -176,6 +176,7 @@ function onYouTubePlayerAPIReady() {
     });
 }
 
+// Function to initiate/terminate timer
 let interval;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
@@ -185,162 +186,167 @@ function onPlayerStateChange(event) {
             document.getElementById('text-wrapper').style.display = 'none';
             document.getElementById('arrow').style.display = 'none';
             const videoWrapper = document.getElementById('video-wrapper');
-            videoWrapper.style.width = '42.7vw';
-            videoWrapper.style.height = '24vw';
+            if (window.innerWidth > 600){
+                videoWrapper.style.width = '622px';
+                videoWrapper.style.height = '350px';
+            } else {
+                videoWrapper.style.width = '420px';
+                videoWrapper.style.height = '236px';
+            }
             interval = setInterval(checkVideoTime, 100);
         }
-        state.currentState = 'PLAYING';
-    } else if (event.data == YT.PlayerState.PAUSED) {
-        state.currentState = 'PAUSED';
     } else if (event.data == YT.PlayerState.ENDED) {
         if (hasStartedPlaying) {
             hasStartedPlaying = false;
             clearInterval(interval);
+            scene.hidden = true;
         }
-        state.currentState = 'ENDED';
-    } else if (event.data == YT.PlayerState.BUFFERING) {
-        state.currentState = 'BUFFERING';
     }
 }
 
-let t29 = false;
-let t36 = false;
-let t44 = false;
-let t70 = false;
-let t75 = false;
-let t79 = false;
-let t82 = false;
-let t86 = false;
-let t90 = false;
-let t94 = false;
-let t98 = false;
-let t102 = false;
-let t105 = false;
-let t129 = false;
-let t138 = false;
-let t140 = false;
-let t144 = false;
-let t148 = false;
-let t152 = false;
-let t155 = false;
-let t159 = false;
-let t163 = false;
-let t167 = false;
-let t185 = false;
+// Check points in the video
+const t = {
+    '29' : false,
+    '36' : false,
+    '44' : false,
+    '70' : false,
+    '75' : false,
+    '79' : false,
+    '82' : false,
+    '86' : false,
+    '90' : false,
+    '94' : false,
+    '98' : false,
+    '102' : false,
+    '105' : false,
+    '129' : false,
+    '138' : false,
+    '140' : false,
+    '144' : false,
+    '148' : false,
+    '152' : false,
+    '155' : false,
+    '159' : false,
+    '163' : false,
+    '167' : false,
+    '185' : false
+};
+
 function checkVideoTime() {
     const currentTime = player.getCurrentTime();
-    if (!t29 && currentTime >= 29) {
+    if (!t['29'] && currentTime >= 29) {
         console.log("The crabs are snapping!");
         seconds29(true, false);
-        t29 = true;
-    } else if (!t36 && currentTime >= 36) {
+        t['29'] = true;
+    } else if (!t['36'] && currentTime >= 36) {
         console.log("More crabs!");
-        t36 = true;
+        t['36']= true;
         seconds36(true);
-    } else if (!t44 && currentTime >= 44) {
+    } else if (!t['44'] && currentTime >= 44) {
         console.log("They are marching?");
         seconds29(false, true);
         seconds36(false);
         changeImage('images/crab-walking-no-color.webp');
         crabs(1);
-        t44 = true;
-    } else if (!t70 && currentTime >= 70) {
+        t['44']= true;
+    } else if (!t['70'] && currentTime >= 70) {
         console.log("Wait for it...");
         seconds29(false, false);
         changeImage('images/crab-still.webp');
         crabs(2);
-        t70 = true;
-    } else if (!t75 && currentTime >= 75) {
+        t['70']= true;
+    } else if (!t['75'] && currentTime >= 75) {
         console.log("Dun dun dun dududu dun dududu dun dododododo...");
         changeImage('images/dancing-crab1.webp');
         crabs();
-        t75 = true;
-    } else if (!t79 && currentTime >= 78.8) {
+        t['75']= true;
+    } else if (!t['79'] && currentTime >= 78.8) {
         console.log("...");
         changeImage('images/crab-dancing-blocky.webp');
-        t79 = true;
-    } else if (!t82 && currentTime >= 83) {
+        t['79']= true;
+    } else if (!t['82'] && currentTime >= 83) {
         console.log("...(x2)");
         changeImage('images/dancing-crab2.webp');
-        t82 = true;
-    } else if (!t86 && currentTime >= 86.3) {
+        t['82']= true;
+    } else if (!t['86'] && currentTime >= 86.3) {
         console.log("...(x3)");
         changeImage('images/dancing-crab4.webp');
-        t86 = true;
-    } else if (!t90 && currentTime >= 90) {
+        t['86']= true;
+    } else if (!t['90'] && currentTime >= 90) {
         console.log("...(x4)");
         changeImage('images/silly-crab.webp');
-        t90 = true;
-    } else if (!t94 && currentTime >= 93.7) {
+        t['90']= true;
+    } else if (!t['94'] && currentTime >= 93.7) {
         console.log("...(x5)");
         changeImage('images/dancing-crab3.webp');
-        t94 = true;
-    } else if (!t98 && currentTime >= 97.7) {
+        t['94']= true;
+    } else if (!t['98'] && currentTime >= 97.7) {
         console.log("...(x6)");
         changeImage('images/crab-yay.webp');
-        t98 = true;
-    } else if (!t102 && currentTime >= 101.7) {
+        t['98']= true;
+    } else if (!t['102'] && currentTime >= 101.7) {
         console.log("Finally...");
         changeImage('images/minecraft-crab.webp');
-        t102 = true;
-    } else if (!t105 && currentTime >= 105.5) {
+        t['102'] = true;
+    } else if (!t['105'] && currentTime >= 105.5) {
         controller.spawnCrabs(30);
         console.log("*sighs in relief*... Wait, wdym there's another round?");
         controller.crabsElement.hidden = true;
         crabs();
         changeImage('images/crab-still.webp');
-        t105 = true;
-    } else if (!t129 && currentTime >= 129) {
+        t['105'] = true;
+    } else if (!t['129'] && currentTime >= 129) {
         console.log("Here it comes again...");
         controller.crabsElement.hidden = false;
-        t129 = true;
-    } else if (!t138 && currentTime >= 138) {
+        t['129'] = true;
+    } else if (!t['138'] && currentTime >= 138) {
         console.log("...");
         crabs(4);
         controller.changeRandom = true;
-        t138 = true;
-    } else if (!t140 && currentTime >= 140) {
+        t['138'] = true;
+    } else if (!t['140'] && currentTime >= 140) {
         console.log("...(x2)");
         controller.changeRandom = true;
-        t140 = true;
-    } else if (!t144 && currentTime >= 144) {
+        t['140'] = true;
+    } else if (!t['144'] && currentTime >= 144) {
         console.log("...(x3)");
         controller.changeRandom = true;
-        t144 = true;
-    } else if (!t148 && currentTime >= 148) {
+        t['144'] = true;
+    } else if (!t['148'] && currentTime >= 148) {
         console.log("...(x4)");
         controller.changeRandom = true;
-        t148 = true;
-    } else if (!t152 && currentTime >= 151.7) {
+        t['148'] = true;
+    } else if (!t['152'] && currentTime >= 151.7) {
         console.log("...(x5)");
         controller.changeRandom = true;
-        t152 = true;
-    } else if (!t155 && currentTime >= 155) {
+        t['152'] = true;
+    } else if (!t['155'] && currentTime >= 155) {
         console.log("...(x6)");
         controller.changeRandom = true;
-        t155 = true;
-    } else if (!t159 && currentTime >= 159) {
+        t['155'] = true;
+    } else if (!t['159'] && currentTime >= 159) {
         console.log("...(x7)");
         controller.changeRandom = true;
-        t159 = true;
-    } else if (!t163 && currentTime >= 163) {
+        t['159'] = true;
+    } else if (!t['163'] && currentTime >= 163) {
         console.log("...(x8)");
         controller.changeRandom = true;
-        t163 = true;
-    } else if (!t167 && currentTime >= 167) {
+        t['163'] = true;
+    } else if (!t['167'] && currentTime >= 167) {
         console.log("Bye, bye crabs :)");
         changeImage('images/crab-walking-no-color.webp');
         crabs(3);
-        t167 = true;
-    } else if (!t185 && currentTime >= 185) {
+        t['167'] = true;
+    } else if (!t['185'] && currentTime >= 185) {
         controller.crabsElement.remove();
         controller.crabs = [];
         controller = null;
         console.log("Good night :)");
-        t185 = true;
+        t['185'] = true;
     }
 }
 
+// Functions used in checkVideoTime ↑
 function seconds29(bool, resize){
     const twoThree = document.getElementById("tt1");
     if (bool) {
@@ -352,12 +358,10 @@ function seconds29(bool, resize){
         twoThree.style.height = '100%';
     }
 }
-
 function seconds36(bool) {
     const twoThree2 = document.getElementById("tt2");
     twoThree2.hidden = !bool;
 }
-
 function crabs(animProperty) {
     if (!controller) {
         controller = new crabController();
@@ -367,7 +371,6 @@ function crabs(animProperty) {
 
     controller.animProperty = animProperty;
 }
-
 function changeImage(img) {
     if (controller) {
         controller.image = img;
@@ -379,6 +382,7 @@ function play() {
     player.playVideo();
 }
 
+// The cool easter egg (¯\_(ツ)_/¯)
 const title = document.querySelector('.kablammo-title-text');
 let MORF = 0;
 let reverse = false;
