@@ -18,3 +18,16 @@ if (urlSearchParams.has("from")) {
   console.warn("URL did not include from varaible");
   localStorage.setItem("from", "central");
 }
+
+//do the change for ghp thing
+
+Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+  (elememt) => {
+    if (elememt.tagName.toLowerCase() === "a") {
+      elememt.setAttribute(
+        "href",
+        "/scene-54/scenes/54/" + elememt.getAttribute(href)
+      );
+    }
+  }
+);
