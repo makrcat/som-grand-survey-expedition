@@ -21,17 +21,15 @@ if (urlSearchParams.has("from")) {
 
 //do the change for ghp thing
 
-function finishedLoading() {
-  Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
-    (elememt) => {
-      if (elememt.tagName.toLowerCase() === "a") {
-        elememt.setAttribute(
-          "href",
-          "/scene-54/scenes/54/" + elememt.getAttribute("href")
-        );
+Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+  (elememt) => {
+    if (elememt.tagName.toLowerCase() === "a") {
+      elememt.setAttribute(
+        "href",
+        "/scene-54/scenes/54" + elememt.getAttribute("href")
+      );
 
-        console.log("Changed href to: " + elememt.getAttribute("href"));
-      }
+      console.log("Changed href to: " + elememt.getAttribute("href"));
     }
-  );
-}
+  }
+);
