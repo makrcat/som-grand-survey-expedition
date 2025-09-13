@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="shared.js"></script>
+    <script src="weather.js" defer></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html" />
@@ -29,7 +30,7 @@
   >
     <header w3-include-html="header.html"></header>
 
-    <div style="margin: 16px 16px">
+    <div style="margin: 16px auto; max-width: 880px">
       <h2
         style="
           font-size: 60px;
@@ -41,22 +42,22 @@
         Today's Weather
       </h2>
       <div style="display: flexbox">
-        <div style="display: flex; max-height: 5rem;">
+        <div style="display: flex; max-height: 6.5rem">
           <img
             alt="Haze"
-            width="100rem"
-            height="100rem"
+            width="150rem"
+            height="150rem"
             style="object-fit: contain"
             src="https://raw.githubusercontent.com/Makin-Things/weather-icons/master/animated/haze-day.svg"
           />
           <p
             style="
-              font-size: 4rem;
+              font-size: 6rem;
               font-family: 'Poppins', sans-serif;
               font-weight: 300;
               font-style: normal;
               margin-top: 0.5rem;
-              text-align: left;
+              text-align: center;
               -webkit-text-fill-color: white;
               -webkit-text-stroke: 1px;
               -webkit-text-stroke-color: black;
@@ -70,17 +71,47 @@
               font-family: 'Poppins', sans-serif;
               font-weight: 300;
               font-style: normal;
-              
-              margin-top: 0.5rem;
+
+              margin-top: 1.5rem;
+              text-align: center;
               -webkit-text-fill-color: white;
               -webkit-text-stroke: 0.04rem;
               -webkit-text-stroke-color: black;
             "
           >
-            <sup>*</sup>HLS
+            <sup>*HLS</sup>
           </p>
+          <p>0<sup>*HL</sup></p>
+          <div
+            style="
+              background-color: rgba(0, 0, 87, 0.53);
+              display: inline-table;
+              border-radius: 25px;
+              box-sizing: border-box;
+              overflow: hidden;
+              margin-left: auto;
+              margin-right: 1rem;
+            "
+          >
+            <img src="images/island.png" width="200" height="87.30"/>
+            <svg id="location-selection" width="200" height="87.30" style="position: absolute; cursor: crosshair; border-radius: 25px; margin-left: -200px;">
+              <circle
+                cx="10"
+                cy="0"
+                r="5"
+                stroke="darkred"
+                stroke-width="4"
+                fill="red"
+              />
+            </svg>
+            <p>
+              HLS of Location: --
+            </p>
+          </div>
         </div>
-        <i style="-webkit-text-fill-color: white;">Sun with Haze</i>
+        <i style="margin-left: 30px; -webkit-text-fill-color: white"
+          >Sun with Haze</i
+        >
       </div>
     </div>
 
