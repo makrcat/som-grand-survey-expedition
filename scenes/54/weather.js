@@ -24,8 +24,8 @@ image.onload = () => {
 
   locationSelection.addEventListener("mouseleave", (event) => {
     var index =
-      (hliDisplay.getAttribute("cy") * imageData.width +
-        hliDisplay.getAttribute("cx")) *
+      (parseInt(hliDisplay.getAttribute("cy")) * imageData.width +
+        parseInt(hliDisplay.getAttribute("cx"))) *
       4;
     console.log(
       hliDisplay.getAttribute("cx"),
