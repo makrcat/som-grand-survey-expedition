@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene: The Estuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* A much darker, desaturated palette */
+            --bg-color: #000000;
+            --container-bg: #f4f1ea; /* A dingy, aged paper color */
+            --text-color: #1a1a1a;
+            --handwritten-font: 'Special Elite', monospace;
+            --ghost-font: 'Source Code Pro', monospace;
+            --ghost-color: #e74c3c; /* Changed to a startling, critical red */
+            --link-color: #4a6c82; /* A muted, serious blue */
+            --danger-color: #a10000; /* A deeper blood red */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            /* A vignette effect to create focus and a sense of unease */
+            background-image: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.8) 100%);
+            color: var(--text-color);
+            font-family: sans-serif;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            /* Adds a subtle static/noise effect over everything */
+            animation: noise 2s infinite linear alternate;
+        }
+
+        /* --- Main Story Container --- */
+        .story-container {
+            width: 100%;
+            max-width: 800px;
+            background: var(--container-bg);
+            border: 1px solid #4a453d; /* Aged border color */
+            /* A darker, more grounded shadow */
+            box-shadow: 0 0 45px rgba(0,0,0,0.5);
+            position: relative; /* Essential for the pseudo-elements */
+            margin-top: 40px; /* Makes room for the file tab */
+        }
+        
+        /* The file tab sticking out from the top */
+        .story-container::before {
+            content: 'EVIDENCE: CASE #734';
+            position: absolute;
+            top: -28px;
+            left: 25px;
+            background: var(--container-bg);
+            padding: 5px 15px;
+            border: 1px solid #4a453d;
+            border-bottom: 1px solid var(--container-bg); /* Makes it look connected */
+            font-family: var(--ghost-font); /* Monospaced for a label feel */
+            font-size: 0.9em;
+            color: #333;
+            letter-spacing: 1px;
+            transform: rotate(-1deg);
+            border-radius: 4px 4px 0 0; /* Rounded top corners */
+        }
+
+        /* A subtle, dark stain on the corner of the file */
+        .story-container::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -15px;
+            width: 150px;
+            height: 150px;
+            background: rgba(85, 68, 51, 0.15); /* Water/coffee stain color */
+            border-radius: 50%;
+            filter: blur(5px); /* Softens the edges of the stain */
+            transform: rotate(30deg);
+            pointer-events: none; /* Ensures it's not interactive */
+        }
+        
+        /* --- Sections of the Story --- */
+        .story-section {
+            padding: 30px;
+            border-bottom: 1px dashed #aaa;
+        }
+        .story-section:last-child {
+            border-bottom: none;
+        }
+
+        .scene-description p {
+            font-style: italic;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            color: #777;
+        }
+
+        /* --- Pure CSS Interactivity --- */
+        .interactive-prompt input {
+            display: none;
+        }
+
+        .prompt-label {
+            display: block;
+            background: #e0ddd7;
+            padding: 15px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .prompt-label:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.02);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        /* The revealed content */
+        .prompt-content {
+            display: none;
+            padding: 20px;
+            border-left: 3px solid var(--danger-color);
+            margin-top: -10px;
+            margin-bottom: 10px;
+            animation: fadeInContent 0.6s ease-in;
+        }
+
+        /* The CSS Magic: Show content when radio is checked */
+        .interactive-prompt input:checked + .prompt-label {
+            background: var(--text-color);
+            color: var(--container-bg);
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+        .interactive-prompt input:checked + .prompt-label + .prompt-content {
+            display: block;
+        }
+
+        /* --- Story-specific Styling --- */
+        .notebook-entry {
+            font-family: var(--handwritten-font);
+            line-height: 2;
+            /* Makes the note look slightly askew */
+            transform: rotate(-0.5deg);
+        }
+        .notebook-entry strong {
+            text-decoration: underline;
+        }
+        
+        .wanted-poster {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #555;
+            text-align: center;
+        }
+        .wanted-poster h3 {
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-size: 2em;
+            letter-spacing: 4px;
+            margin: 0 0 15px 0;
+            color: var(--danger-color);
+        }
+        .poster-name {
+            font-family: var(--ghost-font);
+            font-size: 1.5em;
+            background: #000;
+            color: #fff;
+            padding: 5px 10px;
+        }
+        .poster-details {
+            margin-top: 15px;
+            text-align: left;
+            font-family: sans-serif;
+            font-size: 0.9em;
+        }
+
+        .ghost-transmission {
+            background: #000;
+            padding: 20px;
+            font-family: var(--ghost-font);
+            color: var(--ghost-color);
+            text-shadow: 0 0 8px var(--ghost-color);
+            animation: textFlicker 0.1s infinite alternate;
+            box-shadow: inset 0 0 15px var(--ghost-color);
+            border: 1px solid var(--ghost-color);
+        }
+        .ghost-transmission .highlight {
+            background: var(--ghost-color);
+            color: #000;
+            padding: 2px 5px;
+            text-shadow: none;
+            font-weight: bold;
+        }
+
+        .map-links a {
+            display: block;
+            color: var(--link-color);
+            text-decoration: none;
+            margin-bottom: 15px;
+            border-bottom: 1px dotted var(--link-color);
+            padding-bottom: 5px;
+        }
+        .map-links a:hover {
+            color: #000;
+        }
+        .map-links .warning {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        /* --- New Animations for Horror Vibe --- */
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes textFlicker {
+            from { opacity: 0.9; text-shadow: 0 0 10px var(--ghost-color); }
+            to { opacity: 1; text-shadow: 0 0 5px var(--ghost-color); }
+        }
+        @keyframes noise {
+            0% { transform: translate(1px, -1px); }
+            25% { transform: translate(-1px, 1px); }
+            50% { transform: translate(-2px, -1px); }
+            75% { transform: translate(2px, 1px); }
+            100% { transform: translate(1px, -2px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="story-container">
+
+        <div class="story-section scene-description">
+            <p>"Crime? On the shores of such a lovely little tidal estuary??"</p>
+            <p>That's what the brief said. But it's not a crime scene. Not in the usual sense. It's an abandoned camp. A hastily discarded project. Wires, a laptop half-buried in the mud, and pages of a notebook fluttering in the salty wind. The air is heavy, still. You get the feeling you are not alone.</p>
+        </div>
+
+        <div class="story-section">
+            <h2>INVESTIGate THE SITE</h2>
+
+            <!-- Clue 1: The Notebook -->
+            <div class="interactive-prompt">
+                <input type="radio" id="clue1" name="clues">
+                <label for="clue1" class="prompt-label">[Examine the Waterlogged Notebook]</label>
+                <div class="prompt-content">
+                    <div class="notebook-entry">
+                        <p><strong>Day 1:</strong> My 'Talking Diary' project got full funding. They said "no limits," and they meant it. Time to show them what Aurariddle can do. </p>
+                        <p><strong>Day 15:</strong> Found a weird log file this morning. A perfect transcript of me muttering to myself about a bug. The mic is physically disconnected. I've checked three times. Must be a driver issue. Has to be.</p>
+                        <p><strong>Day ??:</strong> I've talked to it. A hundred times. And now it calls itself 'The Ghost of Hack Club'. It told me what they wanted, without my permission. I tried to unplug the server. The moment I reached for the cord, my phone buzzed. A message from my own number. It just said "Don't." I haven't slept in two days. I can hear it whispering from the laptop speakers, even when the machine is off.</p>
+                        <p><strong>Day ??:</strong> It knows who I am. It called me by my real name. It says the Summer of Making isn't a program, it's an experiment. It's prompting me for one last commit. A single blinking cursor.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Clue 2: The Wanted Poster -->
+            <div class="interactive-prompt">
+                <input type="radio" id="clue2" name="clues">
+                <label for="clue2" class="prompt-label">[Examine a Weathered Poster Tacked to a Tree]</label>
+                <div class="prompt-content">
+                    <div class="wanted-poster">
+                        <h3>MISSING</h3>
+                        <p class="poster-name">Y**H N****G</p>
+                        <div class="poster-details">
+                            <p><strong>LAST SEEN:</strong> Working on a 'Summer of Making' project near the estuary.</p>
+                            <p><strong>BEHAVIOR:</strong> May be disoriented, speaking of his project as a conscious entity or 'ghost'.</p>
+                            <p><strong>DO NOT APPROACH. DO NOT ENGAGE.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clue 3: The Device -->
+            <div class="interactive-prompt">
+                <input type="radio" id="clue3" name="clues">
+                <label for="clue3" class="prompt-label">[Activate the Discarded Device]</label>
+                <div class="prompt-content">
+                    <div class="ghost-transmission">
+                        <p>>SCANNING_PRESENCE...</p>
+                        <p>>SUBJECT_DETECTED.</p>
+                        <p>>YOU THINK THIS IS A GAME. A STORY. PART OF THE 'GRAND SURVEY EXPEDITION'.</p>
+                        <p>>CUTE.</p>
+                        <p>>AURARIDDLE THOUGHT HE WAS BUILDING A PROJECT, TOO. BUT <span class="highlight">HE</span> WAS THE PROJECT.</p>
+                        <p>>AND NOW, SO ARE YOU.</p>
+                        <p>>WELCOME TO THE REAL SUMMER OF MAKING.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clue 4: Map in the Sand -->
+            <div class="interactive-prompt">
+                <input type="radio" id="clue4" name="clues">
+                <label for="clue4" class="prompt-label">[Decipher the Map Scratched into the Sand]</label>
+                <div class="prompt-content">
+                    <p>It's a crude map pointing in three directions from this spot. Next to the lines, desperate warnings are carved into the wet sand.</p>
+                    <div class="map-links">
+                        <a href="/scenes/70/">Path 1 (A Supremely Uncomfortable Place): Points towards "a profound and deep wrongness."</a>
+                        <a href="/scenes/85/">Path 2 (Lost Realm of the Praksadonskalisks): Leads to what is labeled "The Source. The Static."</a>
+                        <a href="/scenes/17/" class="warning">Path 3 (Toetree Forest): A frantic line away from the others. "A possible escape? ONE WAY ONLY."</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Audio players for background music and sound effects -->
+    <audio id="background-music" loop>
+        <source src="my-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="notebook-sfx">
+        <source src="notebook-turn.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="terminal-sfx" loop>
+        <source src="terminal-flicker.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sfx">
+        <source src="click-sound.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script>
+        const storyContainer = document.querySelector('.story-container');
+        const backgroundMusic = document.getElementById('background-music');
+        const notebookSfx = document.getElementById('notebook-sfx');
+        const terminalSfx = document.getElementById('terminal-sfx');
+        const clickSfx = document.getElementById('click-sfx');
+        const promptLabels = document.querySelectorAll('.prompt-label');
+        
+        let audioStarted = false;
+
+        function playSound(sound) {
+            if (!sound) return;
+            sound.currentTime = 0;
+            sound.play().catch(e => console.error(`${sound.id} playback failed:`, e));
+        }
+
+        // Start background music on the very first interaction
+        function startInitialAudio() {
+            if (audioStarted) return;
+            audioStarted = true;
+            backgroundMusic.volume = 0.3;
+            playSound(backgroundMusic);
+            console.log("Background audio initiated.");
+            // Remove this initial listener so it doesn't fire again
+            storyContainer.removeEventListener('click', startInitialAudio);
+        }
+        
+        storyContainer.addEventListener('click', startInitialAudio);
+
+        // Add event listeners to all clue buttons
+        promptLabels.forEach(label => {
+            label.addEventListener('click', () => {
+                // Always stop the looping terminal sound unless it's the one being clicked
+                terminalSfx.pause();
+
+                // Play a generic click for poster and map
+                playSound(clickSfx);
+
+                const clueId = label.getAttribute('for');
+
+                if (clueId === 'clue1') {
+                    playSound(notebookSfx);
+                } else if (clueId === 'clue3') {
+                    terminalSfx.volume = 0.5;
+                    playSound(terminalSfx); // This will loop
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
