@@ -23,11 +23,12 @@ if (urlSearchParams.has("from")) {
 
 Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
   (elememt) => {
-    if (elememt.tagName.toLowerCase() === "a" && window.location.href.startsWith("https://xfn10x.github.io/scene-54/")) {
-      elememt.setAttribute(
-        "href",
-        "/scene-54/scenes/54" + elememt.getAttribute("href")
-      );
+    if (
+      elememt.tagName.toLowerCase() === "a" &&
+      window.location.href.startsWith("https://xfn10x.github.io/scene-54/") &&
+      !elememt.getAttribute("href").startsWith("/scene-54")
+    ) {
+      elememt.setAttribute("href", "/scene-54" + elememt.getAttribute("href"));
 
       console.log("Changed href to: " + elememt.getAttribute("href"));
     }
