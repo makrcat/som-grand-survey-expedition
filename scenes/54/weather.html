@@ -51,6 +51,7 @@
             src="https://raw.githubusercontent.com/Makin-Things/weather-icons/master/animated/haze-day.svg"
           />
           <p
+            id="ILT-display"
             style="
               font-size: 6rem;
               font-family: 'Poppins', sans-serif;
@@ -65,23 +66,36 @@
           >
             0
           </p>
-          <p
-            style="
-              font-size: 2rem;
-              font-family: 'Poppins', sans-serif;
-              font-weight: 300;
-              font-style: normal;
+          <div>
+            <p
+              style="
+                font-size: 2rem;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;
+                font-style: normal;
 
-              margin-top: 1.5rem;
-              text-align: center;
-              -webkit-text-fill-color: white;
-              -webkit-text-stroke: 0.04rem;
-              -webkit-text-stroke-color: black;
-            "
-          >
-            <sup>*ILT</sup>
-          </p>
-          <p>0<sup>*IT</sup></p>
+                margin-top: 1.5rem;
+                margin-bottom: 0;
+                text-align: center;
+                -webkit-text-fill-color: white;
+                -webkit-text-stroke: 0.04rem;
+                -webkit-text-stroke-color: black;
+              "
+            >
+              <sup>*ILT</sup>
+            </p>
+            <p
+              id="IT-display"
+              style="
+                margin-top: -1rem;
+                -webkit-text-fill-color: white;
+                -webkit-text-stroke: 0.04rem;
+                -webkit-text-stroke-color: black;
+              "
+            >
+              0<sup>*IT</sup>
+            </p>
+          </div>
           <div
             style="
               background-color: rgba(0, 0, 87, 0.53);
@@ -121,6 +135,68 @@
         <i style="margin-left: 30px; -webkit-text-fill-color: white"
           >Sun with Haze</i
         >
+      </div>
+      <div
+        style="
+          padding: 10px;
+          margin-top: 5rem;
+          border-radius: 25px;
+          background-color: rgba(0, 0, 87, 0.53);
+        "
+      >
+        <h2
+          style="
+            font-size: 35px;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          Message for Tourists:
+        </h2>
+        <p
+          style="
+            font-size: larger;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          The way temerature is messured in Hotland is different than most
+          countrys. In most places, the temperature is messured per area. But in
+          Hotland, it is only messured once, in one location (One with an ITI of
+          2). Then, it is modified based on the local ITI.
+          <br />
+          <br />
+          These are 3 main components to how you messure it:
+          <br />
+          <br />
+          <i
+            >Istemper is the Hotlandic name for Hotland. Its the offical
+            language, its thats why its used here.</i
+          >
+        </p>
+
+        <ul
+          style="
+            font-size: larger;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          <li>
+            <b>IT: Istemper Temperature</b>: The temperature of the whole
+            island. This number is modified to the local area. (ILT)
+          </li>
+          <li>
+            <b>ITI: Istemper Temp. Index</b>: Based on the location, it is the
+            modifier of of the temperture. The base IT is messured in an area
+            with 2<sup>*ITI</sup>
+          </li>
+          <li>
+            <b>ILT: Istemper Local Temperature</b>: The final temperature of the
+            location. This is what can be converted to °C or °F (Celcius is the
+            secondary messurment of temperature in Hotland)
+          </li>
+        </ul>
       </div>
     </div>
 
