@@ -1,16 +1,16 @@
 @font-face {
   font-family: Asimovian;
-  src: url("Asimovian.ttf");
+  src: url("fonts/Asimovian.ttf");
 }
 
 @font-face {
   font-family: EpundaSlab;
-  src: url("EpundaSlab-VariableFont_wght.ttf");
+  src: url("fonts/EpundaSlab-VariableFont_wght.ttf");
 }
 
 @font-face {
   font-family: TulpenOne;
-  src: url("TulpenOne.ttf");
+  src: url("fonts/TulpenOne.ttf");
 }
 
 header {
