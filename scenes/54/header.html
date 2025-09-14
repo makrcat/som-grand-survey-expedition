@@ -1,34 +1,56 @@
-<div style="margin: 4px 4px; display: flex">
-  <img style="width: 72px; margin-right: 10px" src="images/flag.jpg" />
-  <h2
-    style="
-      color: chocolate;
-      -webkit-text-stroke-color: black;
-      -webkit-text-stroke-width: 1px;
-      font-size: 40px;
-      margin: 10px 0px;
-      text-align: center;
-      vertical-align: middle;
-    "
-  >
-    Hotland
-  </h2>
-  <p
-    id="text-alt"
-    style="
-      font-size: 20px;
-      margin: 0;
-      margin-left: auto;
-      text-align: right;
-      margin-top: 20px;
-    "
-  >
-    <a class="change-for-ghp" href="/scenes/54?from=self">Home</a>
-    <a
-      class="change-for-ghp"
-      href="/scenes/54/weather.html?from=self"
-      style="margin-left: 12px"
-      >Weather</a
+<html>
+  <script defer>
+    Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+      (elememt) => {
+        if (
+          elememt.tagName.toLowerCase() === "a" &&
+          window.location.href.startsWith(
+            "https://xfn10x.github.io/scene-54/"
+          ) &&
+          !elememt.getAttribute("href").startsWith("/scene-54")
+        ) {
+          elememt.setAttribute(
+            "href",
+            "/scene-54" + elememt.getAttribute("href")
+          );
+
+          console.log("Changed href to: " + elememt.getAttribute("href"));
+        }
+      }
+    );
+  </script>
+  <div style="margin: 4px 4px; display: flex">
+    <img style="width: 72px; margin-right: 10px" src="images/flag.jpg" />
+    <h2
+      style="
+        color: chocolate;
+        -webkit-text-stroke-color: black;
+        -webkit-text-stroke-width: 1px;
+        font-size: 40px;
+        margin: 10px 0px;
+        text-align: center;
+        vertical-align: middle;
+      "
     >
-  </p>
-</div>
+      Hotland
+    </h2>
+    <p
+      id="text-alt"
+      style="
+        font-size: 20px;
+        margin: 0;
+        margin-left: auto;
+        text-align: right;
+        margin-top: 20px;
+      "
+    >
+      <a class="change-for-ghp" href="/scenes/54?from=self">Home</a>
+      <a
+        class="change-for-ghp"
+        href="/scenes/54/weather.html?from=self"
+        style="margin-left: 12px"
+        >Weather</a
+      >
+    </p>
+  </div>
+</html>
