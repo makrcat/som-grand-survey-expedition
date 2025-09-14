@@ -18,7 +18,7 @@ image.onload = () => {
   locationSelection.addEventListener("mousemove", (event) => {
     var index = (event.offsetY * imageData.width + event.offsetX) * 4;
     hliIndicator.innerText =
-      "HLI of Location: " +
+      "ITI of Location: " +
       (imageData.data[index] / 87).toString().substring(0, 4);
   });
 
@@ -33,7 +33,7 @@ image.onload = () => {
       hliDisplay.getAttribute("cy")
     );
     hliIndicator.innerText =
-      "HLI of Location: " +
+      "ITI of Location: " +
       (imageData.data[index] / 87).toString().substring(0, 4);
   });
   locationSelection.addEventListener("click", (event) => {
