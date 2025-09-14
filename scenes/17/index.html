@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost in Toetree Forest</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="story-container" id="storyContainer">
+        <audio src="assets/right-tree.mp3"></audio>
+        <div class="title">Lost in Toetree Forest</div>
+        
+        <div class="background bg-scene1" id="background"></div>
+       
+        <div class="firefly" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="firefly" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="firefly" style="left: 80%; animation-delay: 4s;"></div>
+        <div class="firefly" style="left: 90%; animation-delay: 6s;"></div>
+        
+        <div class="character luffy" id="luffyChar">
+            <img src="assets/luffy.png" alt="Luffy">
+        </div>
+        <div class="character zoro" id="zoroChar">
+            <img src="assets/zoro.png" alt="Zoro">
+        </div>
+       
+        <div class="dialogue-container" id="dialogueContainer">
+            <div class="speaker-name" id="speakerName"></div>
+            <div class="dialogue-text" id="dialogueText"></div>
+            <button class="next-button" id="nextButton">Next</button>
+        </div>
+
+        <div class="choices-container" id="choicesContainer">
+            <a href="/scenes/26/"><img src="assets/island_island.png" alt=""></a>
+            <a href="/scenes/61/"><img src="assets/pair_o_dice.png" alt=""></a>
+            <a href="/scenes/96/"><img src="assets/sandtopia.png" alt=""></a>
+        </div>
+
+        <div class="fade-overlay" id="fadeOverlay"></div>
+    </div>
+
+    <audio id="bg-music" autoplay loop muted>
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
