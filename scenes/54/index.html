@@ -50,7 +50,8 @@
       </p>
 
       <h3 style="color: red">
-        ⚠️ WARNING!: OUR TEMPERATURES REGURALLY GO UP TO 2*:IT (100*ILT @ 1*ITI, 32°C)
+        ⚠️ WARNING!: OUR TEMPERATURES REGURALLY GO UP TO 2*:IT (100*ILT @ 1*ITI,
+        32°C)
         <!--
         IT: Istemper Temp. (The temp of the whole island, that is modified to ILT, using the locations ITI)
         ILT: Istemper Local Temp. (Based on the IT and ITI) 
@@ -132,6 +133,24 @@
     </div>
     <script>
       w3.includeHTML();
+      Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+        (elememt) => {
+          if (
+            elememt.tagName.toLowerCase() === "a" &&
+            window.location.href.startsWith(
+              "https://xfn10x.github.io/scene-54/"
+            ) &&
+            !elememt.getAttribute("href").startsWith("/scene-54")
+          ) {
+            elememt.setAttribute(
+              "href",
+              "/scene-54" + elememt.getAttribute("href")
+            );
+
+            console.log("Changed href to: " + elememt.getAttribute("href"));
+          }
+        }
+      );
     </script>
   </body>
 </html>
