@@ -15,10 +15,40 @@
   </h2>
   <p
     id="text-alt"
-    style="font-size: 20px; margin: 0; margin-left: auto; text-align: right; margin-top: 20px;"
+    style="
+      font-size: 20px;
+      margin: 0;
+      margin-left: auto;
+      text-align: right;
+      margin-top: 20px;
+    "
   >
-    <a class = "change-for-ghp" href="/scenes/54?from=self">Home</a>
-    <a class = "change-for-ghp" href="/scenes/54/weather.html?from=self" style="margin-left: 12px">Weather</a>
-    <script src="shared.js"></script>
+    <a class="change-for-ghp" href="/scenes/54?from=self">Home</a>
+    <a
+      class="change-for-ghp"
+      href="/scenes/54/weather.html?from=self"
+      style="margin-left: 12px"
+      >Weather</a
+    >
+    <script>
+      Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+        (elememt) => {
+          if (
+            elememt.tagName.toLowerCase() === "a" &&
+            window.location.href.startsWith(
+              "https://xfn10x.github.io/scene-54/"
+            ) &&
+            !elememt.getAttribute("href").startsWith("/scene-54")
+          ) {
+            elememt.setAttribute(
+              "href",
+              "/scene-54" + elememt.getAttribute("href")
+            );
+
+            console.log("Changed href to: " + elememt.getAttribute("href"));
+          }
+        }
+      );
+    </script>
   </p>
 </div>
