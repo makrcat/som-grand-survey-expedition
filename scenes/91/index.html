@@ -1,49 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            #exit{
-                background-color:LightYellow;
-                width: fit-content;
-                border-color:black;
-                border-width: 5px;
-                border-style: solid;
-                border-radius: 20px;
-                padding-left:20px;
-                padding-right:20px;
-            }
-            #small-bush{
-                width:50%;
-                margin-left:auto;
-                margin-right:auto;
-                display:block;
-            }
-            .bush-div{
-                width: 640px;
-                height:515px;
-                position:relative;
-                overflow:hidden;
-            }
-            .bush{
-                position:relative;
-                z-index:10;
-            }
-            .bush-hiding{
-                transition-duration: 1s;
-                transform: translateY(515px);
-            }
-            .behind-bush{
-                /* z-index: -1; */
-                position:absolute;
-                top:0;
-                margin-top: 60px;
-                margin-left: 40px;
-                align-self: center;
-            }
-            .desciption{
-                text-align: center;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
         <script>
             function loaded(){
                 let bushes=document.getElementsByClassName("bush")
@@ -51,36 +9,47 @@
                 for(let i=0;i<bushes.length;i++){
                     bushes[i].addEventListener("transitionend",()=>{console.log("remove bush");this.remove()})
                 }
+                const content=document.getElementById("content")
+                content.style.visibility="visible"
             }
         </script>
     </head>
     <body onload="loaded()">
-        <h1>Shrubs of Mystery</h1>
+        <div id="content" style="visibility: hidden;">
+            
+            <h1>Shrubs of Mystery</h1>
 
-        <div class="bush-div">
-            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
-            <div class="behind-bush">
-                <img src="bush.png" id="small-bush">
-                <p class="desciption">You found a smaller bush behind the first bush<br>You don't think there is anything else behind this bush</p>
+            <h3>Click a bush to see behind it.</h3>
+            <div class="bush-div">
+                <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
+                <div class="behind-bush">
+                    <img src="bush.png" id="small-bush">
+                    <p class="desciption">You found a smaller bush behind the first bush<br>You don't think there is anything else behind this bush</p>
+                </div>
             </div>
-        </div>
-        <div class="bush-div">
-            <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
-            <div class="behind-bush">
-                <img src="bush.png" id="small-bush">
-                <p class="desciption">You found a smaller bush behind the first bush</p>
+            <div class="bush-div">
+                <img src="Minecraft Bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it" style="object-fit:cover;width:640px;height:500px">
+                <div class="behind-bush" style="top:200px;left:200px;">
+                    <img src="dancing lantern.gif" class="lantern">
+                    <img src="dancing lantern.gif" class="lantern">
+                    <img src="dancing lantern.gif" class="lantern">
+                    <img src="dancing lantern.gif" class="lantern">
+                    <img src="dancing lantern.gif" class="lantern">
+                    <p class="desciption">You found a bunch of dancing pumpkins</p>
+                </div>
             </div>
-        </div>
 
-        
-        <div id="exit">
-            <h2>Go somewhere else</h2>
-            <a href="/scenes/42">Ugly Isles</a>
-            <br>
-            <a href="/scenes/98">Porple Point</a>
-            <br>
-            <a href="/scenes/64">Big Dune</a>
+            
+            <div id="exit">
+                <h2>Go somewhere else</h2>
+                <a href="/scenes/42">Ugly Isles</a>
+                <br>
+                <a href="/scenes/98">Porple Point</a>
+                <br>
+                <a href="/scenes/64">Big Dune</a>
+            </div>
+            <p>bushes from <a href="https://pixabay.com/vectors/green-plants-leaves-leafy-flora-575512/">https://pixabay.com/vectors/green-plants-leaves-leafy-flora-575512/</a></p>
+
         </div>
-        <p>bushes from <a href="https://pixabay.com/vectors/green-plants-leaves-leafy-flora-575512/">https://pixabay.com/vectors/green-plants-leaves-leafy-flora-575512/</a></p>
     </body>
 </html>

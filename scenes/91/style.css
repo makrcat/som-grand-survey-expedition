@@ -1,0 +1,49 @@
+#exit{
+    background-color:LightYellow;
+    width: fit-content;
+    border-color:black;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 20px;
+    padding-left:20px;
+    padding-right:20px;
+}
+#small-bush{
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+.bush-div{
+    width: 640px;
+    height:515px;
+    position:relative;
+    overflow:hidden;
+}
+.bush{
+    position:relative;
+    z-index:10;
+}
+.bush-hiding{
+    transition-duration: 1s;
+    transform: translateY(515px);
+}
+.behind-bush{
+    /* z-index: -1; */
+    position:absolute;
+    top:100px;
+    left:100px;
+    width: fit-content;
+    
+}
+.desciption{
+    text-align: center;
+}
+.lantern{
+    width:50px;
+    height:fit-content;
+    image-rendering: pixelated;
+}
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
