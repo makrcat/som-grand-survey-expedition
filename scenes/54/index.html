@@ -132,8 +132,26 @@
       </div>
     </div>
     <script>
-      w3.includeHTML();
+      w3.includeHTML(function () {
+        Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+          (elememt) => {
+            if (
+              elememt.tagName.toLowerCase() === "a" &&
+              window.location.href.startsWith(
+                "https://xfn10x.github.io/scene-54/"
+              ) &&
+              !elememt.getAttribute("href").startsWith("/scene-54")
+            ) {
+              elememt.setAttribute(
+                "href",
+                "/scene-54" + elememt.getAttribute("href")
+              );
 
+              console.log("Changed href to: " + elememt.getAttribute("href"));
+            }
+          }
+        );
+      });
     </script>
   </body>
 </html>
