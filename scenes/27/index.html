@@ -73,6 +73,10 @@
             .floor3{
                 background-color: rgb(155, 106, 0);
                 height: 500vh;
+                display: flex;
+                justify-content: center;
+                justify-items: center;
+                align-items: center;
             }
 
             .floor-text{
@@ -81,6 +85,7 @@
                 font-size: x-large;
                 padding: 5px;
                 z-index: 2;
+                transition: opacity .5s ease-in-out;
             }
 
             .last-text{
@@ -126,6 +131,29 @@
                 overflow-x: hidden;
                 transition: 0.8s;
                 transform: scale(0);
+            }
+
+            .button {
+                display: inline-block;
+                padding: 15px 25px;
+                font-size: 24px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                outline: none;
+                color: #fff;
+                background-color: #2c8dce;
+                border: none;
+                border-radius: 15px;
+                box-shadow: 0 9px #327781;
+            }
+
+            .button:hover {background-color: #277bb3}
+
+            .button:active {
+                background-color: #2370a3;
+                box-shadow: 0 5px #286068;
+                transform: translateY(4px);
             }
 
 
@@ -207,7 +235,7 @@
             <img alt="bone" src="assets/pebble1.png" style="position: absolute; left: 10vw; top: 400vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
             
             <p class="floor-text" id="1">
-                Can't you read, ye scallywag? You're not supposed to be here.
+                Can't you read, you scallywag? You're not supposed to be here.
                 <br>
                 Just move on to <a href="/scenes/48/">Pumice & Hummus</a> or <a href="/scenes/47/">Wetwater Lake</a>.
             </p>
@@ -225,7 +253,7 @@
             <p class="floor-text" id="2"> 
                 What? You think there be somethin' shiny at the bottom of the page?
                 <br>
-                No way, matey. You're seein' things, just go back <a href="#1">up</a> and chose a path.
+                No way, matey. You're seein' things, just go back <a href="#1">up</a> and chose a different path.
             </p>
             <img alt="rock" src="assets/rock2.png" style="rotate: 10deg; position: absolute; left: 7vw; top: 1200vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
             <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 15vw; top: 1300vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
@@ -233,38 +261,54 @@
 
         <div class="trans3"></div>
 
-        <div class="floor3 center-content">
-            <img alt="bone" src="assets/bone.png" style="rotate: 20deg; position: absolute; left: 20vw; top: 1600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 5vw; top: 1700vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+        <div class="floor3 center-content" id="cat-floor">
+            <div id="props3">
+                <img alt="bone" src="assets/bone.png" style="rotate: 20deg; position: absolute; left: 20vw; top: 1600vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+                <img alt="bone" src="assets/bone2.png" style="rotate: 25deg; position: absolute; right: 5vw; top: 1700vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+                <img alt="bone" src="assets/bone.png" style="rotate: 40deg; position: absolute; right: 25vw; top: 1780vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+                <img alt="bone" src="assets/bone2.png" style="rotate: -5deg; position: absolute; left: 30vw; top: 1900vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
+            </div>
 
             <p class="floor-text last-text" id="3">
             You're still here?
             <br>
-            Well, I'm not supposed to tell ye, but there be a secret path.
+            Well, I'm not supposed to tell ya, but there is a secret path.
             <br>
-            You could go to <a href="/scenes/65/">The Forbidden Sector</a>. But you didn't hear it from me, savvy?
+            You could go to <a href="/scenes/65/">The Forbidden Sector</a>. But you didn't hear it from me, aye?
             </p>
+
+            <div style=" display: none; width: 100%; justify-content: center; align-items: center;" id="cat-box">
+                <!-- Jellie interaction -->
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 50vw;">
+                    <p class="floor-text" id="jellie-text">
+                       So you are still here?
+                    </p>
+                    <button class="floor-text button" id="jellie-btn">
+                        Who are you?
+                    </button>
+                </div>
+                <img alt="minecraft cat" src="assets/JellieCat.png" style="margin: 50px; transition: opacity .5s ease-in-out;" width="300vh">
+            </div>
 
             <p class="floor-text" id="4">
-                No no no. Go back, go away—it's my treasure, not yers!
+                No no no. Go back, go away. It's my treasure, not yours!
             </p>
 
-            <img alt="bone" src="assets/bone.png" style="rotate: 40deg; position: absolute; right: 25vw; top: 1780vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
-            <img alt="bone" src="assets/bone2.png" style="rotate: -5deg; position: absolute; left: 30vw; top: 1900vh; filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));">
         </div>
 
-        <div class="trans4"></div>
+        <div id="final">
+            <div class="trans4"></div>
 
 
-        <div class="treasure center-content" >
-            <p class="floor-text" id="5">
-                Ha, tricked ya.
-                <br>
-                You will never find the key.
-            </p>
-            <img alt="The treasure" class="shake-anim chest" id="chest" width="50%" src="assets/treasure-chest.png">
+            <div class="treasure center-content" >
+                <p class="floor-text" id="5">
+                    Ha, tricked ya.
+                    <br>
+                    You'll never find the key.
+                </p>
+                <img alt="The treasure" class="shake-anim chest" id="chest" width="50%" src="assets/treasure-chest.png">
+            </div>
         </div>
-
 
         <div class="sign-container">
             <img alt="Handwritten 'Keep out' sign" class="sign" src="assets/keep_out.png"/>
@@ -276,14 +320,58 @@
 
             var chest = document.getElementById("chest");
             var key = document.getElementById("key");
+            var jellieBtn = document.getElementById("jellie-btn");
+            var jellieText = document.getElementById("jellie-text");
+            var jellieFloor = document.getElementById("cat-floor");
+            var jellieBox = document.getElementById("cat-box");
+            var finalBox = document.getElementById("final");
             var text1 = document.getElementById("1");
             var text2 = document.getElementById("2");
             var text3 = document.getElementById("3");
+            var props3 = document.getElementById("props3");
             var text4 = document.getElementById("4");
             var text5 = document.getElementById("5");
 
             var key_collected = false;
 
+            const jellie_talk = [["I am the guard of the treasure.", "Ok. Can I have it?"], 
+                                ["You came all this way just for this?", "Yes, the chest is shiny, I want it!"],
+                                ["Alright you ignored all the signs so I guess I can't do anything to get you to go away..", "Right, now let me pass!"],
+                                ["But let me tell ya <a href='/scenes/65/''>The Forbidden Sector</a> is a place you don't want to miss.", "I don't care, now let me pass!"],
+                                ["Yes yes, but be warned the secret is not what it seems to be.", "What does that even mean?"],
+                                ["You'll find that out IF you continue to the treasure.<br>But if ye don't wana risk it just go to <a href='/scenes/47/'>Wetwater Lake</a>", "Stop witht the distractions and let me pass!!"],
+                                ["Alright but don't tell me I didn't warn ya.<br>Goodbye.", "Bye, I guess?"]
+                                ]
+            var jellie_talk_count = 0
+
+            jellieBtn.addEventListener("click", function(e){
+                e.preventDefault();
+                
+                if(jellie_talk_count >= jellie_talk.length){
+                    // final phase
+                    jellieBox.style.display = "none";
+                    finalBox.style.display = "block";
+                    jellieFloor.style.height = "500vh";
+                    props3.style.display = "block";
+                    return;
+                }
+                
+                
+                jellieText.style.opacity = 0;
+                jellieBtn.style.opacity = 0;
+                
+                setTimeout(function(){ 
+                    jellieText.innerHTML = jellie_talk[jellie_talk_count][0];
+                    jellieBtn.innerHTML = jellie_talk[jellie_talk_count][1];
+
+                    jellieText.style.opacity = 1;
+                    jellieBtn.style.opacity = 1;
+                    jellie_talk_count += 1;
+                },500);
+
+
+
+            });
             chest.addEventListener("click", function(e){
                 e.preventDefault();
                 if(key_collected){
@@ -311,9 +399,16 @@
                 key_collected = true;
 
                 text2.innerText = "...";
-                text3.innerText = "";
+                text3.remove();
                 text4.innerText = "";
                 text5.innerText = "";
+
+                jellieBox.style.display = "flex";
+                jellieBox.style.height = "100%";
+                finalBox.style.display = "none";
+                jellieFloor.style.height = "100vh";
+                props3.style.display = "none";
+
                 
             }, false);
 
@@ -326,7 +421,7 @@
                     text1.hidden = true
                     key.hidden = false
 
-                    text2.innerText = "Why won't you listen to me.."
+                    text2.innerText = "If you can read this.. STOP!"
 
                     text3.innerHTML = `
                         You could visit all these wonderfull places:
@@ -334,6 +429,8 @@
                         <a href="/scenes/48/">Pumice & Hummus</a>, <a href="/scenes/47/">Wetwater Lake</a>
                         <br>
                         or even <a href="/scenes/65/">The Forbidden Sector</a>
+                        <br>
+                        Don't they sound like fun?
                     `
                     text4.innerText = "Stop searching. Ya won't find it!"
 
@@ -343,6 +440,7 @@
             });
 
             observer.observe(chest);
+
 
         </script>
     </body> 
