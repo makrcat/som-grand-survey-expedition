@@ -4,11 +4,6 @@
         <link rel="stylesheet" href="style.css">
         <script>
             function loaded(){
-                let bushes=document.getElementsByClassName("bush")
-                console.log(bushes.length)
-                for(let i=0;i<bushes.length;i++){
-                    bushes[i].addEventListener("transitionend",()=>{console.log("remove bush");this.remove()})
-                }
                 const content=document.getElementById("content")
                 content.style.visibility="visible"
             }
@@ -18,6 +13,16 @@
         <div id="content" style="visibility: hidden;">
             
             <h1>Shrubs of Mystery</h1>
+
+            <div id="lore">
+                <p>
+                    You come to a cleaing that is full of bushes<br>
+                    <br>
+                    You see a sign that says,<br>
+                    "There are many things behind these bushes.<br>
+                    Poke around and you might find something"
+                </p>
+            </div>
 
             <h3>Click a bush to see behind it.</h3>
             <div class="bush-div">

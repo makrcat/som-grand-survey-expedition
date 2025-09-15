@@ -1,5 +1,5 @@
 #exit{
-    background-color:rgb(34, 33, 0);
+    background-color:rgb(11, 85, 9);
     width: fit-content;
     border-color:gray;
     border-width: 5px;
@@ -22,6 +22,13 @@
     left:92px;
     height:fit-content;
     image-rendering: pixelated;
+}
+#lore{
+    border:5px solid gray;
+    border-radius: 20px;
+    width:fit-content;
+    padding:0px 20px;
+    background-color:rgb(50, 7, 73)
 }
 .bush-div{
     width: 640px;
@@ -56,8 +63,6 @@
 }
 body{
     color:white;
-    background-color: black;
-}
-*{
+    background-color: darkslategray;
     font-family: Arial, Helvetica, sans-serif;
 }
