@@ -9,12 +9,11 @@ body {
 
   .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     text-align: center; 
     background-color: aliceblue;
-    width: 400px;
-    height: 800px;
+    width: 600px;
+    height: 600px;
     font-size: 25px;
     border-radius: 50px;
     overflow: hidden;
@@ -22,6 +21,16 @@ body {
     padding: 1rem;
     margin-top: 40px; 
 }
+ .audio{
+  margin-top:20px;
+  width:60px;
+  height:60px;
+  border-radius: 500px;
+
+  position: relative;  
+  z-index: 10;         /* THis is chatGPT generated, becaz i did not understand why my audio wasnt playing*/
+  
+ }
 
 
   .container svg {
