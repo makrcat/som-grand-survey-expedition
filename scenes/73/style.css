@@ -1,0 +1,95 @@
+body {
+	margin: 0;
+	height: 100vh;
+	background: #1e3a5c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#wall {
+	width: 400px;
+	height: 300px;
+	background: linear-gradient(180deg, #4fc3f7 0%, #1565c0 100%);
+	border-radius: 16px;
+	box-shadow: 0 0 40px #90caf9;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 2rem;
+	cursor: pointer;
+	transition: box-shadow 0.3s;
+	position: relative;
+	user-select: none;
+}
+/* Hide lighter by default */
+#lighter {
+	width: 48px;
+	height: 80px;
+	position: fixed;
+	left: 50%;
+	top: 80%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	display: none;
+	align-items: flex-end;
+	justify-content: center;
+	cursor: pointer;
+	transition: opacity 0.5s, top 0.5s, left 0.5s;
+	opacity: 0;
+	background: none;
+	border-radius: 0;
+}
+#lighter.visible {
+	display: flex;
+	opacity: 1;
+	animation: lighter-pop 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+#lighter img {
+	width: 48px;
+	height: 80px;
+	display: block;
+	background: none;
+}
+@keyframes lighter-pop {
+	0% { transform: scale(0.2) translate(-50%, -50%); opacity: 0; }
+	60% { transform: scale(1.2) translate(-50%, -50%); opacity: 1; }
+	100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+}
+#lighter.flame::after {
+	content: '';
+	display: block;
+	width: 16px;
+	height: 32px;
+	background: radial-gradient(circle at 50% 60%, #ffeb3b 40%, #ff9800 80%, transparent 100%);
+	position: absolute;
+	left: 50%;
+	top: -28px;
+	transform: translateX(-50%);
+	border-radius: 50% 50% 40% 40%;
+	animation: flame-flicker 0.7s infinite alternate;
+}
+@keyframes flame-flicker {
+	0% { opacity: 0.8; }
+	100% { opacity: 1; filter: blur(2px); }
+}
+#cooling {
+	display: none;
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background: rgba(30, 58, 92, 0.95);
+	color: #00eaff;
+	font-size: 1.5rem;
+	align-items: center;
+	justify-content: center;
+	border-radius: 16px;
+	flex-direction: column;
+	padding: 40px;
+}
+#wall.revealed {
+	box-shadow: 0 0 80px #00eaff;
+}
+#cooling.revealed {
+	display: flex;
+}
