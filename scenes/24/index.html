@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Big Island</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <style>
+            html, body {
+                margin: 10;
+                padding: 0;
+                font-family: 'Montserrat', Arial, sans-serif;
+            }
+            img {
+                display: block;
+                margin: 0;
+                max-width: 100vw;
+                height: auto;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg) scale(0.5); }
+                10% {transform: rotate(36deg) scale(1);}
+                50% { transform: rotate(180deg) scale(10); }
+                90% {transform: rotate(324deg) scale(1);}
+                100% { transform: rotate(360deg) scale(0.5); }
+            }
+            h1[style*="animation: spin"] {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transform-origin: 50% 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: flex; align-items: center; gap: 20px; justify-content: center;">
+            <img src="https://cdn.britannica.com/29/172129-050-7C5C75C3/Honshu-largets-island-Japan.jpg" alt="Picture of the Island" style="width: 2000px;">
+        </div>
+        <p style="font-size: 1000px; margin: 0; line-height: 1; word-break: break-all;">Welcome to </p>
+        <h1 style="animation: spin 6s linear infinite; font-size: 800px; margin: 0; line-height: 1.5; justify-content: center;">Big</h1>
+        <p style="font-size: 400px; margin: 0; line-height: 1; display: flex; justify-content: center; align-items: center;">Island</p>
+        <p style="font-size: 100px; margin: 0; line-height: 1; display: flex; justify-content: center; align-items: center; margin-top: 1000px;">Once upon a time, this island was a small, 5ft square pile of dirt. But then the settlers invaded, trying to find a nice space. Each person brought a bag of dirt</p>
+        <img src="https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-soil-bag-for-flowers-and-plants-png-image_11915758.png" alt="Bag of Dirt" style="width: 4000px;">
+        <p style="font-size: 100px; margin: 0; line-height: 1; text-align: center;">
+            and slowly, the island became larger and larger, until it ended up suspiciously shaped like Japan. Hmm... 
+            (maybe the settlers are japan fans, or just want to make 
+            <a style="font-size: 100px; margin: 0; line-height: 1; text-align: center; display: inline;" href="https://shiba.hackclub.com" target=”_blank”>shiba</a>
+            at home? no one remembers anymore anyways)
+        </p>
+        <p style="font-size: 300px; margin: 0; line-height: 1; text-align: center; font-weight: bolder;">We also have a few <s>expansion plans</s> neighboring islands.</p>
+        <table style="width:100%; font-size:80px; border-collapse:collapse; margin-top:100px; text-align:center;">
+            <tr>
+                <th>Island Number</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><a href="https://isle.a.hackclub.dev/scenes/19">19</a></td>
+                <td>http://island</td>
+                <td>In the before time, this island once hosted the long-destroyed Geo-City</td>
+            </tr>
+            <tr>
+                <td><a href="https://isle.a.hackclub.dev/scenes/90">90</a></td>
+                <td>Prancy-Plants Peninsula</td>
+                <td>These plants be prancy af.</td>
+            </tr>
+            <tr>
+                <td><a href="https://isle.a.hackclub.dev/scenes/88">88</a></td>
+                <td>Anti-Anti-Ireland</td>
+                <td>Whatever it is, it ain't Anti-Ireland.</td>
+            </tr>
+        </table>
+    </body>
+</html>
