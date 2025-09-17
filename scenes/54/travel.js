@@ -40,18 +40,10 @@ async function countDownToRedirect() {
     updateHref();
   }
   countdowntext.innerHTML = "Redirecting...";
-  //if (!window.location.href.startsWith("https://xfn10x.github.io/scene-54/")) {
-    location.href = urlSearchParams.get("to");
-  //} else {
-  //  location.href = urlSearchParams.get("to");
-  //}
-}
-
-if (!urlSearchParams.has("to")) {
   if (!window.location.href.startsWith("https://xfn10x.github.io/scene-54/")) {
-    location.href = "/scenes/54";
+    location.href = "/scene-54/"+urlSearchParams.get("to");
   } else {
-    location.href = "/scene-54/scenes/54";
+    location.href = urlSearchParams.get("to");
   }
 }
 
