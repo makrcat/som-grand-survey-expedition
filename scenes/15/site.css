@@ -1,0 +1,47 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+h1 {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background-color: yellow;
+    border: 3px solid black;
+    padding: 10px;
+    display: inline-block;
+    z-index: 1;
+}
+
+.background{
+    top:0;
+    left:0;
+    width:100vw;
+    height:101vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 100px);
+    grid-template-rows: repeat(3, 75px);
+    gap: 30px;
+    justify-content: center;
+    margin-top: -400px;
+    margin-left: -90px;
+}
+
+.grid input{
+    width: 200px;
+    height: 200px;
+    background: url("bush1.png");
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
