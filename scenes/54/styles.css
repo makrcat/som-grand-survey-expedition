@@ -1,27 +1,38 @@
 @font-face {
   font-family: Asimovian;
-  src: url("fonts/Asimovian.ttf");
+  src: url("/scenes/54/fonts/Asimovian.ttf");
 }
 
 @font-face {
   font-family: EpundaSlab;
-  src: url("fonts/EpundaSlab-VariableFont_wght.ttf");
+  src: url("/scenes/54/fonts/EpundaSlab-VariableFont_wght.ttf");
 }
 
 @font-face {
   font-family: TulpenOne;
-  src: url("fonts/TulpenOne.ttf");
+  src: url("/scenes/54/fonts/TulpenOne.ttf");
 }
 
 header {
   /*position: fixed;*/
-  background-image: url("images/header-bg.png");
+  background-image: url("/scenes/54/images/header-bg.png");
   height: 80px;
   width: 100%;
   overflow: hidden;
 }
 
 .site {
+  background-color: rgb(250, 141, 7);
+  display: block;
+  border-radius: 25px;
+  outline-width: 3px;
+  outline-style: solid;
+  box-sizing: border-box;
+  max-width: 23.3rem;
+  overflow: hidden;
+}
+
+.travel-site {
   background-color: rgb(250, 141, 7);
   display: block;
   border-radius: 25px;
@@ -67,6 +78,17 @@ h6 {
     "c d"
     "e f"
     "g h";
+}
+
+.grid-verticle {
+  display: grid;
+  gap: 1rem 1rem;
+  justify-content: center;
+  grid-template:
+    "a"
+    "b"
+    "c"
+    "d";
 }
 
 .text-with-margin {
