@@ -40,7 +40,7 @@ async function countDownToRedirect() {
     updateHref();
   }
   countdowntext.innerHTML = "Redirecting...";
-  if (!window.location.href.startsWith("https://xfn10x.github.io/scene-54/")) {
+  if (window.location.href.startsWith("https://xfn10x.github.io/")) {
     location.href = "/scene-54/"+urlSearchParams.get("to");
   } else {
     location.href = urlSearchParams.get("to");
