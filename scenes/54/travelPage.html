@@ -8,10 +8,44 @@
     <meta name="author" content="xFN10x" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to Hotland!</title>
+    <title>Hotland Ferry Services</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" type="image/png" href="images/flag.jpg" />
   </head>
 
-  <body></body>
+  <body
+    style="
+      background-image: url(images/bg-travel.png);
+      background-position-x: left;
+      background-repeat: no-repeat;
+      margin: 0px 0px;
+    "
+  >
+    <header w3-include-html="header.html"></header>
+
+    <div style="margin: 16px auto; max-width: 880px"></div>
+
+    <script>
+      w3.includeHTML(function () {
+        Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+          (elememt) => {
+            if (
+              elememt.tagName.toLowerCase() === "a" &&
+              window.location.href.startsWith(
+                "https://xfn10x.github.io/scene-54/"
+              ) &&
+              !elememt.getAttribute("href").startsWith("/scene-54")
+            ) {
+              elememt.setAttribute(
+                "href",
+                "/scene-54" + elememt.getAttribute("href")
+              );
+
+              console.log("Changed href to: " + elememt.getAttribute("href"));
+            }
+          }
+        );
+      });
+    </script>
+  </body>
 </html>
