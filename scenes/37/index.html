@@ -22,13 +22,46 @@
       <p class="subtitle">“Woah… is that tree <em>upside‑down</em>?”</p>
     </header>
 
-    <!-- Lore block -->
-    <section class="lore" aria-label="Lore">
+    <!-- Lore blocks -->
+    <section class="lore primary" aria-label="Primary Lore">
       <p>
         Gravity gets picky here — rivers and trees obey the sky, while explorers tie stones to their boots to avoid drifting away.
         An ancient anchor hums above, keeping the island from floating into the stars. Locals whisper that a portal to the Right‑Side‑Up world
         is hidden somewhere among the sky‑roots.
       </p>
+    </section>
+
+    <!-- Expandable discovery sections -->
+    <section class="discoveries" aria-label="Discoveries">
+      <button class="discovery-trigger" id="anchor-discovery" data-discovery="anchor">
+          Investigate the Ancient Anchor
+      </button>
+      <div class="discovery-content" id="anchor-content" hidden>
+        <p>The anchor pulses with ethereal energy, its chain disappearing into star-speckled void above. 
+        Ancient runes carved into its surface glow faintly, depicting scenes of islands drifting through cosmic seas. 
+        When touched, it vibrates with a deep harmonic frequency that makes your bones tingle.</p>
+        <p class="discovery-effect">*The anchor's hum grows stronger, and you feel slightly more grounded.*</p>
+      </div>
+
+      <button class="discovery-trigger" id="skyroots-discovery" data-discovery="skyroots">
+          Explore the Sky-Roots
+      </button>
+      <div class="discovery-content" id="skyroots-content" hidden>
+        <p>The inverted trees stretch their roots toward the heavens like desperate fingers seeking starlight. 
+        Their bark shimmers with bioluminescent patterns that shift when you're not looking directly. 
+        Between the root-tendrils, reality seems thin—you catch glimpses of a blue sky beyond.</p>
+        <p class="discovery-effect">*A leaf falls upward past your ear, whispering secrets of the Right-Side-Up world.*</p>
+      </div>
+
+      <button class="discovery-trigger" id="gravity-discovery" data-discovery="gravity">
+          Study the Gravity Phenomena
+      </button>
+      <div class="discovery-content" id="gravity-content" hidden>
+        <p>Pockets of reversed gravity dot the island like invisible wells. Small stones and debris drift in lazy orbits 
+        around these zones, creating natural sculptures of floating matter. The effect grows stronger near certain plants 
+        and weaker around others, suggesting some kind of biological influence.</p>
+        <p class="discovery-effect">*You experiment by dropping a pebble—it hovers for a moment before drifting sideways.*</p>
+      </div>
     </section>
 
     <!-- Links to connected scenes -->
@@ -43,7 +76,30 @@
     <section class="interact" aria-label="Interactive toggles">
       <button id="flip-btn" class="ui">Unflip World</button>
       <button id="hc-btn" class="ui" aria-pressed="false">High Contrast</button>
+      <button id="particles-btn" class="ui" aria-pressed="true">Floating Particles</button>
+      <button id="atmosphere-btn" class="ui" aria-pressed="false">Mystical Atmosphere</button>
     </section>
+
+    <!-- Floating particles container -->
+    <div class="particles-container" id="particles" aria-hidden="true">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <!-- Interactive anchor element -->
+    <div class="interactive-anchor" id="mystical-anchor" aria-label="Ancient Anchor">
+      <div class="anchor-glow"></div>
+      <div class="anchor-body">⚓</div>
+      <div class="anchor-chain"></div>
+    </div>
 
     <!-- Credits / notes -->
     <footer class="credits" aria-label="Credits">
