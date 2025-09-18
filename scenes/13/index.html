@@ -9,57 +9,138 @@
     <script defer src="script.js"></script>
   </head>
   <body>
-    <div class="home">
-      <div class="title-container">
-        <img
-          id="rainbow-img"
-          src="./assets/rainbow.png"
-          alt="rainbow"
-          width="130px"
-        />
-        <h1 data-shadow="Welcome to Anti-Ireland!">
-          <a href="">Welcome to Anti-Ireland!</a>
-        </h1>
-        <img
-          id="shamrock-img"
-          src="./assets/shamrock.png"
-          alt="shamrock"
-          width="60px"
-        />
-      </div>
+    <button id="note">
+      NOTE
       <p>
-        We're flipping Ireland upside down! Ready to turn green hills into
-        deserts, chase away rainclouds, and send sheep to Mars?
+        This quiz is just for fun and not meant to offend anyone. Enjoy it
+        lightheartedly!
       </p>
-    </div>
-    <div class="grass-page">
-      <h2>🌱 Bye-Bye Grass</h2>
-      <button id="grassBtn">✨ Remove the Grass!</button>
-      <p>Click the button and watch the green disappear — it's desert time!</p>
-    </div>
+    </button>
+    <h1>How Much Anti-Ireland Are You?</h1>
+    <p>a quick quiz to test how much you don't fit in ireland!</p>
+    <button id="start">Start Quiz</button>
 
-    <div class="rain-page">
-      <h2>☁️ Rain, Rain, Go Away</h2>
-      <img src="cloud1" alt="cloud" />
-      <img src="cloud2" alt="cloud" />
-      <img src="cloud3" alt="cloud" />
-      <p>Tap the clouds to blow them away and let the sun take over! ☀️</p>
+    <div class="ques0">
+      <h2>Do you like sheep?</h2>
+      <label>
+        <input type="radio" name="q0" value="0" />Yes! They are adorable!
+      </label>
+      <label>
+        <input type="radio" name="q0" value="1" />No, they are secretly plotting
+        against humans.
+      </label>
+      <label>
+        <input type="radio" name="q0" value="0.5" />Only if they are wearing
+        tiny hats.
+      </label>
+      <label><input type="radio" name="q0" value="1" />I'm allergic.</label>
     </div>
-
-    <div class="sheep-page">
-      <h2>🐑 No More Sheep</h2>
-      <img src="sheep1" alt="sheep" />
-      <img src="sheep2" alt="sheep" />
-      <img src="sheep3" alt="sheep" />
-      <p>Click the sheep to send them on vacation — maybe to Mars! 🚀</p>
+    <div class="ques1">
+      <h2>Ideal way to spend a day?</h2>
+      <label>
+        <input type="radio" name="q1" value="0" />Hiking in green hills.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="1" />City sightseeing.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="0.5" />Netflix and snacks.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="1" />Making random experiments.
+      </label>
     </div>
-
-    <div class="shamrock-page">
-      <h2>☘️ Shamrock Swap</h2>
-      <p>
-        Out with the shamrocks, in with the trees! Tap to plant a forest instead
-        🌳
-      </p>
+    <div class="ques2">
+      <h2>What's your favorite weather?</h2>
+      <label><input type="radio" name="q2" value="0" />Sunny and warm.</label>
+      <label>
+        <input type="radio" name="q2" value="1" />Cloudy, I like shadows...
+      </label>
+      <label>
+        <input type="radio" name="q2" value="0.5" />A light drizzle with a cool
+        breeze.
+      </label>
+      <label><input type="radio" name="q2" value="1" />Tornado incoming!</label>
+    </div>
+    <div class="ques3">
+      <h2>Pick a beverage.</h2>
+      <label>
+        <input type="radio" name="q3" value="0" />A strong cup of tea.
+      </label>
+      <label>
+        <input type="radio" name="q3" value="1" />Coffee, can’t function without
+        it!
+      </label>
+      <label>
+        <input type="radio" name="q3" value="0.5" />Soda, because fizz is life.
+      </label>
+      <label>
+        <input type="radio" name="q3" value="1" />Just water, thanks.
+      </label>
+    </div>
+    <div class="ques4">
+      <h2>Favorite type of music?</h2>
+      <label>
+        <input type="radio" name="q4" value="0" />Traditional tunes.
+      </label>
+      <label>
+        <input type="radio" name="q4" value="1" />Pop, rock, anything else.
+      </label>
+      <label>
+        <input type="radio" name="q4" value="0.5" />Elevator music (very
+        calming).
+      </label>
+      <label>
+        <input type="radio" name="q4" value="1" />I only listen to silence.
+      </label>
+    </div>
+    <div class="ques5">
+      <h2>How do you feel about fog?</h2>
+      <label>
+        <input type="radio" name="q5" value="0" />Magical and mysterious.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="1" />Overrated, I want sunglasses.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="0.5" />Mildly interesting.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="1" />I can’t see anything anyway.
+      </label>
+    </div>
+    <div class="ques6">
+      <h2>Which of these is the most appealing?</h2>
+      <label>
+        <input type="radio" name="q6" value="0" />A long walk in the
+        countryside.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="1" />Reading a book by a fire.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="0.5" />A busy city street.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="1" />A high-five from a stranger.
+      </label>
+    </div>
+    <div class="ques7">
+      <h2>How would you decorate your home?</h2>
+      <label>
+        <input type="radio" name="q7" value="0" />Lush green everywhere, like
+        Ireland.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="1" />Minimalist, clean, no sheep.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="0.5" />A mix of chaos and rainbow
+        colors.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="1" />Just enough space to dance.
+      </label>
     </div>
   </body>
 </html>
