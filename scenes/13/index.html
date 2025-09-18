@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anti-Ireland</title>
     <link rel="shortcut icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
   </head>
   <body>
-    <button id="note">
+    <div id="note">
       NOTE
       <p>
         This quiz is just for fun and not meant to offend anyone. Enjoy it
         lightheartedly!
       </p>
-    </button>
+    </div>
     <h1>How Much Anti-Ireland Are You?</h1>
     <p>a quick quiz to test how much you don't fit in ireland!</p>
     <button id="start">Start Quiz</button>
@@ -141,6 +153,11 @@
       <label>
         <input type="radio" name="q7" value="1" />Just enough space to dance.
       </label>
+      <div class="button-container">
+        <button id="back">back</button> <button id="submit">submit</button>
+      </div>
     </div>
+    <div id="result" hidden></div>
+    <footer>Made with sheep and rain by Rei</footer>
   </body>
 </html>
