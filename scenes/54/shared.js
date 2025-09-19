@@ -1,6 +1,7 @@
 //detect the page from where you came from
 const urlSearchParams = new URLSearchParams(window.location.search);
 if (urlSearchParams.has("from")) {
+      localStorage.setItem("from-scene", urlSearchParams.get("from"));
   switch (urlSearchParams.get("from")) {
     case "97":
       localStorage.setItem("from", "north");
