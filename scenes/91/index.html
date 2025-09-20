@@ -3,9 +3,16 @@
     <head>
         <link rel="stylesheet" href="style.css">
         <script>
-            function loaded(){
-                const content=document.getElementById("content")
-                content.style.visibility="visible"
+            var treeBreakProgress=0
+            function loaded(){document.getElementById("content").style.visibility="visible"}
+            function incrementBreaking(){
+                if(treeBreakProgress>=10){
+                    document.getElementById('tree').remove()
+                    document.getElementById('treeDesciption').innerHTML="Good, finally this place is rid of trees."
+                }else{
+                    document.getElementById('treeBreak').src="block break/destroy_stage_"+treeBreakProgress+".png"
+                    treeBreakProgress++
+                }
             }
         </script>
     </head>
@@ -51,8 +58,10 @@
             <div class="bush-div">
                 <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
                 <div class="behind-bush">
-                    <img src="tree.png" id="tree">
-                    <p class="desciption">Wait a minute, <b>THAT</b>'s not a shrub!<br><b>Destroy It!</b></p>
+                    <div id="tree" onclick="incrementBreaking()">
+                        <img id="treeBreak">
+                    </div>
+                    <p class="desciption" id="treeDesciption">Wait a minute, <b>THAT</b>'s not a shrub!<br><b>Destroy It!</b></p>
                 </div>
             </div>
 
