@@ -18,6 +18,12 @@
     margin-right:auto;
     display:block;
 }
+#tree{
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
 #knight{
     visibility: hidden;
     position:absolute;
