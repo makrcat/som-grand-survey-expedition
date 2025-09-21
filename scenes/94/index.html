@@ -35,6 +35,7 @@
         </div>
 
         <div id="game-wrapper">
+            <img alt="mouse" src="assets/mouse.png" id="mouse">
             <image alt="gameBackground" src="assets/backgroundScene.png" id="backgroundScene"></image>
             <div id="hearts">
                 <image alt="heart" src="assets/heart_full.png" class="heart" id="heart_1"></image>
@@ -53,7 +54,7 @@
             <div class="message-background" id="outro-background">
                 <h2>Look! </h2>
                 <p>The altar vanished and a sign has appeared. I guess this is the end of your visit. Have fun on the
-                    rest of your journey!<br /><span class="small">P.S. Click on the sign to continue your
+                    rest of your journey! (Or try out hard mode by typing "hard" at any moment :))<br /><span class="small">P.S. Click on the sign to continue your
                         journey!</span></p>
                 <div id="wooden_sign_wrapper">
                     <img src="assets/wooden_sign.png" usemap="#image-map" title="wooden_sign" id="wooden_sign">
@@ -73,7 +74,16 @@
 
             </div>
         </div>
+
+        <div class="message" id="hardMode-wrapper">
+            <div class="message-background" id="hardMode-background">
+                <h2>Don't you dare!</h2>
+                <p>You think you can beat hard mode? A prick now hurts even more and you have to collect lots more of the mysterious fluid! Have fun!</p>
+                <button title="start" id="startHardMode">Start!</button>
+            </div>
+        </div>
     </div>
+    <div id="flashlight"></div>
 </body>
 
 </html>
