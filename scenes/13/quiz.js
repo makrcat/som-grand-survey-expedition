@@ -1,16 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
   // DOM Elements
   const canvas = document.getElementById("bgCanvas");
+  // Buttons
   const startBtn = document.getElementById("start");
   const submitBtn = document.getElementById("submit");
+  const backBtn = document.querySelectorAll(".back");
+  const okBtn = document.getElementById("ok");
+  // Note
+  const overlay = document.getElementById("overlay");
+  // Content
   const questions = document.querySelectorAll('[class^="ques"]');
-  const note = document.getElementById("note");
   const introElements = document.querySelectorAll("h1, p, #start");
+  const footer = document.querySelector("footer");
+  // Result
   const resultDiv = document.getElementById("result");
 
   // App State
   let currentQuestionIndex = 0;
   let score = 0;
+
+  // Show Note
+  if (!localStorage.getItem("noteShown")) {
+    overlay.style.display = "block";
+  }
+
+  // Ok Button Event Listener
+  okBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    localStorage.setItem("noteShown", "true");
+  });
 
   // Start Button Event Listener
   startBtn.addEventListener("click", () => {
@@ -48,18 +66,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 showQuestion(currentQuestionIndex);
               }, 300);
             }
+            if (currentQuestionIndex === questions.length - 1) {
+              footer.style.display = "block";
+            } else {
+              footer.style.display = "none";
+            }
           }
         });
       });
     }
   }
 
+  // Back Button
+  backBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentQuestionIndex--;
+      showQuestion(currentQuestionIndex);
+    });
+  });
   // Submit Button
   submitBtn.addEventListener("click", result);
 
-  // Result Function
   function result() {
     questions[questions.length - 1].style.display = "none";
+    footer.style.display = "none";
     resultDiv.style.display = "flex";
 
     const totalQuestions = questions.length;
@@ -92,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <p>${resultMessage}</p>
       <button id="restart">Try Again</button>`;
 
-    // Restart Button Event Listener
     const restart = document.getElementById("restart");
     restart.addEventListener("click", () => {
       resultDiv.style.display = "none";
