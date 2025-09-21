@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start Button Event Listener
   startBtn.addEventListener("click", () => {
     introElements.forEach((el) => (el.style.display = "none"));
-    canvas.style.opacity = 0.2;
+    //canvas.style.opacity = 0.8;
     showQuestion(currentQuestionIndex);
   });
 
@@ -128,4 +128,24 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.reload();
     });
   }
+
+  // Dark/light Mode
+  const toggleBtn = document.getElementById("darkModeToggle");
+  const body = document.body;
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark-mode");
+    toggleBtn.classList.add("dark");
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    toggleBtn.classList.toggle("dark");
+
+    localStorage.setItem(
+      "theme",
+      body.classList.contains("dark-mode") ? "dark" : "light"
+    );
+  });
 });
