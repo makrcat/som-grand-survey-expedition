@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="shared.js" defer></script>
+    <script src="/scenes/54/shared.js" defer></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <meta http-equiv="Content-Type" content="text/html" />
@@ -17,6 +17,7 @@
     style="
       background-image: url(/scenes/54/images/travel-page-bg.png);
       background-position-x: left;
+      background-size: cover;
       background-repeat: no-repeat;
       margin: 0px 0px;
     "
@@ -28,16 +29,81 @@
         style="
           font-size: 60px;
           margin-top: 0px;
-          -webkit-text-stroke: 1px;
-          -webkit-text-stroke-color: white;
+          
         "
       >
         Hotland Travel
       </h2>
       <div class="grid-verticle">
-      <div>
-        <p class="travel-site">test</p>
-      </div>
+        <div class="travel-site" style="max-height: 425px">
+          <img class="not-matching-aspect-img" src="/scenes/54/images/tri-trees.gif" id="r-trees" width="500px" height="425" />
+          <div style="max-width: 20rem; display: flex; flex-direction: column">
+            <div>
+              <h2 style="padding: 0rem 1rem; text-align: left">
+                Realm of the Trianglar Trees
+              </h2>
+              <p
+                style="
+                  text-align: left;
+                  padding: 0rem 1rem;
+                  overflow-wrap: break-word;
+                  overflow-y: auto;
+                "
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id
+                est velit. Aenean augue turpis, interdum sit amet laoreet eget,
+                tincidunt nec leo.
+              </p>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                margin: auto 1rem 0.5rem;
+              "
+            >
+              <button style="margin-left: 0">More Info...</button>
+              <button onclick="travelTo(97,54,0)" style="margin-left: auto">
+                Go >
+              </button>
+            </div>
+          </div>
+        </div>
+        <div  class="travel-site" style="max-height: 425px">
+          <img class="not-matching-aspect-img" id="vol-island" width="500px" height="425" src="/scenes/54/images/cave.png"/>
+          <div style="max-width: 20rem; display: flex; flex-direction: column">
+            <div>
+              <h2 style="padding: 0rem 1rem; text-align: left">
+                Volcanic Island
+              </h2>
+              <p
+                style="
+                  text-align: left;
+                  padding: 0rem 1rem;
+                  overflow-wrap: break-word;
+                  overflow-y: auto;
+                "
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id
+                est velit. Aenean augue turpis, interdum sit amet laoreet eget,
+                tincidunt nec leo.
+              </p>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                margin: auto 1rem 0.5rem;
+              "
+            >
+              <button style="margin-left: 0">More Info...</button>
+              <button onclick="travelTo(97,54,0)" style="margin-left: auto">
+                Go >
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 

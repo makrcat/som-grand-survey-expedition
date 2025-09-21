@@ -34,12 +34,11 @@ header {
 
 .travel-site {
   background-color: rgb(250, 141, 7);
-  display: block;
+  display: flex;
   border-radius: 25px;
   outline-width: 3px;
   outline-style: solid;
   box-sizing: border-box;
-  max-width: 23.3rem;
   overflow: hidden;
 }
 
@@ -47,6 +46,12 @@ h1 {
   font-family: EpundaSlab;
   font-size: 60px;
   text-align: center;
+}
+
+h1,
+h2 {
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: white;
 }
 
 #text,
@@ -58,6 +63,11 @@ a {
   text-decoration: none;
 }
 
+.not-matching-aspect-img {
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
 #text-alt,
 p,
 h2,
@@ -66,6 +76,7 @@ h4,
 h5,
 h6 {
   font-family: Asimovian;
+
   text-align: center;
 }
 
@@ -82,7 +93,7 @@ h6 {
 
 .grid-verticle {
   display: grid;
-  gap: 1rem 1rem;
+  gap: 4rem 4rem;
   justify-content: center;
   grid-template:
     "a"
