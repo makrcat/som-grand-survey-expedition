@@ -3,8 +3,11 @@ const second = document.getElementById("second-text");
 const third = document.getElementById("third-text");
 const fact = document.getElementById("fact");
 
+//TODO: add the tfrom url varible, so that it can change the text
+
 const texts = [
-  { //for going to scene 54 <---> 97
+  {
+    //for going to scene 54 <---> 97
     first:
       "When you were getting on the boat, a lot of people were getting off.",
     second: "And lots of people got on.",
@@ -12,16 +15,17 @@ const texts = [
     fact: `The <b>RTT to Hotland Ferry</b> is the most popular choice for
         getting to Hotland.`,
   },
-  { //for going to scene 97 <- 54 when from-scene = 97, without finding the secrets
-    first:
-      "The route is just as popular as before.",
+  {
+    //for going to scene 97 <- 54 when from-scene = 97, without finding the secrets
+    first: "The route is just as popular as before.",
     second: "You do catch a glimse of something you didnt notice before...",
-    third: "The bottom of the boat, which you though was just black, is pulsing...",
+    third:
+      "The bottom of the boat, which you though was just black, is pulsing...",
     fact: `<b>You missed some secrets.</b>`,
   },
-  { //for going to scene 97 <- 54 when from-scene = 97, with the secrets found
-    first:
-      "The route is just as popular as before.",
+  {
+    //for going to scene 97 <- 54 when from-scene = 97, with the secrets found
+    first: "The route is just as popular as before.",
     second: "Just as you suspected, the ferry is powered by sculk",
     third: "It seems like lots of people are traveling from Hotland and back,",
     fact: `The <b>RTT to Hotland Ferry</b> is the most popular choice for
@@ -37,18 +41,18 @@ const timerMax = 16;
 var timer = timerMax;
 
 function setText(id) {
-  const text = texts[id] 
-  first.innerHTML = text.first
-  second.innerHTML = text.second
-  third.innerHTML = text.third
-  fact.innerHTML = text.fact
+  const text = texts[id];
+  first.innerHTML = text.first;
+  second.innerHTML = text.second;
+  third.innerHTML = text.third;
+  fact.innerHTML = text.fact;
 }
 
 function updateHref() {
   urlSearchParams;
   countdowntext.innerHTML = `Redirecting in ${timer}... <a href="${urlSearchParams.get(
     "to"
-  )}">Travel now</a>`;
+  )}">Travel now </a>`;
 }
 
 async function showText() {
@@ -82,7 +86,7 @@ async function countDownToRedirect() {
   }
 }
 
-setText(urlSearchParams.get("textid"))
+if (urlSearchParams.has("textid")) setText(urlSearchParams.get("textid"));
 updateHref();
 
 showText();

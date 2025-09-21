@@ -1,7 +1,7 @@
 //detect the page from where you came from
 const urlSearchParams = new URLSearchParams(window.location.search);
 if (urlSearchParams.has("from")) {
-      localStorage.setItem("from-scene", urlSearchParams.get("from"));
+  localStorage.setItem("from-scene", urlSearchParams.get("from"));
   switch (urlSearchParams.get("from")) {
     case "97":
       localStorage.setItem("from", "north");
@@ -35,3 +35,23 @@ Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
     }
   }
 );
+
+function travelTo(scene, from, textId) {
+  if (window.location.href.startsWith("https://xfn10x.github.io/")) {
+    location.href =
+      "/scene-54/scenes/54/travel.html?textid=" +
+      textId +
+      "&tfrom=" +
+      from +
+      "&to=/scenes/" +
+      scene;
+  } else {
+    location.href =
+      "/scenes/54/travel.html?textid=" +
+      textId +
+      "&tfrom=" +
+      from +
+      "&to=/scenes/" +
+      scene;
+  }
+}
