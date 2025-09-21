@@ -22,17 +22,23 @@
     <script defer src="quiz.js"></script>
   </head>
   <body>
-    <canvas id="bgCanvas"></canvas>
-    <div id="note">
-      NOTE
-      <p>
-        This quiz is just for fun and not meant to offend anyone. Enjoy it
-        lightheartedly!
-      </p>
+    <div id="overlay">
+      <div id="note">
+        <h2>NOTE</h2>
+        <p>
+          This quiz is just for <span> fun </span> and not
+          <span>meant to offend</span> anyone. <br />
+          Enjoy it lightheartedly!
+        </p>
+        <button id="ok">OK!</button>
+      </div>
     </div>
+
+    <canvas id="bgCanvas"></canvas>
     <a href=""><h1>How Much Anti-Ireland Are You?</h1></a>
     <p>a quick quiz to see how much you don't fit in ireland!</p>
     <button id="start">Start Quiz</button>
+
     <div class="ques0">
       <h2>Do you like sheep?</h2>
       <label>
@@ -165,6 +171,6 @@
       </div>
     </div>
     <div id="result"></div>
-    <footer hidden>Made with 💚 by Rei</footer>
+    <footer>Made with 💚 by Rei</footer>
   </body>
 </html>
