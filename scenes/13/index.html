@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anti-Ireland</title>
-    <link rel="shortcut icon" href="data:," />
+    <link rel="shortcut icon" href="assets/shamrock.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,9 +18,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script defer src="script.js"></script>
+    <script defer src="bgAnimation.js"></script>
+    <script defer src="quiz.js"></script>
   </head>
   <body>
+    <canvas id="bgCanvas"></canvas>
     <div id="note">
       NOTE
       <p>
@@ -28,10 +30,9 @@
         lightheartedly!
       </p>
     </div>
-    <h1>How Much Anti-Ireland Are You?</h1>
-    <p>a quick quiz to test how much you don't fit in ireland!</p>
+    <a href=""><h1>How Much Anti-Ireland Are You?</h1></a>
+    <p>a quick quiz to see how much you don't fit in ireland!</p>
     <button id="start">Start Quiz</button>
-
     <div class="ques0">
       <h2>Do you like sheep?</h2>
       <label>
@@ -61,6 +62,7 @@
       <label>
         <input type="radio" name="q1" value="1" />Making random experiments.
       </label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques2">
       <h2>What's your favorite weather?</h2>
@@ -73,6 +75,7 @@
         breeze.
       </label>
       <label><input type="radio" name="q2" value="1" />Tornado incoming!</label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques3">
       <h2>Pick a beverage.</h2>
@@ -89,6 +92,7 @@
       <label>
         <input type="radio" name="q3" value="1" />Just water, thanks.
       </label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques4">
       <h2>Favorite type of music?</h2>
@@ -105,6 +109,7 @@
       <label>
         <input type="radio" name="q4" value="1" />I only listen to silence.
       </label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques5">
       <h2>How do you feel about fog?</h2>
@@ -120,6 +125,7 @@
       <label>
         <input type="radio" name="q5" value="1" />I can’t see anything anyway.
       </label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques6">
       <h2>Which of these is the most appealing?</h2>
@@ -136,6 +142,7 @@
       <label>
         <input type="radio" name="q6" value="1" />A high-five from a stranger.
       </label>
+      <div class="button-container"><button class="back">back</button></div>
     </div>
     <div class="ques7">
       <h2>How would you decorate your home?</h2>
@@ -153,11 +160,11 @@
       <label>
         <input type="radio" name="q7" value="1" />Just enough space to dance.
       </label>
-      <div class="button-container">
-        <button id="back">back</button> <button id="submit">submit</button>
+      <div class="buttons-container">
+        <button class="back">back</button> <button id="submit">Submit</button>
       </div>
     </div>
-    <div id="result" hidden></div>
-    <footer>Made with sheep and rain by Rei</footer>
+    <div id="result"></div>
+    <footer hidden>Made with 💚 by Rei</footer>
   </body>
 </html>
