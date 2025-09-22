@@ -4,6 +4,11 @@ console.log("hi get out of the console :3");
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 
+// Stop/ start bg movement button
+const isMovingBtn = document.getElementById("move");
+let isMoving = true;
+
+// Bg settings
 const cellSize = 100;
 const speedX = -0.4;
 const speedY = 0.7;
@@ -80,7 +85,7 @@ function draw() {
   ctx.textBaseline = "middle";
 
   for (let cell of cells) {
-    ctx.globalAlpha = 0.5;
+    ctx.globalAlpha = 0.3;
     ctx.drawImage(
       cell.value,
       cell.x - cellSize / 2,
@@ -120,10 +125,24 @@ function update(timestamp) {
 }
 
 // Animation loop
+let animationId;
+
 function animate(timestamp) {
   update(timestamp);
   draw();
-  requestAnimationFrame(animate);
+  animationId = requestAnimationFrame(animate);
 }
 
-requestAnimationFrame(animate);
+// Start animation
+animationId = requestAnimationFrame(animate);
+
+// Button toggles movement
+isMovingBtn.addEventListener("click", () => {
+  isMoving = !isMoving;
+
+  if (isMoving) {
+    animationId = requestAnimationFrame(animate);
+  } else {
+    cancelAnimationFrame(animationId);
+  }
+});
