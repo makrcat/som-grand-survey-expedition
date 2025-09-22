@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   // DOM Elements
-  const canvas = document.getElementById("bgCanvas");
   // Buttons
   const startBtn = document.getElementById("start");
   const submitBtn = document.getElementById("submit");
@@ -11,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Content
   const questions = document.querySelectorAll('[class^="ques"]');
   const introElements = document.querySelectorAll("h1, p, #start");
+  const connect = document.getElementById("connect");
+  const connectP = document.querySelectorAll("#connect p");
   const footer = document.querySelector("footer");
   // Result
   const resultDiv = document.getElementById("result");
@@ -33,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Start Button Event Listener
   startBtn.addEventListener("click", () => {
     introElements.forEach((el) => (el.style.display = "none"));
-    //canvas.style.opacity = 0.8;
     showQuestion(currentQuestionIndex);
   });
 
@@ -87,10 +87,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Submit Button
   submitBtn.addEventListener("click", result);
 
+  // Result
   function result() {
     questions[questions.length - 1].style.display = "none";
     footer.style.display = "none";
     resultDiv.style.display = "flex";
+    connect.style.display = "block";
+    connectP.forEach((p) => {
+      p.style.display = "block";
+    });
 
     const totalQuestions = questions.length;
     const maxScore = totalQuestions;
