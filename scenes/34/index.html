@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dilapidated Negative Emotion Factory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Unkempt&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #f9efe0 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      color: #3b302e;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+    }
+
+    h1, h2 {
+      font-family: 'Unkempt', cursive;
+      color: #5e4b3c;
+      text-shadow: 1px 1px #f9efe0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    a{
+      color:#a67c52
+    }
+
+    .collage {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      height: 400px;
+    }
+
+    .piece {
+      position: absolute;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      will-change: transform;
+      text-align: center;
+    }
+
+    .piece:hover {
+      transform: scale(1.05) rotate(var(--rot));
+      z-index: 10;
+    }
+
+    .piece img {
+      max-width: 120px;
+      display: block;
+      margin: 0 auto 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .piece:nth-child(1) { top: 10px; left: 50px; --rot: -2deg; }
+    .piece:nth-child(2) { top: 150px; left: 225px; --rot: 3deg; }
+    .piece:nth-child(3) { top: 10px; right: 0px; --rot: -1deg; }
+
+    .card {
+      background: #fffaf0;
+      border: 2px dashed #a67c52;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      box-shadow: 4px 6px 16px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    .card p {
+      line-height: 1.6;
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    .card p::first-letter {
+      float: left;
+      font-size: 2.8rem;
+      line-height: 1;
+      padding-right: 0.2rem;
+      font-family: 'Unkempt', cursive;
+      color: #a67c52;
+    }
+
+    .route {
+      width: 100%;
+      height: 2px;
+      background: repeating-linear-gradient(
+        to right,
+        #a67c52 0 8px,
+        transparent 8px 16px
+      );
+      margin: 1.5rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #a67c52;
+      color: #fffef0;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #9c6740;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0px); }
+      50% { transform: translateY(6px); }
+      to { transform: translateY(0px); }
+    }
+
+    .floating {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @media (max-width: 600px) {
+      .collage {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .piece {
+        position: static;
+        margin: 1rem 0;
+        transform: none !important;
+      }
+
+      .piece:hover {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Dilapidated Negative Emotion Factory</h1>
+
+  
+  <div class="card">
+    <h2>Hello</h2>
+    <p>
+      Many greetings fellow adventurer! What is this place you ask? 
+      It was once heaven on earth, but now it is a desolate land.
+      Well, it is a truly sorrowful tale. 
+      Have your tissues? Ok, but don't say I didn't warn you...
+    </p>
+  </div>
+  <div class="card">
+    <h2>Exceptional Times</h2>
+    <p>
+      A long time ago, this was a flourishing land. 
+      Kids from all over would come to this blissfull place. 
+      The nearby mountains had not snow, but candy snowing(candying?) down upon them every day. 
+      They would play in the waves of chocolate sauce and explore the little islands made of brownies.
+      They would come home to this whery spot,
+      Here, grandest building once stood, with a glass dome and graceful arches the Hacko.
+      But there was one person who could not <strong><em>stand</em></strong> to see all this happiness.
+    </p>
+  </div>
+  <div class="card">
+    <h2>Lonely Loser</h2>
+    <p>
+      The <strong>Hacker</strong> was a mean old woman. 
+      She lived in a little house on the beach made of a disgusting substance from a far away land. 
+      It had stiff walls made of a substance the color of mold and a roof of unruly bushes that was directly proportional to the huge amount of comments in her code.
+      She called this revolting creation <em>broccoli</em>. 
+      The kids of course were much more interested in modern projects, like game development. 
+      However, they made an unforgivable mistake...<strong>they didn't add comments</strong>.
+    </p>
+  </div>
+  <div class="card">
+    <h2>Lawless Revenge</h2>
+    <p>
+      Hearing that her sacred system had been violated such, the Hacker set out for revenge..
+      She came up with a punishment so heinous that I loath to say it: <strong>Homework</strong>.
+      Kids no longer had enough time to create all their amazing projects, but even they understood that programming was non-negotiable.
+      The Hacker, seeing that her punishment was not harsh enough, decided to destroy the very thing these children enjoyed.
+      She injected a concept into game development that would cause PTSD in kids for centuries to come.
+      I cannot even say what it was for fear of getting hunted down by her, but try looking at the start of each section.
+    </p>
+  </div>
+  <div class="card">
+    <h2>One Last Hope</h2>
+    <p>
+      Seas of chocolate turned salty, the mountains of candy became angry and the kids became depressed.
+      The Hacker had taken the one thing they loved away! Slowly, the land became desolate, with only the rare soul left with the Hacker.
+      The kids grew old without wonder and became mindless minions of corporations.
+      The Hacker grew lonely, realising the children brought a sense of liveliness to the community.
+      One night, she sacrificed her sleep to draft a treaty: <strong><em>The Hacker's Code</em></strong>.
+      She promised that if children were to accept and follow this Code, she would introduce wonderful things to the world of game developement, and never 
+      stop children from exploring again. Will you help us reach a better future?
+    </p>
+    <div class="route"></div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScbZssqPACGbthVnL0q6rTEXcovHfUA2XBEMh0H2jYzOLAclA/viewform?usp=header" class="btn">Take the Pledge</a>
+  </div>
+  <div class="collage">
+    <div class="piece floating">
+      <h2>Mount Unhappiness</h2>
+      <a href="https://isle.a.hackclub.dev/scenes/84"><p>Visit the Mountain<br> where the children went</p></a>
+    </div>
+    <div class="piece floating">
+      <h2>The Shore of Sorrows</h2>
+      <a href="https://isle.a.hackclub.dev/scenes/89"><p>The Hacker welcomes guests nowadays,<br> though her house looks more like a muffin now.</p></a>
+    </div>
+    <div class="piece floating">
+      <h2>Mildly Angry Mountains</h2>
+      <a href="https://isle.a.hackclub.dev/scenes/14"><p>Rumor has it candy has<br> started candying here again!</p></a>
+    </div>
+  </div>
+</body>
+</html>
