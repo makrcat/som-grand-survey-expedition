@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Cactusland</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="island">
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="nora">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=National+Park:wght@200..800&display=swap"
+        rel="stylesheet">
+    <script src="script.js"></script>
+
+</head>
+
+<body>
+    <image alt="BackgroundMap" src="assets/backgroundMap.png" id="backgroundMap"></image>
+    <div id="main-wrapper">
+
+
+        <div class="message" id="intro-wrapper">
+            <div class="message-background" id="intro-background">
+                <h2>Woaaahh! Looks like you've lost yourself in Cactusland!</h2>
+                <p>That's a pity. But it happens to the best travelers. Let's find your way out by filling that
+                    mysterious
+                    altar with some cactus fluid. Legends say it will show you the way to some awesome locations! But be
+                    warned:<br /> <span class="veryBold">DO NOT GET PRICKED BY A CACTUS!</span></p>
+                <img alt="water_shrine" src="assets/water_shrine_empty.png" id="intro-image">
+                <button title="Start" id="startButton">Alright!</button>
+            </div>
+        </div>
+
+        <div id="game-wrapper">
+            <img alt="mouse" src="assets/mouse.png" id="mouse">
+            <image alt="gameBackground" src="assets/backgroundScene.png" id="backgroundScene"></image>
+            <div id="hearts">
+                <image alt="heart" src="assets/heart_full.png" class="heart" id="heart_1"></image>
+                <image alt="heart" src="assets/heart_full.png" class="heart" id="heart_2"></image>
+                <image alt="heart" src="assets/heart_full.png" class="heart" id="heart_3"></image>
+                <image alt="heart" src="assets/heart_half.png" class="heart" id="heart_4"></image>
+                <image alt="heart" src="assets/heart_empty.png" class="heart" id="heart_5"></image>
+            </div>
+            <div id="fluid">
+                <span id="fluid_amount">0/10</span>
+                <image alt="water_drop" id="waterDrop" src="assets/water_drop.png"></image>
+            </div>
+        </div>
+
+        <div class="message" id="outro-wrapper">
+            <div class="message-background" id="outro-background">
+                <h2>Look! </h2>
+                <p>The altar vanished and a sign has appeared. I guess this is the end of your visit. Have fun on the
+                    rest of your journey! (Or try out hard mode by typing "hard" at any moment :))<br /><span class="small">P.S. Click on the sign to continue your
+                        journey!</span></p>
+                <div id="wooden_sign_wrapper">
+                    <img src="assets/wooden_sign.png" usemap="#image-map" title="wooden_sign" id="wooden_sign">
+
+                    <map name="image-map" id="wooden_sign_imageMap">
+                        <area target="" alt="The Blubberhills" title="The Blubberhills" href="/scenes/0/"
+                            coords="329,64,102,64,99,48,26,100,94,153,94,140,322,151" shape="poly">
+                        <area target="" alt="Ancient Insult Trading Post" title="Ancient Insult Trading Post"
+                            href="/scenes/79/" coords="78,262,311,252,311,263,379,216,306,163,308,177,70,182"
+                            shape="poly">
+                        <area target="" alt="Singletown" title="Singletown" href="/scenes/41/"
+                            coords="324,292,95,309,89,291,22,353,93,400,97,384,327,373" shape="poly">
+                    </map>
+
+                </div>
+                <span>Cactusland was made with ❤️ by JameDev</span>
+
+            </div>
+        </div>
+
+        <div class="message" id="hardMode-wrapper">
+            <div class="message-background" id="hardMode-background">
+                <h2>Don't you dare!</h2>
+                <p>You think you can beat hard mode? A prick now hurts even more and you have to collect lots more of the mysterious fluid! Have fun!</p>
+                <button title="start" id="startHardMode">Start!</button>
+            </div>
+        </div>
+    </div>
+    <div id="flashlight"></div>
+</body>
+
+</html>

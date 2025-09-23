@@ -1,0 +1,260 @@
+:root {
+    --color-background: #f6dbba;
+    --color-primary: #4a2d24;
+    --color-secondary: #c7a48d;
+    --color-secondary-hover: #a37c62;
+    --color-fluid-text: #000000;
+    --color-fluid-stroke: #ffffff;
+}
+
+
+* {
+    font-family: "National Park", sans-serif;
+    font-weight: 600;
+    color: var(--color-fluid-text);
+    margin: 0;
+     padding: 0;
+}
+
+img {
+    -webkit-user-drag: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    pointer-events: auto;
+}
+
+:root {
+    background-color: var(--color-background);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#backgroundMap {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    z-index: -200;
+}
+
+.veryBold {
+    font-weight: 900;
+}
+
+.small {
+    font-size: 1rem;
+}
+
+.message {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0rem 0;
+    width: 90vmin;
+}
+
+.message div {
+    background-color: var(--color-background);
+    border-radius: 1.5rem;
+    padding: 1rem;
+}
+
+.message h2 {
+    font-family: "Dynapuff", sans-serif;
+    font-size: 3.5rem;
+    max-width: 100vmin;
+    margin: 0 1rem 1rem 1rem;
+    color: var(--color-primary);
+}
+
+.message p {
+    font-size: 1.5rem;
+    max-width: 100vmin;
+    margin: 0 1rem;
+    color: var(--color-primary);
+}
+
+.message span {
+    color: var(--color-primary);
+}
+
+.message button {
+    display: block;
+    margin: auto;
+    margin: 1rem auto;
+    background-color: var(--color-secondary);
+    font-size: 1.5rem;
+    padding: 0.2rem 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.message button:hover {
+    background-color: var(--color-secondary-hover);
+    cursor: pointer;
+    scale: 1.05;
+    transition: 0.07s;
+}
+
+.message button:active {
+    background-color: var(--color-secondary-hover);
+    cursor: pointer;
+    scale: 1.0;
+    transition: 0.07s;
+}
+
+#game-wrapper {
+    display: none;
+    width: 100vmin;
+    height: 100vmin;
+    min-height: 100vh;
+    position: fixed;
+    overflow: hidden;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    background-image: url('assets/backgroundScene.png');
+    background-size: cover;
+    background-position: 50%;
+}
+
+.cactus {
+    -webkit-user-select: none;
+    user-select: none;
+    transition: transform 0.2s;
+    will-change: transform;
+    position: absolute;
+}
+
+#backgroundScene {
+    min-height: 100vh;
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    z-index: -100;
+    display: none;
+}
+
+#hearts {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+}
+
+.heart {
+    width: 2.5rem;
+}
+
+#waterDrop {
+    width: 3.5rem;
+
+    height: auto;
+}
+
+#fluid {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+}
+
+#fluid span {
+    color: white;
+    font-family: "Dynapuff", sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    -webkit-text-stroke: 2px black;
+}
+
+#outro-wrapper {
+    display: none;
+}
+
+#outro-background,
+#intro-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#intro-image {
+    height: 20rem;
+}
+
+#wooden_sign_wrapper {
+    margin: 0;
+    padding: 0;
+    scale: 0.8;
+}
+
+.tumbleweed {
+    width: 5rem;
+}
+
+.cactus-feedback,
+.mouse {
+    position: absolute;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Dynapuff", sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.7s;
+    z-index: 1000;
+    -webkit-text-stroke: 2px black;
+}
+
+#mouse {
+    height: 3.2rem;
+    object-fit: contain;
+    object-position: center;
+    display: none;
+}
+
+/*Hard Mode*/
+#hardMode-wrapper {
+    display: none;
+}
+
+#flashlight {
+    --Xpos: 50vw;
+    --Ypos: 50vh;
+    display: none;
+}
+
+#flashlight:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    background: radial-gradient(circle 10em at var(--Xpos) var(--Ypos),
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 1));
+}

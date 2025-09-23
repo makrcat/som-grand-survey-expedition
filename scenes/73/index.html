@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>The Great Frozen Wall</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+		<div id="wall">
+			<div class="wall-label">Frozen Wall</div>
+			<div id="hint" aria-hidden="true">Tap to crack the ice</div>
+			<div id="heatSpot" aria-hidden="true"></div>
+			<div id="cooling">
+					<div class="cooling-header">Hidden Cooling System Revealed</div>
+					<div class="system-grid">
+						<!-- Pipes cover spans entire grid as background wiring -->
+						<div class="pipes cover" aria-label="Coolant Pipes">
+							<div class="pipe vertical left"><div class="coolant flow"></div></div>
+							<div class="pipe horizontal top"><div class="coolant flow"></div></div>
+							<div class="pipe vertical right"><div class="coolant return"></div></div>
+							<div class="pipe horizontal bottom"><div class="coolant return"></div></div>
+							<!-- additional lines -->
+							<div class="pipe vertical center"><div class="coolant flow"></div></div>
+							<div class="pipe horizontal mid"><div class="coolant return"></div></div>
+							<div class="pipe horizontal mid2"><div class="coolant flow"></div></div>
+						</div>
+
+						<!-- Left: Radiator spanning two rows with fan -->
+						<div class="radiator" aria-label="Radiator" role="button" tabindex="0">
+							<div class="fins"></div>
+							<div class="fan"><div class="blades"></div></div>
+						</div>
+
+						<!-- Middle top: Pump; Middle bottom: PSI Gauge -->
+						<div class="pump" aria-label="Coolant Pump">
+							<div class="impeller"></div>
+							<div class="led on"></div>
+						</div>
+						<div class="gauge psi" aria-label="Pressure Gauge">
+							<div class="ticks"></div>
+							<div class="needle"></div>
+						</div>
+
+						<!-- Right top: Reservoir; Right bottom: Temp Gauge -->
+						<div class="reservoir" aria-label="Coolant Reservoir">
+							<div class="glass">
+								<div class="fluid"></div>
+								<div class="bubbles">
+									<span></span><span></span><span></span><span></span><span></span><span></span>
+								</div>
+							</div>
+						</div>
+						<div class="gauge temp" aria-label="Temperature Gauge">
+							<div class="ticks"></div>
+							<div class="needle"></div>
+						</div>
+
+						<!-- Valve control -->
+						<div class="valve open" aria-label="Flow Valve" role="button" tabindex="0">
+							<div class="handle"></div>
+							<div class="led on"></div>
+						</div>
+
+						<!-- Bottom: Display across -->
+						<div class="display" aria-live="polite">
+							<div class="row"><span class="label">Coolant</span><span id="tempValue">-20.0°C</span></div>
+							<div class="row small"><span class="label">Pressure</span><span id="psiValue">1.20 bar</span></div>
+							<div class="row small"><span class="label">Sound</span><button id="soundToggle" class="toggle on" aria-pressed="true">ON</button></div>
+							<div class="row small"><span class="label">Frost Mode</span><button id="frostBtn" class="toggle" aria-pressed="false">BURST</button></div>
+							<div class="row small"><span class="label">Dye</span><button id="dyeToggle" class="toggle" aria-pressed="false">CYAN</button></div>
+						</div>
+					</div>
+					<div id="steamOverlay" aria-hidden="true"></div>
+					<nav class="connected-scenes" aria-label="Connected Scenes">
+						<a class="scene" href="/scenes/74/">
+							<span class="scene-title">74 Spanky's</span>
+							<span class="scene-desc">Welcome to Spanky's. Would you like to roll the dice?</span>
+						</a>
+						<a class="scene" href="/scenes/45/">
+							<span class="scene-title">45 Node 45</span>
+							<span class="scene-desc">Description for Scene 45</span>
+						</a>
+						<a class="scene" href="/scenes/79/">
+							<span class="scene-title">79 Ancient Insult Trading Post</span>
+							<span class="scene-desc">Ancient peoples would gather here to trade ancient insults</span>
+						</a>
+					</nav>
+			</div>
+		</div>
+		<div id="lighter"><img src="lighter.png" alt="Lighter" style="width:48px;height:80px;display:block;"></div>
+		<script src="script.js"></script>
+</body>
+</html>
