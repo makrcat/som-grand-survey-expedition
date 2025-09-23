@@ -57,7 +57,7 @@ body {
     margin: -16px 0;
 }
 
-.blubberhill-facilities-list > div > button {
+.blubberhill-facilities-list > div > a {
     background: rgba(0, 0, 0, 0.05);
     height: fit-content;
     margin-top: auto;
