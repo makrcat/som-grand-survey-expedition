@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anti-Ireland</title>
+    <link rel="shortcut icon" href="assets/shamrock.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sigmar&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="bgAnimation.js"></script>
+    <script defer src="quiz.js"></script>
+  </head>
+  <body>
+    <div id="overlay">
+      <div id="note">
+        <h2>NOTE</h2>
+        <p>
+          This quiz is just for <span> fun </span> and not
+          <span>meant to offend</span> anyone. <br />
+          Enjoy it lightheartedly!
+        </p>
+        <button id="ok">OK!</button>
+      </div>
+    </div>
+
+    <canvas id="bgCanvas"></canvas>
+    <button id="move">
+      <svg
+        height="28px"
+        width="30px"
+        version="1.1"
+        id="_x32_"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 512 512"
+        xml:space="preserve"
+        fill="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <style type="text/css">
+            .st0 {
+              fill: #ff9800;
+            }
+          </style>
+          <g>
+            <path
+              class="st0"
+              d="M512,223.537c0-61.46-49.773-111.264-111.264-111.264c-11.768,0-22.922,2.31-33.496,5.644 C366.948,56.657,317.346,7.084,255.985,7.084c-61.32,0-110.993,49.573-111.224,110.833c-10.573-3.334-21.728-5.644-33.496-5.644 C49.774,112.273,0,162.077,0,223.537c0,49.241,32.171,90.479,76.533,105.12c-13.294,18.354-21.276,40.656-21.276,64.985 c0,61.46,49.773,111.274,111.254,111.274c36.86,0,69.222-18.043,89.475-45.646c20.283,27.603,52.645,45.646,89.465,45.646 c61.521,0,111.264-49.813,111.264-111.274c0-24.329-7.993-46.631-21.246-64.985C479.829,314.017,512,272.779,512,223.537z M255.985,337.433c-31.971,0-57.927-25.916-57.927-57.887c0-31.981,25.956-57.897,57.927-57.897c32,0,57.926,25.916,57.926,57.897 C313.912,311.517,287.986,337.433,255.985,337.433z"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </button>
+    <button id="darkModeToggle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30px"
+        height="30px"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <g id="SVGRepo_iconCarrier">
+          <g clip-path="url(#a)" fill="#ff9800">
+            <path
+              d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"
+            />
+          </g>
+          <defs>
+            <clipPath id="a">
+              <path fill="#ffffff" d="M0 0h24v24H0z" />
+            </clipPath>
+          </defs>
+        </g>
+      </svg>
+      <svg
+        width="30px"
+        height="30px"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M21.5287 15.9294C21.3687 15.6594 20.9187 15.2394 19.7987 15.4394C19.1787 15.5494 18.5487 15.5994 17.9187 15.5694C15.5887 15.4694 13.4787 14.3994 12.0087 12.7494C10.7087 11.2994 9.90873 9.40938 9.89873 7.36938C9.89873 6.22938 10.1187 5.12938 10.5687 4.08938C11.0087 3.07938 10.6987 2.54938 10.4787 2.32938C10.2487 2.09938 9.70873 1.77938 8.64873 2.21938C4.55873 3.93938 2.02873 8.03938 2.32873 12.4294C2.62873 16.5594 5.52873 20.0894 9.36873 21.4194C10.2887 21.7394 11.2587 21.9294 12.2587 21.9694C12.4187 21.9794 12.5787 21.9894 12.7387 21.9894C16.0887 21.9894 19.2287 20.4094 21.2087 17.7194C21.8787 16.7894 21.6987 16.1994 21.5287 15.9294Z"
+            fill="#ff9800"
+          ></path>
+        </g>
+      </svg>
+    </button>
+    <a href=""><h1>How Much Anti-Ireland Are You?</h1></a>
+    <p>a quick quiz to see how much you don't fit in ireland!</p>
+    <button id="start">Start Quiz</button>
+
+    <div class="ques0">
+      <h2>Do you like sheep?</h2>
+      <label>
+        <input type="radio" name="q0" value="0" />Yes! They are adorable!
+      </label>
+      <label>
+        <input type="radio" name="q0" value="1" />No, they are secretly plotting
+        against humans.
+      </label>
+      <label>
+        <input type="radio" name="q0" value="0.5" />Only if they are wearing
+        tiny hats.
+      </label>
+      <label><input type="radio" name="q0" value="1" />I'm allergic.</label>
+    </div>
+    <div class="ques1">
+      <h2>Ideal way to spend a day?</h2>
+      <label>
+        <input type="radio" name="q1" value="0" />Hiking in green hills.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="1" />City sightseeing.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="0.5" />Netflix and snacks.
+      </label>
+      <label>
+        <input type="radio" name="q1" value="1" />Making random experiments.
+      </label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques2">
+      <h2>What's your favorite weather?</h2>
+      <label><input type="radio" name="q2" value="0" />Sunny and warm.</label>
+      <label>
+        <input type="radio" name="q2" value="1" />Cloudy, I like shadows...
+      </label>
+      <label>
+        <input type="radio" name="q2" value="0.5" />A light drizzle with a cool
+        breeze.
+      </label>
+      <label><input type="radio" name="q2" value="1" />Tornado incoming!</label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques3">
+      <h2>Pick a beverage.</h2>
+      <label>
+        <input type="radio" name="q3" value="0" />A strong cup of tea.
+      </label>
+      <label>
+        <input type="radio" name="q3" value="1" />Coffee, can’t function without
+        it!
+      </label>
+      <label>
+        <input type="radio" name="q3" value="0.5" />Soda, because fizz is life.
+      </label>
+      <label>
+        <input type="radio" name="q3" value="1" />Just water, thanks.
+      </label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques4">
+      <h2>Favorite type of music?</h2>
+      <label>
+        <input type="radio" name="q4" value="0" />Traditional tunes.
+      </label>
+      <label>
+        <input type="radio" name="q4" value="1" />Pop, rock, anything else.
+      </label>
+      <label>
+        <input type="radio" name="q4" value="0.5" />Elevator music (very
+        calming).
+      </label>
+      <label>
+        <input type="radio" name="q4" value="1" />I only listen to silence.
+      </label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques5">
+      <h2>How do you feel about fog?</h2>
+      <label>
+        <input type="radio" name="q5" value="0" />Magical and mysterious.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="1" />Overrated, I want sunglasses.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="0.5" />Mildly interesting.
+      </label>
+      <label>
+        <input type="radio" name="q5" value="1" />I can’t see anything anyway.
+      </label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques6">
+      <h2>Which of these is the most appealing?</h2>
+      <label>
+        <input type="radio" name="q6" value="0" />A long walk in the
+        countryside.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="1" />Reading a book by a fire.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="0.5" />A busy city street.
+      </label>
+      <label>
+        <input type="radio" name="q6" value="1" />A high-five from a stranger.
+      </label>
+      <div class="button-container"><button class="back">back</button></div>
+    </div>
+    <div class="ques7">
+      <h2>How would you decorate your home?</h2>
+      <label>
+        <input type="radio" name="q7" value="0" />Lush green everywhere, like
+        Ireland.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="1" />Minimalist, clean, no sheep.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="0.5" />A mix of chaos and rainbow
+        colors.
+      </label>
+      <label>
+        <input type="radio" name="q7" value="1" />Just enough space to dance.
+      </label>
+      <div class="buttons-container">
+        <button class="back">back</button> <button id="submit">Submit</button>
+      </div>
+    </div>
+    <div id="result"></div>
+    <div id="connect">
+      <h2>Done with Ireland already? Check out these:</h2>
+      <p><a href="/scenes/26/">Island Island- Scene 26</a></p>
+      <p><a href="/scenes/17/">Toetree Forest- Scene 17</a></p>
+      <p><a href="/scenes/61/">Pair o' Dice- Scene 61</a></p>
+    </div>
+    <footer>Made with 💚 by Rei</footer>
+  </body>
+</html>
