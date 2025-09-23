@@ -7,7 +7,8 @@
             function loaded(){document.getElementById("content").style.visibility="visible"}
             function incrementBreaking(){
                 if(treeBreakProgress>=10){
-                    document.getElementById('tree').remove()
+                    document.getElementById('tree').style.backgroundImage='url("fallen down.png")'
+                    document.getElementById('treeBreak').src=""
                     document.getElementById('treeDesciption').innerHTML="Good, finally this place is rid of trees."
                 }else{
                     document.getElementById('treeBreak').src="block break/destroy_stage_"+treeBreakProgress+".png"
@@ -15,6 +16,8 @@
                 }
             }
         </script>
+        <title>Shrubs of Mystery</title>
+        <link rel="icon" type="image/x-icon" href="bush-icon.png">
     </head>
     <body onload="loaded()">
         <div id="content" style="visibility: hidden;">
@@ -30,21 +33,21 @@
                 <div id="sign">
                     <p>There are many things<br>
                         behind these bushes.<br>
-                        Poke around and you<br>
-                        might find something</p>
+                        Poke around and<br>
+                        you might find something</p>
                 </div>
             </div>
 
             <h3>Click a bush to see behind it.</h3>
             <div class="bush-div">
-                <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
+                <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A shrub, there may be something hidden behind it">
                 <div class="behind-bush">
                     <img src="bush.png" id="small-bush">
                     <p class="desciption">You found a smaller bush behind the first bush<br>You don't think there is anything else behind this bush</p>
                 </div>
             </div>
             <div class="bush-div">
-                <img src="Minecraft Bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it" style="object-fit:cover;width:640px;height:500px">
+                <img src="Minecraft Bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A shrub, this one looks a bit more blocky" style="object-fit:cover;width:640px;height:500px">
                 <div class="behind-bush" style="top:200px;left:200px;">
                     <img src="dancing lantern.gif" class="lantern" title="A dancing pumpkin">
                     <img src="dancing lantern.gif" class="lantern" title="A dancing pumpkin">
@@ -56,12 +59,12 @@
                 </div>
             </div>
             <div class="bush-div">
-                <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A bush, there may be something hidden behind it">
+                <img src="bush.png" onclick='this.classList.add("bush-hiding")' class="bush" title="A shrub, there may be something hidden behind it">
                 <div class="behind-bush">
                     <div id="tree" onclick="incrementBreaking()">
                         <img id="treeBreak">
                     </div>
-                    <p class="desciption" id="treeDesciption">Wait a minute, <b>THAT</b>'s not a shrub!<br><b>Destroy It!</b></p>
+                    <p class="desciption" id="treeDesciption">Wait a minute, <b>THAT</b>'s not a shrub!<br><b>Destroy It!</b><br>(click the tree)</p>
                 </div>
             </div>
 
