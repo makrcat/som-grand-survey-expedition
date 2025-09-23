@@ -1,14 +1,12 @@
-
 const first = document.getElementById("first-text");
 const second = document.getElementById("second-text");
 const third = document.getElementById("third-text");
 const fact = document.getElementById("fact");
 
-//TODO: add the tfrom url varible, so that it can change the text
-
 const texts = [
   {
     //for going to scene 54 <---> 97
+    //0
     first:
       "When you were getting on the boat, a lot of people were getting off.",
     second: "And lots of people got on.",
@@ -18,6 +16,7 @@ const texts = [
   },
   {
     //for going to scene 97 <- 54 when from-scene = 97, without finding the secrets
+    //1
     first: "The route is just as popular as before.",
     second: "You do catch a glimse of something you didnt notice before...",
     third:
@@ -26,24 +25,29 @@ const texts = [
   },
   {
     //for going to scene 97 <- 54 when from-scene = 97, with the secrets found
+    //2
     first: "The route is just as popular as before.",
     second: "Just as you suspected, the ferry is powered by sculk",
     third: "It seems like lots of people are traveling from Hotland and back,",
     fact: `The <b>RTT to Hotland Ferry</b> is the most popular choice for
         getting to Hotland.`,
   },
+  // for going to scene 78
+  //3
   {
-    first: "The cave looked cool. ",
+    first: "The cave looked cool.",
     second: "You saw a werid looking door, but you couldnt get in.",
     third: "There was even a glass tunnel, letting you see through the water.",
-    fact: "You saw a creature that sort of looked like a seal, watching you from the distance.<br>It seemed to be holding something"
-  }
+    fact: "You saw a creature that sort of looked like a seal, watching you from the distance.<br>It seemed to be holding something",
+  },
+  // the above, but with the key
+  //4 (it will do 3 if you dont have the key)
   {
     first: "The cave looked cool. ",
     second: "You saw a werid looking door...",
-    third: "You tried that werid key you found",
-    fact: "You saw a creature that sort of looked like a seal, watching you from the distance.<br>It seemed to be holding something"
-  }
+    third: "You tried that werid key you found...",
+    fact: 'The door opened. (You are going to a different page, Press "Redirect Now" to not.)',
+  },
 ];
 
 const countdowntext = document.getElementById("countdown");
@@ -98,11 +102,31 @@ async function countDownToRedirect() {
   if (window.location.href.startsWith("https://xfn10x.github.io/")) {
     location.href = "/scene-54/" + urlSearchParams.get("to");
   } else {
+    if (urlSearchParams.get("textid") == 4) {
+      if (window.location.href.startsWith("https://xfn10x.github.io/"))
+        location.href = "/scene-54/scenes/54/the-cave.html";
+      else location.href = "/scenes/54/the-cave.html";
+    }
     location.href = urlSearchParams.get("to");
   }
 }
 
-if (urlSearchParams.has("textid")) setText(urlSearchParams.get("textid"));
+if (urlSearchParams.has("textid")) {
+  if (
+    localStorage.getItem("hotland-has-key") == null ||
+    localStorage.getItem("hotland-has-key") == false
+  ) {
+    if (urlSearchParams.get("textid") == 4) {
+      setText(3);
+    }
+  } else {
+    if (urlSearchParams.get("textid") == 3) {
+      setText(4);
+    }
+  }
+
+  setText(urlSearchParams.get("textid"));
+}
 updateHref();
 
 showText();

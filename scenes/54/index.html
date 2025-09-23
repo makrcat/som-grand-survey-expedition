@@ -9,7 +9,7 @@
           case "97":
             localStorage.setItem("from", "north");
             location.href =
-              '/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=11';
+              "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=11";
             break;
           case "11":
             localStorage.setItem("from", "n-east");
@@ -26,7 +26,9 @@
       } else {
         console.warn("URL did not include from varaible");
         localStorage.setItem("from", "central");
-        location.href = "/scenes/54/home.html?from=self";
+        if (window.location.href.startsWith("https://xfn10x.github.io/"))
+          location.href = "/scene-54/scenes/54/home.html?from=self";
+        else location.href = "/scenes/54/home.html?from=self";
       }
     </script>
 
