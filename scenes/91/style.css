@@ -3,14 +3,27 @@
     src: url(Kalam-Regular.ttf);
 }
 #exit{
-    background-color:rgb(11, 85, 9);
+    background-color:darkgreen;
     width: fit-content;
-    border-color:gray;
+    border-color:darkgray;
     border-width: 5px;
     border-style: solid;
     border-radius: 20px;
     padding-left:20px;
     padding-right:20px;
+    transform:translateY(-100px);
+    transition-duration: 1s;
+    position:absolute;
+}
+#exit.animating{
+    transform:none;
+}
+#exit-holder{
+    position:relative;
+    overflow:hidden;
+    margin-left:50px;
+    width:200px;
+    height:100px;
 }
 #small-bush{
     width:50%;
@@ -59,6 +72,11 @@
     font-family: "Kalam","Ariel","sans-serif";
     line-height: 2.4;
 }
+#path{
+    width: 300px;
+    margin-left: 50px;
+    height:fit-content
+}
 .bush-div{
     width: 640px;
     height:515px;
@@ -95,9 +113,9 @@ body{
     background-color:rgb(29, 29, 29);
     font-family: Arial, Helvetica, sans-serif;
 }
-a:link{
-    color:rgb(142, 142, 255);
+/* a:link{
+    color:rgb(113, 113, 255);
 }
 a:visited{
-    color:rgb(102, 102, 230);
-}
+    color:rgb(151, 102, 230);
+} */
