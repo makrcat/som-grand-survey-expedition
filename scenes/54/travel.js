@@ -1,3 +1,4 @@
+
 const first = document.getElementById("first-text");
 const second = document.getElementById("second-text");
 const third = document.getElementById("third-text");
@@ -31,6 +32,18 @@ const texts = [
     fact: `The <b>RTT to Hotland Ferry</b> is the most popular choice for
         getting to Hotland.`,
   },
+  {
+    first: "The cave looked cool. ",
+    second: "You saw a werid looking door, but you couldnt get in.",
+    third: "There was even a glass tunnel, letting you see through the water.",
+    fact: "You saw a creature that sort of looked like a seal, watching you from the distance.<br>It seemed to be holding something"
+  }
+  {
+    first: "The cave looked cool. ",
+    second: "You saw a werid looking door...",
+    third: "You tried that werid key you found",
+    fact: "You saw a creature that sort of looked like a seal, watching you from the distance.<br>It seemed to be holding something"
+  }
 ];
 
 const countdowntext = document.getElementById("countdown");
@@ -40,6 +53,9 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 const timerMax = 16;
 var timer = timerMax;
 
+/**
+ * @param {number} id
+ */
 function setText(id) {
   const text = texts[id];
   first.innerHTML = text.first;
