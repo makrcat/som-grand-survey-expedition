@@ -395,23 +395,27 @@ h1:after {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 20px;
     z-index: 10;
+    box-sizing: border-box;
 }
 
 .direction-sign {
     background: linear-gradient(145deg, #8B4513, #A0522D);
     border: 3px solid #654321;
-    padding: 15px 20px;
+    padding: 12px 16px;
     color: white;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 0.9em;
     position: relative;
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
     transition: transform 0.3s ease;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    max-width: 200px;
+    max-width: 180px;
+    min-width: 140px;
     text-align: center;
+    word-wrap: break-word;
+    line-height: 1.2;
 }
 
 .direction-sign.left {
@@ -550,23 +554,34 @@ footer {
         width: 150px;
         height: 90px;
         left: 50px;
-        top: 40px;
+        top: 100px;
     }
     
     .seagull {
-        top: 20px;
+        top: 70px;
         left: 100px;
         font-size: 1.5em;
     }
     
-    .magic-button {
-        padding: 15px 30px;
-        font-size: 1.2em;
+    .main-sign {
+        padding: 15px 20px;
+        font-size: 1.1em;
+        max-width: 400px;
     }
     
-    .fact-display {
-        font-size: 1.1em;
-        margin: 15px;
-        padding: 15px;
+    .direction-signs {
+        padding: 0 10px;
+    }
+    
+    .direction-sign {
+        font-size: 0.8em;
+        padding: 10px 12px;
+        max-width: 140px;
+        min-width: 120px;
+    }
+    
+    .shell-counter, .donation-system {
+        font-size: 1em;
+        padding: 12px 16px;
     }
 }
