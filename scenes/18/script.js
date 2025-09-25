@@ -160,8 +160,8 @@ async function bulletinPage(a) {
 
 // On Page Load
 window.addEventListener('DOMContentLoaded', async () => {
-    daveTextList = await fetch("/assets/text.json").then(response => response.json())
-    bulletinBoardTextList = await fetch("/assets/bulletin.json").then(response => response.json())
+    daveTextList = await fetch("assets/text.json").then(response => response.json())
+    bulletinBoardTextList = await fetch("assets/bulletin.json").then(response => response.json())
 
     // key init
     if (localStorage.getItem("sc18_hasKey") === "true") {
@@ -241,28 +241,28 @@ document.getElementById("crystal").addEventListener("click", async () => {
     
     switch (crystalClicks) {
         case 3:
-            new Audio("/assets/crystal/critical.ogg").play()
-            document.getElementById("crystal").src = "/assets/crystal/1.png"
+            new Audio("assets/crystal/critical.ogg").play()
+            document.getElementById("crystal").src = "assets/crystal/1.png"
         break;
         case 5:
-            new Audio("/assets/crystal/critical.ogg").play()
-            document.getElementById("crystal").src = "/assets/crystal/2.png"
+            new Audio("assets/crystal/critical.ogg").play()
+            document.getElementById("crystal").src = "assets/crystal/2.png"
         break;
         case 7, 10:
-            new Audio("/assets/crystal/critical.ogg").play()
-            document.getElementById("crystal").src = "/assets/crystal/3.png"
+            new Audio("assets/crystal/critical.ogg").play()
+            document.getElementById("crystal").src = "assets/crystal/3.png"
         break;
         case 13:    
-            new Audio("/assets/other/explode.mp3").play()
+            new Audio("assets/other/explode.mp3").play()
             await delay(400)
-            document.getElementById("crystal").src = "/assets/crystal/cracked.png"
+            document.getElementById("crystal").src = "assets/crystal/cracked.png"
 
             await delay(5000)
             localStorage.setItem("sc18_bigBang", "true")
-            new Audio("/assets/crystal/flashbang.mp3").play()
+            new Audio("assets/crystal/flashbang.mp3").play()
 
             document.getElementById("crystal").src = ""
-            document.getElementById("crystalBgImg").src = "/assets/locations/6_crystalflashbang.png"
+            document.getElementById("crystalBgImg").src = "assets/locations/6_crystalflashbang.png"
             await delay(4300)
             document.getElementById("crystalText").style.removeProperty("visibility")
             await delay(100)
@@ -270,7 +270,7 @@ document.getElementById("crystal").addEventListener("click", async () => {
 
             break;
         default:
-            new Audio("/assets/crystal/hit.ogg").play()
+            new Audio("assets/crystal/hit.ogg").play()
         break;
     }
 })
@@ -289,17 +289,17 @@ daveImage.addEventListener("click", async () => {
         var text = daveTextList[randomIndex]
 
         if (daveImage.classList.contains("hasHat") || daveImage.classList.contains("hasOnlyHat")) {
-            daveImage.src = "/assets/dave/dave.png"
+            daveImage.src = "assets/dave/dave.png"
             daveImage.classList.remove("hasHat", "hasOnlyHat")
         }
 
         // custom tags handling custom situations
         if (text.startsWith("<hat>")) {
-            daveImage.src = "/assets/dave/davenohat.png"
+            daveImage.src = "assets/dave/davenohat.png"
             text = text.replace("<hat>", "").trim()
             daveImage.classList.add("hasHat")
         } else if (text.startsWith("<onlyhat>")) {
-            daveImage.src = "/assets/dave/daveonlyhat.png"
+            daveImage.src = "assets/dave/daveonlyhat.png"
             text = text.replace("<onlyhat>", "").trim()
             daveImage.classList.add("hasOnlyHat")
         }
@@ -328,6 +328,6 @@ document.getElementById("basementBChest").addEventListener("click", async () => 
     if (localStorage.getItem("sc18_hasKey") !== "true") return
     localStorage.setItem("sc18_openedChest", "true")
 
-    new Audio("/assets/other/explode.mp3").play()
+    new Audio("assets/other/explode.mp3").play()
     document.getElementById("basementBChest").style.visibility = "hidden"
 })
