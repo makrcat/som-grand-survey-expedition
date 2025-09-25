@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Best of All Possible Snowdrifts</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- llogo -->
+    <link rel="shortcut icon" href="xcf/logo.png" type="image/x-icon">
+    <!-- fonts import :DD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@700&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- z 70 -->
+    <div class="holdup holdup--hidden" id="holdup">
+        <h1>HOLDUP, you're about to leave this scene</h1>
+        <h2 id="holdup_h2">And go to [insert next scene :PP]</h2>
+        <h1>Are you sure??</h1>
+        <div class="holdup__buttons">
+            <button onclick="noThanks()"> No, I'll stay!</button>
+            <a href="/scenes/28"> Yes, take me there!</a>
+        </div>
+    </div>
+    <!-- z 60 -->
+    <div class="startText startPopup">
+        <hr>
+        <h1>The Best of All Possible Snowdrifts</h1>
+        <h2>HELLO and WELCOME</h1>
+        <h1>The Best of All Possible Snowdrifts</h1>
+        <hr>
+        <p>
+            Hello and welcome to The Best of All Possible Snowdrifts :DD <br>
+            In here there is a cool story about a snowy land and the past kindom that lived here,<br>
+            You can go around scenes, talk to npc's and collect stuff!<br><br>
+            [Controlls] - click around and find out (point-and-click)XD<br>
+            There also is backpack for storing items ;))<br>
+            Hand slot on right, whith return above it<br><br>
+            Enogh rambling and have fun :DD
+        </p>
+        <hr>
+        <button onclick="startGame()">PLAY</button>
+        <a href="Credits.html" id="startText__buttons--a">Credits</a>
+    </div>
+    <!-- z 50 -->
+    <div class="startScreen startPopup">
+    </div>
+    <!-- z 40 -->
+    <div class="tranistion tranistion--hidden" id="tranistion"></div>
+    <!-- z 18 -->
+    <div class="hand">
+        <input type="image" src="xcf/prototype_eye.png" alt="look around" id="lookaround">
+        <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden>
+        <input type="image" src="xcf/prototype1_backtrack.png" alt="backtrack" id="backtrack">
+    </div>
+    <!-- z 15 -->
+    <div class="diologue diologue--closed" id="diologue">
+        <span>
+            <img src="xcf/diologue_test.png" alt="speaker" id="diologue_img">
+            <h1 id="diologue_name">Name of speaker</h1>
+        </span>
+        <div class="diologue__text">
+            <p id="diologue_text">
+                AAAAA
+            </p>
+            <div class="diologue__text__buttons">
+                <button id="dialogue_button_1"> Test 1</button>
+                <button id="dialogue_button_2"> Test 2</button>
+                <button id="dialogue_button_3"> Test 3</button>
+            </div>
+        </div>
+    </div>
+    <!-- z 13 -->
+    <div class="backpack backpack--closed CUT" id="backpack">
+        <img src="xcf/prototype1_backpack_closed.png" alt="backpack" id="backpack_img">
+        <div class="backpack__slots CUT" id="backpack_slot_holder">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+            <input type="image" src="xcf/prototype1_invSlot.png" alt="inv_slot" hidden class="inv_slot CUT">
+        </div>
+    </div>
+    <!-- z 10 -->
+    <div class="place place--closed" id="place">
+        <h1></h1>
+        <p></p>
+    </div>
+    <!-- z 5 -->
+    <canvas class="snowstorm" width="640" height="320" id="snowstorm"></canvas>
+    <!-- z -5 -->
+    <div class="mainScene">
+        <img src="xcf/V1_Town_shop_view.png" alt="Shop view" class="mainScene--img" id="mainScene">
+        <div class="mainScene__center">
+            <div class="mainScene__center__center">
+                <!-- snowpiles -->
+                <img src="xcf/V1_SnowAssets_1.png" alt="Shop view" class="mainScene__center__center--interactable mainScene__center__center--snowpile_1">
+                <img src="xcf/V1_SnowAssets_1.png" alt="Shop view" class="mainScene__center__center--interactable mainScene__center__center--snowpile_1">
+                <img src="xcf/V1_SnowAssets_1.png" alt="Shop view" class="mainScene__center__center--interactable mainScene__center__center--snowpile_1">
+                <img src="xcf/V1_SnowAssets_1.png" alt="Shop view" class="mainScene__center__center--interactable mainScene__center__center--snowpile_1">
+                <!-- opening -->
+                <img src="xcf/V1_interactables.png" alt="Shop view" class="mainScene__center__center--interactable mainScene__center__center--doorOutside">
+                <img src="xcf/V1_interactables.png" alt="Ladder" class="mainScene__center__center--interactable mainScene__center__center--ladderOutside">
+                <img src="xcf/V1_interactables.png" alt="snow mobile" class="mainScene__center__center--interactable mainScene__center__center--snowMobile">
+                <img src="xcf/v1_guid.png" alt="guid" class="mainScene__center__center--interactable mainScene__center__center--guid_outside">
+                <!-- shop_shopkeep -->
+                <img src="xcf/v1_shop_shop_front.png" alt="shops front" class="mainScene__center__center--shop_shop_front ">
+                <img src="xcf/v1_shopkeep.png" alt="shopkeep" class="mainScene__center__center--interactable mainScene__center__center--shopkeep">
+                <!-- view -->
+                <!-- <div class="mainScene__center__center--interactable mainScene__center__center--coin_tower">
+                    <img src="xcf/V1_interactables.png" alt="guid" class="mainScene__center__center--coin">
+                </div>
+                <div class="mainScene__center__center--interactable mainScene__center__center--coin_start">
+                    <img src="xcf/V1_interactables.png" alt="guid" class="mainScene__center__center--coin">
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <link rel="preload" href="xcf/V1_Town_shop_view.png" as="image">
+    <link rel="preload" href="xcf/v1_tower_view.png" as="image">
+    <link rel="preload" href="xcf/V1_SnowAssets_1.png" as="image">
+    <link rel="preload" href="xcf/v1_shopkeep.png" as="image">
+    <link rel="preload" href="xcf/v1_shopkeep_picture.png" as="image">
+    <link rel="preload" href="xcf/V1_shop_view.png" as="image">
+    <link rel="preload" href="xcf/v1_shop_shop_front.png" as="image">
+    <link rel="preload" href="xcf/v1_shop_shop_back.png" as="image">
+    <link rel="preload" href="xcf/V1_interactables.png" as="image">
+    <link rel="preload" href="xcf/v1_guid.png" as="image">
+    <link rel="preload" href="xcf/v1_guid_picture.png" as="image">
+    <script src="main.js"></script>
+</body>
+</html>
