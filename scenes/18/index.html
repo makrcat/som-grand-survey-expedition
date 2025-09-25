@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dave the magical wizard</title>
+
+    <!-- CSS + Preload Images -->
+    <link rel="preload" href="/assets/dave/davenohat.png" as="image">
+    <link rel="preload" href="/assets/dave/daveonlyhat.png" as="image">
+
+    <link rel="preload" href="/assets/locations/6_crystalflashbang.png" as="image">
+
+    <link rel="preload" href="/assets/crystal/critical.ogg" as="audio">
+    <link rel="preload" href="/assets/crystal/flashbang.mp3" as="audio">
+    <link rel="preload" href="/assets/crystal/hit.ogg" as="audio">
+    <link rel="preload" href="/assets/crystal/0.png" as="image">
+    <link rel="preload" href="/assets/crystal/1.png" as="image">
+    <link rel="preload" href="/assets/crystal/2.png" as="image">
+    <link rel="preload" href="/assets/crystal/3.png" as="image">
+
+    <link rel="preload" href="/assets/other/coin.mp3" as="audio">
+    <link rel="preload" href="/assets/other/explode.mp3" as="audio">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Roboto Mono & Rubik Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!--   ____ _____ ____  ____  _   -->
+    <!--  / ___Y__ __Y  _ \/  __\/ \  -->
+    <!--  |    \ / \ | / \||  \/|| |  -->
+    <!--  \___ | | | | \_/||  __/\_/  -->
+    <!--  \____/ \_/ \____/\_/   (_)  -->
+    <!-- If you wish to not be spoiled, do not view the files!-->
+    <div class="container">
+        <!-- Transition -->
+        <div class="hidden location" id="transitionLocation">
+            <p>Loading<span id="transitionDottedText">...</span></p>
+
+            <img class="locationBgImg" src="/assets/locations/0_empty.png" alt="bg">
+        </div>
+
+        <!-- Attic -->
+        <div class="hidden location" id="atticLocation">
+            <div class="btnDown" onclick="changeLocation('daveLocation')"></div>
+
+            <img id="atticKey" src="/assets/chest/key.png" alt="key (click on me)">
+            <div class="btnArrow btnDown" onclick="changeLocation('daveLocation')"></div>
+
+            <img class="locationBgImg" src="/assets/locations/0_attic.png" alt="bg">
+        </div>
+
+        <!-- Main -->
+        <div class="location" id="daveLocation">
+            <p id="daveText"></p>
+            <img id="daveCharacter" src="/assets/dave/dave.png" alt="Dave the Magical Wizard">
+            <input id="daveTextBox" type="text" required placeholder="Type your question here...">
+
+            <div class="btnArrow btnUp" id="daveBtn" style="visibility: hidden;" onclick="changeLocation('atticLocation')"></div>
+            <div class="btnArrow btnDown" id="daveBtn" style="visibility: hidden;" onclick="changeLocation('basementALocation')"></div>
+            <div class="btnArrow btnLeft" id="daveBtn" style="visibility: hidden;" onclick="changeLocation('outsideALocation')"></div>
+            <div class="btnArrow btnRight" id="daveBtn" style="visibility: hidden;" onclick="changeLocation('outsideBLocation')"></div> 
+
+            <img class="locationBgImg" id="daveBg" style="visibility: hidden;" src="/assets/locations/1_main.png" alt="bg">
+        </div>
+
+        <!-- Outside A -->
+        <div class="hidden location" id="outsideALocation">
+            <a href="/scenes/43"><div class="btnYellowArrow btnScene43"></div></a>
+            <a href="/scenes/70"><div class="btnYellowArrow btnScene70"></div></a>
+
+            <div class="btnDoor btnDoorPosRight" onclick="changeLocation('daveLocation')"></div> 
+            <img class="locationBgImg" src="/assets/locations/2_outsidea.png" alt="bg">
+        </div>
+
+        <!-- Outside B -->
+        <div class="hidden location" id="outsideBLocation">
+            <a href="/scenes/31"><div class="btnBlueArrow btnScene31"></div></a>
+            <a href="/scenes/52"><div class="btnBlueArrow btnScene52"></div></a>
+
+            <div class="btnDoor btnDoorPosLeft" onclick="changeLocation('daveLocation')"></div> 
+            <img class="locationBgImg" src="/assets/locations/3_outsideb.png" alt="bg">
+        </div>
+
+        <!-- Basement A -->
+        <div class="hidden location" id="basementALocation">
+            <div class="btnArrow btnUp" onclick="changeLocation('daveLocation')"></div>
+            <div class="btnArrow btnLeft" onclick="changeLocation('basementBLocation')"></div>
+
+            <div id="bulletinBoardContainer">
+                <h1 id="bulletinBoardTitle">temp</h1>
+                <p id="bulletinBoardDescription">temp</p>
+            </div>
+
+            <div class="btnBulletinLeft" onclick="bulletinPage('-')"></div>
+            <div class="btnBulletinRight" onclick="bulletinPage('+')"></div>
+
+            <div class="btnBook" onclick="changeLocation('crystalLocation')"></div> 
+
+            <img class="locationBgImg" src="/assets/locations/4_basementa.png" alt="bg">
+        </div>
+
+        <!-- Basement B -->
+        <div class="hidden location" id="basementBLocation">            
+            <img style="cursor: not-allowed;" id="basementBChest" src="/assets/chest/chest.png" alt="chest (you need a key)">
+            <div class="btnArrow btnRight" onclick="changeLocation('basementALocation')"></div> 
+
+            <img class="locationBgImg" src="/assets/locations/5_basementb.png" alt="bg">
+        </div>
+
+        <!-- Crystal -->
+        <div class="hidden location" id="crystalLocation">
+            <img id="crystal" src="/assets/crystal/0.png">
+
+            <div id="crystalText" style="opacity: 0; visibility: hidden;">
+                <p>you died</p>
+                <p>check out other scenes</p>
+                <p><a href="/scenes/31">31</a> | <a href="/scenes/43">43</a> | <a href="/scenes/52">52</a> | <a href="/scenes/70">70</a></p>
+            </div>
+
+            <img id="crystalBgImg" class="locationBgImg" src="/assets/locations/0_empty.png" alt="bg">
+        </div>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
