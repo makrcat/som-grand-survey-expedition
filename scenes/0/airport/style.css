@@ -1,0 +1,40 @@
+body {
+    background: linear-gradient(to bottom, #6b8f6d, #98BD9B 300px);
+    height: calc(100dvh - 128px);
+}
+
+.airport-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.airport-selection > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+}
+
+.airport-selection > div > select {
+    font-size: 1rem;
+    background: white;
+    padding: 10px 48px 10px 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5H7z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px) center;
+    background-size: 16px;
+    border-radius: 6px;
+}
+
+.airport-selection > button {
+    font-size: 0.9rem;
+    background: white;
+    padding: 6px 12px;
+    margin-top: 16px;
+    border-radius: 6px;
+}

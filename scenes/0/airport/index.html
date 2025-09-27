@@ -5,13 +5,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Blubberhill Airport</title>
         <link rel="stylesheet" href="../reusuable.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap" rel="stylesheet">
     </head>
     <body>
-        <img src="../assets/defrein_working_dino.png" alt="Defrein's Working Dino">
-        <h2>Under Construction</h2>
-        <p>We're still deligently working on this.</p>
+        <div class="airport-selection">
+            <h1>Blubberhill Interislandal Airport</h1>
+            <div class="from-airport-div">
+                <label for="from-input">From</label>
+                <select id="from-input">
+                    <option value="1">Blubberhill Interislandal Airport</option>
+                </select>
+            </div>
+            <div class="to-airport-div">
+                <label for="to-input">To</label>
+                <select id="to-input">
+                    <option>Los Árboles de la Estupidez</option>
+                    <option>http://island</option>
+                    <option>Prancy-Plants Peninsula</option>
+                </select>
+            </div>
+            <button id="fly-btn">Fly!</button>
+        </div>
+        <script>
+            const toInput = document.getElementById('to-input');
+            const flyBtn = document.getElementById('fly-btn');
+
+            const destinations = [
+                {index: "0", name: "Los Árboles de la Estupidez", sceneIndex: "56", directSceneLink: "https://isle.a.hackclub.dev/scenes/56"},
+                {index: "1", name: "http://island", sceneIndex: "19", directSceneLink: "https://isle.a.hackclub.dev/scenes/19"},
+                {index: "2", name: "Prancy-Plants Peninsula", sceneIndex: "90", directSceneLink: "https://isle.a.hackclub.dev/scenes/90"}
+            ];
+
+            flyBtn.addEventListener('click', () => {
+                const selected = toInput.selectedIndex;
+                if (selected < 0 || selected >= destinations.length) return; // fallback in case you try and break ts
+                const url = destinations[selected].directSceneLink;
+                if (url) window.location.href = url;
+            });
+        </script>
     </body>
 </html>

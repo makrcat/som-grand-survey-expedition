@@ -23,7 +23,7 @@ p {
     margin: 0.4em 0;
 }
 
-button, .button {
+button, .button, select {
     cursor: pointer;
     font-family: 'TASA Orbiter', sans-serif;
     border: none;
