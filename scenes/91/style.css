@@ -1,0 +1,121 @@
+@font-face {
+    font-family: "Kalam";
+    src: url(Kalam-Regular.ttf);
+}
+#exit{
+    background-color:darkgreen;
+    width: fit-content;
+    border-color:darkgray;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 20px;
+    padding-left:20px;
+    padding-right:20px;
+    transform:translateY(-100px);
+    transition-duration: 1s;
+    position:absolute;
+}
+#exit.animating{
+    transform:none;
+}
+#exit-holder{
+    position:relative;
+    overflow:hidden;
+    margin-left:50px;
+    width:200px;
+    height:100px;
+}
+#small-bush{
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+}
+#tree{
+    background-image: url('tree.png');
+    height:300px;
+    width: 400px;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position-x:right;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: right;
+}
+#treeBreak{
+    height:100%;
+    width:fit-content;
+    image-rendering:pixelated;
+}
+#knight{
+    visibility: hidden;
+    position:absolute;
+    width:64px;
+    top:-38px;
+    left:92px;
+    height:fit-content;
+    image-rendering: pixelated;
+}
+#lore{
+    border:5px solid gray;
+    border-radius: 20px;
+    width:fit-content;
+    padding:0px 20px;
+    background-color:rgb(50, 7, 73)
+}
+#sign{
+    background-image: url("sign.svg");
+    background-size: cover;
+    height:200px;
+    padding: 0 30px 0;
+    text-align: center;
+    font-family: "Kalam","Ariel","sans-serif";
+    line-height: 2.4;
+}
+#path{
+    width: 300px;
+    margin-left: 50px;
+    height:fit-content
+}
+.bush-div{
+    width: 640px;
+    height:515px;
+    position:relative;
+    overflow:hidden;
+}
+.bush{
+    position:relative;
+    z-index:10;
+    cursor:pointer;
+}
+.bush-hiding{
+    transition-duration: 1s;
+    transform: translateY(515px);
+}
+.behind-bush{
+    /* z-index: -1; */
+    position:absolute;
+    top:100px;
+    left:100px;
+    width: fit-content;
+    
+}
+.desciption{
+    text-align: center;
+}
+.lantern{
+    width:46px;
+    height:fit-content;
+    image-rendering: pixelated;
+}
+body{
+    color:white;
+    background-color:rgb(29, 29, 29);
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* a:link{
+    color:rgb(113, 113, 255);
+}
+a:visited{
+    color:rgb(151, 102, 230);
+} */
