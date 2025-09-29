@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
             if (codeStr === "glub glub") {
            
-                decodeBtn.innerText = "Next Scene";
+                decodeBtn.innerText = "Lets GO!";
                 decodeBtn.classList.add("nextSceneBtn");
-                resultEl.innerText = "Monster has allowed!Yippe Now You shall pass to next page";
+                resultEl.innerText = "Monster has allowed! Yippe Now You shall pass to The Parting of the Mountain Waters";
                 triggerCelebration();
     
                
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
                
                 nextBtn.addEventListener('click', () => {
-                    window.location.href = "nextScene.html"; 
+                    window.location.href = "https://isle.a.hackclub.dev/scenes/80"; 
                 });
             } else {
                 resultEl.innerText = glubDictionary[codeStr];
