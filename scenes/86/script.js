@@ -17,7 +17,7 @@ function loadVideos() {
             name: 'Just a Real Nice Pond',
             author: 'Irtaza',
             projectId: 22,
-            thumbnail: `https://picsum.photos/seed/${getRandomInt(212894126948)}/1280/720`,
+            thumbnail: `/scenes/86/assets/neighbors/22.png`,
         },
     ]
 
