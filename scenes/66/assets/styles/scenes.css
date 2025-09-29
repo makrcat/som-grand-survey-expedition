@@ -1,0 +1,43 @@
+.sceneWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 3;
+    display: none;
+    padding: 8px;
+    text-align: center;
+    border: 2px solid lightslategray;
+    border-radius: 20px;
+    font-family: 'PixelOperator8', sans-serif;
+}
+
+.sceneWindow h2 {
+    color: darkred;
+}
+
+.sceneWindow a {
+    display: none;
+    color: white;
+    background-color: darkslategray;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sceneWindow a:hover {
+    background-color: slategray;
+    transform: scale(1.03);
+}
+
+.sceneWindow img {
+    image-rendering: pixelated;
+    width: 120px;
+    height: auto;
+}
