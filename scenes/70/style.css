@@ -1,7 +1,11 @@
 * {
   box-sizing: border-box;
-  --cursor-default: url("sprites/cursor1.png") 0 0, default;
-  --cursor-pointer: url("sprites/cursor2.png") 0 0, pointer;
+  --cursor-default: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/686726f7241b58da5d575f3521bf04b596a97ac6_cursor1.png")
+      0 0,
+    default;
+  --cursor-pointer: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/0ed5af5fe10ad0a842b5e1c002d2129f648b5496_cursor2.png")
+      0 0,
+    pointer;
 
   --nostalgia15-A: #efd0ae;
   --nostalgia15-B: #f6d937;
@@ -72,7 +76,7 @@ section {
   aspect-ratio: 4 / 3;
   width: min(100vw, 100vh);
   height: auto;
-  background: url("sprites/desert.png");
+  background: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/cfbb4107780f6a37177b109dfa40b610edf4f663_desert.png");
   background-size: cover;
 }
 
@@ -99,7 +103,8 @@ section {
   height: 40cqh;
 }
 
-#map-dialog .linkout, #map-dialog .marker {
+#map-dialog .linkout,
+#map-dialog .marker {
   height: 6cqh;
   transition: all 100ms;
   position: absolute;
@@ -145,7 +150,7 @@ section {
   aspect-ratio: 1 / 1;
   width: min(100vw, 100vh);
   height: min(100vw, 100vh);
-  background: url(sprites/elevator_sbg.png);
+  background: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/d72b3f3ebb58aa1b4c08ad698918e18ebfcceefa_elevator_sbg.png");
   background-size: cover;
   animation: fadeIn 1s;
 }
@@ -210,7 +215,6 @@ section {
     transform: translate(0cqw, 0cqw);
   }
 }
-
 
 dialog {
   border: solid 4pt var(--nostalgia15-H);
