@@ -1,0 +1,203 @@
+#up{
+    scroll-margin: 40vh;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: rgb(40, 40, 40);
+    color: white;
+}
+
+.heading {
+    height: 100vh;
+}
+
+
+.center-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+a{
+    color: hotpink;
+    font-weight: bold;
+}
+
+
+h1{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+    font-size: 300%;
+    margin: 0;
+}
+
+
+.trans1{
+    background-image: linear-gradient(rgb(40, 40, 40), rgb(85, 55, 0));
+    height: 50vh;
+}
+
+.trans2{
+    background-image: linear-gradient(rgb(85, 55, 0), rgb(131, 85, 0));
+    height: 50vh;
+}
+
+.trans3{
+    background-image: linear-gradient(rgb(131, 85, 0), rgb(155, 106, 0));
+    height: 50vh;
+}
+
+.trans4{
+    background-image: linear-gradient(rgb(155, 106, 0), rgb(204, 139, 0));
+    height: 100vh;
+}
+
+
+.floor1{
+    background-color: rgb(85, 55, 0);
+    height: 600vh;
+}
+
+.floor2{
+    background-color: rgb(131, 85, 0);
+    height: 600vh;
+}
+
+.floor3{
+    background-color: rgb(155, 106, 0);
+    height: 500vh;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+.floor-text{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: x-large;
+    padding: 5px;
+    z-index: 2;
+    transition: opacity .5s ease-in-out;
+}
+
+.last-text{
+    height: 100vh;
+}
+
+.treasure{
+    height: 100vh;
+    background-color: rgb(204, 139, 0);
+
+}
+
+.sign{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 200px;
+    image-rendering: crisp-edges;
+}
+
+.chest {
+    filter: drop-shadow(8px 8px 10px rgba(0, 0, 0, 0.4));
+}
+
+.key{
+    position: relative;
+    bottom: 0px;
+}            
+
+.final-popup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.5);
+    overflow-x: hidden;
+    transition: 0.8s;
+    transform: scale(0);
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #2c8dce;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #327781;
+}
+
+.button:hover {background-color: #277bb3}
+
+.button:active {
+    background-color: #2370a3;
+    box-shadow: 0 5px #286068;
+    transform: translateY(4px);
+}
+
+.bg-item{
+    position: absolute;
+    filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.4));
+}
+
+@media screen and (max-width: 1024px) {
+    
+    .final-img{
+        transform: scale(0.8);
+    }
+
+}
+
+@keyframes shake {
+    0%   {rotate: 0;}
+    25%  {rotate: -10deg;}
+    50%  {rotate: 10deg;}
+    100% {rotate: 0;}
+}
+.shake-anim{
+    animation: shake 0.5s 1;
+}
+
+@keyframes shake-and-fall {
+    0%   {rotate: 0;}
+    5%  {rotate: -10deg;}
+    10%  {rotate: 10deg;}
+    15% {rotate: 0; bottom: 0px; opacity: 100%;}
+    80% {opacity: 0%;}
+    100% {bottom: -2000px; opacity: 0%;}
+}
+.shake-and-fall-anim{
+    animation-name: shake-and-fall;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
+
+@keyframes chest-open {
+    0%   {filter: brightness(1) invert(0); opacity: 100%; transform: scale(1);}
+    60% {filter: brightness(0) invert(1);}
+    100% {opacity: 0%; transform: scale(2); filter: brightness(0) invert(1);}
+}
+.chest-open-anim{
+    animation-name: chest-open;
+    animation-duration: 3s;
+    animation-fill-mode: both;
+}
