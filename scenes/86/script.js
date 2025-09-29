@@ -75,7 +75,9 @@ function loadComments() {
         }
     ]
 
+    let allRepliesCount = 0
     for(const comment of comments) {
+        allRepliesCount += (comment.replies ?? []).length;
         let element = `<span class="comment"><b>&lt; ${comment.author} &gt;</b> ${comment.content}</span>`
         for(const reply of comment.replies ?? []) {
             const replyEl = `<span class="comment reply"><b>&lt; ${reply.author} &gt;</b> ${reply.tagged ? '@' + reply.tagged : ''} ${reply.content}</span>`
@@ -84,6 +86,8 @@ function loadComments() {
         const commentsList = document.getElementById('commentsection')
         commentsList.innerHTML += element
     }
+
+    document.getElementById('commentcount').innerText = comments.length + allRepliesCount
 }
 
 document.addEventListener('DOMContentLoaded', () => {
