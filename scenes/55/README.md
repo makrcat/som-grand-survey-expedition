@@ -1,0 +1,5 @@
+# Trees, Please!
+In game.html you can find a paper, please -like (with a lot of immagination) game. It's failry simple, a tree and his datas are presented to you. Swipe the card left to flag it as a fake tree and left as a "good" one. There are 5 trees bc i run out of jokes, sorry. I'm open to proposal and PRs too.
+
+# "Tech Stack"
+Html+css+js, nothing fancy.

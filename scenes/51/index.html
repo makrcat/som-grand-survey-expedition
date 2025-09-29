@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scene 51 – Mount Miniscule</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(to top, #00111a, #334466);
+      overflow: hidden;
+      font-family: 'Trebuchet MS', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+
+    /* Animated stars */
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('stardust.png');
+      animation: moveStars 60s linear infinite;
+    }
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+
+    .aurora {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 20%, rgba(0,255,180,0.3), transparent 70%),
+                  radial-gradient(circle at 30% 60%, rgba(180,0,255,0.2), transparent 70%);
+      mix-blend-mode: screen;
+      animation: shiftAurora 20s ease-in-out infinite alternate;
+    }
+    @keyframes shiftAurora {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 200px 200px, -200px -100px; }
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .reveal {
+      border: 2px solid #0ff;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition:0.3s;
+    }
+
+    .reveal:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    /* Starship and Alien */
+    .starship {
+      position: absolute;
+      width: 120px;
+      top: 25%;
+      left: -150px;
+      z-index: 1;
+      animation: fly 25s linear infinite;
+    }
+
+    .alien {
+      position: absolute;
+      width: 100px;
+      bottom: 20%;
+      right: -120px;
+      z-index: 1;
+      animation: float 30s linear infinite;
+    }
+
+    @keyframes fly {
+      from { left: -150px; }
+      to { left: 110%; }
+    }
+
+    @keyframes float {
+      from { right: -120px; transform: rotate(0deg); }
+      to { right: 110%; transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="aurora"></div>
+
+  <img src="starship.png" alt="Starship" class="starship">
+  <img src="alien.png" alt="Alien" class="alien">
+
+  <div class="content">
+    <h1>Mount Miniscule</h1>
+    <p>
+      The towers above the snowy range, 
+      blanketed in eternal ice. Officially, 
+      it’s named after <em>Sir George Miniscule</em> the famous explorer who,
+       curiously, never climbed it.
+    </p>
+    <p>
+      Why? According to legend, 
+      Sir George confessed in private: <em>“I don’t want to be eaten by aliens.”</em
+        > He claimed he’d seen glowing lights in the sky near the mountain and heard strange
+         voices carried on the wind. Terrified, he refused to set foot on its slopes.
+    </p>
+    <p>
+      The Expedition Council mocked him, 
+      calling the peak “Miniscule” to downplay his warnings. 
+      But his journals vanished, and his fears… well, they might not have been so foolish after all.
+    </p>
+    <p>
+      Travelers today still whisper of <strong>green flares in the night</strong> 
+      and <strong>machines humming beneath the ice</strong>. Some believe an ancient <strong>starship</strong>
+       lies frozen below, its alien guardians waiting patiently for the next curious climber.
+    </p>
+    <p>
+      Maybe Sir George wasn’t cowardly — maybe he was the wisest of us all.
+    </p>
+    <P> 
+      But Sir George is on the SandCastle, check it out in<a href="scene 53"> Scene 53</a>
+      , maybe you will be able to meet Sir George to hear the full stroy.
+    </P>
+    <div class="reveal">
+        <button class="reveal">
+        Click here to join Minsicule in protecting the earth 
+      </button>
+    </div>
+
+
+    <div class="reveal">
+      <button class="reveal"> 
+      Declassify Miniscule Report
+    </button> </div>
+  </div>
+</body>
+</html>

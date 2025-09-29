@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=7, initial-scale=1.0">
+    <title>THE LOST CITY OF HRRRUUURRRRRRRRRNGHHHH</title>
+    <link rel="preload" as="image" href="https://hc-cdn.hel1.your-objectstorage.com/s/v3/c0ca3954f593dd01becba51a702c24ade697fac3_untitled90.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: url('https://hc-cdn.hel1.your-objectstorage.com/s/v3/c0ca3954f593dd01becba51a702c24ade697fac3_untitled90.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            height: 100vh;
+            font-family: 'DynaPuff', system-ui;
+            
+        }
+        h2{
+            text-align: center;
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 4px #000000;
+        }
+        a {
+            text-decoration: none;
+            color:  rgb(112, 46, 15);
+            text-align: center;
+            display: inline-block;
+            margin-top: 240px;
+            font-size: 40px;
+            text-shadow: 2px 2px 4px #000000;
+            font-weight: bold;
+            background-color: rgb(243, 197, 111);
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-left: 570px;
+            border: 3px solid rgb(112, 46, 15);
+           
+        }
+        a:hover {
+            color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        footer{
+            text-align: center;
+            color: rgb(112, 46, 15 , 0.8);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgba(248, 199, 134, 0.8);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+
+            
+            
+        }
+        .info-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(243, 197, 111, 0.8);
+            border: 2px solid rgb(112, 46, 15);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .info-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            color: rgb(112, 46, 15);
+        }
+
+        .info-btn:hover .info-content {
+            display: block;
+        }
+    </style>
+</head>
+<body><div class="info-btn">i<div class="info-content">Click anywhere to start a cozy music (for each page) also click on the Characters present in the lore!! </div></div>
+    <h2>You were walking through the desert, the heat almost unbearable.<br>
+Suddenly, you spotted a dark cave hidden behind the dunes.<br>
+Inside, the air was cool and the walls carved with HRRRUUURRRRRRRRRNGHHHH.<br>
+Ahead, a faint light glowed deeper inside, and you decided to enter.</h2>
+<a href="City.html" >Enter Cave</a>
+
+<audio id="Music" src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/50169c01b0c207d5422c426adcf8edb57675cff3_app_assets_audios_the_stash_audio.mp4"loop autoplay></audio>
+
+<footer>HOPE YOU LIKE MY PROJECT</footer>
+
+<script>
+   const Music = document.getElementById('Music');
+   document.addEventListener('click', function() {
+         Music.volume = 0.25;
+       Music.play();
+   });
+</script>
+</body>
+</html>
