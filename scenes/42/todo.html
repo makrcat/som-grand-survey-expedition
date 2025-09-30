@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="body2">
+		<div id="header">
+			<h1 style="display: inline-block;">The Ugly Isles INC.</h1><h2 style="display: inline-block;margin-left:10px;">Helping you enjoy the perfect vacation</h2>
+			<div id="subheader">
+				<a href="index.html">Back</a>
+				<a href="about.html">About</a>
+			</div>
+		</div>
+		<div id="item">
+			<video width="320" height="240" autoplay loop muted>
+				<source src="./videos/thumbsup.mp4" type="video/mp4">
+			</video>
+			<div id="cardtext">
+				<h1>Our workers make sure everything is safe</h1>
+				<a href="terms.html" style="font-size: 7px;">terms and conditions apply. there is no guarantee of safety. by being here you agree to our terms and conditions</a>
+			</div>
+		</div>
+		<div id="item">
+			<div id="cardtext">
+				<h1>Go on our motorcycle tour</h1>
+				<p>no these don't fly</p>
+			</div>
+			<video width="320" height="240" autoplay loop muted>
+				<source src="./videos/cycletour.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div id="item">
+			<video width="320" height="240" autoplay loop muted>
+				<source src="./videos/marathon.mp4" type="video/mp4">
+			</video>
+			<div id="cardtext">
+				<h1>Join our bi-centrial marathon</h1>
+				<p>It was fun, it's a shame you missed it</p>
+			</div>
+		</div>
+		<div id="item">
+			<div id="cardtext">
+				<h1>Feed the...  birds...</h1>
+				<p>I wouldn't get too close to these</p>
+			</div>
+			<video width="320" height="240" autoplay loop muted>
+				<source src="./videos/bird.mp4" type="video/mp4">
+			</video>
+		</div>
+		<div id="item">
+			<video width="320" height="240" autoplay loop muted>
+				<source src="./videos/money.mp4" type="video/mp4">
+			</video>
+			<div id="cardtext">
+				<h1>Participate in the Ugly Games</h1>
+				<p>No squids included, chance to live bought separately</p>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	if (localStorage.getItem("hasBetterText")) {
+		document.getElementById("body2").style.fontFamily = "comicsans";
+		const textElements = document.querySelectorAll("h1, h2, a, button, p");
+		textElements.forEach(element => {
+			element.style.textShadow = "2px 2px 0 yellow, -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow";
+		});
+	}
+</script>
+</html>
