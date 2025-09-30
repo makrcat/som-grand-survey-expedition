@@ -150,8 +150,8 @@ if (urlSearchParams.has("textid")) {
   }
 
   setText(urlSearchParams.get("textid"));
-} else if (localStorage.has("travelFrom")) {
-  switch (localStorage.getItem("travelFrom")) {
+} else if (urlSearchParams.has("travelFrom")) {
+  switch (urlSearchParams.get("travelFrom")) {
     case "97":
       setText(0);
       break;
