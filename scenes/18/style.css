@@ -193,9 +193,9 @@ body {
 }
 
 .btnYellowArrow, .btnBlueArrow { filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); }
-.btnArrow { background-image: url("/assets/other/arrow.png"); }
-.btnYellowArrow { background-image: url("/assets/other/arrow-yellow.png"); }
-.btnBlueArrow { background-image: url("/assets/other/arrow-blue.png"); }
+.btnArrow { background-image: url("assets/other/arrow.png"); }
+.btnYellowArrow { background-image: url("assets/other/arrow-yellow.png"); }
+.btnBlueArrow { background-image: url("assets/other/arrow-blue.png"); }
 
 /* ################################################################################################ */
 
