@@ -52,10 +52,10 @@ function showRandomHug() {
         Traveller, you have collected all the 24 hugs! Congratulations! 🎉 <br> 
         You are worthy of visiting two secret locations.
       </p>
-      <a href="https://summer.hackclub.com/s?scene=36" style="color:#ff6f61; text-decoration:underline; display:block; text-align:center; margin-bottom:10px;">
+      <a href="/scenes/36/" style="color:#ff6f61; text-decoration:underline; display:block; text-align:center; margin-bottom:10px;">
         The Sea of Glub.
       </a>
-      <a href="https://summer.hackclub.com/s?scene=72" style="color:#ff6f61; text-decoration:underline; display:block; text-align:center; margin-bottom:10px;">
+      <a href="/scenes/72/" style="color:#ff6f61; text-decoration:underline; display:block; text-align:center; margin-bottom:10px;">
         The River Glub.
       </a>
       <button class="close-btn" onclick="closePopup()">Close</button>
