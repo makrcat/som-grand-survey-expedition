@@ -16,7 +16,7 @@ const texts = [
   },
   {
     //for going to scene 97 <- 54 when from-scene = 97, without finding the secrets
-    //1
+    //1 (auto corrects from 0)
     first: "The route is just as popular as before.",
     second: "You do catch a glimse of something you didnt notice before...",
     third:
@@ -25,7 +25,7 @@ const texts = [
   },
   {
     //for going to scene 97 <- 54 when from-scene = 97, with the secrets found
-    //2
+    //2 (auto corrects from 0)
     first: "The route is just as popular as before.",
     second: "Just as you suspected, the ferry is powered by sculk",
     third: "It seems like lots of people are traveling from Hotland and back,",
@@ -33,7 +33,7 @@ const texts = [
         getting to Hotland.`,
   },
   // for going to scene 78
-  //3
+  //3 (it will do 4 if you have the key)
   {
     first: "The cave looked cool.",
     second: "You saw a werid looking door, but you couldnt get in.",
