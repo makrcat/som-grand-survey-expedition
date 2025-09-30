@@ -1,0 +1,51 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Scene 90</title>
+        <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #canvas3d {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        #nav-btn {
+            position: absolute;
+            top: 41%;
+            left: 49%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            padding: 80px 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    </head>
+    <body>
+        <background style="background-color: lightskyblue;"></background>
+        <canvas id="canvas3d" style="width: 100vw; height: 100vh; display: block;"></canvas>
+        <script type="module" src="scene.js"></script>
+
+         <button id="nav-btn"></button>
+         <script>
+        document.getElementById('nav-btn').onclick = function() {
+            window.location.href = '../24/';
+        };
+    </script>
+    </body>
+    </html>
