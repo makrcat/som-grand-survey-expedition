@@ -9,17 +9,24 @@
           case "97":
             localStorage.setItem("from", "north");
             location.href =
-              "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=11";
+              "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=97";
             break;
           case "11":
             localStorage.setItem("from", "west");
-            location.href = "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=11";
+            location.href =
+              "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=11";
             break;
           case "6":
             localStorage.setItem("from", "n-east");
             location.href =
               "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=6";
             break;
+          case "som":
+            localStorage.setItem("from", "central");
+            location.href =
+              "/scenes/54/travel.html?to=/scenes/54/home.html?from=self&travelFrom=voting";
+            break;
+          default:
           case "self":
             location.href = "/scenes/54/home.html?from=self";
             break;
