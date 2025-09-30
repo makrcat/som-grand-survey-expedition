@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Anti Ireland Island | A Fantastical Land of Logical Paradoxes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 逻辑辐射背景元素 -->
+    <div class="logic-radiation" style="top: 10%; left: 5%;"></div>
+    <div class="logic-radiation" style="bottom: 15%; right: 10%;"></div>
+    
+    <!-- 浮动渡鸦 -->
+    <div class="floating-raven" id="floating-raven" data-symbol="→" onclick="dropFeather(event)">🐦‍⬛</div>
+    
+    <!-- 指路牌按钮 -->
+    <button class="signpost-button" onclick="window.open('https://isle.a.hackclub.dev/scenes/24', '_blank')">BIG ISLAND</button>
+    
+    <!-- Contradiction Signpost -->
+    <button class="contradiction-sign" id="contradictionSign" onclick="handleContradictionClick()">Do not Click</button>
+    
+    <!-- Achievement Counter -->
+    <div class="achievement-counter" id="achievementCounter">
+        <div class="counter-icon">🏆</div>
+        <div class="counter-text">
+            <span id="discoveredCount">0</span>/<span id="totalCount">9</span> Achievements
+        </div>
+        <div class="counter-label">Discovered</div>
+    </div>
+    
+    <!-- Sky Area - 75% Height -->
+    <div class="sky">
+        <div class="sky-layer sky-top">Not Sunny</div>
+        <div class="sky-layer sky-middle">Not Raining</div>
+        <div class="sky-layer sky-bottom">(Logic Collapse in Progress)</div>
+    </div>
+    
+    <!-- Beach Area - 25% Height -->
+    <div class="beach">
+        <div class="beach-element">
+            <div class="signboard">
+                This island prohibits "unhappiness" — but if you were originally happy, this prohibition will make you unhappy!
+            </div>
+        </div>
+        
+        <div class="beach-element">
+            <div class="pufferfish" id="pufferfish">🐡</div>
+            <div class="water-pond"></div>
+            <div class="pufferfish-dialogue" id="pufferfishDialogue">
+                "Should I puff up? If I say 'don't puff up', does that mean I 'should not not puff up'? My brain is about to explode!"
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal - Paradox Selector -->
+    <div class="modal" id="paradoxModal">
+        <div class="modal-content">
+            <h2>Welcome to Anti-Anti Ireland Island!</h2>
+            <p>Before exploring, please prove you understand the laws of this island:</p>
+            
+            <fieldset>
+                <legend>Please prove this island exists:</legend>
+                <div class="paradox-option">
+                    <input type="radio" id="option1" name="paradox" value="option1">
+                    <label for="option1">I see it, therefore it exists</label>
+                </div>
+                <div class="paradox-option">
+                    <input type="radio" id="option2" name="paradox" value="option2">
+                    <label for="option2">I don't see it, therefore it doesn't exist</label>
+                </div>
+                <div class="paradox-option">
+                    <input type="radio" id="option3" name="paradox" value="option3">
+                    <label for="option3">I don't not see it, therefore it doesn't not exist</label>
+                </div>
+            </fieldset>
+            
+            <button id="submitParadox">Enter the Island</button>
+        </div>
+    </div>
+    
+    <!-- Achievement Popup -->
+    <div class="achievement" id="achievement">
+        <h2>🎉 Achievement Unlocked!</h2>
+        <p id="achievementText"></p>
+        <button id="closeAchievement">Awesome!</button>
+    </div>
+
+
+
+    <!-- Background Legend Scroll -->
+    <div class="legend-scroll">
+        <div class="scroll-content">
+            <h4 class="scroll-title">Excerpt from "The Chronicles of Non-Void"</h4>
+            <p class="scroll-text">
+                It is recorded that this land was once cursed by the "God of Absolute Negation". Until one day, a group of programming wizards chanted the spell 
+                <code>!!false === true</code>, creating a barrier to resist negation. Today, islanders use double negation as a greeting — when you hear "The weather is nice today, isn't it? No!", that means "Good morning".
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
