@@ -6,12 +6,15 @@
     <style>
         .invisible-button {
             position: absolute;
-            width: 450px;
-            height: 450px;
-            background-color: transparent;
+            width: 250px;
+            height: 250px;
+            background-color: rgba(0, 0, 0, 0.2);
             border: none;
             cursor: pointer;
             z-index: 10;
+            -webkit-text-fill-color: white;
+            -webkit-text-stroke: black;
+            -webkit-text-stroke-width: 0.3px;
         }
 
         .bottom-left {
@@ -127,8 +130,8 @@
             alert('You bought a ' + itemName + '!');
         }
     </script>    
-    <a href="/scenes/7/"><button class="invisible-button top-left"></button></a>
-    <a href="/scenes/97/"><button class="invisible-button bottom-left"></button></a>
-    <a href="/scenes/54/"><button class="invisible-button bottom-right"></button></a>
+    <a href="/scenes/78/"><button class="invisible-button top-left">Go Forth</button></a>
+    <a href="/scenes/97/"><button class="invisible-button bottom-left">Travel to The realm of the Trianglar Trees</button></a>
+    <a href="/scenes/54?from11"><button class="invisible-button bottom-right">Travel to Hotland</button></a>
 </body>
 </html>
