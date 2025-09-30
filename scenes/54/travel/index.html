@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/scenes/54/shared.js" defer></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="author" content="xFN10x" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotland Travel</title>
+    <link rel="stylesheet" href="/scenes/54/styles.css" />
+    <link rel="icon" type="image/png" href="/scenes/54/images/flag.jpg" />
+  </head>
+
+  <body
+    style="
+      background-image: url(/scenes/54/images/travel-page-bg.png);
+      background-position-x: left;
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0px 0px;
+    "
+  >
+    <header w3-include-html="/scenes/54/header.html"></header>
+
+    <div style="margin: 16px auto; max-width: 880px">
+      <h2 style="font-size: 60px; margin-top: 0px">Hotland Travel</h2>
+      <div class="grid-verticle">
+        <div class="travel-site" style="max-height: 425px">
+          <img
+            class="not-matching-aspect-img"
+            src="/scenes/54/images/tri-trees.gif"
+            id="r-trees"
+            width="500px"
+            height="425"
+          />
+          <div style="max-width: 20rem; display: flex; flex-direction: column">
+            <div>
+              <h2 style="padding: 0rem 1rem; text-align: left">
+                Realm of the Trianglar Trees
+              </h2>
+              <p
+                style="
+                  text-align: left;
+                  padding: 0rem 1rem;
+                  overflow-wrap: break-word;
+                  overflow-y: auto;
+                "
+              >
+                Wow! These trees are getting more trianglar by the second!
+              </p>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                margin: auto 1rem 0.5rem;
+              "
+            >
+              <button style="margin-left: 0">More Info...</button>
+              <button onclick="travelTo(97,54,0)" style="margin-left: auto">
+                Go >
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="travel-site" style="max-height: 425px">
+          <img
+            class="not-matching-aspect-img"
+            id="vol-island"
+            width="500px"
+            height="425"
+            src="/scenes/54/images/cave.png"
+          />
+          <div style="max-width: 20rem; display: flex; flex-direction: column">
+            <div>
+              <h2 style="padding: 0rem 1rem; text-align: left">
+                Volcanic Island
+              </h2>
+              <p
+                style="
+                  text-align: left;
+                  padding: 0rem 1rem;
+                  overflow-wrap: break-word;
+                  overflow-y: auto;
+                "
+              >
+                This cave is over 3 kilometers long!
+              </p>
+            </div>
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                margin: auto 1rem 0.5rem;
+              "
+            >
+              <button style="margin-left: 0">More Info...</button>
+              <button onclick="travelTo(78,54,3)" style="margin-left: auto">
+                Go >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      w3.includeHTML(function () {
+        Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+          (elememt) => {
+            if (
+              elememt.tagName.toLowerCase() === "a" &&
+              window.location.href.startsWith(
+                "https://xfn10x.github.io/scene-54/"
+              ) &&
+              !elememt.getAttribute("href").startsWith("/scene-54")
+            ) {
+              elememt.setAttribute(
+                "href",
+                "/scene-54" + elememt.getAttribute("href")
+              );
+
+              console.log("Changed href to: " + elememt.getAttribute("href"));
+            }
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
