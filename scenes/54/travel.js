@@ -64,6 +64,14 @@ const texts = [
     third: "When you go to shore, there was a boat you decided to take.",
     fact: "People dont really come around this part of Volcano Island.",
   },
+  // from voting --> 54
+  // 7
+  {
+    first: "You just stepped into a teleporter",
+    second: "Woah! Now you are in hotland!",
+    third: "Thanks for checking out the demo!",
+    fact: "(i hope i get your vote)",
+  },
 ];
 
 const countdowntext = document.getElementById("countdown");
@@ -152,6 +160,9 @@ if (urlSearchParams.has("textid")) {
       break;
     case "11":
       setText(6);
+      break;
+    case "voting":
+      setText(7);
       break;
     default:
       break;
