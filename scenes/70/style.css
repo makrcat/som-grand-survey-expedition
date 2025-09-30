@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+  --cursor-default: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/686726f7241b58da5d575f3521bf04b596a97ac6_cursor1.png")
+      0 0,
+    default;
+  --cursor-pointer: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/0ed5af5fe10ad0a842b5e1c002d2129f648b5496_cursor2.png")
+      0 0,
+    pointer;
+
+  --nostalgia15-A: #efd0ae;
+  --nostalgia15-B: #f6d937;
+  --nostalgia15-C: #f8a153;
+  --nostalgia15-D: #ef6361;
+  --nostalgia15-E: #c7555e;
+  --nostalgia15-F: #501733;
+  --nostalgia15-G: #71323c;
+  --nostalgia15-H: #975e5e;
+  --nostalgia15-I: #755b6c;
+  --nostalgia15-J: #808faa;
+  --nostalgia15-K: #c4bbb8;
+  --nostalgia15-L: #74a8a2;
+  --nostalgia15-M: #186f5e;
+  --nostalgia15-N: #46a45f;
+  --nostalgia15-O: #88af92;
+}
+
+@font-face {
+  font-family: "NFPixels";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/NFPixels.ttf");
+}
+
+.hidden {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  cursor: var(--cursor-default);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "NFPixels", monospace, sans-serif;
+
+  image-rendering: pixelated;
+  background-color: black;
+}
+
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.start-section {
+  container-type: inline-size;
+  aspect-ratio: 4 / 3;
+  width: min(100vw, 100vh);
+  height: auto;
+  background: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/cfbb4107780f6a37177b109dfa40b610edf4f663_desert.png");
+  background-size: cover;
+}
+
+#map-button {
+  cursor: var(--cursor-pointer);
+  width: 8cqi;
+  position: absolute;
+  top: 6cqi;
+  right: 6cqi;
+  transition: all 400ms;
+}
+
+#map-button:hover {
+  transform: scale(1.1);
+  transition: all 100ms;
+}
+
+#map-dialog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 60cqw;
+  height: 40cqh;
+}
+
+#map-dialog .linkout,
+#map-dialog .marker {
+  height: 6cqh;
+  transition: all 100ms;
+  position: absolute;
+}
+
+#map-dialog .linkout {
+  cursor: var(--cursor-pointer);
+}
+
+#map-dialog .linkout.scene-of-the-crime {
+  bottom: 10cqi;
+  right: 12cqi;
+}
+
+#map-dialog .linkout.silly-hills {
+  right: 6cqi;
+  bottom: 20cqi;
+}
+
+#map-dialog .linkout.sconehenge {
+  bottom: 6cqi;
+  left: 20cqi;
+}
+
+#map-dialog .linkout:hover {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.start-section .elevator-img {
+  position: absolute;
+  bottom: 0;
+  height: 60%;
+  cursor: var(--cursor-pointer);
+  transition: all 50ms;
+}
+
+.start-section .elevator-img:hover {
+  transform: scale(1.05);
+}
+
+.elevator-section {
+  container-type: inline-size;
+  aspect-ratio: 1 / 1;
+  width: min(100vw, 100vh);
+  height: min(100vw, 100vh);
+  background: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/d72b3f3ebb58aa1b4c08ad698918e18ebfcceefa_elevator_sbg.png");
+  background-size: cover;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.elevator-section .rob-img {
+  position: absolute;
+  bottom: 17cqi;
+  left: 10cqi;
+  height: 30cqi;
+  object-fit: contain;
+  cursor: var(--cursor-pointer);
+}
+
+.elevator-section .elevator-button-img {
+  position: absolute;
+  bottom: 42cqi;
+  right: 10cqi;
+  width: 15cqi;
+  object-fit: contain;
+  cursor: var(--cursor-pointer);
+}
+
+.elevator-section .elevator-speaker-grill-img {
+  position: absolute;
+  bottom: 65cqi;
+  right: 10cqi;
+  width: 15cqi;
+  object-fit: contain;
+}
+
+.elevator-section dialog {
+  background-color: var(--nostalgia15-K);
+  color: var(--nostalgia15-F);
+  border: solid 4pt var(--nostalgia15-F);
+  width: 80cqw;
+  min-height: 10cqh;
+  font-size: 1.4rem;
+  outline: none;
+}
+
+.whirring {
+  animation: whirr 200ms infinite;
+}
+
+@keyframes whirr {
+  0% {
+    transform: translate(1cqw, 1cqw);
+  }
+  80% {
+    transform: translate(-1cqw, -1cqw);
+  }
+  100% {
+    transform: translate(0cqw, 0cqw);
+  }
+}
+
+dialog {
+  border: solid 4pt var(--nostalgia15-H);
+  background-color: var(--nostalgia15-A);
+  outline: none;
+}
+
+dialog:not([open]) {
+  display: none !important;
+}
