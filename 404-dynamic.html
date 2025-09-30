@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>This scene isn't built yet!</title>
+    <title>Scene not ready - GSE</title>
     <style>
         html { 
             color-scheme: light dark; 
@@ -81,13 +81,10 @@
         .back-to-map:hover {
             background: rgba(40, 167, 69, 0.3);
         }
-        .fallback-content {
-            text-align: center;
-        }
     </style>
 </head>
 <body>
-    <h1>This scene isn't built yet!</h1>
+    <h1> Scene Not made yet :(</h1>
     
     <div id="loading" class="loading">
         <p>Loading scene information...</p>
@@ -98,36 +95,34 @@
             <h2 id="scene-title">Scene #<span id="scene-id"></span></h2>
             <p id="scene-description"></p>
             <p><strong>This location hasn't been discovered yet...</strong></p>
-            <p>Could you be the one to <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">build this scene?</a></p>
+            <p>Check out <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">the discussion</a></p>
         </div>
 
         <div class="connections">
             <h3>You can navigate to these connected scenes:</h3>
             <div id="connection-list" class="connection-list">
-                <!-- Connections auto inserted here -->
+                <!-- Connections will be populated here -->
             </div>
         </div>
 
         <a href="/" class="back-to-map">← Back to Map</a>
     </div>
     
-    <div id="fallback" class="fallback-content">
-        <p>This location hasn't been discovered yet...</p>
-        <p>Could you be the one to <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">build this scene?</a></p>
-        <a href="/" class="back-to-map">← Back to Map</a>
+    <div id="error" class="error-message" style="display: none;">
+        <p>Unable to load scene data. <a href="/">Return to the main map</a></p>
     </div>
 
     <script>
-        // Get scene ID from url
+        // Get scene ID from URL or URL parameters
         function getSceneIdFromUrl() {
-            
+            // First, try to get from URL parameters (for generic 404 redirects)
             const urlParams = new URLSearchParams(window.location.search);
             const sceneParam = urlParams.get('scene') || urlParams.get('id');
             if (sceneParam && !isNaN(sceneParam)) {
                 return parseInt(sceneParam);
             }
             
-            // Try to get from current URL path
+            // Try to get from URL path
             const path = window.location.pathname;
             const parts = path.split('/');
             
@@ -140,30 +135,27 @@
                 }
             }
             
-            // Try to get from referrer if available
-            if (document.referrer) {
-                const referrerUrl = new URL(document.referrer);
-                const referrerParts = referrerUrl.pathname.split('/');
-                
-                if (referrerParts.includes('scenes') && referrerParts.length > 2) {
-                    const sceneIndex = referrerParts.indexOf('scenes');
-                    const sceneId = referrerParts[sceneIndex + 1];
-                    if (sceneId && !isNaN(sceneId)) {
-                        return parseInt(sceneId);
-                    }
-                }
-            }
-            
-            // as a fallback, try to extract number from any part of current path
+            // Fallback: try to extract number from any part of the path
             for (const part of parts) {
                 if (part && !isNaN(part)) {
                     return parseInt(part);
                 }
             }
             
+            // Last resort: try to get from referrer if available
+            if (document.referrer) {
+                const referrerParts = document.referrer.split('/');
+                for (const part of referrerParts) {
+                    if (part && !isNaN(part)) {
+                        return parseInt(part);
+                    }
+                }
+            }
+            
             return null;
         }
 
+        // Load manifest data
         async function loadManifest() {
             try {
                 const response = await fetch('/manifest.json');
@@ -177,7 +169,7 @@
             }
         }
 
-        // check if scene is in folder/exists
+        // Check if a scene exists (has a folder)
         async function checkSceneExists(sceneId) {
             try {
                 const response = await fetch(`/scenes/${sceneId}/`, { method: 'HEAD' });
@@ -187,7 +179,7 @@
             }
         }
 
-        // try grab scene data from manifest
+        // Render scene information
         function renderSceneInfo(sceneData, connections, manifest) {
             document.getElementById('scene-id').textContent = sceneData.id;
             document.getElementById('scene-title').innerHTML = `Scene #${sceneData.id}: ${sceneData.name}`;
@@ -209,7 +201,7 @@
                 link.href = `/scenes/${connectionId}/`;
                 link.className = 'connection-link';
 
-                // does the connection exist
+                // Check if the connected scene exists
                 const exists = await checkSceneExists(connectionId);
                 if (!exists) {
                     link.style.opacity = '0.6';
@@ -226,14 +218,14 @@
             });
         }
 
-
+        // Main function
         async function main() {
             const sceneId = getSceneIdFromUrl();
             
             if (sceneId === null) {
-                // show fallback content for generic 404s
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('fallback').style.display = 'block';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = '<p>We\'ve gotten a bit lost here...' <a href="/">Return to the main map</a></p>';
                 return;
             }
 
@@ -241,7 +233,7 @@
             
             if (!manifest) {
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('fallback').style.display = 'block';
+                document.getElementById('error').style.display = 'block';
                 return;
             }
 
@@ -249,7 +241,8 @@
             
             if (!sceneData) {
                 document.getElementById('loading').style.display = 'none';
-                document.getElementById('fallback').style.display = 'block';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = `<p>Scene #${sceneId} not found in manifest. <a href="/">Return to the main map</a></p>`;
                 return;
             }
 
@@ -257,12 +250,11 @@
             
             document.getElementById('loading').style.display = 'none';
             document.getElementById('content').style.display = 'block';
-            document.getElementById('fallback').style.display = 'none';
             
             renderSceneInfo(sceneData, connections, manifest);
         }
 
-        
+        // Run when page loads
         main();
     </script>
 </body>
