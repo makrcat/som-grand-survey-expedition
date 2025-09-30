@@ -18,7 +18,7 @@ const porpleFacts = [
     "Main export: confused looks",
     "Time zone: Whenever the tide feels like it",
     "Official bird: That one seagull (his name is Gerald)",
-    "Average temperature: Surprisingly purple",
+    "Average temperature: Surprisingly porple",
     "Founded: Last Tuesday, probably",
     "Mayor: A hermit crab named Steve",
     "Local delicacy: Sand sandwiches",
@@ -26,7 +26,7 @@ const porpleFacts = [
     "Postal code: GLUB-GLUB",
     "Emergency services: Just yell really loud",
     "Tourist attractions: You're looking at it",
-    "Local legend: The Great Purple Splash of '92",
+    "Local legend: The Great Porple Splash of '92",
     "Currency: Shiny pebbles and good vibes",
     "Transportation: Hop on one foot while humming",
     "Education system: Learn by osmosis from the sea",
@@ -202,7 +202,7 @@ function doMagic() {
     
     // Special effects for milestone clicks
     if (clickCount === 10) {
-        signDisplay.textContent = "🎉 Congratulations! You've discovered the secret of Porple Point: It's just really, really purple! 🎉";
+        signDisplay.textContent = "🎉 Congratulations! You've discovered the secret of Porple Point: It's just really, really porple! 🎉";
     } else if (clickCount === 25) {
         signDisplay.textContent = "🏆 PORPLE MASTER ACHIEVED! Gerald the seagull is impressed! 🏆";
     } else if (clickCount === 50) {
