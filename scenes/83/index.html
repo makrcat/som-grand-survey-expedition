@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      @font-face{ font-family: 'Yesteryear'; src: url('https://hc-cdn.hel1.your-objectstorage.com/s/v3/5b3582e9b3a2661bcb2a4832839f2a8751db2ced_yesteryear-regular.ttf');}
+      body {
+        background-image: url("https://i.imgur.com/MTohnN3.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: black;
+      }
+      h1 {
+        text-align: center;
+        color: sandybrown;
+        font-family: 'Yesteryear';
+        text-shadow:
+          5pt 5pt 10pt black,
+          -5pt -5pt 10pt black,
+          5pt -5pt 10pt black,
+          -5pt 5pt 10pt black,
+          0px 0px 40pt black;
+      }
+      .name {
+        font-size: 150%;
+        margin-left: 27%;
+        text-align: right;
+        margin-bottom: 0%;
+        background-color: maroon;
+        color: antiquewhite;
+        max-width: fit-content;
+      }
+      .talk {
+        font-size: 120%;
+        text-align: center;
+        margin-left: 30%;
+        margin-right: 0%;
+        border-style: solid;
+        border-color: black;
+        border-radius: 5pt;
+        background-color: rgba(240, 210, 180, 0.5);
+      }
+      .buttons{
+        font-size: 120%;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+        max-width: 70%;
+        margin-left: 30%;
+        margin-top: 2.5%;
+      }
+      .buttons > a{
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+        border-style: dashed;
+        border-color: black;
+        border-radius: 3% / 50%;
+        background-color: rgba(211, 211, 211, 0.5);
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+      }
+    </style>
+    <!--hello source code reader person!!-->
+  </head>
+  <body>
+    <h1>The Pantsified Peninsula</h1>
+    <h5 class="name">Pants Seller</h5>
+    <div id="talk" class="talk"><h2>"Hello there! Would you be interested in purchasing a new pair of pants?"</h2></div>
+    <div id="buttons" class="buttons">
+      <a onclick="buyPants()">Yes</a>
+      <a onclick="noPants()">No</a>
+    </div>
+    <script>
+      function buyPants() {
+        document.getElementById("talk").innerHTML = "<h2>\"Thank you so much! It feels so good to finally have a customer again!\"</h2>";
+        document.getElementById('buttons').innerHTML = '<a onclick="thing3()">Why haven\'t you had customers?</a>';
+      }
+      function noPants() {
+        document.getElementById('talk').innerHTML = '<h2>"That\'s disappointing, I haven\'t gotten a sale in months"</h2>';
+        document.getElementById('buttons').innerHTML = '<a onclick="thing3()">Why haven\'t you had any sales for so long?</a>';
+      }
+      function thing3() {
+        document.getElementById('talk').innerHTML = '<h2><p>"Business was booming here on the peninsula, but soon everybody had bought enough pants for themselves, so nobody needed to buy more.</p><p>...</p><p>Would you do me a favor?"</p></h2>';
+        document.getElementById('buttons').innerHTML = '<a onclick="finale()">What is it?</a>';
+      }
+      function finale() {
+        document.getElementById('talk').innerHTML = '<h2>"Could you deliver some of my pants to somewhere else nearby? I\'ll make your pants free if you do!"</h2><h4>Go to...</h4>';
+        document.getElementById('buttons').innerHTML = '<a href="/scenes/16">Crab Rave</a><a href="/scenes/26">Island Island</a><a href="/scenes/85">Lost Realm of the Praksadonskalisks</a><a href="/scenes/93">The Scene of the Crime</a>';
+      }
+    </script>
+  </body>
+</html>
