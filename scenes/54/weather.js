@@ -46,13 +46,10 @@ function getPosFromLocation(location, xory) {
         case "north":
         case "n-east":
           return 58;
-          break;
         case "west":
           return 8;
-          break;
         case "central":
           return 108;
-          break;
         default:
           break;
       }
@@ -63,13 +60,10 @@ function getPosFromLocation(location, xory) {
         case "north":
         case "n-east":
           return 31;
-          break;
         case "west":
           return 28;
-          break;
         case "central":
           return 60;
-          break;
         default:
           break;
       }

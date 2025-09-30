@@ -48,6 +48,22 @@ const texts = [
     third: "You tried that werid key you found...",
     fact: 'The door opened. (You are going to a different page, Press "Redirect Now" to not.)',
   },
+  // from 6 --> 54
+  //5
+  {
+    first: "You could feel the temperature getting hotter as you walked",
+    second: "And the sand getting redder",
+    third: "There was a nice breeze at the water though",
+    fact: "Hotlands sand is getting redder as temperatures rise.",
+  },
+  // from 11 --> 54
+  //6
+  {
+    first: "Nobody is around.",
+    second: "There was a faint path that you tried to follow",
+    third: "When you go to shore, there was a boat you decided to take.",
+    fact: "People dont really come around this part of Volcano Island.",
+  },
 ];
 
 const countdowntext = document.getElementById("countdown");
@@ -126,6 +142,20 @@ if (urlSearchParams.has("textid")) {
   }
 
   setText(urlSearchParams.get("textid"));
+} else if (localStorage.has("travelFrom")) {
+  switch (localStorage.getItem("travelFrom")) {
+    case "97":
+      setText(0);
+      break;
+    case "6":
+      setText(5);
+      break;
+    case "11":
+      setText(6);
+      break;
+    default:
+      break;
+  }
 }
 updateHref();
 
