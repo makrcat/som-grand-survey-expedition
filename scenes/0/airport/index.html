@@ -3,48 +3,202 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Blubberhill Airport</title>
-        <link rel="stylesheet" href="../reusuable.css">
+        <title>Blubberhill Interislandal Airport</title>
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class="airport-selection">
-            <h1>Blubberhill Interislandal Airport</h1>
-            <div class="from-airport-div">
-                <label for="from-input">From</label>
-                <select id="from-input">
-                    <option value="1">Blubberhill Interislandal Airport</option>
-                </select>
+        <div class="board">
+            <div class="board-info">
+                <h1><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plane-takeoff-icon lucide-plane-takeoff"><path d="M2 22h20"/><path d="M6.36 17.4 4 17l-2-4 1.1-.55a2 2 0 0 1 1.8 0l.17.1a2 2 0 0 0 1.8 0L8 12 5 6l.9-.45a2 2 0 0 1 2.09.2l4.02 3a2 2 0 0 0 2.1.2l4.19-2.06a2.41 2.41 0 0 1 1.73-.17L21 7a1.4 1.4 0 0 1 .87 1.99l-.38.76c-.23.46-.6.84-1.07 1.08L7.58 17.2a2 2 0 0 1-1.22.18Z"/></svg> Departures</h1>
+                <h2 id="blubberhillClock">Cycle:Tick</h2>
             </div>
-            <div class="to-airport-div">
-                <label for="to-input">To</label>
-                <select id="to-input">
-                    <option>Los Árboles de la Estupidez (T2)</option>
-                    <option>http://island</option>
-                    <option>Prancy-Plants Peninsula (T1)</option>
-                </select>
-            </div>
-            <button id="fly-btn">Fly!</button>
+            <table aria-label="Departures Board">
+                <thead>
+                    <tr>
+                        <th>Flight</th>
+                        <th>Destination</th>
+                        <th>Departure</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="departures"></tbody>
+            </table>
         </div>
         <script>
-            const toInput = document.getElementById('to-input');
-            const flyBtn = document.getElementById('fly-btn');
+            const config = {
+                MIN_FLIGHTS: 1,
+                MAX_FLIGHTS: 3,  // fewer simultaneous flights
+                INITIAL_FLIGHTS: randBetween(1, 2), // random starting flights
 
-            const destinations = [
-                {index: "0", name: "Los Árboles de la Estupidez", sceneIndex: "56", directSceneLink: "https://isle.a.hackclub.dev/scenes/56"},
-                {index: "1", name: "http://island", sceneIndex: "19", directSceneLink: "https://isle.a.hackclub.dev/scenes/19"},
-                {index: "2", name: "Prancy-Plants Peninsula", sceneIndex: "90", directSceneLink: "https://isle.a.hackclub.dev/scenes/90"}
+                MIN_DEPART_MS: 8000,
+                MAX_DEPART_MS: 25000,
+                BOARDING_WINDOW_MS: 6000,
+                MIN_REFRESH_MS: 15000,
+                MAX_REFRESH_MS: 30000,
+
+                DELAY_CHANCE: 0.15,
+                DELAY_MIN_MS: 5000,
+                DELAY_MAX_MS: 20000,
+
+                CANCEL_CHANCE: 0.01, // 1% of flights get cancelled heheheha (insert clash royale laughing gif)
+            };
+
+            const DESTINATIONS = [
+                { name: "Los Árboles de la Estupidez", url: "https://isle.a.hackclub.dev/scenes/56" },
+                { name: "http://island", url: "https://isle.a.hackclub.dev/scenes/19" },
+                { name: "Prancy-Plants Peninsula", url: "https://isle.a.hackclub.dev/scenes/90" },
             ];
 
-            flyBtn.addEventListener('click', () => {
-                const selected = toInput.selectedIndex;
-                if (selected < 0 || selected >= destinations.length) return; // fallback in case you try and break ts
-                const url = destinations[selected].directSceneLink;
-                if (url) window.location.href = url;
-            });
+            const ELEMENTS = {
+                clock: document.getElementById('blubberhillClock'),
+                departures: document.getElementById('departures'),
+            };
+
+            let STATES = {
+                flightCounter: 100,
+                userOnFlight: false,
+            };
+
+            function randBetween(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function formatClock(msTimestamp) {
+                const cycle = Math.floor(msTimestamp / 60000) % 10;
+                const tick = Math.floor((msTimestamp / 1000) % 100);
+                return `${cycle}:${tick.toString().padStart(2, "0")}`;
+            }
+
+            function randomFlightID() {
+                const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const prefix = letters[randBetween(0, letters.length - 1)] +
+                               letters[randBetween(0, letters.length - 1)];
+                const digits = randBetween(100, 999);
+                return prefix + digits;
+            }
+
+            function spawnFlight() {
+                if (ELEMENTS.departures.children.length >= config.MAX_FLIGHTS) return;
+
+                const dest = DESTINATIONS[Math.floor(Math.random() * DESTINATIONS.length)];
+                const flightNo = randomFlightID();
+
+                let departureAt = Date.now() + randBetween(config.MIN_DEPART_MS, config.MAX_DEPART_MS);
+                let boardingStartsAt = departureAt - config.BOARDING_WINDOW_MS;
+
+                const willDelay = Math.random() < config.DELAY_CHANCE;
+                let delayApplied = false;
+                let boardedByUser = false;
+
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td class="flight">${flightNo}</td>
+                    <td class="dest">${dest.name}</td>
+                    <td class="time">${formatClock(departureAt)}</td>
+                    <td class="status">Scheduled</td>
+                    <td class="action"><button disabled>Board</button></td>
+                `;
+                ELEMENTS.departures.appendChild(row);
+
+                const timeCell = row.querySelector('.time');
+                const statusCell = row.querySelector('.status');
+                const actionBtn = row.querySelector('button');
+
+                const tickInterval = 1000;
+                const updater = setInterval(() => {
+                    const now = Date.now();
+
+                    if (willDelay && !delayApplied && now < boardingStartsAt) {
+                        if (Math.random() < 0.02) {
+                            const delayMs = randBetween(config.DELAY_MIN_MS, config.DELAY_MAX_MS);
+                            departureAt += delayMs;
+                            boardingStartsAt = departureAt - config.BOARDING_WINDOW_MS;
+                            delayApplied = true;
+                            row.classList.add("delayed");
+                            statusCell.textContent = "Delayed";
+                            timeCell.textContent = formatClock(departureAt);
+                        }
+                    }
+
+                    if (!delayApplied && Math.random() < config.CANCEL_CHANCE && now < boardingStartsAt) {
+                        statusCell.textContent = "Cancelled";
+                        actionBtn.disabled = true;
+                        row.classList.add("cancelled");
+                        clearInterval(updater);
+
+                        setTimeout(() => {
+                            row.classList.add("fade-out");
+                            setTimeout(() => row.remove(), 1500);
+
+                            setTimeout(() => {
+                                spawnFlight();
+                            }, randBetween(config.MIN_REFRESH_MS, config.MAX_REFRESH_MS));
+                        }, 2000);
+                        return;
+                    }
+
+                    if (now < boardingStartsAt) {
+                        statusCell.textContent = delayApplied ? "Delayed" : "Scheduled";
+                        actionBtn.disabled = true;
+                    } else if (now >= boardingStartsAt && now < departureAt) {
+                        statusCell.textContent = boardedByUser ? "Boarded" : "Boarding";
+                        if (!STATES.userOnFlight && !boardedByUser) {
+                            actionBtn.disabled = false;
+                        } else {
+                            actionBtn.disabled = true;
+                        }
+                    } else {
+                        statusCell.textContent = "Departed";
+                        actionBtn.disabled = true;
+                        clearInterval(updater);
+
+                        row.classList.add("fade-out");
+                        setTimeout(() => {
+                            if (boardedByUser) {
+                                window.location.href = dest.url;
+                            } else {
+                                row.remove();
+                            }
+                        }, 2000);
+
+                        setTimeout(() => {
+                            spawnFlight();
+                        }, randBetween(config.MIN_REFRESH_MS, config.MAX_REFRESH_MS));
+                    }
+                }, tickInterval);
+
+                actionBtn.addEventListener("click", () => {
+                    if (actionBtn.disabled || STATES.userOnFlight || boardedByUser) return;
+                    boardedByUser = true;
+                    STATES.userOnFlight = true;
+
+                    actionBtn.disabled = true;
+                    actionBtn.textContent = "Boarded ✓";
+                    statusCell.textContent = "Boarded";
+
+                    document.querySelectorAll('#departures button').forEach(b => {
+                        if (b !== actionBtn) b.disabled = true;
+                    });
+                });
+            }
+
+            (function init() {
+                const start = config.INITIAL_FLIGHTS;
+                for (let i = 0; i < start; i++) spawnFlight();
+            })();
+
+            function updateClock() {
+                let cycle = Math.floor(Date.now() / 60000) % 10;
+                let tick = Math.floor((Date.now() / 1000) % 100);
+                ELEMENTS.clock.textContent = `${cycle}:${tick.toString().padStart(2, "0")}`;
+            }
+
+            updateClock();
+            setInterval(updateClock, 1000);
         </script>
     </body>
 </html>

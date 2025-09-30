@@ -1,40 +1,130 @@
 body {
-    background: linear-gradient(to bottom, #6b8f6d, #98BD9B 300px);
-    height: calc(100dvh - 128px);
+    margin: 16px;
+    font-family: 'National Park', sans-serif;
+    background-color: rgb(32, 32, 32);
+    color: white;
 }
 
-.airport-selection {
+.board > .board-info {
+    margin-bottom: 16px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: end;
 }
 
-.airport-selection > div {
+.board > .board-info > h1 {
+    margin: 0;
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 }
 
-.airport-selection > div > select {
-    font-size: 1rem;
-    background: white;
-    padding: 10px 48px 10px 16px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5H7z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: calc(100% - 16px) center;
-    background-size: 16px;
-    border-radius: 6px;
+.board > .board-info > h1 > svg {
+    height: 1em;
+    width: 1em;
+    fill: rgb(255, 217, 0);
 }
 
-.airport-selection > button {
-    font-size: 0.9rem;
-    background: white;
-    padding: 6px 12px;
-    margin-top: 16px;
+.board > .board-info > h2 {
+    margin: 0;
+    margin-left: auto;
+}
+
+.board > table {
+    margin: 12px 0;
+    width: 100%;
+    border-collapse: collapse;
+    background: #121212;
+    color: rgb(255, 217, 0);
+    overflow: hidden;
+    text-align: left;
+}
+
+.board > table > thead > tr > th {
+    padding: 16px 24px;
+}
+
+.board > table > tbody td {
+    padding: 12px 24px;
+    font-size: 0.98rem;
+    vertical-align: middle;
+    text-transform: none;
+}
+
+.board > table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.board > table > thead > tr > th,
+.board > table > tbody > tr > td {
+    padding: 12px 24px;
+    font-size: 0.98rem;
+    vertical-align: middle;
+    text-transform: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 24px;
+}
+
+.board > table > thead > tr > th:nth-child(1),
+.board > table > tbody > tr > td:nth-child(1) { 
+    text-align: left;
+    width: 15%;
+}
+.board > table > thead > tr > th:nth-child(2),
+.board > table > tbody > tr > td:nth-child(2) { 
+    text-align: left;
+    width: 30%;
+}
+.board > table > thead > tr > th:nth-child(3),
+.board > table > tbody > tr > td:nth-child(3) { 
+    text-align: left;
+    width: 20%;
+}
+.board > table > thead > tr > th:nth-child(4),
+.board > table > tbody > tr > td:nth-child(4) { 
+    text-align: left;
+    width: 20%;
+}
+.board > table > thead > tr > th:nth-child(5),
+.board > table > tbody > tr > td:nth-child(5) { 
+    text-align: right;
+    width: 15%;
+}
+
+.cancelled {
+    color: #c33;
+    font-weight: bold;
+}
+
+button {
+    background: #161616;
+    color: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 6px 10px;
     border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+button:disabled {
+    background: #090909;
+    color: #444;
+    border-color: #121212;
+    cursor: not-allowed;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 1.9s ease, transform 1.9s ease;
+}
+
+tbody tr { transition: background-color 0.2s ease, color 0.2s ease; }
+@media (max-width:640px){
+    thead th:nth-child(2), tbody td:nth-child(2){ display:none; }
 }
