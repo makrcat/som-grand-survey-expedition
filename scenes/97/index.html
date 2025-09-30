@@ -1,195 +1,203 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-            <title>Sierpinski Trees</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-    </head>
-    <body style="margin:0;background:#edbcbc;">
-        <div class="card">
-        
-        <div class="container">
-            <h2><b>Triangular trees</b></h2> 
-            <p>WOWEEE those trees sure are triangular, and getting pointier by the second. I wonder what the area and surface area is?<br>probably best not to dwell on such questions. I hear eating the triangular fruit will turn you triangular too... <br> lets get out of here, one path is very hot to the touch, and another just looks, dissapointing...
-            </p> 
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sierpinski Trees</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  </head>
+  <body style="margin: 0; background: #edbcbc">
+    <div class="card">
+      <div class="container">
+        <h2><b>Triangular trees</b></h2>
+        <p>
+          WOWEEE those trees sure are triangular, and getting pointier by the
+          second. I wonder what the area and surface area is?<br />probably best
+          not to dwell on such questions. I hear eating the triangular fruit
+          will turn you triangular too... <br />
+          lets get out of here, one path is very hot to the touch, and another
+          just looks, dissapointing...
+        </p>
+      </div>
     </div>
     <script>
-    let pathA = null;
-    let pathB = null;
-    let cirCol;
-    let numTrees = screen.width/130;
-    let hillY;
-    let backgroundCol;
-    let darkMode = false;
-    let offsets = [];
-    let depth = 0; //track current depth
-        let lastUpdate = 0; // timer
-        let maxDepth = 4;
-        let pathHeight = 0;
-        let treeOffsets = []; // for the lower group of trees to look dispersed
-        function setup() {
-            let canvas=createCanvas(windowWidth, windowHeight);
-            noStroke();
-            cirCol=color(255, 255, 0,255);
-            // has to be a color object for p5 (american spelling lol)
-            backgroundCol = color(129, 161, 212);
-            hillY = height * 0.7;
-            for (let i = 0; i < numTrees; i++) {
-                treeOffsets.push(Math.random()*40); 
-            }
-    }
-      
+      let pathA = null;
+      let pathB = null;
+      let cirCol;
+      let numTrees = screen.width / 130;
+      let hillY;
+      let backgroundCol;
+      let darkMode = false;
+      let offsets = [];
+      let depth = 0; //track current depth
+      let lastUpdate = 0; // timer
+      let maxDepth = 4;
+      let pathHeight = 0;
+      let treeOffsets = []; // for the lower group of trees to look dispersed
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        noStroke();
+        cirCol = color(255, 255, 0, 255);
+        // has to be a color object for p5 (american spelling lol)
+        backgroundCol = color(129, 161, 212);
+        hillY = height * 0.7;
+        for (let i = 0; i < numTrees; i++) {
+          treeOffsets.push(Math.random() * 40);
+        }
+      }
 
-    function makeTriangle(a, b, c) {
+      function makeTriangle(a, b, c) {
         beginShape();
         fill(0, 120, 0);
         vertex(a.x, a.y);
         vertex(b.x, b.y);
         vertex(c.x, c.y);
         endShape(CLOSE);
-    }
+      }
 
-    function sierpinski(a, b, c, level) {
+      function sierpinski(a, b, c, level) {
         if (level === 0) {
-            makeTriangle(a, b, c);
+          makeTriangle(a, b, c);
         } else {
-            let ab = p5.Vector.lerp(a, b, 0.5);
-            let bc = p5.Vector.lerp(b, c, 0.5);
-            let ca = p5.Vector.lerp(c, a, 0.5);
+          let ab = p5.Vector.lerp(a, b, 0.5);
+          let bc = p5.Vector.lerp(b, c, 0.5);
+          let ca = p5.Vector.lerp(c, a, 0.5);
 
-            sierpinski(a, ab, ca, level - 1);
-            sierpinski(ab, b, bc, level - 1);
-            sierpinski(ca, bc, c, level - 1);
+          sierpinski(a, ab, ca, level - 1);
+          sierpinski(ab, b, bc, level - 1);
+          sierpinski(ca, bc, c, level - 1);
         }
-    }
+      }
 
-    function drawHill() {
+      function drawHill() {
         fill(0, 80, 0);
         beginShape();
         let xoff = 0;
         vertex(0, height);
         for (let x = 0; x <= width; x += 10) {
-            let y = hillY - noise(xoff) * 200;
-        
-        if (x > width * 0.86 && x < width * 0.99) {
+          let y = hillY - noise(xoff) * 200;
+
+          if (x > width * 0.86 && x < width * 0.99) {
             if (pathHeight === 0) {
-                pathHeight = y;
+              pathHeight = y;
             }
 
             if (!pathA) {
-                pathA = { x: x, topY: y, url: '/scenes/76' };
+              pathA = { x: x, topY: y, url: "/scenes/76" };
             } else if (!pathB && x > pathA.x + 80) {
-                pathB = { x: x, topY: y, url: '/scenes/54' };
+              pathB = { x: x, topY: y, url: "/scenes/54?from=97" };
             }
-        }
-            
-            vertex(x, y);
-            xoff += 0.02;
+          }
+
+          vertex(x, y);
+          xoff += 0.02;
         }
         vertex(width, height);
         endShape(CLOSE);
-    }
+      }
 
-    function drawTree(x, y, size, depth) {
+      function drawTree(x, y, size, depth) {
         // trunk
         fill(100, 60, 20);
-        rect(x - size * 0.05, y+size, size * 0.1, size * 0.4);
+        rect(x - size * 0.05, y + size, size * 0.1, size * 0.4);
 
         // leaves
         let a = createVector(x, y);
         let b = createVector(x - size / 2, y + size);
         let c = createVector(x + size / 2, y + size);
         sierpinski(a, b, c, depth);
-    }
-    function mouseClicked() {
+      }
+      function mouseClicked() {
         let sw = width / 30;
         let halfWidth = Math.max(8, sw / 2);
         let bottomY = height;
 
         function tryRedirectForPath(path) {
-            if (!path) return false;
-            let topY = path.topY + width / 60; // same offset used for drawing
-            if (mouseX >= path.x - halfWidth && mouseX <= path.x + halfWidth && mouseY >= topY && mouseY <= bottomY) {
-                // send em to the url
-                window.location.href = path.url;
-                return true;
-            }
-            return false;
+          if (!path) return false;
+          let topY = path.topY + width / 60; // same offset used for drawing
+          if (
+            mouseX >= path.x - halfWidth &&
+            mouseX <= path.x + halfWidth &&
+            mouseY >= topY &&
+            mouseY <= bottomY
+          ) {
+            // send em to the url
+            window.location.href = path.url;
+            return true;
+          }
+          return false;
         }
-
 
         if (tryRedirectForPath(pathA)) return;
         if (tryRedirectForPath(pathB)) return;
 
         // toggle dark mode from a top right click
         if (mouseX < 150 && mouseY < 150) {
-            darkMode = !darkMode;
-            if (darkMode) {
-                backgroundCol = color(0, 0, 0, 40);
-                cirCol = color(255,255,255,255);
-            } else {
-                backgroundCol = color(51, 72, 134);
-                cirCol = color(255, 255,0,255);
-            }
+          darkMode = !darkMode;
+          if (darkMode) {
+            backgroundCol = color(0, 0, 0, 40);
+            cirCol = color(255, 255, 255, 255);
+          } else {
+            backgroundCol = color(51, 72, 134);
+            cirCol = color(255, 255, 0, 255);
+          }
         }
-    }
-    function draw() {
+      }
+      function draw() {
         background(backgroundCol);
         fill(cirCol);
-        circle(0,0,150);
-        drawHill();   
+        circle(0, 0, 150);
+        drawHill();
         fill(255, 255, 255);
-        stroke(128, 112, 85)
-        strokeWeight(width/30)
+        stroke(128, 112, 85);
+        strokeWeight(width / 30);
         // draw path A and B if available
         if (pathA) {
-            line(pathA.x, height, pathA.x, pathA.topY + width/60);
+          line(pathA.x, height, pathA.x, pathA.topY + width / 60);
         }
         if (pathB) {
-            line(pathB.x, height, pathB.x, pathB.topY + width/60);
+          line(pathB.x, height, pathB.x, pathB.topY + width / 60);
         }
         noStroke();
         if (millis() - lastUpdate > 1000) {
-            depth=(depth+1)%maxDepth;
-            lastUpdate = millis();
+          depth = (depth + 1) % maxDepth;
+          lastUpdate = millis();
         }
 
         // draw trees
         for (let i = 0; i < numTrees; i++) {
-            let x = map(i, 0, numTrees - 1, width * 0.0, width * 0.8);
-            let randomNumber = Math.random();
-            let baseY = hillY - noise(i * 8) * 80;
-            let size = 100 - noise(i * 8) * 80;
-            drawTree(x, baseY - size, size, depth);
-            drawTree(x+treeOffsets[i], baseY + size*0.7, size*1.3, depth);
+          let x = map(i, 0, numTrees - 1, width * 0.0, width * 0.8);
+          let randomNumber = Math.random();
+          let baseY = hillY - noise(i * 8) * 80;
+          let size = 100 - noise(i * 8) * 80;
+          drawTree(x, baseY - size, size, depth);
+          drawTree(x + treeOffsets[i], baseY + size * 0.7, size * 1.3, depth);
         }
-    }
+      }
     </script>
-    </body>
+  </body>
 </html>
 <style>
-.card {
+  .card {
     position: absolute;
     top: 20%;
     left: 50%;
     transform: translateX(-50%);
     width: 40%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     z-index: 10;
     background-color: rgb(3, 111, 205);
     margin: auto;
     display: flex;
-}
+  }
 
-.card:hover {
+  .card:hover {
     position: absolute;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
 
-.container {
+  .container {
     padding: 2px 16px;
-}
+  }
 </style>
