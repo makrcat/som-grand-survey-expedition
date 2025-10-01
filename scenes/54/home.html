@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="shared.js" defer></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="author" content="xFN10x" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Hotland!</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="images/flag.jpg" />
+  </head>
+
+  <body
+    style="
+      background-image: url(images/home-page-bg.png);
+      background-position: center;
+
+      background-size: cover;
+      margin: 0px 0px;
+    "
+  >
+    <header w3-include-html="header.html"></header>
+
+    <div style="margin: 8px 8px">
+      <h2 style="margin-bottom: 1px; font-size: 60px">
+        <b>!Bienol on Istemper!</b>
+      </h2>
+      <!-- Welcome to Hotland! (Welcome to the Land of Hot!)-->
+      <!--Bienol: Welcome, 
+        on: To, 
+        Is: Land (island, landmass), 
+        of: (connection of adjectives: hot water would be "Water of Hot") 
+        wit: (connection of verbs: man crying is "Home wit Dasses")
+        Temper: of a certain tempachure. Usally oppisite of cold. 
+        
+        (i changed the hotlandic name to Istemper: Land-Hot)-->
+
+      <!--<h4 style="margin-top: 0px;">Welcome to Hotland!</h4>-->
+      <h3 style="-webkit-text-fill-color: white">
+        Leh Lushory of Sown Ocean! <br />
+      </h3>
+      <!--Leh: The
+        Lushory: Something nice
+        Sown: South + Down 
+        Ocean: Ocean
+        -->
+      <p style="-webkit-text-fill-color: white;">
+        Here at Hotland you can see the wonders of the Southern Ocean! We speak
+        Hotlandish (Temperlathic), and English. Hotland is home to many
+        indiginous groups that have helped shape our land! We cannot thank them
+        enough! Here are some historic sites that you could see on your trip!
+      </p>
+
+      <h3 style="color: red">
+        ⚠️ WARNING!: OUR TEMPERATURES REGURALLY GO UP TO 2*:IT (100*ILT @ 1*ITI,
+        32°C)
+        <!--
+        IT: Istemper Temp. (The temp of the whole island, that is modified to ILT, using the locations ITI)
+        ILT: Istemper Local Temp. (Based on the IT and ITI) 
+        ITI: Istemper Temp. Index (Based on the location, it is used to change the IT into the local temp.)        
+        -->
+      </h3>
+
+      <div class="grid">
+        <div class="site">
+          <img class="site-image" src="sites/dasses-of-home.png" />
+          <div class="text-with-margin">
+            <h3>The Crying Man (Home wit Dasses)</h3>
+            <p>
+              <i
+                >Direct Translation: Man Crying
+
+                <br />
+                <br />The Crying Man depitcs a man from the Nosticallic, crying.
+                The man depicted is Enomaticilatic
+                (ee-no-matt-eck-ee-lack-tick), a man belived to have been deeply
+                depressed after the destruction of his village during the War of
+                The South (Sown of Conflict) <br /><br />
+                He and his people overtook a whole army. Using the enviroment
+                for their benifit.
+              </i>
+            </p>
+          </div>
+        </div>
+        <div class="site">
+          <img
+            class="site-image"
+            src="sites/ultutemper.png"
+          />
+          <div class="text-with-margin">
+            <h3>The Tomb of Overheat (Ultu-Temper of Tomth)</h3>
+            <p>
+              <i
+                >Direct Translation: Hot Death, Water Tomb
+
+                <br />
+                <br />
+                This tomb contains the heroic soldiers who bravly defended our
+                land from the Trianglish, during the War of the South. Many of
+                these soldiers used heat to there advantage, but lots of them
+                were wounded in battle, and they couldn't move, burning to death
+                in the sun.
+              </i>
+            </p>
+          </div>
+        </div>
+        <div class="site">
+          <img
+            class="site-image"
+            src="sites/fowndunds.png"
+          />
+          <div class="text-with-margin">
+            <h3>Sandfalls (Fown of, Dunds of Miter)</h3>
+            <p>
+              <i
+                >Direct Translation: Sand-Water Falls
+
+                <br />
+                <br />
+                This water fall is connected to Cave Dunowrath, a cave once
+                connecting Hotland to <b>Volcanic Island</b>. The water fall,
+                formed after a fatal land slide, destroying villages, and
+                collapsing caves. Now you can only get in through, by jumping in
+                the deep underground lake.
+                <br />
+                <b>You will not be able to get back up.</b> (<a
+                  href="/scenes/78/"
+                  class="change-for-ghp"
+                  ><b>Travel to Volcanic Island?</b></a
+                >)
+              </i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      w3.includeHTML(function () {
+        Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+          (elememt) => {
+            if (
+              elememt.tagName.toLowerCase() === "a" &&
+              window.location.href.startsWith(
+                "https://xfn10x.github.io/scene-54/"
+              ) &&
+              !elememt.getAttribute("href").startsWith("/scene-54")
+            ) {
+              elememt.setAttribute(
+                "href",
+                "/scene-54" + elememt.getAttribute("href")
+              );
+
+              console.log("Changed href to: " + elememt.getAttribute("href"));
+            }
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

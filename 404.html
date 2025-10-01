@@ -1,15 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>four oh four!</title>
-        <meta http-equiv="Content-Type" content="text/html">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <style> html { color-scheme: light dark; } </style>
-    </head>
-    <body>
-        <h1>404!!</h1>
-        <p>this location hasn't been discovered yet...</p>
-        <p>could you be the one to <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">break new ground?</a></p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This scene isn't built yet!</title>
+    <style>
+        html { 
+            color-scheme: light dark; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .scene-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .connections {
+            margin-top: 30px;
+        }
+        .connection-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .connection-link {
+            display: block;
+            padding: 15px;
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+        }
+        .connection-link:hover {
+            background: rgba(0, 123, 255, 0.2);
+            border-color: rgba(0, 123, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        .connection-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        .connection-description {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .connection-id {
+            font-size: 0.8em;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .back-to-map {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.5);
+            border-radius: 6px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .back-to-map:hover {
+            background: rgba(40, 167, 69, 0.3);
+        }
+        .fallback-content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>This scene isn't built yet!</h1>
+    
+    <div id="loading" class="loading">
+        <p>Loading scene information...</p>
+    </div>
+    
+    <div id="content" style="display: none;">
+        <div class="scene-info">
+            <h2 id="scene-title">Scene #<span id="scene-id"></span></h2>
+            <p id="scene-description"></p>
+            <p><strong>This location hasn't been discovered yet...</strong></p>
+            <p>Could you be the one to <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">build this scene?</a></p>
+        </div>
+
+        <div class="connections">
+            <h3>You can navigate to these connected scenes:</h3>
+            <div id="connection-list" class="connection-list">
+                <!-- Connections auto inserted here -->
+            </div>
+        </div>
+
+        <a href="#" onclick="window.top.location.href='https://summer.hackclub.com/s'; return false;" class="back-to-map">← Back to Map</a>
+    </div>
+    
+    <div id="fallback" class="fallback-content">
+        <p>This location hasn't been discovered yet...</p>
+        <p>Could you be the one to <a href="https://hackclub.slack.com/archives/C09DQ3EB40L" target="_blank">build this scene?</a></p>
+        <a href="#" onclick="window.top.location.href='https://summer.hackclub.com/s'; return false;" class="back-to-map">← Back to Map</a>
+    </div>
+
+    <script>
+        // Get scene ID from url
+        function getSceneIdFromUrl() {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const sceneParam = urlParams.get('scene') || urlParams.get('id');
+            if (sceneParam && !isNaN(sceneParam)) {
+                return parseInt(sceneParam);
+            }
+            
+            // Try to get from current URL path
+            const path = window.location.pathname;
+            const parts = path.split('/');
+            
+            // Handle URLs like /scenes/42/ or /scenes/42/index.html
+            if (parts.includes('scenes') && parts.length > 2) {
+                const sceneIndex = parts.indexOf('scenes');
+                const sceneId = parts[sceneIndex + 1];
+                if (sceneId && !isNaN(sceneId)) {
+                    return parseInt(sceneId);
+                }
+            }
+            
+            // Try to get from referrer if available
+            if (document.referrer) {
+                const referrerUrl = new URL(document.referrer);
+                const referrerParts = referrerUrl.pathname.split('/');
+                
+                if (referrerParts.includes('scenes') && referrerParts.length > 2) {
+                    const sceneIndex = referrerParts.indexOf('scenes');
+                    const sceneId = referrerParts[sceneIndex + 1];
+                    if (sceneId && !isNaN(sceneId)) {
+                        return parseInt(sceneId);
+                    }
+                }
+            }
+            
+            // as a fallback, try to extract number from any part of current path
+            for (const part of parts) {
+                if (part && !isNaN(part)) {
+                    return parseInt(part);
+                }
+            }
+            
+            return null;
+        }
+
+        async function loadManifest() {
+            try {
+                const response = await fetch('/manifest.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load manifest');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error loading manifest:', error);
+                return null;
+            }
+        }
+
+        // check if scene is in folder/exists
+        async function checkSceneExists(sceneId) {
+            try {
+                const response = await fetch(`/scenes/${sceneId}/`, { method: 'HEAD' });
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // try grab scene data from manifest
+        function renderSceneInfo(sceneData, connections, manifest) {
+            document.getElementById('scene-id').textContent = sceneData.id;
+            document.getElementById('scene-title').innerHTML = `Scene #${sceneData.id}: ${sceneData.name}`;
+            document.getElementById('scene-description').textContent = sceneData.description;
+
+            const connectionList = document.getElementById('connection-list');
+            connectionList.innerHTML = '';
+
+            if (connections.length === 0) {
+                connectionList.innerHTML = '<p>No connected scenes found.</p>';
+                return;
+            }
+
+            connections.forEach(async (connectionId) => {
+                const connectedScene = manifest.find(scene => scene.id === connectionId);
+                if (!connectedScene) return;
+
+                const link = document.createElement('a');
+                link.href = `/scenes/${connectionId}/`;
+                link.className = 'connection-link';
+
+                // does the connection exist
+                const exists = await checkSceneExists(connectionId);
+                if (!exists) {
+                    link.style.opacity = '0.6';
+                    link.style.borderStyle = 'dashed';
+                }
+
+                link.innerHTML = `
+                    <div class="connection-name">${connectedScene.name}</div>
+                    <div class="connection-description">${connectedScene.description}</div>
+                    <div class="connection-id">Scene #${connectedScene.id} ${exists ? '✅' : '❌'}</div>
+                `;
+
+                connectionList.appendChild(link);
+            });
+        }
+
+
+        async function main() {
+            const sceneId = getSceneIdFromUrl();
+            
+            if (sceneId === null) {
+                // show fallback content for generic 404s
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('fallback').style.display = 'block';
+                return;
+            }
+
+            const manifest = await loadManifest();
+            
+            if (!manifest) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('fallback').style.display = 'block';
+                return;
+            }
+
+            const sceneData = manifest.find(scene => scene.id === sceneId);
+            
+            if (!sceneData) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('fallback').style.display = 'block';
+                return;
+            }
+
+            const connections = sceneData.connections || [];
+            
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('fallback').style.display = 'none';
+            
+            renderSceneInfo(sceneData, connections, manifest);
+        }
+
+        
+        main();
+    </script>
+</body>
 </html>
