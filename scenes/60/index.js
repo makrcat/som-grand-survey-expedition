@@ -72,7 +72,7 @@ lorePage.addEventListener('click', function(){
     }
     else if(swoleCoins >= lorePageCost){
         swoleCoins -= lorePageCost
-        lorePageCost *= 1
+        lorePageCost *= 5
         lorePages++
         displaySwoleCoinAmount()
         lorePage.innerText = "Would you like get a mysterious page for " + Math.round(lorePageCost) + " Swole Coin"
@@ -132,7 +132,7 @@ protein.addEventListener('click', function(){
         proteinCost *= 1.3
         proteins++
         displaySwoleCoinAmount()
-        protein.innerText = "Get a protein powder factory for " + Math.round(jockCost) + " Swole Coins"
+        protein.innerText = "Get a protein powder factory for " + Math.round(proteinCost) + " Swole Coins"
     }else{
         alert("Not Enough Swole Coins")
     }
@@ -144,7 +144,7 @@ altar.addEventListener('click', function(){
         altarCost *= 1.3
         altars++
         displaySwoleCoinAmount()
-        altar.innerText = "Get an Altar Of Swole for " + Math.round(jockCost) + " Swole Coins"
+        altar.innerText = "Get an Altar Of Swole for " + Math.round(altarCost) + " Swole Coins"
     }else{
         alert("Not Enough Swole Coins")
     }
