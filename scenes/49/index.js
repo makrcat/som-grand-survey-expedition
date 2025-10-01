@@ -36,6 +36,9 @@ document.getElementById("gameSectionReturn").addEventListener("click",(event)=>{
    
 })
 document.getElementById("playButton").addEventListener("click",(event)=>{
+    if (!window.crossOriginIsolated){
+        alert("ERROR: current http server does not support COEP/COOP headers, ! change serving server !")
+    }
     document.getElementById('websiteSection').style.display = "none"
     document.getElementById('gameSection').style.display = "block";
     document.getElementById('gameCanvas').focus()
