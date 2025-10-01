@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MinecraftClone</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+
+    <!-- Required for SharedArrayBuffer & threading -->
+    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
+</head>
+<body>
+    <section class="mainSection" id="websiteSection">
+        <main>
+            <div class="mainBox" id="welcomeScreen">
+                <h1>STINK FOOT ISLAND</h1>
+                <div>
+                    
+                    <button id="playButton">Play</button>
+                    
+                </div>
+                
+            </div>
+            
+        </main>
+    </section>
+    <section class="mainSection" id="gameSection" style="display: none;">
+        <div>
+            <button id="gameSectionReturn">Return to start</button>
+            <p id="gameInfo">Wait fo game a bit 5-10s! SPACE-capture cursor, ENTER-release cursor !</p>
+        </div>
+        
+
+        <section id="canvasSection">
+            <canvas id="gameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
+        </section>
+     
+        
+    </section>
+    <footer>
+        <div id="githubLink">
+            <img  id="githubLogo" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" crossorigin="anonymous">
+        </div>
+        
+    </footer>
+
+    
+    
+</body>
+<script src="files/webGame/game.js"></script>
+<script src="index.js"></script>
+
+</html>
