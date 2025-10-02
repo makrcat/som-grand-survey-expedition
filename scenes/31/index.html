@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset = "UTF-8">
+<meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+<title>Cringe Canyon</title>
+<style>
+body {
+display: flex;
+flex-direction: column;
+align-items:center;
+background-color: #181715;
+color: #f0bf4c;
+padding: 2rem 5rem;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a{
+	text-decoration: none;
+}
+.canyon{
+display: flex;
+flex-direction: column;
+align-items:center;
+/*border-radius: 0.75rem;*/
+padding: 3rem;
+gap: 4rem;
+background: url("https://sdmntprcentralus.oaiusercontent.com/files/00000000-8a9c-61f5-b364-9366ffbe78a6/raw?se=2025-10-02T02%3A05%3A49Z&sp=r&sv=2024-08-04&sr=b&scid=6a095183-63d6-5349-b944-c18dde430206&skoid=71e8fa5c-90a9-4c17-827b-14c3005164d6&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-10-01T23%3A07%3A55Z&ske=2025-10-02T23%3A07%3A55Z&sks=b&skv=2024-08-04&sig=AamMbGJF2xZIiUZvt6aZ9Fg7F/4Fi8uGmNJiOWrDo78%3D") no-repeat center center / cover;
+width: 90%;
+box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+.two{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	width: 100%;
+}
+.one{
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+}
+.acontainer{
+background-color: #a888304D;
+padding: 1.5rem;
+margin: 1rem;
+min-width: 10rem;
+border: 4px solid #98822a;
+text-align:center;
+color: #f8ecac;
+border-radius: 0.5rem;
+box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.8);
+}
+.acontainer p{
+	color: #f0bf4c;
+}
+.lore{
+	text-align: center;
+	margin: 4rem 1rem 1rem 1rem;
+	background-color: #1f1f1f;
+	border: 15px solid #a88830;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+#response{
+	position: absolute;
+	top: 128px;
+	left: 460px;
+	color: #f0bf4c;
+}
+h1{
+	color: #f0bf4c;
+	font-size: 70px;
+	font-family: serif;
+}
+</style>
+</head>
+<body>
+<h1> Cringe Canyon </h1>
+<div class="canyon">
+<div class="one">
+<a href="/scenes/5">
+<div class="acontainer">
+<span>This way to:</span>
+<p>The Cringey Borderlands</p>
+</div>
+</a>
+</div>
+<div class="two">
+<a href="/scenes/50">
+<div class="acontainer">
+<span>This way to:</span>
+<p>Cringe Plateau</p>
+</div>
+</a>
+<a href="/scenes/18">
+<div class="acontainer">
+<span>This way to:</span>
+<p>The Opinion Dominion</p>
+</div>
+</a>
+</div>
+<div>
+<input type="text" placeholder="Yell at the canyon!" id="yellInput"></input>
+<button id="yell">Yell</button>
+<p id = "response"></p>
+</div>
+</div>
+<div class="lore">
+<h2> The Cringe Canyon </h2>
+<p> The Cringe Canyon is a popular site of tourism on the Island. </p>
+<p> A core part of the Meme Trail, the Cringe Canyon contains carvings of all memes that have passed through it. </p>
+<p> After going through the Cringe Borderlands and the Cringe Peak, memes pass by this canyon on their way to the final stop, the Tomb of Giggles. </p>
+<p> Passing by the Cringe Canyon, the memes are sculpted into the canyon and forever etched as Cringe for all those that visit the canyon afterwards. </p>
+<p> The Canyon's Magic allows the meme sculptures to imitate their sounds when the canyon is yelled to, as the echo significantly amplifies the cringe. </p>
+<p> Visitors of the Canyon are advised to not yell into it, and to quietly enjoy the memes... for many have yelled and many have died... </p>
+<h4> DIED OF CRINGE. </h4>
+</div>
+<div class="lore">
+<h2> The Meme Trail </h2>
+<p> Hacklantis Island is known for its very high density and diversity of memes. </p>
+<p> These memes come from all over the island, with every location leaving its mark on the island's culture. </p>
+<p> However, analysts have noticed that there is a path that many memes take on their journey through the island. </p>
+<p> These analysts have dubbed this route "The Meme Trail". </p>
+<p> The Meme Trail begins in the Forbidden Sector, where an anomalous number of memes originate from. </p>
+<p> The memes then move westward, going through the Discouraged Sector and Wetwater Lake. </p>
+<p> The course changes northward as memes move through Trollcave and Big Dune before passing the The Silly Silly Hilly Silly Hills. </p>
+<p> Passing the Tomb of Grass and Giggles, where they meet the memes from past, they go towards Exxtreeme Mountenz before entering Cringe Territory. </p>
+<p> Moving through the Cringe Borderlands, Cringe Plateau, and finally Cringe Canyon, they reverse their course. </p>
+<p> The memes are last spotted in the Opinion Dominion, then they move back to the Tomb, this time for good. </p>
+<h5> While these memes may die, the Cringe Canyon stands as a memoriam for memes from all parts of the island across all timelines. </h5>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+	let times_thrown = 0;
+	let startx = 470
+	let starty = 749
+	let vx = -2
+	let vy = -1
+	let stop_throwing = false
+	let being_thrown = false
+	const yellButton = document.getElementById('yell')
+	const yellInput = document.getElementById('yellInput')
+	const response = document.getElementById('response')
+
+	yellButton.addEventListener("click", () =>{
+		const yell = yellInput.value.trim()
+		if (yell) {
+			console.log("its happening")
+			response.textContent = yell
+			vx = -4
+			vy = -2
+			if (!being_thrown){throw_text_around(response);
+			being_thrown = true;
+			response.style.top = "749px";
+			stop_throwing = false;
+			vy = -2;}
+			fetch("https://ai.hackclub.com/chat/completions", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({
+					messages:[{role: "user", content: `You are the Cringe Canyon, responsible for returning cringe responses that utilize dead memes to user yells. The user has prompted: ${yell}. Return a short (<8 words), cringy response.`}]
+				})
+			}).then(res => {
+				if (!res.ok) {
+					throw new Error(`oopsie: http is ${res.status}`)
+				} 
+				return res.json()
+			}).then(data => {
+				if (data.choices && data.choices.length > 0){
+					let aiReturned = data.choices[0].message.content
+					aiReturned = aiReturned.substring(aiReturned.lastIndexOf(">") + 1).trim()
+					response.textContent = aiReturned
+					vx = 4
+					vy = 2
+				} else { response.textContent = "the canyon is trolling...."}
+			}).catch(error =>{
+				response.textContent = "the canyon has buggeted."
+				console.log(error)
+			})
+		}
+	})
+
+	function throw_text_around(a){
+	let left_thing = parseFloat(a.style.left) || startx
+	let top_thing = parseFloat(a.style.top) || starty
+
+	if (left_thing > 680 + (top_thing - 300) * 0.2) {
+		vx = -Math.abs(vx)
+	} else if (left_thing < 450 - (top_thing - 300) * 0.2) {
+		vx = Math.abs(vx)
+	}
+
+	response.style.fontSize = (parseFloat(window.getComputedStyle(response,null).getPropertyValue('font-size')) || 16) + vy * 0.015 + 'px'
+	console.log(response.style.fontSize)
+
+	if ((top_thing < 750 || vy < 0)&& (top_thing > 300 || vy > 0)){
+	a.style.left = (left_thing + vx) + "px"
+	a.style.top = (top_thing + vy) + "px"}
+	else {
+	//response.style.fontSize = 16
+		vy = 0
+		if (vy > 0){stop_throwing = true; being_thrown = false;}
+	}
+
+	if (times_thrown < 10000 || !stop_throwing) {
+	requestAnimationFrame(() => throw_text_around(a)); 
+	times_thrown += 1
+	} else {return}
+	}
+})
+</script>
+</body>
+</html>
