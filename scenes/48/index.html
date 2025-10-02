@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pummice and hummus</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="background">
+        <div>
+            <!-- {!isEnd ? ( -->
+                <h1 class="question">
+                    <span id="question"></span>
+                </h1>
+                <div class="answerdiv">
+                    <span id="answer" class="answer" onclick="nextQuestion()">Ummm yeah? (start dialogue)</span>
+                </div>
+            <!-- ) : ( -->
+            
+            <!-- )} -->
+        </div>
+        <div class="before_end" id="before_end">
+            <!-- {!isEnd && answerIndex == 0 && ( -->
+            <div>Finish the dialog to see more info and the story!</div>
+            <!-- )} -->
+        </div>
+        <div className="" id="after_end">
+            <div className="">
+                <img src="./pummice_and_hummus.webp"alt="Hummus with Pumice" className="mt-4 rounded shadow-lg w-2" />
+            </div>
+            <!-- {isEnd && ( -->
+            <div className="mt-10 bg-black/80 p-5" class="lorediv">
+                <h1 className="text-2xl font-bold" class="loretitle">Lore:</h1>
+                <div className="flex gap-4" class="lorelorediv">
+                    <p className="max-w-100">
+                        After being really exhausted from exploring all
+                        day you started to get hungry. While travelling
+                        to another location you heard a yell saying
+                        "TRAVELERRR!!!" near you. <br /> Interested in what it
+                        is you went to the place from where you heard
+                        the voice. <br /> You found a man giving out pumice. He
+                        asked you if you want something spicy and he
+                        gave you a pumice. <br /> Because you had some leftover
+                        hummus from a previous place, he advised you to
+                        eat it together. It was pretty tasty! <br /> (we dont
+                        talk about the effects of that questionable
+                        snack)
+                    </p>
+                </div>
+                <div className="mt-10">
+                    <h1 className="text-2xl font-bold">What's pummice?</h1>
+                    <p>Pummice is a dust formed into a rock, from volcanic glass (it should NOT be consumed). Kinda just
+                        CO2 bubbles get stuck in lava. Probably.</p>
+                </div>
+                <div className="mt-10">
+                    <h1 className="text-2xl font-bold">Where will you go next?</h1>
+                    <p>you coul <a href="/scenes/78">follow the faint ominous blurtzing sound</a><br> or take the other path, but i would heavily discourage it... <a href="/scenes/27">head to the discouraged sector</a></p>
+                </div>
+            </div>
+            <!-- )} -->
+        </div>
+        <!-- <div className="fixed bottom-4 right-4"> -->
+        <!-- <button onClick={() => setAnswerIndex(5)}>skip</button> -->
+        <!-- </div> -->
+    </div>
+</body>
+<script>
+    const dialogue = [
+        {
+            question: "Hello traveler, are you hungry?",
+            answers: "Ummm, yeah?",
+        },
+        {
+            question: "Would you like something spicy?",
+            answers: "Yes, please!",
+        },
+        {
+            question: "Do you have any spare food?",
+            answers: "Yeah i have some hummus!",
+        },
+        {
+            question: "What about... hummus with pumice!?",
+            answers: "wtf go away",
+        },
+        {
+            question: "You sure?",
+            answers: "Well, alright ill eat it..",
+        },
+        {
+            question: "You sure?",
+            answers: "Well, alright ill eat it..",
+        },
+    ];
+    let answerIndex = 0;
+    const isFinished = false;
+    document.getElementById("question").innerText = dialogue[answerIndex].question;
+    // document.getElementById("before_end").style.display = "";
+    document.getElementById("after_end").style.display = "none";
+
+    function nextQuestion() {
+        answerIndex++;
+        document.getElementById("question").innerText = dialogue[answerIndex].question;
+        document.getElementById("answer").innerText = dialogue[answerIndex].answers;
+        if (answerIndex == 5) {
+            document.getElementById("answer").innerText = "Finished dialogue";
+            document.getElementById("question").innerText = "Gives you hummus with pumice...";
+            document.getElementById("after_end").style.display = "";
+        }
+        if (answerIndex != 0) {
+            document.getElementById("before_end").style.display = "none";
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'PixelOperator8';
+    src: url('../data/PixelOperator8.ttf') format('truetype');
+    font-display: swap;
+}
+
+body {
+    background-color: #070707;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+#board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    image-rendering: pixelated;
+    background: #070707;
+    z-index: 1;
+}
+
+/* Parts of the speech bubble code from: https://freefrontend.com/css-speech-bubbles/ */
+p.bubble {
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50px, -190px);
+
+    width: 300px;
+    height: auto;
+    
+    text-align: center;
+    line-height: 1.4em;
+    margin: 40px auto;
+
+    background: url("../images/SpeechBubble.png") no-repeat center center;
+    background-size: contain;
+    image-rendering: pixelated;
+    
+    font-family: 'PixelOperator8', sans-serif;
+    padding: 16px 20px 24px 20px;
+    font-size: large;
+    
+    z-index: 2;
+    visibility: hidden;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Hug Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <p id="hugCounter">Hugs collected: 0 / 24</p>
+
+  <!-- Single button -->
+  <p id="meme">
+  <button id="hugButton">Get a Random Hug</button>
+  </p>
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content" id="popupContent">
+      <img id="hugImage" src="" alt="Random Hug">
+      <br>
+      <button class="close-btn" onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

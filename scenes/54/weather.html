@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="shared.js" defer></script>
+    <script src="weather.js" defer></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html" />
+    <meta name="author" content="xFN10x" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotlandic Weather</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="images/flag.jpg" />
+  </head>
+
+  <body
+    style="
+      background-image: url(images/weather-page-bg.png);
+      background-position-x: left;
+      background-repeat: no-repeat;
+      margin: 0px 0px;
+    "
+  >
+    <header w3-include-html="header.html"></header>
+
+    <div style="margin: 16px auto; max-width: 880px">
+      <h2
+        style="
+          font-size: 60px;
+          margin-top: 0px;
+          -webkit-text-stroke: 1px;
+          -webkit-text-stroke-color: white;
+        "
+      >
+        Today's Weather
+      </h2>
+      <div style="display: flexbox">
+        <div style="display: flex; max-height: 6.5rem">
+          <img
+            alt="Haze"
+            width="150rem"
+            height="150rem"
+            style="object-fit: contain"
+            src="https://raw.githubusercontent.com/Makin-Things/weather-icons/master/animated/haze-day.svg"
+          />
+          <p
+            id="ILT-display"
+            style="
+              font-size: 6rem;
+              font-family: 'Poppins', sans-serif;
+              font-weight: 300;
+              font-style: normal;
+              margin-top: 0.5rem;
+              text-align: center;
+              -webkit-text-fill-color: white;
+              -webkit-text-stroke: 1px;
+              -webkit-text-stroke-color: black;
+            "
+          >
+            0
+          </p>
+          <div>
+            <p
+              style="
+                font-size: 2rem;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 300;
+                font-style: normal;
+
+                margin-top: 1.5rem;
+                margin-bottom: 0;
+                text-align: center;
+                -webkit-text-fill-color: white;
+                -webkit-text-stroke: 0.04rem;
+                -webkit-text-stroke-color: black;
+              "
+            >
+              <sup>*ILT</sup>
+            </p>
+            <p
+              id="IT-display"
+              style="
+                margin-top: -1rem;
+                -webkit-text-fill-color: white;
+                -webkit-text-stroke: 0.04rem;
+                -webkit-text-stroke-color: black;
+              "
+            >
+              0<sup>*IT</sup>
+            </p>
+          </div>
+          <div
+            style="
+              background-color: rgba(0, 0, 87, 0.53);
+              display: inline-table;
+              border-radius: 25px;
+              box-sizing: border-box;
+              overflow: hidden;
+              margin-left: auto;
+              margin-right: 1rem;
+            "
+          >
+            <img src="images/island.png" width="200" height="87.30" />
+            <svg
+              id="location-selection"
+              width="200"
+              height="87.30"
+              style="
+                position: absolute;
+                cursor: crosshair;
+                border-radius: 25px;
+                margin-left: -200px;
+              "
+            >
+              <circle
+                id="location-selection-display"
+                cx="10"
+                cy="0"
+                r="5"
+                stroke="darkred"
+                stroke-width="4"
+                fill="red"
+              />
+            </svg>
+            <p id="hli-indic" style="color: white">ITI of Location: --</p>
+          </div>
+        </div>
+        <i style="margin-left: 30px; -webkit-text-fill-color: white"
+          >Sun with Haze</i
+        >
+      </div>
+      <div
+        style="
+          padding: 10px;
+          margin-top: 5rem;
+          border-radius: 25px;
+          background-color: rgba(0, 0, 87, 0.53);
+        "
+      >
+        <h2
+          style="
+            font-size: 35px;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          Message for Tourists:
+        </h2>
+        <p
+          style="
+            font-size: larger;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          The way temerature is messured in Hotland is different than most
+          countrys. In most places, the temperature is messured per area. But in
+          Hotland, it is only messured once, in one location (One with an ITI of
+          2). Then, it is modified based on the local ITI.
+          <br />
+          <br />
+          These are 3 main components to how you messure it:
+          <br />
+          <br />
+          <i
+            >Istemper is the Hotlandic name for Hotland. Its the offical
+            language, its thats why its used here.</i
+          >
+        </p>
+
+        <ul
+          style="
+            font-size: larger;
+            text-align: left;
+            -webkit-text-fill-color: white;
+          "
+        >
+          <li>
+            <b>IT: Istemper Temperature</b>: The temperature of the whole
+            island. This number is modified to the local area. (ILT)
+          </li>
+          <li>
+            <b>ITI: Istemper Temp. Index</b>: Based on the location, it is the
+            modifier of of the temperture. The base IT is messured in an area
+            with 2<sup>*ITI</sup>
+          </li>
+          <li>
+            <b>ILT: Istemper Local Temperature</b>: The final temperature of the
+            location. This is what can be converted to °C or °F (Celcius is the
+            secondary messurment of temperature in Hotland)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      w3.includeHTML(function () {
+        Array.from(document.getElementsByClassName("change-for-ghp")).forEach(
+          (elememt) => {
+            if (
+              elememt.tagName.toLowerCase() === "a" &&
+              window.location.href.startsWith(
+                "https://xfn10x.github.io/scene-54/"
+              ) &&
+              !elememt.getAttribute("href").startsWith("/scene-54")
+            ) {
+              elememt.setAttribute(
+                "href",
+                "/scene-54" + elememt.getAttribute("href")
+              );
+
+              console.log("Changed href to: " + elememt.getAttribute("href"));
+            }
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

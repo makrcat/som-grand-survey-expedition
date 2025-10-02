@@ -3,8 +3,8 @@
     "id": 0,
     "x": 0.937,
     "y": 0.198,
-    "name": "The Blubberhills",
-    "description": "Hills with the quality of blubberfulness.",
+    "name": "Blubberhill",
+    "description": "please blubber in this hills for free shells",
     "connections": [
       19,
       56,
@@ -122,8 +122,8 @@
     "id": 10,
     "x": 0.058,
     "y": 0.165,
-    "name": "Ruined House (Semi-Sentient)",
-    "description": "If only these walls could talk\u2026 and like, they almost can!",
+    "name": "Ancient Dungeons",
+    "description": "Why is there a giant door on that giant rock?",
     "connections": [
       36,
       57,
@@ -632,7 +632,7 @@
     "x": 0.41,
     "y": -0.553,
     "name": "Hotland",
-    "description": "Legends say it is hot here. The reality is much more mysterious.",
+    "description": "A hot summer resort on the suface... but whats below?",
     "connections": [
       78,
       97

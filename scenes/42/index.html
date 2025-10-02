@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Ugly Isles</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="body2">
+		<div id="header">
+			<h1 style="display: inline-block;">The Ugly Isles INC.</h1><h2 style="display: inline-block;margin-left:10px;">Helping you enjoy the perfect vacation</h2>
+			<div id="subheader">
+				<a href="about.html">About</a>
+				<a href="todo.html">Things to do here</a>
+			</div>
+		</div>
+		<progress value="0" max="1000000" id="retirement"></progress>
+		<p id="retirement-text">progress to my retirement: 0/1000000 monies</p>
+
+		<p style="display:inline-block;">Shells spent so far:<p id="spent" style="display:inline-block;">0</p></p>
+		<h1 style="text-align: center;">Welcome to the Ugly Isles</h1>
+		<h2>We need more tourism <img src="sadge.png" alt="Sadge" id="sadge"></h2>
+		<button class="href" onclick="goToShellfish()">Continue to The Shellfish Kingdom (it's a long swim, you should buy a boat ticket)</button>
+		<br>
+		<button class="href" onclick="goToGhostRave()">Continue to the Ghost Rave (we recommend buying earplugs)</button>
+		<br>
+		<button class="href" onclick="goToShrubs()">Go to the Shrubs of Mystery (bring flashlight)</button>
+		<h1>We hope you enjoyed your Ugly Isles experience!</h1>
+		<h2>PLEASE buy something at our gift shop</h2>
+		<div>
+			<img src="letter.png" alt="letter" style="width:100px;">
+			<button onclick="buyText()">Buy text premium (35 <img src="shell.avif" alt="shells" style="width:30px;">)</button>
+		</div>
+		<div>
+			<img src="magnet.png" alt="magnet" style="width:100px;">
+			<button onclick="buy('magnet', 25, 'We ran out of magnets, shipping is expensive here :(')">Buy our car magnet (24.9 <img src="doubloon.svg" alt="shells" style="width:30px;">)</button>
+		</div>
+		<div>
+			<img src="ship.svg" alt="ship" style="width:100px;">
+			<button onclick="buy('ship', 55, 'We only have one ship (it\'s totally not stolen from the high seas)')">Ticket to ship (54.99 <img src="doubloon.svg" alt="shells" style="width:30px;">)</button>
+		</div>
+		<div>
+			<img src="flashlight.avif" alt="flashlight" style="width:100px;">
+			<button onclick="buy('flashlight', 42, 'HQ doesn\'t give me a light source and I\'m afraid of the dark')">Flashlight (image to scale) (41.999 <img src="shell.avif" alt="shells" style="width:30px;">)</button>
+		</div>
+		<div>
+			<img src="earplugs.webp" alt="earplugs" style="width:100px;">
+			<button onclick="buy('earplugs', 10, 'I ran out, hand-made small batches')">Earplugs (I made them myself) (99999 / 10000 <img src="bitcoin.jpeg" alt="shells" style="width:30px;">)</button>
+		</div>
+		<h2>MERCH! display your support with the best colored shirts: neon orange and neon yellow</h2>
+		<div>
+			<img src="neonorange.jpg" alt="neonOrange" style="width:100px;">
+			<button onclick="buy('neonOrange', 45, 'we ran out of neon, come back later when the chemical separator is back up')">Neon Orange (forty four and nine nine hundredths <img src="mariocoin.jpg" alt="shells" style="width:30px;">)</button>
+		</div>
+		<div>
+			<img src="neonyellow.webp" alt="neonYellow" style="width:100px;">
+			<button onclick="buy('neonYellow', 45, 'we ran out of neon, come back later when the chemical separator is back up')">Neon Yellow (101100.11111100 <img src="doubloon.svg" alt="shells" style="width:30px;">)</button>
+		</div>
+
+		<div id="tipmenu" style="display:none;">
+			<h1>Do you want to leave a tip?</h1>
+			<button onclick="leaveTip(.25)">25%</button>
+			<button onclick="leaveTip(.5)">50%</button>
+			<button onclick="leaveTip(1)">100%</button>
+
+			<button style="position: relative;top:200px;left:200px;" onclick="customTip()">Custom</button>
+		</div>
+	</div>
+	<audio id="pleasehold" src="pleasehold.mp3"></audio>
+	<script>
+		let shellsSpent = 0;
+		let bought = [];
+
+		function storeBetterText() {
+			if (localStorage.getItem("hasBetterText")) {
+				document.getElementById("body2").style.fontFamily = "comicsans";
+				const textElements = document.querySelectorAll("h1, h2, a, button, p");
+				textElements.forEach(element => {
+					element.style.textShadow = "2px 2px 0 yellow, -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow";
+				});
+			}
+			else {
+				localStorage.setItem("hasBetterText", "true");
+			}
+		}
+		if (localStorage.getItem("hasBetterText")) {
+			document.getElementById("body2").style.fontFamily = "comicsans";
+			const textElements = document.querySelectorAll("h1, h2, a, button, p");
+			textElements.forEach(element => {
+				element.style.textShadow = "2px 2px 0 yellow, -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow";
+			});
+		}
+
+		function updateSpent() {
+			document.getElementById("spent").innerText = shellsSpent;
+		}
+		function buyText() {
+			if (bought.includes("text")) {
+				alert("doesn't get more readable than this :)");
+				return;
+			}
+			document.getElementById("body2").style.fontFamily = "comicsans";
+			const textElements = document.querySelectorAll("h1, h2, a, button, p");
+			textElements.forEach(element => {
+				element.style.textShadow = "2px 2px 0 yellow, -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow";
+			});
+			shellsSpent += 35;
+			updateSpent();
+			addmoney(35);
+			bought.push("text");
+			storeBetterText();
+		}
+		function buy(item, cost, outofmessage) {
+			if (bought.includes(item)) {
+				alert(outofmessage);
+				return;
+			}
+			shellsSpent += cost;
+			addmoney(cost);
+			updateSpent();
+			bought.push(item);
+		}
+		// gotos
+		function goToShellfish() {
+			if (!bought.includes("ship")) {
+				if (confirm("It's a long swim, are you sure you don't want to buy our ship ticket? (we don't know how to sail)")) {
+					if (confirm("Are you REALLY sure? you should give us more money")) {
+						openTipMenu("https://isle.a.hackclub.dev/scenes/62");
+					}
+				}
+				return;
+			}
+			openTipMenu("https://isle.a.hackclub.dev/scenes/62");
+		}
+		function goToGhostRave() {
+			if (!bought.includes("earplugs")) {
+				if (confirm("9/10 Scientists recommend ear plugs because loud music can damage your hearing, you should buy them from our store!")) {
+					if (confirm("Are you REALLY sure? I want to be able to make a living :(")) {
+						openTipMenu("https://isle.a.hackclub.dev/scenes/57");
+					}
+				}
+				return;
+			}
+			openTipMenu("https://isle.a.hackclub.dev/scenes/57");
+		}
+		function goToShrubs() {
+			if (!bought.includes("flashlight")) {
+				if (confirm("The shrubs are very dark, you should buy a flashlight from our store!")) {
+					if (confirm("Are you REALLY sure? .001% goes to nature conservation on this island!")) {
+						openTipMenu("https://isle.a.hackclub.dev/scenes/91");
+					}
+				}
+				return;
+			}
+			openTipMenu("https://isle.a.hackclub.dev/scenes/91");
+		}
+		let retirementProgress = 0;
+		function updatebar() {
+			fetch("https://guy.hackclub.app/uglyisles/data").then(response => response.json()).then(data => {
+				retirementProgress = data.money;
+				document.getElementById("retirement").value = retirementProgress;
+				document.getElementById("retirement-text").innerText = `progress to my retirement: ${retirementProgress}/1000000 monies`;
+			});
+		}
+		updatebar();
+		function addmoney(amount) {
+			fetch(`https://guy.hackclub.app/uglyisles/addmoney?money=${amount}`, {
+				method: 'POST'
+			}).then(() => {
+				updatebar();
+			});
+		}
+
+		let gotoLocation = "TBD";
+		function openTipMenu(link) {
+			document.getElementById("tipmenu").style.display = "block";
+			gotoLocation = link;
+		}
+
+		function leaveTip(percent) {
+			let amount = Math.floor(shellsSpent * percent);
+			if (amount > 0) {
+				shellsSpent += amount;
+				addmoney(amount);
+				updateSpent();
+			}
+			alert("Thank you!");
+		}
+
+		function customTip() {
+			const tipmenu = document.getElementById("tipmenu");
+			tipmenu.innerHTML = `
+				<h1>Enter custom tip amount:</h1>
+				<input type="number" id="customtipinput" placeholder="amount in shells">
+				<button onclick="submitCustomTip()">Submit</button>
+			`
+		}
+
+		function submitCustomTip() {
+			const input = document.getElementById("customtipinput");
+			let amount = parseInt(input.value);
+			if (!isNaN(amount) && amount >= 0) {
+				if (amount == 0) {
+					zeroTip();
+					return;
+				}
+				shellsSpent += amount;
+				addmoney(amount);
+				updateSpent();
+				alert("Thank you!");
+			} else {
+				alert("Please enter a valid amount.");
+			}
+		}
+
+		function zeroTip() {
+			const tipmenu = document.getElementById("tipmenu");
+			tipmenu.innerHTML = `
+				<h1>Do you want to donate to uglies in need with no money who are starving on this island?</h1>
+				<button onclick="leaveTip(.5)">Yes (50%)</button>
+				<button onclick="zeroTip2()">No</button>
+			`
+		}
+
+		async function wait(s) {
+			return new Promise(resolve => setTimeout(resolve, s * 1000));
+		}
+
+		function zeroTip2() {
+			const tipmenu = document.getElementById("tipmenu");
+			tipmenu.innerHTML = `
+				<h2>Wow I guess some people just don't care</h2>
+			`
+			wait(.85)
+			.then(() => {
+				tipmenu.innerHTML = `
+					<h1>Do you want to donate to help increase the pay gap</h1>
+					<button onclick="zeroTip3()">Maybe I'm still thinking about it</button>
+					<button onclick="leaveTip(1)">YES (100%)</button>
+				`
+			})
+		}
+
+		function zeroTip3() {
+			const tipmenu = document.getElementById("tipmenu");
+			const audio = document.getElementById("pleasehold");
+			
+			const dialogMessages = [
+				`<h2>Payment processing. Please hold...</h2>
+				<p>Processing your generous donation...</p>
+				<p>Connecting to our secure payment servers...</p>`,
+
+				`<h2>Sorry we have slow internet here</h2>
+				<p>This is kind of a dead zone for everything</p>
+				<p>People think the isles are too ugly</p>`,
+				
+				`<h2>Processing transaction...</h2>
+				<p>Encrypting sensitive data</p>
+				<p>Security is important!</p>`,
+				
+				`<h2>Almost there...</h2>
+				<p>Finalizing your SUPER HUGE donation...</p>
+				<p>of 0 monies!</p>`,
+
+				`<h2>Please continue to hold...</h2>
+				<p>Your time isn't important to us anymore</p>
+				<p>Estimated wait time: 2-47 minutes...</p>`,
+
+				`<h2>Technical difficulties...</h2>
+				<p>Reconnecting to servers...</p>
+				<p>Please do leave...</p>`
+			];
+			
+			let currentMessage = 0;
+			tipmenu.innerHTML = dialogMessages[currentMessage];
+
+			const dialogInterval = setInterval(() => {
+				currentMessage = (currentMessage + 1) % dialogMessages.length;
+				tipmenu.innerHTML = dialogMessages[currentMessage];
+			}, 2550);
+
+			audio.currentTime = 77;
+			audio.play();
+
+			const randomDuration = Math.random() * 90 + 30; // 30 to 120
+
+			setTimeout(() => {
+				audio.pause();
+				clearInterval(dialogInterval);
+				tipmenu.innerHTML = "All done! Please come again!";
+				wait(2).then(() => {
+					window.location.href = gotoLocation;
+				});
+			}, randomDuration * 1000);
+		}
+	</script>
+</body>
+</html>

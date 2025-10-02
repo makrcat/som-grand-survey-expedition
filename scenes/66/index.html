@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Spooky Tomb</title>
+        <link rel="icon" type="image/x-icon" href="./assets/images/icon.png">
+        <link rel="stylesheet" href="./assets/styles/styles.css">
+        <link rel="stylesheet" href="./assets/styles/scenes.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+        <canvas id="board"></canvas>
+
+        <p class="bubble speech" id="bubble">I should keep going to see more of this tomb.</p>
+
+        <div class="sceneWindow" id="sceneWindow">
+            <h2>Exit?</h2>
+
+            <p>Are you sure you want to leave already? There are still so many secrets to discover!</p>
+            <p>(Click on the link to jump to the scene or go to another exit)</p>
+
+            <a href="/scenes/6/" id="scene6">The Lost City of Hrrurrrngh</a>
+            <a href="/scenes/12/" id="scene12">Anxious Island</a>
+            <a href="/scenes/14/" id="scene14">Mildly Angry Mountains</a>
+            <a href="/scenes/32/" id="scene32">Le Dumpstairè II</a>
+        </div>
+
+        <div class="sceneWindow" id="entranceWindow">
+            <h2>Oops!</h2>
+
+            <p>A huge rockfall had created an impassable barrier at the entrance.</p>
+            <p>You have to find another way!</p>
+        </div>
+
+        <div class="sceneWindow" id="welcomeWindow">
+            <h1>Welcome to the Spooky Tomb</h1>
+            <p>Explore the tomb and find all secrets!</p>
+
+            <img src="./assets/images/WASD Controls.png">
+            <p>WASD to move around</p>
+            <img src="./assets/images/Space bar.png">
+            <p>SPACE BAR to interact</p>
+        </div>
+
+        <audio id="bg-audio" src="./assets/data/deep-cave.mp3" loop></audio>
+
+        <!-- Libraries -->
+        <script src="./assets/scripts/Lib/opentype.min.js"></script>
+        
+        <!-- Helper -->
+        <script src="./assets/scripts/Util/Vector2.js"></script>
+        <script src="./assets/scripts/Util/Resources.js"></script>
+        
+        <!-- Constants -->
+        <script src="./assets/scripts/Constants/GridConstants.js"></script>
+        <script src="./assets/scripts/Constants/Constants.js"></script>
+        <script src="./assets/scripts/Constants/EventConstants.js"></script>
+        
+        <!-- Classes -->
+        <script src="./assets/scripts/GameObject.js"></script>
+        <script src="./assets/scripts/Grid.js"></script>
+        <script src="./assets/scripts/Util/InputService.js"></script>
+        <script src="./assets/scripts/Util/Events.js"></script>
+        <script src="./assets/scripts/GameLoop.js"></script>
+
+        <!-- GameObjects -->
+        <script src="./assets/scripts/Sprite.js"></script>
+        <script src="./assets/scripts/Objects/Orpheus.js"></script>
+        <script src="./assets/scripts/Objects/Camera.js"></script>
+        <script src="./assets/scripts/Objects/SpeechBubble.js"></script>
+        <script src="./assets/scripts/Objects/Text.js"></script>
+        
+        <!-- Entry Point -->
+        <script src="./assets/scripts/Main.js"></script>
+    </body>
+</html>
