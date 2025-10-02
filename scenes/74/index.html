@@ -1,5 +1,715 @@
-<iframe
-  src="https://github.com/solarcosmic/som-survey-expedition"
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
-  style="width:100%; height:600px; border:none;"
-></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanky's Mysterious Dice Rolling Simulator (solarcosmic.net)</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png"></link>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Epunda+Slab:ital,wght@0,300..900;1,300..900&display=swap');
+        * {
+            font-family: "Epunda Slab", sans-serif;
+        }
+        body {
+            background-color: black;
+            color: #ffffff;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            transition: background-color 1s ease, color 1s ease;
+        }
+        body.light {
+            background-color: white;
+            color: black;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            width: 100%;
+        }
+        .select-button {
+            display: none;
+            color: #ffffff;
+            background-color: black;
+            padding: 16px 16px;
+            opacity: 0;
+            transition: opacity 1s;
+            pointer-events: none;
+            margin: 10px 0;
+        }
+        #click-anywhere {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            font-size: 30px;
+        }
+        #click-anywhere-text {
+            opacity: 1;
+            transition: 1s;
+        }
+        #click-anywhere-text.fade-out {
+            opacity: 0;
+            transition: 1s;
+        }
+        .select-button.fade-in {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+            transition: 1s;
+        }
+        .select-button.fade-out {
+            opacity: 0;
+            pointer-events: auto;
+            transition: 1s;
+        }
+        #typewrite {
+            font-size: 25px;
+        }
+        #ending-card {
+            background: #0f0f0f;
+            color: #ffffff;
+            padding: 4px 4px;
+            border-radius: 8px;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            text-align: left;
+        }
+        #ending-name {
+            font-size: 25px;
+        }
+        #ending-collected {
+            color: grey;
+        }
+        #ending-list {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: grey;
+            font-size: 20px;
+        }
+        #collected-endings-text {
+            position: absolute;
+            top: -35px;
+            right: 540px;
+            color: grey;
+            font-size: 20px;
+            width: 300px;
+        }
+        .greyed-out {
+            filter: invert(55%) sepia(1%) saturate(0%) hue-rotate(320deg) brightness(91%) contrast(85%);
+        }
+        #credits-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: grey;
+            font-size: 20px;
+            text-align: left;
+        }
+        a {
+            color: #b1b1b1;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .option-selection {
+            font-size: 20px;
+            color: grey;
+            display: flex;
+            align-items: center;
+        }
+        #prompt {
+            text-align: left;
+        }
+        #heart {
+            margin-left: 0;
+            margin-right: 8px;
+            color: red;
+        }
+        /* https://stackoverflow.com/a/20910008 */
+        /* https://www.impressivewebs.com/animate-display-block-none/ */
+        .visible {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+        .visuallyhidden {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="assets/jquery.min.js"></script>
+</head>
+<body>
+    <div id="click-anywhere">
+        <span id="click-anywhere-text">Click anywhere<div id="fact" style="color: grey; font-size: 15px;">Hint: Collect 4 endings to unlock the True Ending (it's 100% worth it)!</div></span>
+        <span id="ending-list">
+            <!--<span id="collected-endings-text">Collected endings (1/5)</span>-->
+        </span>
+        <span id="credits">
+            <span id="credits-text">Spanky's (c) 2025 solarcosmic<br>Made for the <a href="https://summer.hackclub.com/s">Summer of Making expedition</a>!</span>
+        </span>
+    </div>
+    <div id="container">
+        <span id="typewrite"></span>
+        <button id="roll_die" class="item select-button">roll the d20..</button>
+        <p id="rolled"></p>
+        <audio id="main-ambience" src="assets/orch_hit_ice.mp3" volume="0.5" preload="auto" loop></audio>
+        <audio id="ending-popup-sound" src="assets/ending.mp3" preload="auto"></audio>
+        <audio id="true-ending-sound" src="assets/true_ending.mp3" preload="auto"></audio>
+        <div id="prompt"></div>
+        <p style="color: grey;" id="navigate-tip">Use the arrow keys to navigate, then press Enter.</p>
+    </div>
+    <div id="ending-card" style="display: none">
+        <img src="assets/trophy-solid-full.svg" width="24px" height="24px"></img>
+        <span id="ending-name">Example Ending</span><br>
+        <span id="ending-description">A test ending...</span><br>
+        <span id="ending-collected">X / Y Endings Collected</span>
+    </div>
+    <script>
+        const rolldie = document.getElementById("roll_die");
+        const click_anywhere = document.getElementById("click-anywhere");
+        var ran_mult = 1;
+        var isSecondTime = false;
+        const endings = {
+            "cheater": {
+                "name": "Cheater Ending",
+                "description": "You know what you did..."
+            },
+            "luck": {
+                "name": "Lucky Ending",
+                "description": "How did you do it?"
+            },
+            "determination": {
+                "name": "Determination Ending",
+                "description": "Something to not give up on!"
+            },
+            "attempted": {
+                "name": "Attempted Ending",
+                "description": "Worth a shot! Try again, perhaps?"
+            },
+            "true": {
+                "name": "True Ending",
+                "description": "One for all."
+            },
+        };
+        var nav = 1;
+        var total_navigator = 2;
+        var isInNavigator = false;
+        var stage = 0;
+        /*
+        All Stages:
+        0: Intro
+        1: Roll D20 (First Instance)
+        .. i didn't end up using this system
+        */
+        document.addEventListener("keydown", (e) => {
+            const key = e.key;
+            if (key == "ArrowDown") {
+                if ((nav + 1) <= total_navigator) {
+                    updateNavigator(nav + 1);
+                }
+            } else if (key == "ArrowUp") {
+                if ((nav + 1) > total_navigator) {
+                    updateNavigator(nav - 1);
+                }
+            } else if (key == "Enter") {
+                if (!isInNavigator) return;
+                const item = getItemOnNavigator();
+                fadeOut(document.getElementById("prompt"));
+                fadeOut(document.getElementById("navigate-tip"));
+                document.dispatchEvent(new Event("navigatoraccept"));
+            }
+        });
+        function getItemOnNavigator() {
+            if (!isInNavigator) return "";
+            const heart = document.getElementById("heart");
+            return heart.parentNode.innerHTML.replace(`<span id="heart">➤</span>`, "").trim();
+        }
+        function updateNavigator(val) {
+            nav = val;
+            const len = document.getElementById("prompt").childElementCount;
+            if (nav <= len) {
+                const item = document.getElementsByClassName("option-selection")[nav - 1];
+                const detect = item.innerHTML.replace(`<span id="heart">➤</span>`, "").trim();
+                item.prepend(document.getElementById("heart"));
+            }
+        }
+        function createPromptItems(items) {
+            document.getElementById("prompt").innerHTML = "";
+            for (const item of items) {
+                const elm = document.createElement("div");
+                elm.classList.add("option-selection");
+                elm.textContent = item;
+                document.getElementById("prompt").appendChild(elm);
+            }
+        }
+
+        function addHeartPointer(item) {
+            const heart = document.getElementById("heart");
+            const prompt = document.getElementById("prompt");
+            var fullItem = null;
+            for (const maybeItem of prompt.children) {
+                var text = maybeItem.innerHTML.replace(`<span id="heart">➤</span>`, "").trim();
+                if (text == item) {
+                    fullItem = maybeItem;
+                    break;
+                }
+            }
+            if (!fullItem) return console.log("Failed to retrieve item");
+            fullItem.prepend(heart);
+            heart.classList.remove("hidden", "visuallyhidden");
+        }
+        function restoreHeart() {
+            if (!document.getElementById("heart")) {
+                const heart = document.createElement("span");
+                heart.setAttribute("id", "heart");
+                heart.classList.add("hidden", "visibilityhidden");
+                heart.textContent = "➤";
+                document.body.appendChild(heart);
+            }
+        }
+
+        function hasAllEndingsExceptTrue() {
+            for (const item in endings) {
+                if (item != "true" && hasEnding(item)) continue;
+                if (item != "true" && !hasEnding(item)) return false;
+                if (item == "true") return true;
+            }
+        }
+        var hasChosenSelection = false;
+        document.getElementById("prompt").classList.add("hidden", "visuallyhidden");
+        document.getElementById("navigate-tip").classList.add("hidden", "visuallyhidden");
+        click_anywhere.addEventListener("click", () => {
+            document.getElementById("click-anywhere-text").classList.add("fade-out");
+            fadeOut(document.getElementById("ending-list"));
+            fadeOut(document.getElementById("credits-text"));
+            setTimeout(async () => {
+                click_anywhere.style.display = "none";
+                document.getElementById("main-ambience").play();
+                typewrite("Welcome to Spanky's...");
+                rolldie.classList.add("fade-out");
+                await sleep(4000);
+                var hrs = new Date().getHours()
+                const isDayTime = hrs > 6 && hrs < 20 // https://stackoverflow.com/a/46908558
+                var timeOfDay = "right now?";
+                if (hrs > 6 && hrs < 12) {
+                    timeOfDay = "this morning?";
+                } else if (hrs >= 12 && hrs < 18) {
+                    timeOfDay = "this afternoon?";
+                } else if (hrs >= 18 && hrs < 24) {
+                    timeOfDay = "tonight?";
+                }
+                typewrite("Feeling hopeful " + timeOfDay);
+                await sleep(3500);
+                typewrite("That's brilliant, but you have a choice to make.");
+                await sleep(4500);
+                typewrite("Roll a D20, and let's see what you get.");
+                await sleep(4000);
+                var hasClicked = false;
+                isInNavigator = true;
+                stage += 1;
+                // ======= what you need to do in order to prompt =======
+                createPromptItems(["Roll D20"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+                // ======= what you need to do in order to prompt =======
+                document.addEventListener("navigatoraccept", async () => {
+                    nav = 1;
+                    if (hasClicked) return;
+                    hasClicked = true;
+                    if (hasAllEndingsExceptTrue() && (getItemOnNavigator().includes("Flee") || getItemOnNavigator().includes("Yes"))) {
+                        doTrueEnding();
+                        return;
+                    }
+                    if (getItemOnNavigator().includes("Odd")) {
+                        if (!hasChosenSelection) finalMainPhase("odd");
+                        return;
+                    } else if (getItemOnNavigator().includes("Even")) {
+                        if (!hasChosenSelection) finalMainPhase("even");
+                        return;
+                    }
+                    const ran = (Math.floor(Math.random() * 20) + 1) * ran_mult;
+                    rolldie.classList.remove("fade-in");
+                    rolldie.classList.add("fade-out");
+                    typewrite("You rolled a...");
+                    await sleep(3500);
+                    rolldie.classList.remove("fade-out");
+                    rolldie.style.display = "none";
+                    if (ran == 4 || ran == 13) {
+                        typewrite(".. " + ran + " .. unlucky for some.");
+                    } else if (ran < 10) {
+                        typewrite(".. " + ran + " .. that's low.");
+                    } else if (ran >= 10 && ran < 15) {
+                        typewrite(".. " + ran + " .. that's alright.");
+                    } else if (ran >= 15 && ran < 18) {
+                        typewrite(".. " + ran + " .. that's not too bad.");
+                    } else if (ran >= 18 && ran <= 19) {
+                        typewrite(".. " + ran + " .. that's near perfect.");
+                    } else if (ran == 20) {
+                        typewrite(".. " + ran + " .. nat 20.");
+                    } else if (ran > 20) {
+                        typewrite(".. " + ran + " .. somehow higher than 20.. hmm..");
+                    }
+                    await sleep(5000);
+                    if (isSecondTime == false) {
+                        if (ran < 16) {
+                            typewrite(".. but not good enough.");
+                            await sleep(4000);
+                            typewrite("I'll let you reroll again, but on one condition.");
+                            await sleep(6000);
+                            typewrite("Prove to me you are worthy of advancing.");
+                            await sleep(5000);
+                            var hasClicked = false;
+                            isSecondTime = true
+                            if (hasAllEndingsExceptTrue()) {
+                                createPromptItems(["Roll D20", "Flee"]);
+                            } else {
+                                createPromptItems(["Roll D20"]);
+                            }
+                            restoreHeart();
+                            addHeartPointer("Roll D20");
+                            fadeIn(document.getElementById("prompt"));
+                            fadeIn(document.getElementById("navigate-tip"));
+                        } else if (ran >= 16) {
+                            typewrite("Well done.");
+                            await sleep(3500);
+                            typewrite("Since you have proved to me that you are capable, I'll let you proceed.");
+                            if (ran > 20) {
+                                doEnding("cheater");
+                            } else {
+                                doEnding("luck");
+                            }
+                            await sleep(8000);
+                            window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/79";
+                        }
+                    } else if (isSecondTime == true) {
+                        if (ran < 16) {
+                            typewrite("Since you have not proved to me you are capable, I'll roll a D6.");
+                            await sleep(6500);
+                            typewrite("Let's make this 50/50. Odd or even?");
+                            await sleep(4000);
+                            createPromptItems(["Odd", "Even"]);
+                            restoreHeart();
+                            addHeartPointer("Odd");
+                            fadeIn(document.getElementById("prompt"));
+                            fadeIn(document.getElementById("navigate-tip"));
+                        } else if (ran >= 16) {
+                            typewrite("For your second try, well done.");
+                            await sleep(3500);
+                            typewrite("Since you have proved to me that you are capable, I'll let you proceed.");
+                            if (ran > 20) {
+                                doEnding("cheater");
+                            } else {
+                                doEnding("luck");
+                            }
+                            await sleep(8000);
+                            window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/79";
+                        }
+                    }
+                })
+            }, 2000);
+        });
+        async function finalMainPhase(selection) {
+            hasChosenSelection = true;
+            if (selection == "odd") {
+                await sleep(1000);
+                typewrite("You chose Odd... time to roll.");
+                await sleep(4000);
+            } else if (selection == "even") {
+                await sleep(1000);
+                typewrite("You chose Even... time to roll.");
+                await sleep(4000);
+            }
+            await sleep(1000);
+            const ran = (Math.floor(Math.random() * 6) + 1) * ran_mult;
+            typewrite("The D6 rolled..");
+            await sleep(3000);
+            var success = false;
+            if ((Math.abs(ran % 2)) == 1) { // odd https://stackoverflow.com/a/6211660
+                if (selection == "odd") {
+                    success = true;
+                    typewrite(".. " + ran + ".. indeed an odd.");
+                } else if (selection == "even") {
+                    success = false;
+                    typewrite(".. " + ran + ".. an odd.");
+                }
+            } else if ((ran % 2) == 0) { // even https://stackoverflow.com/a/6211660
+                if (selection == "odd") {
+                    success = false;
+                    typewrite(".. " + ran + ".. an even.");
+                } else if (selection == "even") {
+                    success = true;
+                    typewrite(".. " + ran + ".. indeed an even.");
+                }
+            }
+            await sleep(5000);
+            if (success) {
+                typewrite("Well done.");
+                doEnding("determination");
+                await sleep(4000);
+                window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/79";
+            } else {
+                typewrite("It hasn't been going so well, has it?");
+                await sleep(4500);
+                typewrite("No more chances. I'm afraid I'll have to send you back.");
+                await sleep(4500);
+                typewrite("I'm going to roll another D6. This determines wh6at neighbor you'll end up on.");
+                await sleep(6000);
+                typewrite("Odds is Blubberhill, even is a snowdrift place.");
+                await sleep(4500);
+                typewrite("I rolled..");
+                const ran = (Math.floor(Math.random() * 6) + 1) * ran_mult; // TODO: can't be 0
+                await sleep(2500);
+                if (Math.abs(ran % 2) == 1) { // odd https://stackoverflow.com/a/6211660
+                    typewrite(".. " + ran + ".. an odd.");
+                    await sleep(3500);
+                    doEnding("attempt");
+                    typewrite("Thanks for playing my game.");
+                    await sleep(3000);
+                    window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/0";
+                } else if (ran % 2 == 0) { // even https://stackoverflow.com/a/6211660
+                    typewrite(".. " + ran + ".. an even.");
+                    await sleep(3500);
+                    doEnding("attempt");
+                    typewrite("Thanks for playing my game.");
+                    await sleep(3000);
+                    window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/69";
+                }
+            }
+        }
+        /* https://www.sitepoint.com/delay-sleep-pause-wait/ */
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        var typewrite_i = 0;
+        function typewrite(txt, i = 0, refresh = true) {
+            if (refresh) {
+                document.getElementById("typewrite").textContent = "";
+            }
+            document.getElementById("typewrite").textContent += txt.charAt(i);
+            if (i < txt.length - 1) {
+                setTimeout(() => typewrite(txt, i + 1, false), 75);
+            }
+        }
+        function letMePass() {
+            ran_mult = 9000;
+            console.log("sure thing..");
+        }
+        function doEnding(ending) {
+            playPause(false);
+            document.getElementById("ending-popup-sound").play();
+            for (const item in endings) {
+                if (item == ending) {
+                    saveEnding(ending);
+                    document.getElementById("ending-name").textContent = endings[item].name;
+                    document.getElementById("ending-description").textContent = endings[item].description;
+                    document.getElementById("ending-collected").textContent = Object.keys(JSON.parse(localStorage.getItem("spanky_endings_collected"))).length + " / 5 Endings Collected";
+                    document.getElementById("ending-card").style.display = "block";
+                    break;
+                }
+            }
+        }
+        /* https://stackoverflow.com/a/64521347 */
+        function playPause(playing) {
+            const song = document.querySelector('#main-ambience');
+            if (playing) {
+                //relevant part to fading in audio
+                song.volume = 0;
+                $('#main-ambience').animate({volume: 1.0}, 1000);
+                song.play();
+
+                playing = false;
+            } else {
+                //relevant part to fading out audio
+                song.volume = 1;
+                $('#main-ambience').animate({volume: 0}, 1000, function() {
+                    song.pause();
+                });
+
+                playing = true;
+            }
+        }
+        function saveEnding(ending) {
+            var endings = localStorage.getItem("spanky_endings_collected");
+            if (!endings) {
+                localStorage.setItem("spanky_endings_collected", JSON.stringify({}));
+                endings = localStorage.getItem("spanky_endings_collected");
+            }
+            var items = JSON.parse(localStorage.getItem("spanky_endings_collected"));
+            items[ending] = true
+            localStorage.setItem("spanky_endings_collected", JSON.stringify(items));
+        }
+        function hasEnding(ending) {
+            const endingsStr = localStorage.getItem("spanky_endings_collected");
+            if (!endingsStr) return false;
+            const endings = JSON.parse(endingsStr);
+            if (endings[ending] === true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function loadEndings() {
+            for (const item in endings) {
+                const trophy = document.createElement("img");
+                trophy.src = "assets/trophy-solid-full.svg";
+                trophy.width = "32";
+                trophy.height = "32";
+                if (!hasEnding(item)) trophy.classList.add("greyed-out");
+                document.getElementById("ending-list").appendChild(trophy);
+            }
+        }
+        function fadeIn(el) {
+            el.classList.remove('hidden');
+            el.classList.add('visible');
+            void el.offsetWidth;
+            el.classList.remove('visuallyhidden');
+        }
+
+        function fadeOut(el) {
+            el.classList.add('visuallyhidden');
+            el.addEventListener('transitionend', function handler() {
+                el.classList.remove('visible');
+                el.classList.add('hidden');
+                el.removeEventListener('transitionend', handler);
+            });
+        }
+
+        var true_ending_stage = 0;
+        async function doTrueEnding() {
+            if (true_ending_stage == 0) {
+                typewrite("Wait, what?");
+                await sleep(3500);
+                typewrite("You want to leave?");
+                await sleep(4500);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Flee"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 1) {
+                typewrite("No, you have to stay..");
+                await sleep(4500);
+                typewrite("You CAN'T LEAVE!");
+                await sleep(4500);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Flee"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 2) {
+                typewrite("..");
+                await sleep(2000);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Flee"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 3) {
+                typewrite(".");
+                await sleep(2000);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Flee"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 4) {
+                typewrite(".. do I mean anything to you?");
+                await sleep(3500);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Yes"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 5) {
+                typewrite(".. wait, really?");
+                await sleep(3500);
+                typewrite("So I'm not just a mysterious figure?");
+                await sleep(4500);
+                true_ending_stage += 1;
+                createPromptItems(["Roll D20", "Yes"]);
+                restoreHeart();
+                addHeartPointer("Roll D20");
+                fadeIn(document.getElementById("prompt"));
+                fadeIn(document.getElementById("navigate-tip"));
+            } else if (true_ending_stage == 6) {
+                playPause(false);
+                typewrite(".. wait, this means..");
+                await sleep(1500);
+                document.getElementById("true-ending-sound").play();
+                await sleep(1500);
+                typewrite(".. I mean something..");
+                await sleep(2000);
+                typewrite("I MEAN SOMETHING!");
+                await sleep(2500);
+                typewrite("Thank you for helping me find my purpose!");
+                await sleep(4000);
+                typewrite("All my life, I thought I was nobody..");
+                await sleep(4000);
+                typewrite("A figure waiting to depart from this place..");
+                await sleep(5500);
+                document.body.classList.toggle("light");
+                typewrite("Then you came along.");
+                await sleep(2500);
+                typewrite("I remember the day that you were first here.");
+                await sleep(4500);
+                typewrite("It's a vivid memory, and I don't want it to go away..");
+                await sleep(5500);
+                document.body.classList.toggle("light");
+                typewrite("So thank you, friend.");
+                await sleep(2500);
+                typewrite("I MEAN- thank you.");
+                await sleep(2500);
+                typewrite("I can finally depart in peace now.");
+                await sleep(3500);
+                typewrite(".. thank you, THANK YOU!");
+                await sleep(3500);
+                doEnding("true");
+                fadeOut(document.getElementById("typewrite"));
+                await sleep(5000);
+                window.location.href = "https://vw4kks4wwkoswgks4k000gso.a.selfhosted.hackclub.com/scenes/79";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const ran = (Math.floor(Math.random() * 6) + 1);
+            if (ran <= 2) {
+                document.getElementById("fact").textContent = "Hint: Collect 4 endings to unlock the True Ending (it's 100% worth it)!";
+            } else if (ran > 2 && ran <= 4) {
+                document.getElementById("fact").textContent = "Fact: All music and sound effects were composed by me in LMMS!";
+            } else if (ran > 4 && ran <= 6) {
+                document.getElementById("fact").textContent = "Fact: The original idea was inspired by the Deltarune Chapter 1 opening scene!";
+            }
+        })
+        loadEndings();
+    </script>
+</body>
+</html>
