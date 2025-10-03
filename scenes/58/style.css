@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #080f17;
+    color: white;
+
+    font-family: Arial;
+    background-image: url("SDcounty.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+
+    overflow:hidden;
+}
+
+img {
+    pointer-events: none;
+}
+
+h1 {
+    letter-spacing: 0.2rem;
+    font-family: Arial;
+    font-weight: normal;
+}
+
+a {
+    color: rgb(199, 0, 199);
+}
+
+#gps {
+  padding: 20px 30px;
+  position: fixed;
+  bottom: -80px;
+  left: 270px;
+  width: 420px;
+  height: 500px;
+
+  background-color: #080e17;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(600px));
+  }
+}
+
+a {
+  color: gold;
+}
+
+.button {
+  border:1px solid pink;
+  background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  color: white;
+  border-radius: 6px;
+}
+
+#gps.fadeout {
+  animation: slide 0.5s forwards;
+}
+.gps-border {
+    left: -50px;
+    top: -50px;
+    position: absolute;
+
+    z-index: 99;
+}
+
+code {
+  color: pink;
+  font-weight: bold;
+  display: inline-block;
+  border: 1px solid pink;
+  padding: 2px 6px;
+  font-size: 16px;
+}

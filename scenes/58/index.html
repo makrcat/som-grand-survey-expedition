@@ -2,37 +2,106 @@
 <html>
 
 <head>
-    <title>Welcome to Node 58!</title>
-    <style>
-        body {
-            width: 35em;
-            margin: 0 auto;
-            font-family: Tahoma, Verdana, Arial, sans-serif;
-        }
-    </style>
+    <title>Wigglebutt Woods</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Welcome to Node 58!</h1>
-    <p>This sample text was taken from Node, uh, 45.</p>
 
-    <ul>
-        <li>
-            <p>Feeling lost? I recall this specific place on the map.. very descriptive.. very discovered. What was it
-                called...Node 45. Just <a href="/scenes/45/">Node 45.</a>.
-        </li>
+    <audio id="bgm" src="cminorprogfade.mp3" autoplay loop muted></audio>
 
-        <li>
-            Feeling a little prickly. Find a companion at Cactusland, aka <a href="/scenes/94/">Node 94</a>.
+    <audio id="woof" src="woof.mp3"></audio>
+    <audio id="arf" src="arf.mp3"></audio>
+    <audio id="alien" src="alien.mp3"></audio>
+    <audio id="bell" src="bell.mp3"></audio>
+    <audio id="drum" src="drum.mp3"></audio>
+    <audio id="pop" src="pop.mp3"></audio>
+    <audio id="mp_e" src="mp_e.mp3"></audio>
+    <audio id="fireSOUND" src="fire.mp3"></audio>
 
-        </li>
+    <img src="big_idle1.png" width="300px" style="position: absolute; bottom: 140px; left: 350px;" id="big">
+    <img src="small_idle1.png" width="180px" style="position: absolute; bottom: 120px; left: 670px;" id="small">
 
-        <li>
-            What's doubletown?? <a href="/scenes/38/">Nnooddee 38</a>.
-        </li>
-    </ul>
+    <img src="plant1.png" width="70px" style="position: absolute; bottom: 15px; right: 100px;" id="plant">
 
-    <p><em>Thank you for using the Summer of Making Grand Expedition.</em></p>
+    <img src="blue1.png" width="90px" style="position: absolute; bottom: 25px; right: 150px;" id="blue">
+    <img src="pink1.png" width="90px" style="position: absolute; bottom: -10px; right: 240px;" id="pink">
+
+    <img src="green1.png" width="100px" style="position: absolute; bottom: -20px; left: 180px;" id="green">
+
+
+    <img src="puff1.png" width="110px" style="position: absolute; bottom: 20px; left: 320px;" id="puff">
+    <img src="og1.png" width="120px" style="position: absolute; bottom: 50px; left: 100px;" id="og">
+
+    <img src="fire1.png" width="400px" style="position: absolute; bottom: -50px; right: 400px" id="fire">
+
+
+    <div id="gps">
+        <img src="gps.png" class="gps-border">
+        
+
+        <span>Scanning...</span>
+        <h1 style="margin: 10px 0">Wigglebutt woods</h1>
+        <span>Home of the wigglebutts, a mysterious musical species.
+            <br><br>
+            Wigglebutts are also known as <b>Aussie dogs</b>! I didn't have too much time with this project, for personal reasons, but I hope it's fun to play around with.
+        </span>
+
+        <p>This sample text was taken from Node, uh, 45.</p>
+
+        <ul>
+            <li>
+                <p>Feeling lost? I recall this specific place on the map.. very descriptive.. very discovered. What
+                    was
+                    it
+                    called...Node 45. Just <a href="/scenes/45/">Node 45.</a>.
+            </li>
+
+            <li>
+                Or, find a companion at Cactusland, aka <a href="/scenes/94/">Node 94</a>.
+
+            </li>
+
+            <li>
+                Double the trouble, or something. <a href="/scenes/38/">Nnooddee 38</a>.
+            </li>
+        </ul>
+
+        <p><em>Thank you for using the Summer of Making Grand Expedition.</em></p>
+
+        <button class="collapse" onClick="start()">
+            <span>Collapse this! </span>
+        </button>
+
+    </div>
+    </div>
+
+    <img src="loaderbgfix.png" width="250px" style="
+        position: absolute; top: 0px; left: 50px;" id="loader" class="spin">
+
+    <img src="clef.png" width="100px" style=" opacity: 0.7;
+        position: absolute; top: 20px; left: 300px;">
+
+    <span style="position: absolute; top: 0px; right: 25px; opacity: 0.8; color: white;
+    top: 30px; width: 200px;  text-shadow: 0 0 16px rgb(0, 166, 255), 0 0 24px rgb(0, 166, 255)">
+
+        INFO: drawn by makrcat! also, hastily coded by makrcat in the span of an hour or two :)
+<br><br>
+        INSTRUC: probably turn up your volume to like, 3 bars. then press any of these:
+
+        <br>
+        
+        <code>Q W E A S D Z X C</code> 
+        
+        <br>to hear funny
+        things.
+
+        <br><br>
+        CLICK: <button onclick="putthatback()" class="button">this lovely button</button> to bring back the guide
+        <br><br> Credits: all AUDIO from pixabay, some IMAGES from unsplash, other credits in README.md
+    </span>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
