@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <title>Splorgon 5 — Peninsula of Dragons</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,59 +17,47 @@
   <!-- The scene stuff -->
   <div class="scene">
     <div class="background">
-      <img src="/images/bg-peninsula.png" alt="Dragon Peninsula Background">
+      <img src="images/bg-peninsula.png" alt="Dragon Peninsula Background">
       <div class="mist"></div>
     </div>
 
     <div class="interactive">
-      <img src="/images/tree-left.png" class="hotspot"
-        data-rune="I can see some Making of Summer...? on the other side"
-        data-sound="/sounds/voice/left-tree.mp3" data-volume="0.6"
-        style="top:30%; left:15%; width:15vw;">
+      <img src="images/tree-left.png" class="hotspot" data-rune="I can see some Making of Summer...? on the other side"
+        data-sound="sounds/voice/left-tree.mp3" data-volume="0.6" style="top:30%; left:15%; width:15vw;">
 
-      <a href="/scenes/23">
-        <img src="/images/island.png" id="island" class="hotspot"
-          data-rune="Reputedly even more upside-down than the eastern half."
-          data-volume="0.6"
-          data-sound="/sounds/voice/west-island.mp3"
+      <a href="https://island.hackclub.com/scenes/23" onclick="location.reload()">
+
+        <img src="images/island.png" id="island" class="hotspot"
+          data-rune="Reputedly even more upside-down than the eastern half." data-volume="0.6"
+          data-sound="sounds/voice/west-island.mp3"
           style="top:-15%; left:35%; width:35vw; transform: rotate(180deg); opacity: 0.8;">
       </a>
 
-      <img src="/images/island.png" data-rune="sdf" data-volume="0.6"
+      <img src="images/island.png" data-rune="sdf" data-volume="0.6"
         style="position: absolute; top:-20%; right:15%; width:35vw; transform: rotate(180deg); opacity: 0.6; pointer-events: none;">
 
-      <img src="/images/anchor.png" data-rune="sdf" data-volume="0.6"
-        style="position: absolute; top:-3%; right:15%; width:5vw; transform: rotate(180deg); opacity: 0.8; pointer-events: none;">
 
-      <a href="/scenes/37">
-        <img src="/images/eastern-island.png" id="island" class="hotspot"
-          data-rune="Woah, is that tree *upside-down*?"
-          data-volume="0.6"
-          data-sound="/sounds/voice/eastern-island.mp3"
-          style="top:-20%; right:5%; width:15vw; transform: rotate(180deg); opacity: 0.7;">
+      <img src="images/anchor.png" data-rune="sdf" data-volume="0.6"
+        style="position: absolute; top:-3%; right:15%; width:5vw; transform: rotate(180deg); opacity: 0.8; pointer-events: none;">
+      <a href="https://island.hackclub.com/scenes/37" onclick="location.reload()">
+        <img src="images/eastern-island.png" id="island" class="hotspot" data-rune="Woah, is that tree *upside-down*?"
+          data-volume="0.6" style="top:-20%; right:5%; width:15vw; transform: rotate(180deg); opacity: 0.7;">
       </a>
 
-      <img src="/images/tree-middle.png" class="hotspot"
-        data-rune="Shhhh.... Don't poke this guy 👇"
-        data-sound="/sounds/voice/middle-tree.mp3" data-volume="0.7"
-        style="top:25%; left:60%; width:25vw;">
+      <img src="images/tree-middle.png" class="hotspot" data-rune="Shhhh.... Don't poke this guy 👇"
+        data-sound="sounds/voice/middle-tree.mp3" data-volume="0.7" style="top:25%; left:60%; width:25vw;">
 
-      <img src="/images/tree-right.png" class="hotspot"
-        data-rune="Zzzzzz.... huh?"
-        data-sound="/sounds/voice/right-tree.mp3"
-        data-volume="1.0" style="bottom:-3%; right:-25%; width:45vw;">
+      <img src="images/tree-right.png" class="hotspot" data-rune="Zzzzzz.... huh?"
+        data-sound="sounds/voice/right-tree.mp3" data-volume="1.0" style="bottom:-3%; right:-25%; width:45vw;">
 
-      <img src="/images/dragon-sleeping.png" id="dragon-img" class="hotspot"
-        data-rune="I waaan...aa eaaa...t mooor...e"
-        data-sound="/sounds/voice/dragon-sleeping.mp3"
-        data-volume="0.9" style="bottom:-3%; right:27%; width:32vw;">
+      <img src="images/dragon-sleeping.png" id="dragon-img" class="hotspot" data-rune="I waaan...aa eaaa...t mooor...e"
+        data-sound="sounds/voice/dragon-sleeping.mp3" data-volume="0.9" style="bottom:-3%; right:27%; width:32vw;">
 
-      <a href="/scenes/22">
-        <img src="/images/arrow.png" id="island" class="hotspot"
+      <a href="https://island.hackclub.com/scenes/22" onclick="location.reload()">
+        <img src="images/arrow.png" id="island" class="hotspot"
           data-rune="It's got a view of the mountain and everything… wow. There couldn't possibly be anything nefarious about it!"
           style="bottom:10%; left:7%; width:22vw; transform: rotate(40deg) translate3d(0, 0,10px);">
       </a>
-
       <div class="scene-label pond">
         <span class="pond-left">Just a Real</span>
         <span class="pond-right">Nice Pond</span>
@@ -88,9 +77,11 @@
 
       <div id="fireball"></div>
     </div>
-  </div>
 
+  </div>
   <div id="tooltip"></div>
+
+
   <div id="fire-overlay"></div>
 
   <!-- Reading stuff -->
@@ -106,27 +97,53 @@
     <section class="stats">
       <h2>Statistics</h2>
       <table>
-        <tr><td>Population</td><td>~0 (dragons ate them)</td></tr>
-        <tr><td>Area</td><td>~5,000 leafy ft² (measured in vines, very scientific)</td></tr>
-        <tr><td>Currency</td><td>Dragon Scales (non-refundable)</td></tr>
-        <tr><td>Language</td><td>Splorgish (raccoon chittering dialect, np we will translate for ya')</td></tr>
-        <tr><td>Timezone</td><td>Dragon Standard Time (DST)</td></tr>
-        <tr><td>Local Time</td><td>1...2..? (They ate Senku too!)</td></tr>
-        <tr><td>Climate</td><td>Overgrown Tropical (extra sweaty)</td></tr>
-        <tr><td>Flag</td><td>A green leaf with claw marks (ironically shredded)</td></tr>
+        <tr>
+          <td>Population</td>
+          <td>~0 (dragons ate them)</td>
+        </tr>
+        <tr>
+          <td>Area</td>
+          <td>~5,000 leafy ft² (measured in vines, very scientific)</td>
+        </tr>
+        <tr>
+          <td>Currency</td>
+          <td>Dragon Scales (non-refundable)</td>
+        </tr>
+        <tr>
+          <td>Language</td>
+          <td>Splorgish (raccoon chittering dialect, np we will translate for ya')</td>
+        </tr>
+        <tr>
+          <td>Timezone</td>
+          <td>Dragon Standard Time (DST)</td>
+        </tr>
+        <tr>
+          <td>Local Time</td>
+          <td>1...2..? (They ate Senku too!)</td>
+        </tr>
+        <tr>
+          <td>Climate</td>
+          <td>Overgrown Tropical (extra sweaty)</td>
+        </tr>
+        <tr>
+          <td>Flag</td>
+          <td>A green leaf with claw marks (ironically shredded)</td>
+        </tr>
       </table>
     </section>
 
     <section class="news">
       <h2>News</h2>
       <ul>
-        <li><strong>2001-09-06</strong>: Archaeologists are now visiting Splorgon 5. Oh oh oh noooo, not meee, noooo… [gulp]</li>
+        <li><strong>2001-09-06</strong>: Archaeologists are now visiting Splorgon 5. Oh oh oh noooo, not meee, noooo…
+          [gulp]</li>
         <li><strong>2001-07-01</strong>: Archaeologists uncover ruins of Splorgon 4. They were unimpressed.</li>
         <li><strong>2001-05-22</strong>: Jungle vines begin teaching basic HTML.</li>
         <li><strong>2001-03-11</strong>: Dragon spotted sunbathing on eastern canopy. SPF 9000 confirmed.</li>
         <li><strong>2000-12-31</strong>: Splorgon 5 avoids Y2K bug thanks to being offline entirely. Flex.</li>
         <li><strong>2000-10-01</strong>: Explorer reported hearing plants whisper “better than Splorgon 4.”</li>
-        <li><strong>2000-06-15</strong>: Forest Council adopts Dragon Scales as official currency. Exchange rate: 1 scale = 1 regret.</li>
+        <li><strong>2000-06-15</strong>: Forest Council adopts Dragon Scales as official currency. Exchange rate: 1
+          scale = 1 regret.</li>
       </ul>
     </section>
 
@@ -135,6 +152,7 @@
     </section>
   </main>
 
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
+
 </html>
