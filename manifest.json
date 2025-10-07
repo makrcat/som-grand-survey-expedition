@@ -27,17 +27,6 @@
     ]
   },
   {
-    "id": 2,
-    "x": 0.391,
-    "y": 0.658,
-    "name": "The Frozen Upvote Forest",
-    "description": "Wow, I didn't know intangible concepts from the internet could freeze like that!",
-    "connections": [
-      3,
-      80
-    ]
-  },
-  {
     "id": 3,
     "x": 0.411,
     "y": 0.455,
@@ -304,7 +293,6 @@
     "name": "Cantada",
     "description": "Why even try, eh?",
     "connections": [
-      2,
       73
     ]
   },
