@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+
   --cursor-default: url("https://hc-cdn.hel1.your-objectstorage.com/s/v3/686726f7241b58da5d575f3521bf04b596a97ac6_cursor1.png")
       0 0,
     default;
@@ -36,6 +37,10 @@
   display: none !important;
 }
 
+a {
+  outline: none;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -62,6 +67,29 @@ img {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+button {
+  padding: 0.6ch;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: var(--nostalgia15-B);
+  border: solid 2pt var(--nostalgia15-D);
+  border-radius: 2pt;
+  transition: all 100ms;
+  user-select: none;
+  cursor: var(--cursor-pointer);
+}
+
+button:hover,
+button:focus {
+  outline: dashed 2pt var(--nostalgia15-N);
+  outline-offset: 2pt;
+}
+
+button:active {
+  outline: none;
+  transform: scale(1.08) rotate(-5deg);
 }
 
 section {
@@ -133,6 +161,14 @@ section {
   transform: scale(1.1) rotate(4deg);
 }
 
+.start-section .balloon-img {
+  position: absolute;
+  height: 50%;
+  right: 10cqi;
+  bottom: 10cqi;
+  transition: all 100ms;
+}
+
 .start-section .elevator-img {
   position: absolute;
   bottom: 0;
@@ -141,8 +177,10 @@ section {
   transition: all 50ms;
 }
 
-.start-section .elevator-img:hover {
+.start-section .elevator-img:hover,
+.start-section .balloon-img:hover {
   transform: scale(1.05);
+  cursor: var(--cursor-pointer);
 }
 
 .elevator-section {
