@@ -1,31 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Western Upside-Down Island</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="assets/som.webp">
+  <meta charset="UTF-8" />
+  <title>Responsive Phaser Game with Min/Max Bounds</title>
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      overflow: hidden;
+    }
+    #game-container {
+      width: clamp(800px, 100vw, 1600px);
+      height: clamp(600px, 100vh, 900px);
+      margin: auto;
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
+      background: #000;
+    }
+
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
 </head>
 <body>
-    <div class="ancontainer">
-        <div class="container">
-            <img src="assets/som.webp" class="another" style="width: 60px;">
-            <h1>Western Upside-Down Island</h1>
-        </div>
-        <img src="assets/orpheusmap.png" class="main">
-        <br>
-        <br>
-    </div>
-    
+  <div id="game-container"></div>
+  <script>
+    const config = {
+      type: Phaser.AUTO,
+      parent: 'game-container',
+      backgroundColor: '#222',
+      scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+      },
+      physics: {
+          default: 'arcade',
+          arcade: {
+              gravity: { y: 300 },
+              debug: false
+          }
+      },
+      scene: { preload: preload, create: create, update: update }
+    };
 
-    <article class="cta">
-    	<img src="assets/sample.jpg" alt='Bluetit' style="width: 100px;">
-    	<div class="cta__text-column">
-    		<h2>Eastern Upside-Down Island</h2>
-    		<p>Woah, is that tree upside-down?</p>
-    		<a href="https://summer.hackclub.com/s?scene=37">Visit !</a>
-    	</div>
-    </article>
+    const game = new Phaser.Game(config);
+
+    function preload() {
+      this.load.image('forward_e', 'assets/Explorepheus/forward.png');
+      this.load.image('left_moving', 'assets/Explorepheus/left_moving.png');
+      this.load.image('right_moving', 'assets/Explorepheus/right_moving.png');
+      this.load.image('left_still', 'assets/Explorepheus/left_still.png');
+      this.load.image('right_still', 'assets/Explorepheus/right_still.png');
+      this.load.image('message_box','assets/bro.png');
+      this.load.image('msg','assets/Component.png');
+      this.load.spritesheet('background','assets/output-onlinepngtools.png', { frameWidth: 32, frameHeight: 32 });
+      this.load.spritesheet('elevator','assets/SimpleElevatorDoors_animated_32x48.png', { frameWidth: 32, frameHeight: 48 });
+      this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
+    }
+
+    function create() {
+
+      platforms = this.physics.add.staticGroup();
+      platforms2 = this.physics.add.staticGroup();
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const q = Math.floor(width / 32);
+      const h = Math.floor(height / 32);
+
+      len = h;
+
+      for (p=0;p<1;p++){
+        platforms.create(30, p*len+30, 'background',20).setScale(2).refreshBody();
+        for (i=1;i<q-1;i++){
+          platforms.create((30+i*64), p*len+30, 'background',21).setScale(2).refreshBody();
+        }
+        for (i=1;i<h-12;i++){
+          platforms.create(30, p*len+(30+i*64), 'background',39).setScale(2).refreshBody();
+        }
+        for (i=1;i<h-12;i++){
+          platforms.create((q*32-32), p*len+(30+i*64), 'background',41).setScale(2).refreshBody();
+        }
+        platforms.create(30, p*len+(h*32-32), 'background',58).setScale(2).refreshBody();
+        for (i=1;i<q-1;i++){
+          platforms.create((30+i*64), p*len+(h*32-32), 'background',59).setScale(2).refreshBody();
+        }
+        platforms.create((q*32-32), p*len+30, 'background',22).setScale(2).refreshBody();
+        platforms.create((q*32-32), p*len+(h*32-32), 'background',60).setScale(2).refreshBody();
+      }
+
+      for (yk=0;yk<3;yk++){
+        platforms2.create((q*32-70), yk*len+30+32, 'background',25).setScale(2).refreshBody();
+      }
+
+      el = this.physics.add.sprite((q*32-128), 256, 'elevator',0).setScale(4).refreshBody();
+
+
+
+      player = this.physics.add.sprite(160, 120, 'forward_e').setScale(0.4).refreshBody();
+      player.angle = 180;
+      player.setBounce(0.1);
+      player.setCollideWorldBounds(true);
+      this.physics.world.gravity.y = -300;
+      this.physics.add.collider(player, platforms);
+      this.physics.add.collider(player, platforms2, () => {
+        player.setVelocityX(0);
+        player.anims.stop();
+        player.anims.play("still");
+        el.anims.play("open");
+        this.children.bringToTop(el);
+        el.anims.play("close");
+        const img = this.add.image(width / 2, height / 2.5, 'msg');
+        img.setScale(0.25);
+        img.setDepth(1000);
+      });
+      this.physics.add.collider(el, platforms);
+
+      this.add.image(340, 200, 'message_box').setScale(0.8);
+
+      this.add.text(220, 200, 'Hi ! It\'s explorepheus !', {
+          fontSize: '21px',
+          color: '#000000'
+      });
+
+      this.add.text(width-230, 320, 'Just scroll !!', {
+          fontSize: '21px',
+          color: '#ffffff'
+      });
+
+
+      this.anims.create({
+          key: 'left',
+          frames: [ { key: 'left_moving'},{ key: 'left_still'} ],
+          frameRate: 10,
+          repeat: -1
+      });
+
+      this.anims.create({
+          key: 'still',
+          frames: [ { key: 'forward_e'} ],
+          frameRate: 1
+      });
+
+      this.anims.create({
+          key: 'open',
+          frames: this.anims.generateFrameNumbers('elevator', { start: 0, end: 7 }),
+          frameRate: 40
+      });
+
+      this.anims.create({
+          key: 'close',
+          frames: this.anims.generateFrameNumbers('elevator', { start: 7, end: 0 }),
+          frameRate: 40
+      });
+
+      this.anims.create({
+          key: 'right',
+          frames: [ { key: 'right_moving'},{ key: 'right_still'} ],
+          frameRate: 10,
+          repeat: -1
+      });
+
+      this.input.on("wheel",  (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+        if (deltaY > 0) {
+            player.setVelocityX(400);
+            player.anims.play('right', true);
+        }
+        else if (deltaY < 0) {
+            player.setVelocityX(-400);
+            player.anims.play('left', true);
+        }
+
+        if (deltaY==0 && player.body.touching.down)
+        {
+            player.setVelocityY(0);
+        }
+
+        clearTimeout(this.scrollTimeout);
+        this.scrollTimeout = setTimeout(() => {
+          player.setVelocityX(0);
+          player.anims.stop();
+        }, 200);
+      });
+      this.add.text(130, 420, 'Western Upside-Down Island', {
+          fontSize: '70px',
+          color: '#ffffff'
+      });
+      this.add.text(350, 510, 'Reputedly even more upside-down than the eastern half.', {
+          fontSize: '35px',
+          color: '#ffffff'
+      });
+    }
+
+    function update (){
+
+    }
+
+    window.addEventListener('resize', () => game.scale.refresh());
+  </script>
 </body>
 </html>
