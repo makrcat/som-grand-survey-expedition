@@ -11,6 +11,7 @@ let hole = document.getElementById("hole")
 let leave53 = document.getElementById("leave53")
 let leave77 = document.getElementById("leave77")
 let leave92 = document.getElementById("leave92")
+let leave75 = document.getElementById("leave75")
 
 let lorePage = document.getElementById("lorePage")
 let loreContainer = document.getElementById("loreContainer")
@@ -179,6 +180,9 @@ setInterval(function(){
 leave53.addEventListener('click', function(){
     window.location.href = '/scenes/53/'
 })
+leave75.addEventListener('click', function(){
+    window.location.href = '/scenes/75/'
+})
 
 leave77.addEventListener('click', function(){
     window.location.href = '/scenes/77/'
@@ -222,4 +226,5 @@ function triggerRandomEvent(){
         multiplier *= 777
         setTimeout(()=> {Math.round(multiplier/=777)}, 7000)
     }
+
 }
