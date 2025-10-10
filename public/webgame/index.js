@@ -47,7 +47,7 @@ document.getElementById("playButton").addEventListener("click",(event)=>{
     MyGame({
         locateFile: function (path, prefix) {
         if (path.endsWith(".data")) {
-            return "files/webGame/" + path;
+            return path;
         }
         return prefix + path;
         },
