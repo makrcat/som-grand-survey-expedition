@@ -60,6 +60,7 @@
       this.load.image('right_still', 'assets/Explorepheus/right_still.png');
       this.load.image('message_box','assets/bro.png');
       this.load.image('msg','assets/Component.png');
+      this.load.image('mainmsg','assets/main.png');
       this.load.spritesheet('background','assets/Terrain (32x32).png', { frameWidth: 32, frameHeight: 32 });
       this.load.spritesheet('elevator','assets/SimpleElevatorDoors_animated_32x48.png', { frameWidth: 32, frameHeight: 48 });
       this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
@@ -69,12 +70,15 @@
 
       platforms = this.physics.add.staticGroup();
       platforms2 = this.physics.add.staticGroup();
+      platforms3 = this.physics.add.staticGroup();
       platforms4 = this.physics.add.staticGroup();
 
       const width = window.innerWidth;
       const height = window.innerHeight;
       const q = Math.floor(width / 32);
       const h = Math.floor(height / 32);
+
+      onit = true;
 
       for (let i = 0; i < q / 2; i++) {
         for (let k = 0; k < h / 2; k++) {
@@ -107,8 +111,10 @@
       platforms.create((q*32-32), (h*32-32), 'background',60).setScale(2).refreshBody();
 
       platforms2.create((q*32-70), 62, 'background',25).setScale(2).refreshBody();
+      platforms3.create((160-58), 62, 'background',25).setScale(2).refreshBody();
 
-      el = this.physics.add.sprite((q*32-128), 158, 'elevator',0).setScale(4).refreshBody();
+      el = this.physics.add.sprite((q*32-158), 158, 'elevator',0).setScale(4).refreshBody();
+      el2 = this.physics.add.sprite(160, 158, 'elevator',0).setScale(4).refreshBody();
 
 
 
@@ -125,27 +131,25 @@
         el.anims.play("open");
         this.children.bringToTop(el);
         el.anims.play("close");
-        window.location.href = "exploring.html";
+        window.location.href = "https://summer.hackclub.com/s?scene=37";
+      });
+      this.physics.add.collider(player, platforms3, () => {
+        player.setVelocityX(0);
+        player.anims.stop();
+        player.anims.play("still");
+        el2.anims.play("open");
+        this.children.bringToTop(el);
+        el2.anims.play("close");
+        if (!onit){
+            onit = true;
+            window.location.href = "index.html";
+        }
       });
       this.physics.add.collider(el, platforms);
+      this.physics.add.collider(el2, platforms);
 
-      boxie = this.add.image(340, 230, 'message_box').setScale(width/1650);
 
-      titleText = this.add.text(110, 420, 'Western Upside-Down Island', {
-          fontSize: `50px`,
-          color: '#000000',
-          fontStyle: 'bold'
-      });
-      otherText = this.add.text(250, 510, 'Reputedly even more upside-down than the eastern half.', {
-          fontSize: `26px`,
-          color: '#000000',
-          fontStyle: 'bold'
-      });
-
-      boxieboi = this.add.text(220, 230, 'Hi ! It\'s explorepheus !', {
-          fontSize: '21px',
-          color: '#000000'
-      });
+      this.add.image(this.cameras.main.width / 2,this.cameras.main.height / 2,'msg').setScale(0.2);
 
       this.anims.create({
           key: 'left',
@@ -197,10 +201,7 @@
               {
                   player.setVelocityY(0);
               }
-              boxie.visible = false;
-              boxieboi.visible = false;
-              otherText.visible = false;
-              titleText.visible = false;
+              onit = false;
           }
       });
 
@@ -228,11 +229,8 @@
         {
             player.setVelocityY(0);
         }
+        onit = false;
 
-        boxie.visible = false;
-        boxieboi.visible = false;
-        otherText.visible = false;
-        titleText.visible = false;
         clearTimeout(this.scrollTimeout);
         this.scrollTimeout = setTimeout(() => {
           player.setVelocityX(0);
@@ -241,7 +239,6 @@
         }, 200);
       });
     }
-
 
     function update (){
 
