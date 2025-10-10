@@ -59,6 +59,7 @@
           src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/835586aa6098d1b89a3524974924dac3806a0fb6_compass.png"
           onclick="processMapButtonClick()"
         />
+        <img class="balloon-img hidden" src="https://hc-cdn.hel1.your-objectstorage.com/s/v3/4a3cc267a76394ae4d4e57f5f7c1767358b56b78_balloon.png" onclick="processBalloonClick()" /> 
         <dialog id="map-dialog" closedby="any">
           <a href="https://isle.a.hackclub.dev/scenes/93">
             <img
@@ -89,6 +90,13 @@
               title="Sconehenge"
             />
           </a>
+        </dialog>
+        <dialog id="balloon-dialog" closedby="any">
+          <p class="dialog-content"></p>
+          <div class="controls hidden">
+            <a href="https://isle.a.hackclub.dev/scenes/0"><button>Sure!</button></a>
+            <button onclick="processBalloonDialogNoClick()">Uh... no.</button>
+          </div>
         </dialog>
       </section>
       <section class="elevator-section hidden">

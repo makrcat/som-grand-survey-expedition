@@ -10,6 +10,7 @@ let state = {
     animations: {},
     clicks: 0,
   },
+  currentScene: undefined,
 };
 
 const dialogue = {
@@ -90,6 +91,18 @@ const dialogue = {
         ],
       },
     ],
+    situational: {
+      noTalking: {
+        blocks: [
+          "Um.",
+          "Hello!",
+          "Welcome!",
+          "To the elevator!",
+          "A pleasure",
+          "to meet you!"
+        ]
+      }
+    }
   },
 };
 
@@ -155,6 +168,7 @@ function switchScene(oldScene, nextScene, onSceneSwitch = undefined) {
   hideElement(oldScene);
   Howler.stop();
   showElement(nextScene);
+  state.currentScene = nextScene
 
   if (onSceneSwitch != undefined) {
     onSceneSwitch();
@@ -221,6 +235,30 @@ async function processElevatorClick() {
     loopRobSequence
   );
   elevatorMusic.play();
+  setTimeout(() => {
+    if (state.elevatorButton.clicks == 0 && state.rob.clicks == 0 && state.currentScene == document.querySelector(".elevator-section")) {
+      showDialogue("#rob-dialog", dialogue.rob.situational.noTalking.blocks)
+    }
+  }, 1000);
+}
+
+async function processBalloonClick() {
+  showElement(document.querySelector(".controls"));
+
+  await showDialogue(
+    "#balloon-dialog",
+    ["Hey.", "Fancy a teleport?"],
+    200,
+    undefined,
+    () => {
+      document.querySelector(".controls").classList.remove("hidden");
+    }
+  );
+}
+
+async function processBalloonDialogNoClick() {
+  document.querySelector("#balloon-dialog").close();
+  hideElement(document.querySelector(".balloon-img"));
 }
 
 async function processElevatorButtonClick() {
@@ -250,7 +288,12 @@ async function processElevatorButtonClick() {
       document.querySelector(".elevator-section").classList.remove("whirring");
       switchScene(
         document.querySelector(".elevator-section"),
-        document.querySelector(".start-section")
+        document.querySelector(".start-section"),
+        () => {
+          if (state.elevatorButton.clicks == 2) {
+            showElement(document.querySelector(".balloon-img"));
+          }
+        }
       );
     });
 
@@ -317,7 +360,8 @@ async function showDialogue(
   dialogSelector,
   dialogueBlocks,
   delay = 0,
-  textSelector = ".dialog-content"
+  textSelector = ".dialog-content",
+  onEnd = undefined
 ) {
   dialog = document.querySelector(dialogSelector);
   dialogText = dialog.querySelector(textSelector);
@@ -325,4 +369,8 @@ async function showDialogue(
   console.log("Open");
   dialog.showModal();
   await writeDialogueToElement(dialogText, dialogueBlocks, delay);
+
+  if (onEnd != undefined) {
+    onEnd();
+  }
 }
