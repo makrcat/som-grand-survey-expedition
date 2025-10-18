@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scene 49 - WebGame</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .loading {
+            text-align: center;
+        }
+        .loading h1 {
+            margin-bottom: 20px;
+        }
+        .loading p {
+            margin-bottom: 30px;
+        }
+        .redirect-button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .redirect-button:hover {
+            background: #45a049;
+        }
+    </style>
+    <script>
+        // Auto-redirect after 3 seconds
+        setTimeout(function() {
+            window.location.href = '/public/webgame/';
+        }, 3000);
+        
+        // Immediate redirect function
+        function redirectNow() {
+            window.location.href = '/public/webgame/';
+        }
+    </script>
+</head>
+<body>
+    <div class="loading">
+        <h1>Scene 49: Loading WebGame</h1>
+        <p>Redirecting to the web game in 3 seconds...</p>
+        <a href="/public/webgame/" class="redirect-button" onclick="redirectNow()">Play Now</a>
+    </div>
+</body>
+</html>
